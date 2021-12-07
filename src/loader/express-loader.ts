@@ -3,6 +3,7 @@ import swaggerUI from "swagger-ui-express"
 import { VERSION } from "./../config"
 import docs from "../api-docs/swagger.json"
 import morgan from "morgan"
+import { homeRoute } from "./../apps/home"
 
 
 const swaggerOptions = {
@@ -10,8 +11,9 @@ const swaggerOptions = {
 }
 
 export default ({ app }: { app: Application }) => {
-    require("./../db")
+    // require("./../db")
     app.use(morgan("combined"))
+    homeRoute.default({ app })
     app.use(`/${VERSION}/docs`,
         swaggerUI.serve,
         swaggerUI.setup(
