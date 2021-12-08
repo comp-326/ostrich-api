@@ -10,7 +10,7 @@ const BASE_DIR = path.dirname(__dirname)
 
 const PORT = process.env.PORT || 4200
 const HOST = process.env.HOST || '127.0.0.1'
-const VERSION = process.env.VERSION || '/v1'
+const VERSION = process.env.VERSION || 'v1'
 const DB_URL = process.env.DB_URL
 const SECRET_KEY = process.env.SECRET_KEY
 const REFRESH_KEY = process.env.REFRESH_KEY

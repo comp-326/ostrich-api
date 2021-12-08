@@ -3,7 +3,7 @@ import { VERSION } from "./../../../config";
 import homeController from "../controllers/home.controller";
 
 
-export default ({ app }: { app: Router }) => {
+const homeRouter= ({ app }: { app: Router }) => {
     const router: Router = Router()
     // Route paths
     router.get("/", homeController)
@@ -12,3 +12,4 @@ export default ({ app }: { app: Router }) => {
     app.use(`/${VERSION}/`, router)
     return app
 }
+export default homeRouter
