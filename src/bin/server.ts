@@ -1,11 +1,9 @@
-import app from "./app"
-const http = require("http")
-import { HOST, PORT, VERSION } from "./../config/"
+import app from "./app";
+import http from "http";
+import { HOST, PORT, VERSION } from "./../config/";
 
+const server = http.createServer(app);
 
-const server = http.createServer(app)
-
-server.listen(PORT, () => {
-    console.log(`Server running on http://${HOST}:${PORT}/${VERSION}`);
-
-})
+server.listen({ host: HOST, port: PORT }, () => {
+  console.log(`Server running on http://${HOST}:${PORT}/${VERSION}`);
+});
