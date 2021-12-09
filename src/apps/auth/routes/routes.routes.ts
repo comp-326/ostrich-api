@@ -50,7 +50,7 @@ const authRouter = ({ app }: { app: Application }) => {
   );
   router.post("/logout", logout);
   router.get("/verify/:token", verifyAccountmail);
-  router.post("/generateverificationLink/", generateMailConfirmationLink);
+  router.post("/verify/new", generateMailConfirmationLink);
   router.post("/confirm/mail", logout);
   router.put("/account/update", updateAccount);
   router.get("/users", getAllUsers);

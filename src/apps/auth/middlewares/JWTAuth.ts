@@ -6,7 +6,7 @@ dotenv.config();
 
 class JWTAuth {
   generateToken = async (user: Object) => {
-    const token = jwt.sign({ ...user }, SECRET_KEY);
+    const token = jwt.sign({ ...user }, SECRET_KEY!);
     return token;
   };
 
