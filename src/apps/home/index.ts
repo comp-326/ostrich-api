@@ -1,4 +1,4 @@
-import * as homeRoute from "./routes/routes"
+import homeRouter from "./routes/routes"
 
-export default Object.freeze({ homeRoute })
-export { homeRoute }
+export default homeRouter
+export { homeRouter }
