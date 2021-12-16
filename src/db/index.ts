@@ -1,10 +1,21 @@
-import { connect } from "mongoose";
-import config from "./../config";
+import { DATABASE_URL } from './../config'
 
-const connection = connect(config.DB_URL!)
-    .then(() => (console.log(`Database connection successful`)
-    )).catch(err => console.log(err.message)
-    )
+import mongoose, { Mongoose } from 'mongoose'
+import { MongoError } from 'mongodb'
 
+function callback(err?: MongoError) {
+	if (err) {
+		console.log(err.message)
+	} else {
+		console.log('Succesfully Connected!')
+	}
+}
 
-export default connection
+function connectDatabase(): Promise<Mongoose> {
+	// const mongoUrl = 'localhost'
+
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	return mongoose.connect(DATABASE_URL!, {})
+}
+
+export { connectDatabase, callback }
