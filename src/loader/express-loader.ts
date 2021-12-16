@@ -2,11 +2,6 @@ import express, { Application } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
 
-const swaggerOptions = {
-	explorer: true,
-	customSiteTitle: 'Ostrich ventures',
-}
-
 export default ({ app }: { app: Application }) => {
 	// Db
 	require('./../db/index')
