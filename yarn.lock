@@ -1455,6 +1455,7 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-16.11.12.tgz"
   integrity sha512-+2Iggwg7PxoO5Kyhvsq9VarmPbIelXP070HMImEpbtGCoyWNINQj4wzjbQCXzdHTRXnqufutJb5KAURZANNBAw==
 
+<<<<<<< HEAD
 "@types/nodemailer-express-handlebars@^4.0.2":
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/@types/nodemailer-express-handlebars/-/nodemailer-express-handlebars-4.0.2.tgz#7bc3ac6d4c1fd0ff7550dbf6132a67a611ae15cf"
@@ -1463,6 +1464,8 @@
     "@types/express-handlebars" "^5"
     "@types/nodemailer" "*"
 
+=======
+>>>>>>> b570386d4308cf5753618f93fae83122cc845ccd
 "@types/nodemailer-html-to-text@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@types/nodemailer-html-to-text/-/nodemailer-html-to-text-3.1.0.tgz#6da7b773c5da07c33ea4a1ac201cfadce8249937"
@@ -4400,6 +4403,7 @@ node-releases@^2.0.1:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.1.tgz"
   integrity sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==
 
+<<<<<<< HEAD
 nodemailer-express-handlebars@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/nodemailer-express-handlebars/-/nodemailer-express-handlebars-4.0.0.tgz#8b832872cdc29464d44520c754f8978454286014"
@@ -4407,6 +4411,8 @@ nodemailer-express-handlebars@^4.0.0:
   dependencies:
     express-handlebars "^4.0.0"
 
+=======
+>>>>>>> b570386d4308cf5753618f93fae83122cc845ccd
 nodemailer-html-to-text@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/nodemailer-html-to-text/-/nodemailer-html-to-text-3.2.0.tgz#91b959491fef8f7d91796047abb728aa86d4a12b"
