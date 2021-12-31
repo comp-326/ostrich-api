@@ -15,8 +15,8 @@ export const getUserById = async (
 		} else {
 			return res.status(200).json({ success: true, profile: user })
 		}
-	} catch (e) {
-		next(e)
+	} catch (error) {
+		next(error)
 	}
 }
 export const getUser = async (
@@ -33,8 +33,8 @@ export const getUser = async (
 			throw new ErrorResponse('User not found', 404)
 		}
 		return res.status(200).json({ message: 'Success', success: true, user })
-	} catch (e) {
-		next(e)
+	} catch (error) {
+		next(error)
 	}
 }
 export const getUsers = async (
@@ -49,8 +49,8 @@ export const getUsers = async (
 		} else {
 			return res.status(200).json({ success: true, users })
 		}
-	} catch (e) {
-		next(e)
+	} catch (error) {
+		next(error)
 	}
 }
 export const userProfile = async (
@@ -65,8 +65,8 @@ export const userProfile = async (
 		} else {
 			return res.status(200).json({ success: true, profile: user })
 		}
-	} catch (e) {
-		next(e)
+	} catch (error) {
+		next(error)
 	}
 }
 export const updateUserProfile = async (
@@ -83,7 +83,7 @@ export const updateUserProfile = async (
 			{ new: true },
 		)
 		return res.status(200).json({ success: true, user })
-	} catch (e) {
-		next(e)
+	} catch (error) {
+		next(error)
 	}
 }
