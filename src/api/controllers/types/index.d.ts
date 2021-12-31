@@ -2,5 +2,5 @@
 import { Request } from 'express'
 
 export type RequestType = {
-	[prop: string]: any
+	[props: string]: any
 } & Request

@@ -32,6 +32,7 @@ export type WorkspaceModelType = {
 	name: string
 	admins: unknown[]
 	creators: unknown[]
+	counselors: unknown[]
 	members: unknown[]
 	institutions: unknown[]
 	active: boolean
@@ -45,9 +46,7 @@ export type AppointmentModelType = {
 	startTime: Date
 	endTime: Date
 	title: string
-	confirmed: boolean
-	pending: boolean
-	done: boolean
+	status: string
 	_doc: any
 } & Document
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from 'express'
-import User from 'src/model/User.model'
+import User from './../../model/User.model'
 import ErrorResponse from './../../middlewares/error'
 import Workspace from './../../model/Workspace.model'
 import { RequestType } from './types'
@@ -94,7 +94,7 @@ export const uploadContent = async (
 	next: NextFunction,
 ) => {
 	// try {
-	return res.status(200).json({ message: 'Register' })
+	return res.status(200).json({ message: 'Uploading constent' })
 	// } catch (e) {
 	// next(e)
 	// }
@@ -111,19 +111,27 @@ export const monitorWorkspaceBilling = async (
 	// }
 }
 export const inviteUserToWorkspace = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	return res.status(200).json({ message: 'Register' })
-	// } catch (e) {
-	// next(e)
-	// }
+	try {
+		const workspaceId = req.params.workspaceId
+		const userEmail = req.body.email
+		const workspace = await Workspace.findById(workspaceId)
+		if (!workspace) throw new ErrorResponse('Workspace invalid', 400)
+		//create email snippet for sending
+		return res.status(200).json({
+			message: `Email invitation has been sent to ${userEmail}`,
+			success: true,
+		})
+	} catch (e) {
+		next(e)
+	}
 }
 
 export const manageUserInWorkspace = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -135,15 +143,15 @@ export const manageUserInWorkspace = async (
 }
 
 export const createIntakes = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	return res.status(200).json({ message: 'Register' })
-	// } catch (e) {
-	// next(e)
-	// }
+	try {
+		return res.status(200).json({ message: 'Register' })
+	} catch (e) {
+		next(e)
+	}
 }
 export const workspaceRequestUpgrade = async (
 	req: RequestType,
@@ -156,7 +164,7 @@ export const workspaceRequestUpgrade = async (
 	// next(e)
 	// }
 }
-export const downgradeUser = async (
+export const downgradeWorkspaceUser = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction,

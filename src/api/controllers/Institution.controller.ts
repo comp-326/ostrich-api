@@ -1,22 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request, Response, NextFunction } from 'express'
+import { Response, NextFunction } from 'express'
 // import ErrorResponse from './../../middlewares/error'
 import Comment from './../../model/Comment.model'
 import Institution from './../../model/Institution.model'
 import { RequestType } from './types'
 export const createInstitution = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	// const newInstitution = new Institution({
-	// 	...req.body,
-	// })
-	// const savedInstitution = await newInstitution.save()
-	// if (!savedInstitution) {
-	// 	throw new ErrorResponse('Could not create institution', 400)
-	// } else {
+	
+
 	return res.status(200).json({
 		success: true,
 		message: 'Institution created succesfully',
@@ -26,7 +20,7 @@ export const createInstitution = async (
 	// }
 }
 export const updateInstitution = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {

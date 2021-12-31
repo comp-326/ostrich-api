@@ -22,6 +22,10 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
 		default: [],
 	},
+	counselors: {
+		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+		default: [],
+	},
 	institutions: {
 		type: [
 			{

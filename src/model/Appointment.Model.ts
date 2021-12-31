@@ -7,18 +7,11 @@ const AppointmentSchema = new Schema<AppointmentModelType>(
 			type: SchemaTypes.ObjectId,
 			ref: 'User',
 		},
-		confirmed: {
-			type: Boolean,
-			default: false,
+		status: {
+			type: String,
+			default: 'pending',
 		},
-		pending: {
-			type: Boolean,
-			default: true,
-		},
-		done: {
-			type: Boolean,
-			default: false,
-		},
+
 		startTime: {
 			type: SchemaTypes.Date,
 		},

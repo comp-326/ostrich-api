@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-// /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express'
 import ErrorResponse from './../../middlewares/error'
 import User from './../../model/User.model'
 import jwt from 'jsonwebtoken'
 import { SECRET_KEY } from './../../config'
-// import { confirmPassword } from '../middlewares/pass'
-// import { confirmPassword } from '../middlewares/pass'
 
 export const login = async (
 	req: Request,
@@ -19,7 +16,6 @@ export const login = async (
 		const user = await User.findOne({ email }).select('+password')
 
 		const p_match = await user!.passwordMatch(req.body.password)
-		console.log(p_match)
 
 		if (!p_match)
 			return res
@@ -64,7 +60,6 @@ export const register = async (
 		})
 		if (!newUser)
 			throw new ErrorResponse('Account could not be created', 500)
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { password, ...props } = newUser._doc
 		return res.status(200).json({
 			success: true,
