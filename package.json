@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node ./dist/server.js",
-    "prestart":"eslint --fix && npm run build",
+    "prestart": "eslint --fix && npm run build",
     "build": "tsc",
     "dev:server": "nodemon ./src/server.ts"
   },
@@ -23,6 +23,7 @@
     "mongoose": "^6.1.3",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.2",
+    "typescript": "^4.5.4",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -43,7 +44,6 @@
     "prettier": "^2.5.1",
     "supertest": "^6.1.6",
     "ts-jest": "^27.1.2",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
+    "ts-node": "^10.4.0"
   }
 }
