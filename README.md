@@ -1,1 +1,0 @@
-# Ostrich API backend development
