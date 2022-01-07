@@ -1,24 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from 'express'
 // import ErrorResponse from './../../middlewares/error'
 import Comment from './../../model/Comment.model'
 import Institution from './../../model/Institution.model'
+import Workspace from './../../model/Workspace.model'
+import User from './../../model/User.model'
 import { RequestType } from './types'
 export const createInstitution = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
-	
-
-	return res.status(200).json({
-		success: true,
-		message: 'Institution created succesfully',
-	})
-	// } catch (e) {
-	// 	next(e)
-	// }
+	try {
+		const newInstitution = new Institution({
+			...req.body,
+			author: req.user.userId,
+		})
+		const savedInstitution = await newInstitution.save()
+		await Workspace.findByIdAndUpdate(
+			req.params.workspaceId,
+			{
+				$push: { institutions: savedInstitution },
+			},
+			{ new: true },
+		)
+		return res.status(200).json({
+			success: true,
+			message: 'Institution created succesfully',
+			institution: savedInstitution,
+		})
+	} catch (error) {
+		next(error)
+	}
 }
+// Update institution details
 export const updateInstitution = async (
 	req: RequestType,
 	res: Response,
@@ -44,6 +61,7 @@ export const updateInstitution = async (
 		return next(error)
 	}
 }
+// Write a comment on an institution
 export const commentOnInstitution = async (
 	req: RequestType,
 	res: Response,
@@ -52,7 +70,7 @@ export const commentOnInstitution = async (
 	try {
 		const institutionId = req.params.institutionId
 		const newComment = new Comment({
-			content: req.body.body,
+			comment: req.body.comment,
 			author: req.user.userId,
 		})
 		const savedComment = await newComment.save()
@@ -63,14 +81,17 @@ export const commentOnInstitution = async (
 			},
 			{ new: true },
 		)
+
 		return res.status(200).json({
 			success: true,
-			institution: commentedInstitution?.populate(''),
+			institution: commentedInstitution,
 		})
 	} catch (e) {
 		next(e)
 	}
 }
+
+// Like an institution
 export const likeInstitution = async (
 	req: RequestType,
 	res: Response,
@@ -78,10 +99,29 @@ export const likeInstitution = async (
 ) => {
 	try {
 		const institutionId = req.params.institutionId
+		const inLikes = await User.find({
+			$and: [
+				{ _id: req.user.userId },
+				{ likedInstitutions: { $in: [institutionId] } },
+			],
+		})
+
+		if (inLikes.length > 0) {
+			return res
+				.status(400)
+				.json({ success: false, message: 'Already liked institution' })
+		}
 		const institution = await Institution.findByIdAndUpdate(
 			institutionId,
 			{
 				$inc: { likes: 1 },
+			},
+			{ new: true },
+		)
+		await User.findByIdAndUpdate(
+			req.user.userId,
+			{
+				$push: { likedInstitutions: institutionId },
 			},
 			{ new: true },
 		)
@@ -95,5 +135,5 @@ export const rateInstitution = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	return res.status(200).json({ message: 'Register' })
+	return res.status(200).json({ message: 'Rating institution' })
 }

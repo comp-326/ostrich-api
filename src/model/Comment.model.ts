@@ -6,7 +6,7 @@ const CommentSchema = new Schema<CommentModelType>({
 		type: SchemaTypes.ObjectId,
 		ref: 'User',
 	},
-	content: {
+	comment: {
 		type: String,
 		required: true,
 	},

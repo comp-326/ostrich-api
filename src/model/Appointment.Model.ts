@@ -3,9 +3,10 @@ import { AppointmentModelType } from './types'
 
 const AppointmentSchema = new Schema<AppointmentModelType>(
 	{
-		appointee: {
+		intakeId: {
 			type: SchemaTypes.ObjectId,
 			ref: 'User',
+			required: [true, 'Intake id must be provided'],
 		},
 		status: {
 			type: String,
@@ -14,21 +15,24 @@ const AppointmentSchema = new Schema<AppointmentModelType>(
 
 		startTime: {
 			type: SchemaTypes.Date,
-		},
-		endTime: {
-			type: SchemaTypes.Date,
+			required: [true, 'Start time must be provided'],
 		},
 		duration: {
 			type: Number,
+			required: [true, 'Meeting duration must be provided'],
 		},
-		author: {
+		owner: {
 			type: SchemaTypes.ObjectId,
 			ref: 'User',
-			required: true,
+			required: [true, 'User id is required'],
 		},
 		title: {
 			type: String,
-			required: true,
+			required: [true, 'Title field is required'],
+		},
+		meetingLink: {
+			type: String,
+			required: [true, 'Please provide meeting link'],
 		},
 	},
 	{ timestamps: true },

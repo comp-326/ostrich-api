@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import ErrorResponse from './../../../middlewares/error'
 import User from './../../../model/User.model'
+import Workspace from './../../../model/Workspace.model'
 
 export const checkAccountActivation = async (
 	req: Request,
@@ -11,7 +12,10 @@ export const checkAccountActivation = async (
 		const { email }: { email: string } = req.body
 		const user = await User.findOne({ email })
 		if (!user?.active)
-			throw new ErrorResponse('Please check your email and activate your account', 401)
+			throw new ErrorResponse(
+				'Please check your email and activate your account',
+				401,
+			)
 		return next()
 	} catch (error) {
 		return next(error)
@@ -47,6 +51,24 @@ export const checkRegisteredMail = async (
 		const user = await User.findOne({ email })
 		if (!user) return next()
 		throw new ErrorResponse('Email already registered', 400)
+	} catch (error) {
+		return next(error)
+	}
+}
+export const checkWorkspaceExist = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const workspaceId = req.params.workspaceId
+
+		const workspace = await Workspace.findById(workspaceId)
+
+		if (workspace) {
+			return next()
+		}
+		throw new ErrorResponse('Invalid workspace provided', 400)
 	} catch (error) {
 		return next(error)
 	}

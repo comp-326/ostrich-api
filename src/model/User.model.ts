@@ -70,7 +70,7 @@ const UserSchema = new Schema<UserModelType>(
 			type: SchemaTypes.Date,
 		},
 		likedInstitutions: {
-			type: [SchemaTypes.ObjectId],
+			type: [{ type: SchemaTypes.ObjectId, ref: 'Institution' }],
 			default: [],
 		},
 	},

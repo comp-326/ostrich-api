@@ -21,13 +21,15 @@ export type UserModelType = {
 		zip: string
 	}
 	likedInstitutions: unknown[]
-	referrals:unknown[]
+	referrals: unknown[]
 	_doc: any
 	passwordMatch: (password: string) => boolean
 	// hashPassword: (password: string) => void
 } & Document
 
 export type WorkspaceModelType = {
+	images: unknown[]
+	logoUrl: string
 	owner: unknown
 	name: string
 	admins: unknown[]
@@ -41,29 +43,38 @@ export type WorkspaceModelType = {
 
 export type AppointmentModelType = {
 	duration: number
-	author: unknown
-	appointee: unknown
+	owner: unknown
+	intakeId: unknown
 	startTime: Date
-	endTime: Date
+	meetingLink: string
 	title: string
 	status: string
+	intakePhoneNumber: string
+	message: string
 	_doc: any
 } & Document
 
 export type InstitutionModelType = {
 	name: string
 	description: string
-	location: string
 	comments: unknown[]
 	likes: number
 	shares: number
 	author: unknown
-
+	logo: string
+	images: string[]
+	size: string
+	population: number
+	location: {
+		latitude: string
+		longitude: string
+		city: string
+	}
 	_doc: any
 } & Document
 
 export type CommentModelType = {
 	author: unknown
-	content: string
+	comment: string
 	_doc: any
 } & Document
