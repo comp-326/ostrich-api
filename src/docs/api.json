@@ -1,0 +1,86 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Ostrich API",
+        "contact": {
+            "email": "forinda82@gmail.com",
+            "name": "Orinda",
+            "url": "https://www.ostrich.com"
+        },
+        "description": "A web API interface for data consuming",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "tags": [
+        {
+            "name": "Workspace",
+            "description": "Deals with Workspace"
+        },
+        {
+            "name": "Admin",
+            "description": "Administrative roles"
+        },
+        {
+            "name": "User",
+            "description": "basic User and roles"
+        },
+        {
+            "name": "workspace Admin",
+            "description": "Only administrate workspace"
+        }
+    ],
+    "basePath": "/v1",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Get Institution feeds",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/{workspaceId}/intake/new": {
+            "post": {
+                "description": "Create a new intake",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/{workspaceId}/institution/new": {
+            "post": {
+                "description": "Create new Institution",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    }
+}
