@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from 'express'
-import Appointment from 'src/model/Appointment.Model'
+import { AppointmentStates } from './../../constants/appointment'
+import Appointment from './../../model/Appointment.Model'
 import { RequestType } from './types'
 export const createAppointment = async (
 	req: RequestType,
@@ -30,7 +31,7 @@ export const cancelAppointment = async (
 	try {
 		const appointment = await Appointment.findByIdAndUpdate(
 			req.params.appointmentId,
-			{ status: 'cancelled' },
+			{ status: AppointmentStates.cancelled },
 			{ new: true },
 		)
 		return res.status(200).json({
@@ -47,11 +48,20 @@ export const updateAppointment = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	return res.status(200).json({ message: 'Updating appointment' })
-	// } catch (error) {
-	// next(error)
-	// }
+	try {
+		const appointment = await Appointment.findByIdAndUpdate(
+			req.body.id,
+			{ ...req.body },
+			{ new: true },
+		)
+		return res.status(200).json({
+			message: 'Appointment update success',
+			success: true,
+			appointment,
+		})
+	} catch (error) {
+		next(error)
+	}
 }
 
 export const rescheduleAppointment = async (
@@ -71,5 +81,26 @@ export const rescheduleAppointment = async (
 		})
 	} catch (error) {
 		next(error)
+	}
+}
+
+export const confirmAppointment = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const appointment = await Appointment.findByIdAndUpdate(
+			req.params.appointmentId,
+			{ status: AppointmentStates.confirmed },
+			{ new: true },
+		)
+		return res.status(200).json({
+			message: 'Appointment cancelled',
+			appointment,
+			success: true,
+		})
+	} catch (error) {
+		return next(error)
 	}
 }

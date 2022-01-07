@@ -2,7 +2,7 @@
 import { NextFunction, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { SECRET_KEY } from './../../config'
-import ErrorResponse from './../../middlewares/error'
+// import ErrorResponse from './../../middlewares/error'
 import { RequestType } from '../controllers/types'
 import Workspace from './../../model/Workspace.model'
 
@@ -14,11 +14,18 @@ export const Authorize = async (
 	try {
 		const AuthHeaderToken = req.headers.authorization
 		if (!AuthHeaderToken)
-			throw new ErrorResponse('Auth header token not provided', 400)
+			return res.status(400).json({
+				success: false,
+				message: 'Auth header token not provided',
+			})
 		const token = AuthHeaderToken.split(' ')[1]
 		return jwt.verify(token, SECRET_KEY!, (err, payload) => {
-			if (err)
-				throw new ErrorResponse('Invalid or expired auth token', 400)
+			if (err) {
+				return res.status(401).json({
+					success: false,
+					message: 'Please login to access this page',
+				})
+			}
 			req.user = payload!
 			return next()
 		})
@@ -34,7 +41,7 @@ export const AuthorizeAdmin = async (
 ) => {
 	try {
 		Authorize(req, res, () => {
-			if (req.user.role === 'admin') {
+			if (req.user.role! === 'admin') {
 				return next()
 			} else {
 				return res

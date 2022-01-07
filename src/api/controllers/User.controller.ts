@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request, Response, NextFunction } from 'express'
+import { Response, NextFunction } from 'express'
 import ErrorResponse from './../../middlewares/error'
 import User from '../../model/User.model'
+import { RequestType } from './types'
 
 export const getUserById = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -20,7 +21,7 @@ export const getUserById = async (
 	}
 }
 export const getUser = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -38,7 +39,7 @@ export const getUser = async (
 	}
 }
 export const getUsers = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -54,7 +55,7 @@ export const getUsers = async (
 	}
 }
 export const userProfile = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -70,7 +71,7 @@ export const userProfile = async (
 	}
 }
 export const updateUserProfile = async (
-	req: Request,
+	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -87,3 +88,5 @@ export const updateUserProfile = async (
 		next(error)
 	}
 }
+
+

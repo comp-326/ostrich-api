@@ -37,7 +37,17 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 	},
 	name: {
 		type: String,
-		required: true,
+		unique: true,
+		index: true,
+		required: [true, 'Workspace name is required'],
+	},
+	logoUrl: {
+		type: String,
+		default: '',
+	},
+	images: {
+		type: [String],
+		default: [],
 	},
 })
 
