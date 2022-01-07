@@ -4,6 +4,9 @@ import AuthRouter from '../api/routes/Auth.routes'
 import WorkspaceRouter from '../api/routes/Workspace.routes'
 import swaggerUi from 'swagger-ui-express'
 import DOCS from './../docs/api.json'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { BASE_DIR } from './../config'
+console.log(BASE_DIR)
 
 export default ({ app }: { app: Application }) => {
 	app.use('/auth', AuthRouter)

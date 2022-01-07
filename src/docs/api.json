@@ -49,38 +49,6 @@
                     }
                 }
             }
-        },
-        "/{workspaceId}/intake/new": {
-            "post": {
-                "description": "Create a new intake",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/{workspaceId}/institution/new": {
-            "post": {
-                "description": "Create new Institution",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
         }
-    }
-}
+        
+}}
