@@ -1,6 +1,9 @@
 import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config()
+
+const BASE_DIR = path.dirname(__dirname)
 
 const PORT = process.env.PORT
 const SECRET_KEY = process.env.SECRET_KEY
@@ -20,6 +23,7 @@ export default {
 	API,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
+	BASE_DIR
 }
 export {
 	PORT,
@@ -30,4 +34,5 @@ export {
 	API,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
+	BASE_DIR
 }
