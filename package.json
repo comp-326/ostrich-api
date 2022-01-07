@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node ./dist/server.js",
+    "prestart":"eslint --fix && npm run build",
     "build": "tsc",
-    "postbuild": "eslint --fix",
     "dev:server": "nodemon ./src/server.ts"
   },
   "keywords": [],
