@@ -11,7 +11,7 @@ export type UserModelType = {
 	role: string
 	email: string
 	profilePic: string
-	active: boolean
+	isActive: boolean
 	activationDate: Date
 	address: {
 		city: string
@@ -23,6 +23,14 @@ export type UserModelType = {
 	likedInstitutions: unknown[]
 	referrals: unknown[]
 	_doc: any
+	ActivationToken: {
+		value: string
+		isUsed: boolean
+	}
+	PasswordToken: {
+		value: string
+		isUsed: boolean
+	}
 	passwordMatch: (password: string) => boolean
 	// hashPassword: (password: string) => void
 } & Document

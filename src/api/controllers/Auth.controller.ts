@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Response, NextFunction } from 'express'
+
 import ErrorResponse from './../../middlewares/error'
 import User from './../../model/User.model'
 import jwt from 'jsonwebtoken'
@@ -65,7 +66,12 @@ export const register = async (
 			{ userId: newUser._id },
 			process.env.SECRET_KEY!,
 		)
-		console.log(newUser)
+		await newUser.updateOne(
+			{
+				ActivationToken: { value: confirmToken, used: false },
+			},
+			{ new: true },
+		)
 
 		mailTransport.sendMail(
 			{
@@ -103,32 +109,85 @@ export const confirmAccountEmail = async (
 ) => {
 	try {
 		const token = req.params.token
+
 		if (!token) {
 			throw new ErrorResponse('No auth confirmation token provided', 400)
 		}
+
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return jwt.verify(token, SECRET_KEY!, async (err, payload) => {
+			/**
+			 * If the user token is invalid Throw an error
+			 */
 			if (err)
-				throw new ErrorResponse('Confirmation ink has expired', 400)
-			if (
-				await User.findOne({
-					$and: [{ _id: payload!.userId }, { active: true }],
+				return res.status(300).json({
+					success: false,
+					message: 'Account already activated',
 				})
-			) {
-				return next(
-					new ErrorResponse(
-						'Account already activated proceed to login',
-						400,
-					),
-				)
+			/**
+			/**
+			 * Query user from database with the jwt payload
+			 */
+			const dbUser = await User.findOne({
+				$and: [{ _id: payload!.userId }],
+			}).select('+ActivationToken')
+			/**
+			 * Check if user exists
+			 */
+			if (!dbUser) {
+				return next(new ErrorResponse('Account does not exist', 404))
 			}
+			/**
+			 * Check if user is active
+			 */
+			if (dbUser?.isActive)
+				return res.status(300).json({
+					success: false,
+					message: 'Account already activated',
+				})
+			/**
+			 * Check if the JWT payload for user matches the Given db user
+			 * If token do not match throw an exception for the invalid token
+			 */
+			if (!(dbUser?.ActivationToken.value === token)) {
+				/**
+				 * Check if the token is already used
+				 * If used then return Already used and cannot be re-used
+				 */
+				if (dbUser?.ActivationToken.isUsed) {
+					return res.status(400).json({
+						success: false,
+						message: 'Link already used and cannot be re-used',
+					})
+				}
+				/**
+				 * If the token is valid and it is not used
+				 * Activate the user account
+				 * Make the token used so that the link is invalid
+				 */
+				await dbUser!.updateOne(
+					{
+						isActive: true,
+						ActivationToken: /**Toggle state */ { isUsed: true },
+					},
+					{ new: true },
+				)
+				return res.status(400).json({
+					success: true,
+					message: 'Account confirmation successful',
+				})
+			}
+			/**
+			 * If the token do not match then the token is invalid
+			 * Still render the token used
+			 */
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			await User.findByIdAndUpdate(payload!.userId, {
-				active: true,
+			await dbUser.updateOne(payload!.userId, {
+				activationToken: { isUsed: true },
 			})
 
 			return res.status(200).json({
-				message: 'Account activated successfully',
+				message: 'Invalid token',
 				success: true,
 			})
 		})
@@ -207,4 +266,68 @@ export const resetPassword = async (
 	// } catch (e) {
 	// 	next(e)
 	// }
+}
+
+/**
+ *
+ *Get activation link to User account
+ */
+export const getActivationToken = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const { email }: { email: string } = req.body
+		const dbUser = await User.findOne({ email }).select('+ActivationToken')
+		if (!dbUser) {
+			return res.status(400).json({
+				success: false,
+				message:
+					'The email provided is not registered with any account',
+			})
+		}
+		const token = jwt.sign(
+			{ userId: dbUser!._id, email: dbUser!.email, role: dbUser!.role },
+			SECRET_KEY!,
+			{ expiresIn: '1h' },
+		)
+		/**
+		 * Set the activation link to the user instance
+		 */
+		await dbUser?.updateOne(
+			{
+				ActivationToken: { value: token, isUsed: false },
+			},
+			{ new: true },
+		)
+		mailTransport.sendMail(
+			{
+				to: dbUser!.email,
+				subject: 'Activate your account',
+				html: `
+				<p>Hello ${dbUser!.firstName} ${
+					dbUser!.lastName
+					// eslint-disable-next-line indent
+				} please click the link below to activate your account</p>
+				<p>The link is only valid for 1hour</p>
+<p><a href="http://localhost:3000/account/activate/${token}">Activate account</a></p>
+				`,
+			},
+			async (err, payload) => {
+				if (err) {
+					console.log('Could not send email', err)
+					next(new ErrorResponse('Could not send email', 500))
+				}
+				if (payload) {
+					return res.status(200).json({
+						success: true,
+						message: 'Activation link sent to your email',
+					})
+				}
+			},
+		)
+	} catch (e) {
+		next(e)
+	}
 }

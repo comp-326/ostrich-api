@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import nodeMailer from 'nodemailer'
+import { htmlToText } from 'nodemailer-html-to-text'
 import { EMAIL_ACCOUNT, EMAIL_PASSWORD } from './../../config'
 
 export const mailTransport = nodeMailer.createTransport({
@@ -10,6 +11,7 @@ export const mailTransport = nodeMailer.createTransport({
 		pass: EMAIL_PASSWORD,
 	},
 })
+mailTransport.use('compile', htmlToText())
 
 export const resetPasswordTemplate = token => {
 	return `

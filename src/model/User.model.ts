@@ -49,7 +49,7 @@ const UserSchema = new Schema<UserModelType>(
 			country: { type: String },
 			zip: { type: String },
 		},
-		active: {
+		isActive: {
 			type: Boolean,
 			default: false,
 		},
@@ -72,6 +72,16 @@ const UserSchema = new Schema<UserModelType>(
 		likedInstitutions: {
 			type: [{ type: SchemaTypes.ObjectId, ref: 'Institution' }],
 			default: [],
+		},
+		ActivationToken: {
+			value: { type: String },
+			isUsed: { type: Boolean },
+			select:false,
+		},
+		PasswordToken: {
+			value: { type: String },
+			isUsed: { type: Boolean },
+			select:false
 		},
 	},
 	{ timestamps: true },

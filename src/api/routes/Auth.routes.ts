@@ -2,6 +2,7 @@
 import { Router } from 'express'
 import {
 	confirmAccountEmail,
+	getActivationToken,
 	login,
 	register,
 	resetPassword,
@@ -27,6 +28,9 @@ import { confirmPasswordResetToken } from '../middlewares/requests/request'
 
 const router = Router()
 
+/**
+ * Register new user
+ */
 router
 	.route('/register')
 	.post(
@@ -49,9 +53,20 @@ router
 		checkAccountActivation,
 		login,
 	)
-// Confirm account email
+/**
+ * Confirm User account
+ */
 router.route('/account/confirm/:token').post(confirmAccountEmail)
-// Reset password
+
+/**
+ * Get activation email if not received or expired
+ */
+router
+	.route('/account/confirm/get/token')
+	.post(emptyEmailField, getActivationToken)
+/**
+ * Reset password and Update password
+ */
 router
 	.route('/account/password/reset/:resetToken')
 	.put(
@@ -61,7 +76,9 @@ router
 		confirmPasswordMatch,
 		resetPassword,
 	)
-// Forgot password
+/**
+ * Get pasword reset link
+ */
 router
 	.route('/account/password/forgot')
 	.post(emptyEmailField, confirmAccountEmail)

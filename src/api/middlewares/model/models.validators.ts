@@ -11,7 +11,7 @@ export const checkAccountActivation = async (
 	try {
 		const { email }: { email: string } = req.body
 		const user = await User.findOne({ email })
-		if (!user?.active)
+		if (!user?.isActive)
 			throw new ErrorResponse(
 				'Please check your email and activate your account',
 				401,
