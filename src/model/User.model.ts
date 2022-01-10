@@ -76,13 +76,17 @@ const UserSchema = new Schema<UserModelType>(
 		ActivationToken: {
 			value: { type: String },
 			isUsed: { type: Boolean },
-			select:false,
+			select: false,
 		},
 		PasswordToken: {
 			value: { type: String },
 			isUsed: { type: Boolean },
-			select:false
+			select: false
 		},
+		availability:{
+			type:SchemaTypes.ObjectId,
+			ref:'Availability'
+		}
 	},
 	{ timestamps: true },
 )

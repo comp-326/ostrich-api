@@ -13,6 +13,13 @@ export type UserModelType = {
 	profilePic: string
 	isActive: boolean
 	activationDate: Date
+	availability: unknown
+	middleName: string
+	userType: string
+	dateOfBirth: Date | string
+	phoneNumber: string
+	modeOfCommunication: 'sms' | 'email'
+	note: string
 	address: {
 		city: string
 		street: string
@@ -33,6 +40,13 @@ export type UserModelType = {
 	}
 	passwordMatch: (password: string) => boolean
 	// hashPassword: (password: string) => void
+} & Document
+
+export type AvailabilityType = { 
+	days: string[], 
+	startTime: string|Date, 
+	endTime: string|Date, 
+	_doc: any 
 } & Document
 
 export type WorkspaceModelType = {
