@@ -38,6 +38,10 @@ const UserSchema = new Schema<UserModelType>(
 			],
 			default: [],
 		},
+		accountType:{
+			type:String,
+			default:'basic',
+		},
 		address: {
 			street: {
 				type: String,

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response, NextFunction } from 'express'
+// import { emailRegex } from './../../../constants/regex'
 import ErrorResponse from './../../../middlewares/error'
 
 // Email
@@ -7,6 +9,8 @@ export const emptyEmailField = async (
 	res: Response,
 	next: NextFunction,
 ) => {
+	// console.log('Email body',req.body)
+
 	try {
 		const { email }: { email: string | undefined } = req.body
 		if (!email) throw new ErrorResponse('Email field required', 400)
@@ -104,9 +108,8 @@ export const passwordRegex = async (
 	next: NextFunction,
 ) => {
 	try {
-		const { password }: { password: string | undefined } = req.body
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const { passOK, errors } = passRegex(password!)
+		const { passOK, errors } = passRegex(req.body)
 		if (!passOK) throw new ErrorResponse(errors, 400)
 		else return next()
 	} catch (e) {
@@ -114,7 +117,18 @@ export const passwordRegex = async (
 	}
 }
 //Validate passwordRegex
-const passRegex = (password: string) => {
+const passRegex = ({
+	password,
+	firstName,
+	lastName,
+
+	email,
+}: {
+	password: string
+	firstName?: string
+	lastName?: string
+	email: string
+}) => {
 	let errors = ''
 	if (password.search(new RegExp(/[a-z]+/)) < 0) {
 		errors += 'Password must contain a Lowercase letter\n'
@@ -125,9 +139,21 @@ const passRegex = (password: string) => {
 	if (password.search(new RegExp(/[0-9]+/)) < 0) {
 		errors += 'Password must contain a number\n'
 	}
+	if (password.match(new RegExp(firstName!, 'i'))) {
+		errors += 'Password must not contain your first name\n'
+	}
+	if (password.match(new RegExp(lastName!, 'i'))) {
+		errors += 'Password must not contain your last name\n'
+	}
+	if (password.match(new RegExp(email!, 'i'))) {
+		errors += 'Password not contain your email\n'
+	}
 	if (password.length < 8) {
 		errors += 'Password must be at least 8 characters\n	'
 	}
+	// if(!password.match(emailRegex)){
+	// 	errors += 'Invalid email address\n'
+	// }
 
 	if (errors !== '') {
 		return { passOK: false, errors }

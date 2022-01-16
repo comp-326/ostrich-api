@@ -7,6 +7,7 @@ export type UserModelType = {
 	lastName: string
 	middleName: string
 	gender: string
+	accountType: string
 	password: string
 	role: string
 	email: string

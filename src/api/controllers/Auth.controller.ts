@@ -16,6 +16,8 @@ export const login = async (
 	next: NextFunction,
 ) => {
 	try {
+		// console.log('Body',req.body)
+
 		const { email } = req.body
 		const user = await User.findOne({ email }).select('+password')
 		if (!(await user!.passwordMatch(req.body.password)))
@@ -57,45 +59,17 @@ export const register = async (
 		// const hPassword = await hashPassword(req.body.password)
 		const newUser = await User.create({
 			...req.body,
+			active: true,
+			accountType: 'basic',
 			role: 'user',
 		})
 		if (!newUser)
 			throw new ErrorResponse('Account could not be created', 500)
 		const { password, ...props } = newUser._doc
-		const confirmToken = jwt.sign(
-			{ userId: newUser._id },
-			process.env.SECRET_KEY!,
-		)
-		await newUser.updateOne(
-			{
-				ActivationToken: { value: confirmToken, used: false },
-			},
-			{ new: true },
-		)
-
-		mailTransport.sendMail(
-			{
-				to: newUser.email,
-				subject: 'Activate your account',
-				html: `
-			<div>
-			<p>Please click the link below to activate your account</p>
-			<a href="http://localhost:3000/auth/account/confirm/${confirmToken}>Activate account</a>
-			</div>
-			`,
-			},
-			async (err, info) => {
-				if (err) {
-					console.log('Could not send email', err)
-				}
-				if (info) console.log('Email sent successfully')
-			},
-		)
 		return res.status(200).json({
 			success: true,
 			user: props,
-			message:
-				'Account created successfully, Check your email for activaioni',
+			message: 'Account created successfully',
 		})
 	} catch (error) {
 		return next(error)
