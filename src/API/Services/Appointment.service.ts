@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from "express"
-import { AppointmentStates } from "./../../constants/appointment"
-import Appointment from "./../../model/Appointment.Model"
+import { AppointmentStates } from "../../constants/appointment"
+import Appointment from "../../Models/Appointment.Model"
 import { RequestType } from "./types"
 export const createAppointment = async (
 	req: RequestType,

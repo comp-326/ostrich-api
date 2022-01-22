@@ -4,8 +4,8 @@ import {
 	createAppointment,
 	rescheduleAppointment,
 	updateAppointment,
-} from "../controllers/Appointment.controller"
-import { updateUserProfile, userProfile } from "../controllers/User.controller"
+} from "../Services/Appointment.service"
+import { updateUserProfile, userProfile } from "../Services/User.service"
 
 const router = Router()
 

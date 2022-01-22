@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import nodeMailer from "nodemailer"
 import { htmlToText } from "nodemailer-html-to-text"
-import { EMAIL_ACCOUNT, EMAIL_PASSWORD } from "./../../config"
+import { EMAIL_ACCOUNT, EMAIL_PASSWORD } from "../../config"
 
 export const mailTransport = nodeMailer.createTransport({
 	service: "gmail",

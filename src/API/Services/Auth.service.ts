@@ -3,12 +3,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Response, NextFunction } from "express"
 
-import ErrorResponse from "./../../middlewares/error"
-import User from "./../../model/User.model"
+import ErrorResponse from "../../Middlewares/error"
+import User from "../../Models/User.model"
 import jwt from "jsonwebtoken"
-import { SECRET_KEY } from "./../../config"
+import { SECRET_KEY } from "../../config"
 import { RequestType } from "./types"
-import { mailTransport, resetPasswordTemplate } from "../services/Mail.service"
+import { mailTransport, resetPasswordTemplate } from "../Cservices/Mail.service"
 
 export const login = async (
 	req: RequestType,
@@ -65,9 +65,18 @@ export const register = async (
 		})
 		if (!newUser) throw new ErrorResponse("Account could not be created", 500)
 		const { password, ...props } = newUser._doc
+		const token = jwt.sign(
+			{
+				userId: props?._id,
+				email: props?.email,
+				role: props?.role,
+			},
+			SECRET_KEY!,
+		)
 		return res.status(200).json({
 			success: true,
 			user: props,
+			token,
 			message: "Account created successfully",
 		})
 	} catch (error) {

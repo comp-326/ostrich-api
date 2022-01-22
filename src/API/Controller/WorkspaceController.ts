@@ -1,11 +1,11 @@
-import { Authorize, AuthorizeWorkspaceAdmin } from "./../middlewares/AuthJwt"
+import { Authorize, AuthorizeWorkspaceAdmin } from "../Middlewares/AuthJwt"
 import { Router } from "express"
 import {
 	commentOnInstitution,
 	createInstitution,
 	likeInstitution,
 	updateInstitution,
-} from "../controllers/Institution.controller"
+} from "../Services/Institution.service"
 import {
 	createIntakes,
 	createWorkspace,
@@ -13,13 +13,13 @@ import {
 	downgradeWorkspaceUser,
 	inviteUserToWorkspace,
 	memberWorkspaces,
-} from "../controllers/Workspace.controller"
-import { AuthorizeAdmin } from "../middlewares/AuthJwt"
+} from "../Services/Workspace.service"
+import { AuthorizeAdmin } from "../Middlewares/AuthJwt"
 import {
 	emptyCommentBody,
 	emptyWorkspaceName,
-} from "../middlewares/form/form.validator"
-import { checkWorkspaceExist } from "../middlewares/model/models.validators"
+} from "../Middlewares/form/form.validator"
+import { checkWorkspaceExist } from "../Middlewares/model/models.validators"
 
 const router = Router()
 // New workspace

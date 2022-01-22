@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from "express"
-import User from "./../../model/User.model"
-import ErrorResponse from "./../../middlewares/error"
-import Workspace from "./../../model/Workspace.model"
+import User from "../../Models/User.model"
+import ErrorResponse from "../../Middlewares/error"
+import Workspace from "../../Models/Workspace.model"
 import { RequestType } from "./types"
-import { UserRoles } from "./../../constants/roles"
-import { mailTransport } from "../services/Mail.service"
+import { UserRoles } from "../../constants/roles"
+import { mailTransport } from "../Cservices/Mail.service"
 import jwt from "jsonwebtoken"
-import { SECRET_KEY } from "./../../config"
+import { SECRET_KEY } from "../../config"
 
 export const createWorkspace = async (
 	req: RequestType,

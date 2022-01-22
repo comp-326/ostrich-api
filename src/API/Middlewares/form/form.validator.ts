@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response, NextFunction } from "express"
 // import { emailRegex } from './../../../constants/regex'
-import ErrorResponse from "./../../../middlewares/error"
+import ErrorResponse from "../../../Middlewares/error"
 
 // Email
 export const emptyEmailField = async (

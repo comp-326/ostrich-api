@@ -1,9 +1,9 @@
-import { homepage } from "./../html"
+import { homepage } from "../html"
 import { Application } from "express"
-import AuthRouter from "../api/routes/Auth.routes"
-import WorkspaceRouter from "../api/routes/Workspace.routes"
+import AuthRouter from "../API/Controller/AuthController"
+import WorkspaceRouter from "../API/Controller/WorkspaceController"
 import swaggerUi from "swagger-ui-express"
-import DOCS from "./../docs/api.json"
+import DOCS from "../docs/api.json"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // import { BASE_DIR } from './../config'
 // console.log(BASE_DIR)

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
-import ErrorResponse from "./../../../middlewares/error"
-import User from "./../../../model/User.model"
-import Workspace from "./../../../model/Workspace.model"
+import ErrorResponse from "../../../Middlewares/error"
+import User from "../../../Models/User.model"
+import Workspace from "../../../Models/Workspace.model"
 
 export const checkAccountActivation = async (
 	req: Request,

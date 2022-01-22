@@ -3,10 +3,10 @@ import express, { Application } from "express"
 import morgan from "morgan"
 import helmet from "helmet"
 import cors from "cors"
-import router from "./../router"
-import ErrorHandler from "./../middlewares/ErrorHandler"
-import db from "./../db"
-import { DATABASE_URL } from "./../config"
+import router from "../Router"
+import ErrorHandler from "../Middlewares/ErrorHandler"
+import db from "../db"
+import { DATABASE_URL } from "../config"
 
 export default ({ app }: { app: Application }) => {
 	app.use(express.json({ limit: "100mb" }))

@@ -3,10 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from "express"
 // import ErrorResponse from './../../middlewares/error'
-import Comment from "./../../model/Comment.model"
-import Institution from "./../../model/Institution.model"
-import Workspace from "./../../model/Workspace.model"
-import User from "./../../model/User.model"
+import Comment from "../../Models/Comment.model"
+import Institution from "../../Models/Institution.model"
+import Workspace from "../../Models/Workspace.model"
+import User from "../../Models/User.model"
 import { RequestType } from "./types"
 export const createInstitution = async (
 	req: RequestType,

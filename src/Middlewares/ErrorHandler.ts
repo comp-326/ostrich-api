@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express"
-import capitalize from "./../utils/capitalize"
+import capitalize from "../Utils/capitalize"
 import ErrorResponse from "./error"
 
 export default function (

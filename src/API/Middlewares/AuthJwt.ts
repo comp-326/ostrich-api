@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { NextFunction, Response } from 'express'
-import jwt from 'jsonwebtoken'
-import { SECRET_KEY } from './../../config'
+import { NextFunction, Response } from "express"
+import jwt from "jsonwebtoken"
+import { SECRET_KEY } from "../../config"
 // import ErrorResponse from './../../middlewares/error'
-import { RequestType } from '../controllers/types'
-import Workspace from './../../model/Workspace.model'
+import { RequestType } from "../Services/types"
+import Workspace from "../../Models/Workspace.model"
 
 export const Authorize = async (
 	req: RequestType,
@@ -16,14 +16,14 @@ export const Authorize = async (
 		if (!AuthHeaderToken)
 			return res.status(400).json({
 				success: false,
-				message: 'Auth header token not provided',
+				message: "Auth header token not provided",
 			})
-		const token = AuthHeaderToken.split(' ')[1]
+		const token = AuthHeaderToken.split(" ")[1]
 		return jwt.verify(token, SECRET_KEY!, (err, payload) => {
 			if (err) {
 				return res.status(401).json({
 					success: false,
-					message: 'Please login to access this page',
+					message: "Please login to access this page",
 				})
 			}
 			req.user = payload!
@@ -41,12 +41,12 @@ export const AuthorizeAdmin = async (
 ) => {
 	try {
 		Authorize(req, res, () => {
-			if (req.user.role! === 'admin') {
+			if (req.user.role! === "admin") {
 				return next()
 			} else {
 				return res
 					.status(403)
-					.json({ success: false, message: 'You are not authorized' })
+					.json({ success: false, message: "You are not authorized" })
 			}
 		})
 	} catch (error) {
@@ -73,9 +73,7 @@ export const AuthorizeWorkspaceAdmin = async (
 				],
 			})
 			if (!workspace) {
-				return res
-					.status(403)
-					.json({ success: false, message: 'Unauthorized' })
+				return res.status(403).json({ success: false, message: "Unauthorized" })
 			}
 			return next()
 		})
@@ -103,9 +101,7 @@ export const AuthorizeWorkspaceCreator = async (
 				],
 			})
 			if (!workspace) {
-				return res
-					.status(403)
-					.json({ success: false, message: 'Unauthorized' })
+				return res.status(403).json({ success: false, message: "Unauthorized" })
 			}
 			return next()
 		})

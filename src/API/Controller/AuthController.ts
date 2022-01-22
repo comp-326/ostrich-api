@@ -6,11 +6,11 @@ import {
 	login,
 	register,
 	resetPassword,
-} from "../controllers/Auth.controller"
+} from "../Services/Auth.service"
 import {
 	acceptWorkspaceInvitation,
 	verifyWorkspaceInvitation,
-} from "../controllers/Workspace.controller"
+} from "../Services/Workspace.service"
 import {
 	emptyEmailField,
 	emptyFirstnameField,
@@ -18,13 +18,12 @@ import {
 	emptyPasswordField,
 	passwordRegex,
 	confirmPasswordMatch,
-} from "../middlewares/form/form.validator"
+} from "../Middlewares/form/form.validator"
 import {
-	checkAccountActivation,
 	checkAccountMailExist,
 	checkRegisteredMail,
-} from "../middlewares/model/models.validators"
-import { confirmPasswordResetToken } from "../middlewares/requests/request"
+} from "../Middlewares/model/models.validators"
+import { confirmPasswordResetToken } from "../Middlewares/requests/request"
 
 const router = Router()
 
@@ -50,7 +49,6 @@ router
 		emptyEmailField,
 		emptyPasswordField,
 		checkAccountMailExist,
-		checkAccountActivation,
 		login,
 	)
 /**

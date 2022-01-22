@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { RequestType } from "./../../controllers/types/index.d"
+import { RequestType } from "../../Services/types"
 import { NextFunction, Response } from "express"
-import ErrorResponse from "./../../../middlewares/error"
+import ErrorResponse from "../../../Middlewares/error"
 import jwt from "jsonwebtoken"
-import { SECRET_KEY } from "./../../../config"
+import { SECRET_KEY } from "../../../config"
 
 //Confirm password reset token
 export const confirmPasswordResetToken = async (

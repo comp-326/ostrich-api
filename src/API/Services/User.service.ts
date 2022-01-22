@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, NextFunction } from "express"
-import ErrorResponse from "./../../middlewares/error"
-import User from "../../model/User.model"
+import ErrorResponse from "../../Middlewares/error"
+import User from "../../Models/User.model"
 import { RequestType } from "./types"
 
 export const getUserById = async (
