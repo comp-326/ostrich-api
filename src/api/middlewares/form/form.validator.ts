@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from "express"
 // import { emailRegex } from './../../../constants/regex'
-import ErrorResponse from './../../../middlewares/error'
+import ErrorResponse from "./../../../middlewares/error"
 
 // Email
 export const emptyEmailField = async (
@@ -13,7 +13,7 @@ export const emptyEmailField = async (
 
 	try {
 		const { email }: { email: string | undefined } = req.body
-		if (!email) throw new ErrorResponse('Email field required', 400)
+		if (!email) throw new ErrorResponse("Email field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -27,8 +27,7 @@ export const emptyFirstnameField = async (
 ) => {
 	try {
 		const { firstName }: { firstName: string | undefined } = req.body
-		if (!firstName)
-			throw new ErrorResponse('First name field required', 400)
+		if (!firstName) throw new ErrorResponse("First name field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -43,7 +42,7 @@ export const emptylastNameField = async (
 ) => {
 	try {
 		const { lastName }: { lastName: string | undefined } = req.body
-		if (!lastName) throw new ErrorResponse('Last name field required', 400)
+		if (!lastName) throw new ErrorResponse("Last name field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -57,7 +56,7 @@ export const emptyUserNameField = async (
 ) => {
 	try {
 		const { username }: { username: string | undefined } = req.body
-		if (!username) throw new ErrorResponse('Username field required', 400)
+		if (!username) throw new ErrorResponse("Username field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -71,7 +70,7 @@ export const emptyPasswordField = async (
 ) => {
 	try {
 		const { password }: { password: string | undefined } = req.body
-		if (!password) throw new ErrorResponse('Password field required', 400)
+		if (!password) throw new ErrorResponse("Password field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -94,7 +93,7 @@ export const confirmPasswordMatch = async (
 		} = req.body
 
 		if (!(password === confirmPassword))
-			throw new ErrorResponse('Passwords do not match', 400)
+			throw new ErrorResponse("Passwords do not match", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -129,33 +128,33 @@ const passRegex = ({
 	lastName?: string
 	email: string
 }) => {
-	let errors = ''
+	let errors = ""
 	if (password.search(new RegExp(/[a-z]+/)) < 0) {
-		errors += 'Password must contain a Lowercase letter\n'
+		errors += "Password must contain a Lowercase letter\n"
 	}
 	if (password.search(new RegExp(/[A-Z]+/)) < 0) {
-		errors += 'Password must contain a Uppercase letter\n'
+		errors += "Password must contain a Uppercase letter\n"
 	}
 	if (password.search(new RegExp(/[0-9]+/)) < 0) {
-		errors += 'Password must contain a number\n'
+		errors += "Password must contain a number\n"
 	}
-	if (password.match(new RegExp(firstName!, 'i'))) {
-		errors += 'Password must not contain your first name\n'
+	if (password.match(new RegExp(firstName!, "i"))) {
+		errors += "Password must not contain your first name\n"
 	}
-	if (password.match(new RegExp(lastName!, 'i'))) {
-		errors += 'Password must not contain your last name\n'
+	if (password.match(new RegExp(lastName!, "i"))) {
+		errors += "Password must not contain your last name\n"
 	}
-	if (password.match(new RegExp(email!, 'i'))) {
-		errors += 'Password not contain your email\n'
+	if (password.match(new RegExp(email!, "i"))) {
+		errors += "Password not contain your email\n"
 	}
 	if (password.length < 8) {
-		errors += 'Password must be at least 8 characters\n	'
+		errors += "Password must be at least 8 characters\n	"
 	}
 	// if(!password.match(emailRegex)){
 	// 	errors += 'Invalid email address\n'
 	// }
 
-	if (errors !== '') {
+	if (errors !== "") {
 		return { passOK: false, errors }
 	}
 	return { passOK: true, errors }
@@ -168,8 +167,7 @@ export const emptyAppointmentTitle = async (
 ) => {
 	try {
 		const { title }: { title: string | undefined } = req.body
-		if (!title)
-			throw new ErrorResponse('Appointment title field required', 400)
+		if (!title) throw new ErrorResponse("Appointment title field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -184,7 +182,7 @@ export const emptyAppointmentIntakeId = async (
 	try {
 		const { intakeId }: { intakeId: string | undefined } = req.body
 		if (!intakeId)
-			throw new ErrorResponse('Appointment intakeId field required', 400)
+			throw new ErrorResponse("Appointment intakeId field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -200,10 +198,7 @@ export const emptyAppointmentIntakePhoneNumber = async (
 	try {
 		const { phoneNumber }: { phoneNumber: string | undefined } = req.body
 		if (!phoneNumber)
-			throw new ErrorResponse(
-				'Appointment phone number field required',
-				400,
-			)
+			throw new ErrorResponse("Appointment phone number field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -219,10 +214,7 @@ export const emptyAppointmentMeetingLink = async (
 	try {
 		const { meetingLink }: { meetingLink: string | undefined } = req.body
 		if (!meetingLink)
-			throw new ErrorResponse(
-				'Appointment meeting link field required',
-				400,
-			)
+			throw new ErrorResponse("Appointment meeting link field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -238,10 +230,7 @@ export const emptyAppointmentDuration = async (
 		const { meetingDuration }: { meetingDuration: string | undefined } =
 			req.body
 		if (!meetingDuration)
-			throw new ErrorResponse(
-				'Appointment meetingDuration field required',
-				400,
-			)
+			throw new ErrorResponse("Appointment meetingDuration field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -258,7 +247,7 @@ export const emptyAppointmentStartTime = async (
 			req.body
 		if (!meetingStartTime)
 			throw new ErrorResponse(
-				'Appointment meetingStartTime field required',
+				"Appointment meetingStartTime field required",
 				400,
 			)
 		return next()
@@ -278,7 +267,7 @@ export const emptyAppointmentCategory = async (
 			req.body
 		if (!meetingCategory)
 			throw new ErrorResponse(
-				'Appointment meeting Category field required',
+				"Appointment meeting Category field required",
 				400,
 			)
 		return next()
@@ -295,7 +284,7 @@ export const emptyWorkspaceName = async (
 ) => {
 	try {
 		const { name }: { name: string | undefined } = req.body
-		if (!name) throw new ErrorResponse('Workspace name field required', 400)
+		if (!name) throw new ErrorResponse("Workspace name field required", 400)
 		return next()
 	} catch (e) {
 		return next(e)
@@ -309,8 +298,7 @@ export const emptyCommentBody = async (
 ) => {
 	try {
 		const { comment }: { comment: string | undefined } = req.body
-		if (!comment)
-			throw new ErrorResponse('You cannot post empty comment', 400)
+		if (!comment) throw new ErrorResponse("You cannot post empty comment", 400)
 		return next()
 	} catch (e) {
 		return next(e)

@@ -1,6 +1,6 @@
-import http from 'http'
-import app from './app'
-import { PORT } from './config'
+import http from "http"
+import app from "./app"
+import { PORT } from "./config"
 
 const server = http.createServer(app)
 

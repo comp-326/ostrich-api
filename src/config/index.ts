@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-import path from 'path'
+import dotenv from "dotenv"
+import path from "path"
 
 dotenv.config()
 
@@ -23,7 +23,7 @@ export default {
 	API,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
-	BASE_DIR
+	BASE_DIR,
 }
 export {
 	PORT,
@@ -34,5 +34,5 @@ export {
 	API,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
-	BASE_DIR
+	BASE_DIR,
 }

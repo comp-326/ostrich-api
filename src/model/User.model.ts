@@ -1,12 +1,12 @@
-import { model, Schema, SchemaTypes } from 'mongoose'
-import { UserModelType } from './types'
-import bcrypt from 'bcryptjs'
+import { model, Schema, SchemaTypes } from "mongoose"
+import { UserModelType } from "./types"
+import bcrypt from "bcryptjs"
 
 const UserSchema = new Schema<UserModelType>(
 	{
 		email: {
 			type: String,
-			required: [true, 'Email field is required'],
+			required: [true, "Email field is required"],
 			index: true,
 			unique: true,
 		},
@@ -17,15 +17,15 @@ const UserSchema = new Schema<UserModelType>(
 		},
 		firstName: {
 			type: String,
-			required: [true, 'First name is required'],
+			required: [true, "First name is required"],
 		},
 		lastName: {
 			type: String,
-			required: [true, 'Last name field is required'],
+			required: [true, "Last name field is required"],
 		},
 		password: {
 			type: String,
-			required: [true, 'Password cannot be empty'],
+			required: [true, "Password cannot be empty"],
 			minlength: 8,
 			select: false,
 		},
@@ -33,14 +33,14 @@ const UserSchema = new Schema<UserModelType>(
 			type: [
 				{
 					type: SchemaTypes.ObjectId,
-					required: [true, 'Referral Id required'],
+					required: [true, "Referral Id required"],
 				},
 			],
 			default: [],
 		},
-		accountType:{
-			type:String,
-			default:'basic',
+		accountType: {
+			type: String,
+			default: "basic",
 		},
 		address: {
 			street: {
@@ -64,17 +64,17 @@ const UserSchema = new Schema<UserModelType>(
 			type: String,
 			required: false,
 		},
-		profilePic: { type: String, default: '' },
+		profilePic: { type: String, default: "" },
 		role: {
 			type: String,
-			default: 'user',
+			default: "user",
 			lowercase: true,
 		},
 		activationDate: {
 			type: SchemaTypes.Date,
 		},
 		likedInstitutions: {
-			type: [{ type: SchemaTypes.ObjectId, ref: 'Institution' }],
+			type: [{ type: SchemaTypes.ObjectId, ref: "Institution" }],
 			default: [],
 		},
 		ActivationToken: {
@@ -85,18 +85,18 @@ const UserSchema = new Schema<UserModelType>(
 		PasswordToken: {
 			value: { type: String },
 			isUsed: { type: Boolean },
-			select: false
+			select: false,
 		},
-		availability:{
-			type:SchemaTypes.ObjectId,
-			ref:'Availability'
-		}
+		availability: {
+			type: SchemaTypes.ObjectId,
+			ref: "Availability",
+		},
 	},
 	{ timestamps: true },
 )
 
-UserSchema.pre('save', async function (next) {
-	if (!this.isModified('password')) {
+UserSchema.pre("save", async function (next) {
+	if (!this.isModified("password")) {
 		return next()
 	}
 	const salt = await bcrypt.genSalt(10)
@@ -108,4 +108,4 @@ UserSchema.methods.passwordMatch = async function (password: string) {
 	return await bcrypt.compare(password, this.password)
 }
 
-export default model<UserModelType>('User', UserSchema)
+export default model<UserModelType>("User", UserSchema)

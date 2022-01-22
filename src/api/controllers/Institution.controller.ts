@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Response, NextFunction } from 'express'
+import { Response, NextFunction } from "express"
 // import ErrorResponse from './../../middlewares/error'
-import Comment from './../../model/Comment.model'
-import Institution from './../../model/Institution.model'
-import Workspace from './../../model/Workspace.model'
-import User from './../../model/User.model'
-import { RequestType } from './types'
+import Comment from "./../../model/Comment.model"
+import Institution from "./../../model/Institution.model"
+import Workspace from "./../../model/Workspace.model"
+import User from "./../../model/User.model"
+import { RequestType } from "./types"
 export const createInstitution = async (
 	req: RequestType,
 	res: Response,
@@ -28,7 +28,7 @@ export const createInstitution = async (
 		)
 		return res.status(200).json({
 			success: true,
-			message: 'Institution created succesfully',
+			message: "Institution created succesfully",
 			institution: savedInstitution,
 		})
 	} catch (error) {
@@ -55,7 +55,7 @@ export const updateInstitution = async (
 		)
 		return res.status(200).json({
 			success: true,
-			message: 'Institution updated successfully',
+			message: "Institution updated successfully",
 		})
 	} catch (error) {
 		return next(error)
@@ -109,7 +109,7 @@ export const likeInstitution = async (
 		if (inLikes.length > 0) {
 			return res
 				.status(400)
-				.json({ success: false, message: 'Already liked institution' })
+				.json({ success: false, message: "Already liked institution" })
 		}
 		const institution = await Institution.findByIdAndUpdate(
 			institutionId,
@@ -135,5 +135,5 @@ export const rateInstitution = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	return res.status(200).json({ message: 'Rating institution' })
+	return res.status(200).json({ message: "Rating institution" })
 }

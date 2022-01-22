@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Router } from 'express'
+import { Router } from "express"
 import {
 	confirmAccountEmail,
 	getActivationToken,
 	login,
 	register,
 	resetPassword,
-} from '../controllers/Auth.controller'
+} from "../controllers/Auth.controller"
 import {
 	acceptWorkspaceInvitation,
 	verifyWorkspaceInvitation,
-} from '../controllers/Workspace.controller'
+} from "../controllers/Workspace.controller"
 import {
 	emptyEmailField,
 	emptyFirstnameField,
@@ -18,13 +18,13 @@ import {
 	emptyPasswordField,
 	passwordRegex,
 	confirmPasswordMatch,
-} from '../middlewares/form/form.validator'
+} from "../middlewares/form/form.validator"
 import {
 	checkAccountActivation,
 	checkAccountMailExist,
 	checkRegisteredMail,
-} from '../middlewares/model/models.validators'
-import { confirmPasswordResetToken } from '../middlewares/requests/request'
+} from "../middlewares/model/models.validators"
+import { confirmPasswordResetToken } from "../middlewares/requests/request"
 
 const router = Router()
 
@@ -32,7 +32,7 @@ const router = Router()
  * Register new user
  */
 router
-	.route('/register')
+	.route("/register")
 	.post(
 		emptyEmailField,
 		emptyFirstnameField,
@@ -45,7 +45,7 @@ router
 	)
 // Login new User
 router
-	.route('/login')
+	.route("/login")
 	.post(
 		emptyEmailField,
 		emptyPasswordField,
@@ -56,19 +56,19 @@ router
 /**
  * Confirm User account
  */
-router.route('/account/confirm/:token').post(confirmAccountEmail)
+router.route("/account/confirm/:token").post(confirmAccountEmail)
 
 /**
  * Get activation email if not received or expired
  */
 router
-	.route('/account/confirm/get/token')
+	.route("/account/confirm/get/token")
 	.post(emptyEmailField, getActivationToken)
 /**
  * Reset password and Update password
  */
 router
-	.route('/account/password/reset/:resetToken')
+	.route("/account/password/reset/:resetToken")
 	.put(
 		confirmPasswordResetToken,
 		emptyPasswordField,
@@ -80,11 +80,11 @@ router
  * Get pasword reset link
  */
 router
-	.route('/account/password/forgot')
+	.route("/account/password/forgot")
 	.post(emptyEmailField, confirmAccountEmail)
 // Accept workspace invitation
 router
-	.route('/workspace/:workspaceId/join/:token')
+	.route("/workspace/:workspaceId/join/:token")
 	.post(
 		verifyWorkspaceInvitation,
 		emptyEmailField,

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Response, NextFunction } from 'express'
+import { Response, NextFunction } from "express"
 
-import ErrorResponse from './../../middlewares/error'
-import User from './../../model/User.model'
-import jwt from 'jsonwebtoken'
-import { SECRET_KEY } from './../../config'
-import { RequestType } from './types'
-import { mailTransport, resetPasswordTemplate } from '../services/Mail.service'
+import ErrorResponse from "./../../middlewares/error"
+import User from "./../../model/User.model"
+import jwt from "jsonwebtoken"
+import { SECRET_KEY } from "./../../config"
+import { RequestType } from "./types"
+import { mailTransport, resetPasswordTemplate } from "../services/Mail.service"
 
 export const login = async (
 	req: RequestType,
@@ -19,11 +19,11 @@ export const login = async (
 		// console.log('Body',req.body)
 
 		const { email } = req.body
-		const user = await User.findOne({ email }).select('+password')
+		const user = await User.findOne({ email }).select("+password")
 		if (!(await user!.passwordMatch(req.body.password)))
 			return res
 				.status(401)
-				.json({ success: false, message: 'Check your login details' })
+				.json({ success: false, message: "Check your login details" })
 
 		const token = jwt.sign(
 			{
@@ -36,14 +36,14 @@ export const login = async (
 				gender: user?.gender,
 			},
 			SECRET_KEY!,
-			{ expiresIn: '1h' },
+			{ expiresIn: "1h" },
 		)
 		const { password, ...props } = user!._doc
 		return res.status(200).json({
 			success: true,
 			token,
 			user: props,
-			message: 'Login successful',
+			message: "Login successful",
 		})
 	} catch (error) {
 		return next(error)
@@ -60,16 +60,15 @@ export const register = async (
 		const newUser = await User.create({
 			...req.body,
 			active: true,
-			accountType: 'basic',
-			role: 'user',
+			accountType: "basic",
+			role: "user",
 		})
-		if (!newUser)
-			throw new ErrorResponse('Account could not be created', 500)
+		if (!newUser) throw new ErrorResponse("Account could not be created", 500)
 		const { password, ...props } = newUser._doc
 		return res.status(200).json({
 			success: true,
 			user: props,
-			message: 'Account created successfully',
+			message: "Account created successfully",
 		})
 	} catch (error) {
 		return next(error)
@@ -85,7 +84,7 @@ export const confirmAccountEmail = async (
 		const token = req.params.token
 
 		if (!token) {
-			throw new ErrorResponse('No auth confirmation token provided', 400)
+			throw new ErrorResponse("No auth confirmation token provided", 400)
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -96,7 +95,7 @@ export const confirmAccountEmail = async (
 			if (err)
 				return res.status(300).json({
 					success: false,
-					message: 'Account already activated',
+					message: "Account already activated",
 				})
 			/**
 			/**
@@ -104,12 +103,12 @@ export const confirmAccountEmail = async (
 			 */
 			const dbUser = await User.findOne({
 				$and: [{ _id: payload!.userId }],
-			}).select('+ActivationToken')
+			}).select("+ActivationToken")
 			/**
 			 * Check if user exists
 			 */
 			if (!dbUser) {
-				return next(new ErrorResponse('Account does not exist', 404))
+				return next(new ErrorResponse("Account does not exist", 404))
 			}
 			/**
 			 * Check if user is active
@@ -117,7 +116,7 @@ export const confirmAccountEmail = async (
 			if (dbUser?.isActive)
 				return res.status(300).json({
 					success: false,
-					message: 'Account already activated',
+					message: "Account already activated",
 				})
 			/**
 			 * Check if the JWT payload for user matches the Given db user
@@ -131,7 +130,7 @@ export const confirmAccountEmail = async (
 				if (dbUser?.ActivationToken.isUsed) {
 					return res.status(400).json({
 						success: false,
-						message: 'Link already used and cannot be re-used',
+						message: "Link already used and cannot be re-used",
 					})
 				}
 				/**
@@ -148,7 +147,7 @@ export const confirmAccountEmail = async (
 				)
 				return res.status(400).json({
 					success: true,
-					message: 'Account confirmation successful',
+					message: "Account confirmation successful",
 				})
 			}
 			/**
@@ -161,7 +160,7 @@ export const confirmAccountEmail = async (
 			})
 
 			return res.status(200).json({
-				message: 'Invalid token',
+				message: "Invalid token",
 				success: true,
 			})
 		})
@@ -177,7 +176,7 @@ export const deleteUserAccount = async (
 ) => {
 	// try {
 	// const user = await User.delete({ ...req.body })
-	return res.status(200).json({ message: 'Register' })
+	return res.status(200).json({ message: "Register" })
 	// } catch (e) {
 	// next(e)
 	// }
@@ -192,23 +191,23 @@ export const forgotPassword = async (
 		const { email }: { email: string } = req.body
 		const user = await User.findOne({ email })
 		if (!user)
-			return next(new ErrorResponse('Account email does not exist', 404))
+			return next(new ErrorResponse("Account email does not exist", 404))
 		const token = jwt.sign(
 			{ userId: user._id, email: user.email },
 			SECRET_KEY!,
-			{ expiresIn: '1h' },
+			{ expiresIn: "1h" },
 		)
 		mailTransport.sendMail(
 			{
 				to: user.email,
-				subject: 'Password reset',
+				subject: "Password reset",
 				html: resetPasswordTemplate(token),
 			},
 			async (err, _payload) => {
 				if (err) {
 					return next(
 						new ErrorResponse(
-							'Please check your email to reset your password',
+							"Please check your email to reset your password",
 							400,
 						),
 					)
@@ -217,7 +216,7 @@ export const forgotPassword = async (
 			},
 		)
 
-		return res.status(200).json({ message: 'Register' })
+		return res.status(200).json({ message: "Register" })
 	} catch (e) {
 		next(e)
 	}
@@ -236,7 +235,7 @@ export const resetPassword = async (
 	// 		{ password },
 	// 		{ new: true },
 	// 	)
-	return res.status(200).json({ message: 'Resetting password' })
+	return res.status(200).json({ message: "Resetting password" })
 	// } catch (e) {
 	// 	next(e)
 	// }
@@ -253,18 +252,17 @@ export const getActivationToken = async (
 ) => {
 	try {
 		const { email }: { email: string } = req.body
-		const dbUser = await User.findOne({ email }).select('+ActivationToken')
+		const dbUser = await User.findOne({ email }).select("+ActivationToken")
 		if (!dbUser) {
 			return res.status(400).json({
 				success: false,
-				message:
-					'The email provided is not registered with any account',
+				message: "The email provided is not registered with any account",
 			})
 		}
 		const token = jwt.sign(
 			{ userId: dbUser!._id, email: dbUser!.email, role: dbUser!.role },
 			SECRET_KEY!,
-			{ expiresIn: '1h' },
+			{ expiresIn: "1h" },
 		)
 		/**
 		 * Set the activation link to the user instance
@@ -278,7 +276,7 @@ export const getActivationToken = async (
 		mailTransport.sendMail(
 			{
 				to: dbUser!.email,
-				subject: 'Activate your account',
+				subject: "Activate your account",
 				html: `
 				<p>Hello ${dbUser!.firstName} ${
 					dbUser!.lastName
@@ -290,13 +288,13 @@ export const getActivationToken = async (
 			},
 			async (err, payload) => {
 				if (err) {
-					console.log('Could not send email', err)
-					next(new ErrorResponse('Could not send email', 500))
+					console.log("Could not send email", err)
+					next(new ErrorResponse("Could not send email", 500))
 				}
 				if (payload) {
 					return res.status(200).json({
 						success: true,
-						message: 'Activation link sent to your email',
+						message: "Activation link sent to your email",
 					})
 				}
 			},

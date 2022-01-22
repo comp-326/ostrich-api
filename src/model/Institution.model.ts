@@ -1,26 +1,26 @@
-import { model, SchemaTypes, Schema } from 'mongoose'
-import { InstitutionModelType } from './types'
+import { model, SchemaTypes, Schema } from "mongoose"
+import { InstitutionModelType } from "./types"
 
 const InstitutionShema = new Schema<InstitutionModelType>(
 	{
 		author: {
 			type: SchemaTypes.ObjectId,
-			ref: 'User',
+			ref: "User",
 		},
 		description: {
 			type: String,
-			default: '',
+			default: "",
 		},
 		comments: {
 			type: [
 				{
 					author: {
 						type: SchemaTypes.ObjectId,
-						ref: 'User',
+						ref: "User",
 					},
 					comment: {
 						type: String,
-						default: '',
+						default: "",
 					},
 				},
 			],
@@ -36,9 +36,9 @@ const InstitutionShema = new Schema<InstitutionModelType>(
 		},
 		location: {
 			type: {
-				longitude: { type: String, default: '' },
-				latitude: { type: String, default: '' },
-				city: { type: String, default: '' },
+				longitude: { type: String, default: "" },
+				latitude: { type: String, default: "" },
+				city: { type: String, default: "" },
 			},
 		},
 		population: {
@@ -49,11 +49,11 @@ const InstitutionShema = new Schema<InstitutionModelType>(
 			type: String,
 			unique: true,
 			index: true,
-			required: [true, 'Institution name required'],
+			required: [true, "Institution name required"],
 		},
 		logo: {
 			type: String,
-			default: '',
+			default: "",
 		},
 		size: {
 			type: String,
@@ -63,4 +63,4 @@ const InstitutionShema = new Schema<InstitutionModelType>(
 	{ timestamps: true },
 )
 
-export default model('Institution', InstitutionShema)
+export default model("Institution", InstitutionShema)

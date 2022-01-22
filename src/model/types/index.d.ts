@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Document } from 'mongoose'
+import { Document } from "mongoose"
 
 export type UserModelType = {
 	username: string
@@ -19,7 +19,7 @@ export type UserModelType = {
 	userType: string
 	dateOfBirth: Date | string
 	phoneNumber: string
-	modeOfCommunication: 'sms' | 'email'
+	modeOfCommunication: "sms" | "email"
 	note: string
 	address: {
 		city: string
@@ -43,11 +43,11 @@ export type UserModelType = {
 	// hashPassword: (password: string) => void
 } & Document
 
-export type AvailabilityType = { 
-	days: string[], 
-	startTime: string|Date, 
-	endTime: string|Date, 
-	_doc: any 
+export type AvailabilityType = {
+	days: string[]
+	startTime: string | Date
+	endTime: string | Date
+	_doc: any
 } & Document
 
 export type WorkspaceModelType = {

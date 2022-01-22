@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
-import ErrorResponse from './../../../middlewares/error'
-import User from './../../../model/User.model'
-import Workspace from './../../../model/Workspace.model'
+import { Request, Response, NextFunction } from "express"
+import ErrorResponse from "./../../../middlewares/error"
+import User from "./../../../model/User.model"
+import Workspace from "./../../../model/Workspace.model"
 
 export const checkAccountActivation = async (
 	req: Request,
@@ -13,7 +13,7 @@ export const checkAccountActivation = async (
 		const user = await User.findOne({ email })
 		if (!user?.isActive)
 			throw new ErrorResponse(
-				'Please check your email and activate your account',
+				"Please check your email and activate your account",
 				401,
 			)
 		return next()
@@ -32,7 +32,7 @@ export const checkAccountMailExist = async (
 		const user = await User.findOne({ email })
 		if (!user)
 			throw new ErrorResponse(
-				'User account does not exist please create one ',
+				"User account does not exist please create one ",
 				404,
 			)
 		return next()
@@ -50,7 +50,7 @@ export const checkRegisteredMail = async (
 		const { email }: { email: string } = req.body
 		const user = await User.findOne({ email })
 		if (!user) return next()
-		throw new ErrorResponse('Email already registered', 400)
+		throw new ErrorResponse("Email already registered", 400)
 	} catch (error) {
 		return next(error)
 	}
@@ -68,7 +68,7 @@ export const checkWorkspaceExist = async (
 		if (workspace) {
 			return next()
 		}
-		throw new ErrorResponse('Invalid workspace provided', 400)
+		throw new ErrorResponse("Invalid workspace provided", 400)
 	} catch (error) {
 		return next(error)
 	}
@@ -83,7 +83,7 @@ export const checkRegistereduUserName = async (
 		const { username }: { username: string } = req.body
 		const user = await User.findOne({ username })
 		if (!user) return next()
-		throw new ErrorResponse('Username already registered', 400)
+		throw new ErrorResponse("Username already registered", 400)
 	} catch (error) {
 		return next(error)
 	}

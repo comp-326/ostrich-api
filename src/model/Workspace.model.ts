@@ -1,36 +1,36 @@
-import { Schema, model, SchemaTypes } from 'mongoose'
-import { WorkspaceModelType } from './types'
+import { Schema, model, SchemaTypes } from "mongoose"
+import { WorkspaceModelType } from "./types"
 
 const WorkspaceSchema = new Schema<WorkspaceModelType>({
 	owner: {
 		type: SchemaTypes.ObjectId,
-		ref: 'User',
+		ref: "User",
 	},
 	active: {
 		type: Boolean,
 		default: true,
 	},
 	admins: {
-		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
 	members: {
-		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
 	creators: {
-		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
 	counselors: {
-		type: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
 	institutions: {
 		type: [
 			{
 				type: SchemaTypes.ObjectId,
-				ref: 'Institution',
+				ref: "Institution",
 			},
 		],
 		default: [],
@@ -39,11 +39,11 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		type: String,
 		unique: true,
 		index: true,
-		required: [true, 'Workspace name is required'],
+		required: [true, "Workspace name is required"],
 	},
 	logoUrl: {
 		type: String,
-		default: '',
+		default: "",
 	},
 	images: {
 		type: [String],
@@ -51,4 +51,4 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 	},
 })
 
-export default model<WorkspaceModelType>('Workspace', WorkspaceSchema)
+export default model<WorkspaceModelType>("Workspace", WorkspaceSchema)

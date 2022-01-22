@@ -1,5 +1,5 @@
-import express from 'express'
-import expressLoader from './expressLoader'
+import express from "express"
+import expressLoader from "./expressLoader"
 
 const app = express()
 expressLoader({ app })
