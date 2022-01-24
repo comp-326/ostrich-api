@@ -2,7 +2,6 @@
 import { Document } from "mongoose"
 
 export type UserModelType = {
-	username: string
 	firstName: string
 	lastName: string
 	middleName: string
