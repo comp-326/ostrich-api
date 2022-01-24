@@ -56,12 +56,14 @@ export const register = async (
 	next: NextFunction,
 ) => {
 	try {
+		const uniqueName = `User#${new Date().getTime()}`
 		// const hPassword = await hashPassword(req.body.password)
 		const newUser = await User.create({
 			...req.body,
 			active: true,
 			accountType: "basic",
 			role: "user",
+			username:uniqueName
 		})
 		if (!newUser) throw new ErrorResponse("Account could not be created", 500)
 		const { password, ...props } = newUser._doc

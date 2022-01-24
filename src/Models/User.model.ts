@@ -13,8 +13,8 @@ const UserSchema = new Schema<UserModelType>(
 		username: {
 			type: String,
 			required: false,
-			unique: false,
-			default: "",
+			unique: true,
+			index:true
 		},
 		firstName: {
 			type: String,
