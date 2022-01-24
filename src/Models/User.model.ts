@@ -10,6 +10,12 @@ const UserSchema = new Schema<UserModelType>(
 			index: true,
 			unique: true,
 		},
+		username: {
+			type: String,
+			required: false,
+			unique: false,
+			default: "",
+		},
 		firstName: {
 			type: String,
 			required: [true, "First name is required"],
