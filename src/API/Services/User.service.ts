@@ -77,7 +77,7 @@ export const updateUserProfile = async (
 ) => {
 	try {
 		const user = await User.findByIdAndUpdate(
-			req.params.id,
+			req.params.userId,
 			{
 				...req.body,
 			},

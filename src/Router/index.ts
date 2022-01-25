@@ -1,7 +1,8 @@
 import { homepage } from "../html"
 import { Application } from "express"
-import AuthRouter from "../API/Controller/AuthController"
-import WorkspaceRouter from "../API/Controller/WorkspaceController"
+import AuthController from "../API/Controller/AuthController"
+import UserController from "../API/Controller/UserController"
+import WorkspaceController from "../API/Controller/WorkspaceController"
 import swaggerUi from "swagger-ui-express"
 import DOCS from "../docs/api.json"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -9,8 +10,9 @@ import DOCS from "../docs/api.json"
 // console.log(BASE_DIR)
 
 export default ({ app }: { app: Application }) => {
-	app.use("/auth", AuthRouter)
-	app.use("/workspace", WorkspaceRouter)
+	app.use("/auth", AuthController)
+	app.use("/workspace", WorkspaceController)
+	app.use("/user", UserController)
 	app.use(
 		"/docs",
 		swaggerUi.serve,

@@ -59,6 +59,30 @@ const InstitutionShema = new Schema<InstitutionModelType>(
 			type: String,
 			min: 0,
 		},
+		image1Url: {
+			type: String,
+			default: "",
+		},
+		image2Url: {
+			type: String,
+			default: "",
+		},
+		image3Url: {
+			type: String,
+			default: "",
+		},
+		image4Url: {
+			type: String,
+			default: "",
+		},
+		image5Url: {
+			type: String,
+			default: "",
+		},
+		image6Url: {
+			type: String,
+			default: "",
+		},
 	},
 	{ timestamps: true },
 )

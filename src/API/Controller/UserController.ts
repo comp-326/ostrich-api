@@ -1,4 +1,5 @@
 import { Router } from "express"
+import { Authorize } from "../Middlewares/AuthJwt"
 import {
 	cancelAppointment,
 	createAppointment,
@@ -14,6 +15,6 @@ router.put("/appointment/cancel/:appointmentId", cancelAppointment)
 router.put("/appointment/reschedule/:appointmentId", rescheduleAppointment)
 router.put("/appointment/update/:appointmentId", updateAppointment)
 router.get("/profile/:userId", userProfile)
-router.put("/profile/:userId/update", updateUserProfile)
+router.put("/profile/:userId/update",Authorize,updateUserProfile)
 
 export default router

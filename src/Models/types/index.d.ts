@@ -79,6 +79,12 @@ export type AppointmentModelType = {
 
 export type InstitutionModelType = {
 	name: string
+	image1Url: string
+	image2Url: string
+	image3Url: string
+	image4Url: string
+	image5Url: string
+	image6Url: string
 	description: string
 	comments: unknown[]
 	likes: number

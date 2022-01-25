@@ -5,6 +5,7 @@ import { SECRET_KEY } from "../../config"
 // import ErrorResponse from './../../middlewares/error'
 import { RequestType } from "../Services/types"
 import Workspace from "../../Models/Workspace.model"
+import capitalize from "./../../Utils/capitalize"
 
 export const Authorize = async (
 	req: RequestType,
@@ -21,9 +22,11 @@ export const Authorize = async (
 		const token = AuthHeaderToken.split(" ")[1]
 		return jwt.verify(token, SECRET_KEY!, (err, payload) => {
 			if (err) {
+				console.log(err)
+
 				return res.status(401).json({
 					success: false,
-					message: "Please login to access this page",
+					message: capitalize(err.message),
 				})
 			}
 			req.user = payload!
