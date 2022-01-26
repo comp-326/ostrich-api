@@ -168,8 +168,6 @@ export const sendPasswordResetLink = async (
 			},
 			async (err, payload) => {
 				if (err) {
-					console.log(err)
-
 					console.log("Could not send email")
 					return res
 						.status(400)
