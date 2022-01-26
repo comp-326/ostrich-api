@@ -124,6 +124,7 @@ export const sendPasswordResetLink = async (
 	next: NextFunction,
 ) => {
 	try {
+		let sent = false
 		const {
 			email,
 			device,
@@ -159,6 +160,7 @@ export const sendPasswordResetLink = async (
 			token: confirmationToken,
 		})
 		const mailTemplate = resetPasswordTemplate(link)
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		mailTransport.sendMail(
 			{
 				to: email,
@@ -168,21 +170,23 @@ export const sendPasswordResetLink = async (
 			},
 			async (err, payload) => {
 				if (err) {
-					console.log("Could not send email")
-					return res
-						.status(400)
-						.json({ success: false, message: "Could not send email" })
+					sent = false
 				}
 				if (payload) {
-					console.log("Success")
+					sent = true
 				}
 			},
 		)
 
-		res.json({
+		if (!sent) {
+			return res.status(400).json({
+				success: false,
+				message: "Could not send email",
+			})
+		}
+		return res.status(200).json({
 			success: true,
-			link,
-			message: "A password reset link has been sent to your email",
+			message: "Check your email for the reset link",
 		})
 	} catch (e) {
 		next(e)
