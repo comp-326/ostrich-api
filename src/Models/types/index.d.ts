@@ -43,11 +43,16 @@ export type UserModelType = {
 	// hashPassword: (password: string) => void
 } & Document
 
-export type AvailabilityType = {
-	days: string[]
-	startTime: string | Date
-	endTime: string | Date
-	_doc: any
+// export type AvailabilityType = {
+// 	days: string[]
+// 	startTime: string | Date
+// 	endTime: string | Date
+// 	_doc: any
+// } & Document
+export type UserAvailabilityType = {
+	user:unknown
+	availability: AvailabilityType
+	_doc:any
 } & Document
 
 export type WorkspaceModelType = {
@@ -107,3 +112,16 @@ export type CommentModelType = {
 	comment: string
 	_doc: any
 } & Document
+
+export type AvailabilityType = {
+	startTime: string
+	endTime: string
+	days: AvailabilityDaysType[]
+}
+export type AvailabilityDaysType = {
+	day: string
+	value: string
+	initial: string
+	position: number
+}
+export type DayInitialType = string

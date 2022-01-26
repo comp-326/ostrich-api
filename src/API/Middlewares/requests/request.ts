@@ -14,12 +14,11 @@ export const confirmPasswordResetToken = async (
 	try {
 		const resetToken = req.params.resetToken
 		if (!resetToken) return next(new ErrorResponse("Invalid link", 400))
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		jwt.verify(resetToken, SECRET_KEY!, async (err, _payload) => {
+		jwt.verify(resetToken, SECRET_KEY!, async function (err, payload) {
 			if (err) {
-				return next(new ErrorResponse("Reset link has expired", 401))
+				return next(new ErrorResponse("Reset link invalid", 401))
 			}
+			req.user = payload
 			return next()
 		})
 	} catch (e) {

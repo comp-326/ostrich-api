@@ -8,7 +8,11 @@ import User from "../../Models/User.model"
 import jwt from "jsonwebtoken"
 import { SECRET_KEY } from "../../config"
 import { RequestType } from "./types"
-import { mailTransport, resetPasswordTemplate } from "../Cservices/Mail.service"
+
+import Availability from "./../../Models/Availability.model"
+import Institution from "./../../Models/Institution.model"
+import Workspace from "./../../Models/Workspace.model"
+import Comment from "./../../Models/Comment.model"
 
 export const login = async (
 	req: RequestType,
@@ -63,7 +67,7 @@ export const register = async (
 			active: true,
 			accountType: "basic",
 			role: "user",
-			username:uniqueName
+			username: uniqueName,
 		})
 		if (!newUser) throw new ErrorResponse("Account could not be created", 500)
 		const { password, ...props } = newUser._doc
@@ -185,71 +189,26 @@ export const deleteUserAccount = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	// const user = await User.delete({ ...req.body })
-	return res.status(200).json({ message: "Register" })
-	// } catch (e) {
-	// next(e)
-	// }
-}
-
-export const forgotPassword = async (
-	req: RequestType,
-	res: Response,
-	next: NextFunction,
-) => {
 	try {
-		const { email }: { email: string } = req.body
-		const user = await User.findOne({ email })
-		if (!user)
-			return next(new ErrorResponse("Account email does not exist", 404))
-		const token = jwt.sign(
-			{ userId: user._id, email: user.email },
-			SECRET_KEY!,
-			{ expiresIn: "1h" },
-		)
-		mailTransport.sendMail(
-			{
-				to: user.email,
-				subject: "Password reset",
-				html: resetPasswordTemplate(token),
-			},
-			async (err, _payload) => {
-				if (err) {
-					return next(
-						new ErrorResponse(
-							"Please check your email to reset your password",
-							400,
-						),
-					)
-					return
-				}
-			},
-		)
-
-		return res.status(200).json({ message: "Register" })
-	} catch (e) {
-		next(e)
+		if (req.user.userId === req.params.userId) {
+			await Availability.deleteMany({ user: req.user.userId })
+			await Institution.deleteMany({ author: req.user.userId })
+			await Workspace.deleteMany({ owner: req.user.userId })
+			await Comment.deleteMany({ author: req.user.userId })
+			await User.findByIdAndDelete(req.user.userId)
+			return res.status(200).json({
+				success: true,
+				message: "Account deletion successful",
+				user: {},
+			})
+		} else {
+			return res
+				.status(403)
+				.json({ success: false, message: "You can oly delete your account" })
+		}
+	} catch (err) {
+		next(err)
 	}
-}
-export const resetPassword = async (
-	req: RequestType,
-	res: Response,
-	next: NextFunction,
-) => {
-	// try {
-	// 	// const user = await User.delete({ ...req.body })
-	// 	const password = req.body.password
-	// 	const decoded = jwt.decode(req.params.token)
-	// 	await User.findByIdAndUpdate(
-
-	// 		{ password },
-	// 		{ new: true },
-	// 	)
-	return res.status(200).json({ message: "Resetting password" })
-	// } catch (e) {
-	// 	next(e)
-	// }
 }
 
 /**
@@ -262,55 +221,10 @@ export const getActivationToken = async (
 	next: NextFunction,
 ) => {
 	try {
-		const { email }: { email: string } = req.body
-		const dbUser = await User.findOne({ email }).select("+ActivationToken")
-		if (!dbUser) {
-			return res.status(400).json({
-				success: false,
-				message: "The email provided is not registered with any account",
-			})
-		}
-		const token = jwt.sign(
-			{ userId: dbUser!._id, email: dbUser!.email, role: dbUser!.role },
-			SECRET_KEY!,
-			{ expiresIn: "1h" },
-		)
-		/**
-		 * Set the activation link to the user instance
-		 */
-		await dbUser?.updateOne(
-			{
-				ActivationToken: { value: token, isUsed: false },
-			},
-			{ new: true },
-		)
-		mailTransport.sendMail(
-			{
-				to: dbUser!.email,
-				subject: "Activate your account",
-				html: `
-				<p>Hello ${dbUser!.firstName} ${
-					dbUser!.lastName
-					// eslint-disable-next-line indent
-				} please click the link below to activate your account</p>
-				<p>The link is only valid for 1hour</p>
-<p><a href="http://localhost:3000/account/activate/${token}">Activate account</a></p>
-				`,
-			},
-			async (err, payload) => {
-				if (err) {
-					console.log("Could not send email", err)
-					next(new ErrorResponse("Could not send email", 500))
-				}
-				if (payload) {
-					return res.status(200).json({
-						success: true,
-						message: "Activation link sent to your email",
-					})
-				}
-			},
-		)
-	} catch (e) {
-		next(e)
+		res.json({ message: "Activation of account" })
+	} catch (err) {
+		next(err)
 	}
 }
+
+

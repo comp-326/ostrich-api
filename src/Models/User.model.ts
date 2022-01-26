@@ -14,7 +14,7 @@ const UserSchema = new Schema<UserModelType>(
 			type: String,
 			required: false,
 			unique: true,
-			index:true
+			index: true,
 		},
 		firstName: {
 			type: String,
@@ -89,14 +89,17 @@ const UserSchema = new Schema<UserModelType>(
 			select: false,
 		},
 		availability: {
-			type: SchemaTypes.ObjectId,
+			type: [SchemaTypes.ObjectId],
 			ref: "Availability",
+			default: [],
 		},
 	},
 	{ timestamps: true },
 )
 
 UserSchema.pre("save", async function (next) {
+	console.log("Modified", this.isModified("password"))
+
 	if (!this.isModified("password")) {
 		return next()
 	}

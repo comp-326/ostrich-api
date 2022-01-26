@@ -1,16 +1,18 @@
+import {
+	emptyNewPassword,
+	emptyConfirmNewPassword,
+} from "./../Middlewares/form/user.validators"
+import {
+	emailPasswordReset,
+	newPasswordRegex,
+	sendPasswordResetLink,
+	updateAccountPassword,
+	validPasswordResetLink,
+} from "./../Services/PassWord.service"
+import { Authorize } from "./../Middlewares/AuthJwt"
+import { emptyCurrentPassword, matchCurrentPassword, newPasswordMatchConfirmNewPassword } from "./../Middlewares/model/models.validators"
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from "express"
-import {
-	confirmAccountEmail,
-	getActivationToken,
-	login,
-	register,
-	resetPassword,
-} from "../Services/Auth.service"
-import {
-	acceptWorkspaceInvitation,
-	verifyWorkspaceInvitation,
-} from "../Services/Workspace.service"
 import {
 	emptyEmailField,
 	emptyFirstnameField,
@@ -18,81 +20,102 @@ import {
 	emptyPasswordField,
 	passwordRegex,
 	confirmPasswordMatch,
-} from "../Middlewares/form/form.validator"
+} from "../Middlewares/form/user.validators"
 import {
-	checkAccountMailExist,
 	checkRegisteredMail,
+	checkAccountMailExist,
+	newPasswordMatchOldPassword,
 } from "../Middlewares/model/models.validators"
 import { confirmPasswordResetToken } from "../Middlewares/requests/request"
+import {
+	login,
+	getActivationToken,
+	register,
+	confirmAccountEmail,
+} from "../Services/Auth.service"
 
 const router = Router()
 
+const registerMiddlewares = [
+	emptyEmailField,
+	emptyFirstnameField,
+	emptylastNameField,
+	emptyPasswordField,
+	passwordRegex,
+	confirmPasswordMatch,
+	checkRegisteredMail,
+]
+const loginMiddlewares = [
+	emptyEmailField,
+	emptyPasswordField,
+	checkAccountMailExist,
+]
+const passResetLinkMiddlewares = [emptyEmailField, checkAccountMailExist]
+const updatePassMiddlewares = [
+	Authorize,
+	emptyCurrentPassword,
+	emptyNewPassword,
+	matchCurrentPassword,
+	newPasswordMatchOldPassword,
+	passwordRegex,
+	newPasswordMatchConfirmNewPassword,
+]
+const resetPasswordMiddlewares = [
+	confirmPasswordResetToken,
+	validPasswordResetLink,
+	emptyNewPassword,
+	newPasswordRegex,
+	emptyConfirmNewPassword,
+	newPasswordMatchConfirmNewPassword,
+]
 /**
  * Register new user
+ *
  */
-router
-	.route("/register")
-	.post(
-		emptyEmailField,
-		emptyFirstnameField,
-		emptylastNameField,
-		emptyPasswordField,
-		passwordRegex,
-		confirmPasswordMatch,
-		checkRegisteredMail,
-		register,
-	)
-// Login new User
-router
-	.route("/login")
-	.post(
-		emptyEmailField,
-		emptyPasswordField,
-		checkAccountMailExist,
-		login,
-	)
+router.post("/register", ...registerMiddlewares, register)
+/**
+ * Login new User
+ */
+
+router.post("/login", ...loginMiddlewares, login)
+
 /**
  * Confirm User account
  */
-router.route("/account/confirm/:token").post(confirmAccountEmail)
+router.post("/account/confirm/:device/:token", confirmAccountEmail)
 
 /**
  * Get activation email if not received or expired
  */
 router
-	.route("/account/confirm/get/token")
+	.route("/account/activate/email")
 	.post(emptyEmailField, getActivationToken)
+
 /**
- * Reset password and Update password
+ * ************** HANDLING PASSWORDS ********************
  */
-router
-	.route("/account/password/reset/:resetToken")
-	.put(
-		confirmPasswordResetToken,
-		emptyPasswordField,
-		passwordRegex,
-		confirmPasswordMatch,
-		resetPassword,
-	)
+/**
+ * Update account password
+ */
+router.put(
+	"/profile/password/update",
+	...updatePassMiddlewares,
+	updateAccountPassword,
+)
 /**
  * Get pasword reset link
  */
-router
-	.route("/account/password/forgot")
-	.post(emptyEmailField, confirmAccountEmail)
-// Accept workspace invitation
-router
-	.route("/workspace/:workspaceId/join/:token")
-	.post(
-		verifyWorkspaceInvitation,
-		emptyEmailField,
-		emptyFirstnameField,
-		emptylastNameField,
-		emptyPasswordField,
-		passwordRegex,
-		confirmPasswordMatch,
-		checkRegisteredMail,
-		acceptWorkspaceInvitation,
-	)
-
+router.post(
+	"/account/password/forgot",
+	...passResetLinkMiddlewares,
+	sendPasswordResetLink,
+)
+/**
+ * Reset password and Update password
+ */
+router.put(
+	"/account/password/reset/:resetToken",
+	...resetPasswordMiddlewares,
+	emailPasswordReset,
+)
 export default router
