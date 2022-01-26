@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "start": "node ./dist/server.js",
     "prestart": "npm install && eslint --fix && npm run build",
     "build": "tsc",
