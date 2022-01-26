@@ -50,9 +50,9 @@ export type UserModelType = {
 // 	_doc: any
 // } & Document
 export type UserAvailabilityType = {
-	user:unknown
+	user: unknown
 	availability: AvailabilityType
-	_doc:any
+	_doc: any
 } & Document
 
 export type WorkspaceModelType = {
@@ -91,6 +91,9 @@ export type InstitutionModelType = {
 	image5Url: string
 	image6Url: string
 	description: string
+	videoUrl: string
+	isStandout: boolean
+	audioUrl:string
 	comments: unknown[]
 	likes: number
 	shares: number
