@@ -34,6 +34,12 @@ const InstitutionShema = new Schema<InstitutionModelType>(
 			type: Number,
 			min: 0,
 		},
+		videoUrl: {
+			type: String,
+			default: "",
+		},
+		audioUrl: { type: String, default: "" },
+		isStandout: { type: Boolean, default: false },
 		location: {
 			type: {
 				longitude: { type: String, default: "" },
