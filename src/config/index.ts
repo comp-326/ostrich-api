@@ -12,6 +12,7 @@ const HOST = process.env.HOST
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD
 const EMAIL_ACCOUNT = process.env.EMAIL_ACCOUNT
 const REFRESH_KEY = process.env.REFRESH_KEY
+const WEB_CLIENT = process.env.WEB_CLIENT_PASSWORD_RESET_URL
 const API = process.env.API
 
 export default {
@@ -24,6 +25,7 @@ export default {
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
 	BASE_DIR,
+	WEB_CLIENT,
 }
 export {
 	PORT,
@@ -31,6 +33,7 @@ export {
 	REFRESH_KEY,
 	HOST,
 	DATABASE_URL,
+	WEB_CLIENT,
 	API,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,

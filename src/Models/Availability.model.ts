@@ -1,12 +1,34 @@
 import { model, Schema, SchemaTypes } from "mongoose"
-import { AvailabilityType } from "./types"
+import { UserAvailabilityType } from "./types"
 
-const AvailabilitySchema = new Schema<AvailabilityType>({
-	days: {
-		type: [String],
+const AvailabilitySchema = new Schema<UserAvailabilityType>({
+	user: {
+		type: SchemaTypes.ObjectId,
+		ref: "User",
+		required: [true, "You must be a valid user"],
 	},
-	startTime: { type: SchemaTypes.Date },
-	endTime: { type: SchemaTypes.Date },
+	availability: {
+		type: {
+			days: [
+				{
+					position: {
+						type: Number,
+					},
+					initial: {
+						type: String,
+					},
+					value: {
+						type: String,
+					},
+					day: { type: String, uppercase: true },
+				},
+			],
+			startTime: {
+				type: String,
+			},
+			endTime: { type: String },
+		},
+	},
 })
 
-export default model<AvailabilityType>("Availability", AvailabilitySchema)
+export default model<UserAvailabilityType>("Availability", AvailabilitySchema)
