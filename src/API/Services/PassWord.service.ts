@@ -161,22 +161,17 @@ export const sendPasswordResetLink = async (
 		})
 		const mailTemplate = resetPasswordTemplate(link)
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		mailTransport.sendMail(
-			{
+		try {
+			const res = await mailTransport.sendMail({
 				to: email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
 				subject: "Reset your password",
-			},
-			async (err, payload) => {
-				if (err) {
-					sent = false
-				}
-				if (payload) {
-					sent = true
-				}
-			},
-		)
+			})
+			res && (sent = true)
+		} catch (err) {
+			sent = false
+		}
 
 		if (!sent) {
 			return res.status(400).json({
@@ -186,7 +181,7 @@ export const sendPasswordResetLink = async (
 		}
 		return res.status(200).json({
 			success: true,
-			message: "Check your email for the reset link",
+			message: "Check your email reset your password",
 		})
 	} catch (e) {
 		next(e)
