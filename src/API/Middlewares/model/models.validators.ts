@@ -102,16 +102,36 @@ export const matchCurrentPassword = async (
 ) => {
 	try {
 		const { currentPassword }: { currentPassword: string } = req.body
-		console.log(currentPassword)
-		console.log(req.body)
 
 		const user = await User.findById(req.user.userId).select("+password")
-		console.log(user)
 
 		if (await user?.passwordMatch(currentPassword)) {
 			return next()
 		}
 		return next(new ErrorResponse("Password don't match", 400))
+	} catch (error) {
+		return next(error)
+	}
+}
+
+/**
+ * Check if the current user password is correct
+ * If the password does not match then that is a
+ * malicious account activity and thus return some error
+ */
+export const activeUser = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const { email }: { email: string } = req.body
+
+		const user = await User.findOne({ email })
+		if (user?.isActive) {
+			return next()
+		}
+		return next(new ErrorResponse("Please activate your account", 400))
 	} catch (error) {
 		return next(error)
 	}

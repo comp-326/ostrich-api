@@ -25,3 +25,26 @@ export const confirmPasswordResetToken = async (
 		return next(e)
 	}
 }
+
+export const validAccountActivationToken = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const activationToken = req.params.token
+		// console.log("Paramas", req.params)
+
+		if (!activationToken)
+			return next(new ErrorResponse("No token provided", 400))
+		jwt.verify(activationToken, SECRET_KEY!, async function (err, payload) {
+			if (err) {
+				return next(new ErrorResponse("Link has expired", 401))
+			}
+			req.user = payload
+			return next()
+		})
+	} catch (e) {
+		return next(e)
+	}
+}

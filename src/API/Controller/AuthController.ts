@@ -10,7 +10,12 @@ import {
 	validPasswordResetLink,
 } from "./../Services/PassWord.service"
 import { Authorize } from "./../Middlewares/AuthJwt"
-import { emptyCurrentPassword, matchCurrentPassword, newPasswordMatchConfirmNewPassword } from "./../Middlewares/model/models.validators"
+import {
+	activeUser,
+	emptyCurrentPassword,
+	matchCurrentPassword,
+	newPasswordMatchConfirmNewPassword,
+} from "./../Middlewares/model/models.validators"
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from "express"
 import {
@@ -26,7 +31,7 @@ import {
 	checkAccountMailExist,
 	newPasswordMatchOldPassword,
 } from "../Middlewares/model/models.validators"
-import { confirmPasswordResetToken } from "../Middlewares/requests/request"
+import { confirmPasswordResetToken, validAccountActivationToken } from "../Middlewares/requests/request"
 import {
 	login,
 	getActivationToken,
@@ -49,6 +54,7 @@ const loginMiddlewares = [
 	emptyEmailField,
 	emptyPasswordField,
 	checkAccountMailExist,
+	activeUser,
 ]
 const passResetLinkMiddlewares = [emptyEmailField, checkAccountMailExist]
 const updatePassMiddlewares = [
@@ -82,7 +88,7 @@ router.post("/login", ...loginMiddlewares, login)
 /**
  * Confirm User account
  */
-router.post("/account/confirm/:device/:token", confirmAccountEmail)
+router.post("/account/confirm/:token",validAccountActivationToken, confirmAccountEmail)
 
 /**
  * Get activation email if not received or expired

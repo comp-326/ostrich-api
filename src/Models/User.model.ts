@@ -79,8 +79,8 @@ const UserSchema = new Schema<UserModelType>(
 			default: [],
 		},
 		ActivationToken: {
-			value: { type: String },
-			isUsed: { type: Boolean },
+			value: { type: String, default: "" },
+			isUsed: { type: Boolean, default: true },
 			select: false,
 		},
 		PasswordToken: {
