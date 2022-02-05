@@ -8,7 +8,7 @@ import Institution from "../../Models/Institution.model"
 import Workspace from "../../Models/Workspace.model"
 import User from "../../Models/User.model"
 import { RequestType } from "./types"
-export const createInstitution = async (
+export  const createInstitution = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction,
