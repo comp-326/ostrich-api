@@ -23,6 +23,7 @@ export const resetPasswordTemplate = (link: string) => {
             padding: 10px;
             text-decoration: none;
             padding: 10px;
+            background-color:dodgerblue;
         }
     </style>
 <head>
@@ -45,9 +46,7 @@ export const getEmailAccountConfirmationLinkMailTemplate = (link: string) => {
 	return `
 	<!DOCTYPE html>
 <html lang="en">
-<style>body{
-	font-size:18px;
-}
+<style>
         a{
             padding: 10px 20px;
             text-decoration: none;

@@ -6,5 +6,5 @@ export default ({
 	token: string
 	CLIENT_URL: string
 }) => {
-	return `${CLIENT_URL}/register/verify/${token}`
+	return `${CLIENT_URL}/#/register/verify/${token}`
 }
