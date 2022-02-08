@@ -45,7 +45,6 @@ export const login = async (
 				gender: user?.gender,
 			},
 			SECRET_KEY!,
-			{ expiresIn: "1h" },
 		)
 		const { password, ...props } = user!._doc
 		return res.status(200).json({
@@ -221,7 +220,7 @@ export const getActivationToken = async (
 				to: email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
-				subject:"Account Activation"
+				subject: "Account Activation",
 			})
 			res && (sent = true)
 		} catch (err) {

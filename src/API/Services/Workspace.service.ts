@@ -28,7 +28,14 @@ export const createWorkspace = async (
 			},
 			{ new: true },
 		)
-		return res.status(200).json({ success: true, workspace: savedWorkspace })
+		const user = await User.findByIdAndUpdate(
+			req.user.userId,
+			{ firstTimeSignOn: false },
+			{ new: true },
+		)
+		return res
+			.status(200)
+			.json({ success: true, workspace: savedWorkspace, user })
 	} catch (error) {
 		return next(error)
 	}
@@ -72,16 +79,24 @@ export const addWorkspaceStaff = async (
 		return next(error)
 	}
 }
-export const register = async (
+export const getWorkspace = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
-	// try {
-	return res.status(200).json({ message: "Register" })
-	// } catch (e) {
-	// next(e)
-	// }
+	try {
+		const workspace = await Workspace.findOne({ owner: req.user.userId })
+			.populate("admins","firstName role lastName createdAt updatedAt isActive")
+			.populate("counselors","firstName role lastName createdAt updatedAt isActive")
+			.populate("members", "firstName role lastName createdAt updatedAt isActive")
+			.populate("institutions")
+		if (!workspace) {
+			return next(new ErrorResponse("No workspace found", 404))
+		}
+		return res.status(200).json({ workspace, success: true })
+	} catch (err) {
+		return next(err)
+	}
 }
 // Create your workspace billing
 export const createWorkspaceBilling = async (

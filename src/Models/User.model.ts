@@ -83,6 +83,7 @@ const UserSchema = new Schema<UserModelType>(
 			isUsed: { type: Boolean, default: true },
 			select: false,
 		},
+		firstTimeSignOn: { type: Boolean, default: true },
 		PasswordToken: {
 			value: { type: String },
 			isUsed: { type: Boolean },
