@@ -11,6 +11,7 @@ import {
 	createWorkspace,
 	createWorkspaceBilling,
 	downgradeWorkspaceUser,
+	getWorkspace,
 	inviteUserToWorkspace,
 	memberWorkspaces,
 } from "../Services/Workspace.service"
@@ -23,7 +24,9 @@ import { checkWorkspaceExist } from "../Middlewares/model/models.validators"
 
 const router = Router()
 // New workspace
-router.post("/user/new", Authorize, emptyWorkspaceName, createWorkspace)
+router.post("/user/workspace/new", Authorize, emptyWorkspaceName, createWorkspace)
+// User workspace
+router.get("/user/workspace/single", Authorize, getWorkspace)
 // New staff
 router.post("/:workspaceId/intake/new", AuthorizeAdmin, createIntakes)
 // New institution

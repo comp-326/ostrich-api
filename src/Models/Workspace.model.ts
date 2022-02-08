@@ -26,6 +26,11 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
+	type: {
+		type: String,
+		enum: ["personal", "education", "work"],
+		default: "personal",
+	},
 	institutions: {
 		type: [
 			{
@@ -35,7 +40,7 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		],
 		default: [],
 	},
-	name: {
+	workspaceName: {
 		type: String,
 		unique: true,
 		index: true,
