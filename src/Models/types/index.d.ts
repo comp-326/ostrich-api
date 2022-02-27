@@ -68,11 +68,7 @@ export type WorkspaceModelType = {
 	counselors: unknown[]
 	members: unknown[]
 	institutions: unknown[]
-<<<<<<< HEAD
-	type:"personal"|"education"|"work"
-=======
 	settings: { [props: string]: any }
->>>>>>> origin/main
 	active: boolean
 	_doc: any
 } & Document
