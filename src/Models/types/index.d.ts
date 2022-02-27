@@ -7,6 +7,7 @@ export type UserModelType = {
 	lastName: string
 	middleName: string
 	gender: string
+	firstTimeSignOn:boolean
 	accountType: string
 	password: string
 	role: string
@@ -61,13 +62,17 @@ export type WorkspaceModelType = {
 	images: unknown[]
 	logoUrl: string
 	owner: unknown
-	name: string
+	workspaceName: string
 	admins: unknown[]
 	creators: unknown[]
 	counselors: unknown[]
 	members: unknown[]
 	institutions: unknown[]
+<<<<<<< HEAD
+	type:"personal"|"education"|"work"
+=======
 	settings: { [props: string]: any }
+>>>>>>> origin/main
 	active: boolean
 	_doc: any
 } & Document

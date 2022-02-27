@@ -222,7 +222,7 @@ export const getActivationToken = async (
 				to: email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
-				subject:"Account Activation"
+				subject: "Account Activation",
 			})
 			res && (sent = true)
 		} catch (err) {

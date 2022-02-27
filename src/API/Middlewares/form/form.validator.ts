@@ -130,11 +130,12 @@ export const emptyWorkspaceName = async (
 	next: NextFunction,
 ) => {
 	try {
-		const { name }: { name: string | undefined } = req.body
-		if (!name) throw new ErrorResponse("Workspace name field required", 400)
+		const { workspaceName }: { workspaceName: string | undefined } = req.body
+		if (!workspaceName)
+			throw new ErrorResponse("Workspace name field required", 400)
 		return next()
-	} catch (e) {
-		return next(e)
+	} catch (err) {
+		return next(err)
 	}
 }
 //Comment body
