@@ -54,6 +54,7 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		type: [String],
 		default: [],
 	},
+	settings: { type: Object, default: {} },
 })
 
 export default model<WorkspaceModelType>("Workspace", WorkspaceSchema)

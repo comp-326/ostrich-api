@@ -11,22 +11,19 @@ import {
 	createWorkspace,
 	createWorkspaceBilling,
 	downgradeWorkspaceUser,
-	getWorkspace,
 	inviteUserToWorkspace,
-	memberWorkspaces,
+	userWorkspace,
 } from "../Services/Workspace.service"
 import { AuthorizeAdmin } from "../Middlewares/AuthJwt"
 import {
 	emptyCommentBody,
 	emptyWorkspaceName,
 } from "../Middlewares/form/form.validator"
-import { checkWorkspaceExist } from "../Middlewares/model/models.validators"
+import { checkWorkspaceExist, checkWorkspaceIfExist } from "../Middlewares/model/models.validators"
 
 const router = Router()
 // New workspace
-router.post("/user/workspace/new", Authorize, emptyWorkspaceName, createWorkspace)
-// User workspace
-router.get("/user/workspace/single", Authorize, getWorkspace)
+router.post("/user/new", Authorize, emptyWorkspaceName,checkWorkspaceIfExist ,createWorkspace)
 // New staff
 router.post("/:workspaceId/intake/new", AuthorizeAdmin, createIntakes)
 // New institution
@@ -67,5 +64,7 @@ router.put(
 	commentOnInstitution,
 )
 // Get user workspaces
-router.get("/user/workspaces", Authorize, memberWorkspaces)
+router.get("/user/workspace", Authorize, userWorkspace)
 export default router
+
+

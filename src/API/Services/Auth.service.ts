@@ -28,7 +28,7 @@ export const login = async (
 		// console.log('Body',req.body)
 
 		const { email } = req.body
-		const user = await User.findOne({ email }).select("+password")
+		const user = await User.findOne({ email }).select("+password +fisTime")
 		if (!(await user!.passwordMatch(req.body.password)))
 			return res
 				.status(401)
@@ -100,6 +100,7 @@ export const register = async (
 		} catch (err) {
 			sent = false
 		}
+		// sent=true
 		if (sent) {
 			await newUser?.updateOne(
 				{
@@ -109,6 +110,7 @@ export const register = async (
 			)
 			return res.status(200).json({
 				success: true,
+				link,
 				message:
 					"Account created successfully, Please check your email to confirm your account",
 			})
