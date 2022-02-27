@@ -71,6 +71,7 @@ const UserSchema = new Schema<UserModelType>(
 			default: "user",
 			lowercase: true,
 		},
+		firstTimeSignOn: { type: Boolean, default: true },
 		activationDate: {
 			type: SchemaTypes.Date,
 		},

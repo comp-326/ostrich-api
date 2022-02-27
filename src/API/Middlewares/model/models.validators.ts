@@ -41,6 +41,20 @@ export const checkAccountMailExist = async (
 		return next(error)
 	}
 }
+export const checkWorkspaceIfExist = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const { name }: { name: string } = req.body
+		const workspace = await Workspace.findOne({ name })
+		if (workspace) throw new ErrorResponse("Workspace name already exist", 404)
+		return next()
+	} catch (error) {
+		return next(error)
+	}
+}
 
 export const checkRegisteredMail = async (
 	req: Request,

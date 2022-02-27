@@ -11,6 +11,7 @@ export type UserModelType = {
 	password: string
 	role: string
 	email: string
+	firstTimeSignOn:boolean
 	profilePic: string
 	isActive: boolean
 	activationDate: Date
@@ -56,6 +57,7 @@ export type UserAvailabilityType = {
 } & Document
 
 export type WorkspaceModelType = {
+	[props:string]:any
 	images: unknown[]
 	logoUrl: string
 	owner: unknown
@@ -65,6 +67,7 @@ export type WorkspaceModelType = {
 	counselors: unknown[]
 	members: unknown[]
 	institutions: unknown[]
+	settings: { [props: string]: any }
 	active: boolean
 	_doc: any
 } & Document
@@ -83,6 +86,7 @@ export type AppointmentModelType = {
 } & Document
 
 export type InstitutionModelType = {
+	[props: string]: any
 	name: string
 	image1Url: string
 	image2Url: string
@@ -93,7 +97,7 @@ export type InstitutionModelType = {
 	description: string
 	videoUrl: string
 	isStandout: boolean
-	audioUrl:string
+	audioUrl: string
 	comments: unknown[]
 	likes: number
 	shares: number

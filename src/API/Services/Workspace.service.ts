@@ -28,7 +28,12 @@ export const createWorkspace = async (
 			},
 			{ new: true },
 		)
-		return res.status(200).json({ success: true, workspace: savedWorkspace })
+		const user = await User.findByIdAndUpdate(req.user.userId, {
+			firstTimeSignOn: false,
+		})
+		return res
+			.status(200)
+			.json({ success: true, user, workspace: savedWorkspace })
 	} catch (error) {
 		return next(error)
 	}
@@ -261,29 +266,29 @@ export const acceptWorkspaceInvitation = async (
 	}
 }
 // User workspaces
-export const memberWorkspaces = async (
+export const userWorkspace = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction,
 ) => {
 	try {
-		const workspaces = await Workspace.find({
-			$in: { members: req.user.userId },
+		const workspace = await Workspace.findOne({
+			owner: req.user.userId,
 		})
 			.populate("members")
 			.populate("admins")
 			.populate("institutions")
 			.populate("creators")
 			.populate("counselors")
-		if (workspaces.length < 1) {
+		if (!workspace) {
 			return res.status(404).json({
 				success: true,
-				message: "You are not a member of any workspace",
+				message: "No workspace available",
 			})
 		}
 		return res.status(200).json({
 			success: false,
-			workspaces,
+			workspace,
 		})
 	} catch (e) {
 		next(e)
