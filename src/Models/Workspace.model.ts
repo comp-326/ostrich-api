@@ -22,7 +22,7 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
-	counselors: {
+	creator_lite: {
 		type: [{ type: SchemaTypes.ObjectId, ref: "User" }],
 		default: [],
 	},
@@ -40,7 +40,12 @@ const WorkspaceSchema = new Schema<WorkspaceModelType>({
 		],
 		default: [],
 	},
-	workspaceName: {
+	messages: {
+		type: [SchemaTypes.ObjectId],
+		ref: "WorkspaceMessage",
+		default: [],
+	},
+	name: {
 		type: String,
 		unique: true,
 		index: true,

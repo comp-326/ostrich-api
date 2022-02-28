@@ -116,16 +116,20 @@ export const createAvailability = async (
 	next: NextFunction,
 ) => {
 	try {
-		const availability = await Availability.create({
-			...req.body,
+		const newAvailability = new Availability({
+			days: [...req.body.days],
+			startTime: req.body.startTime,
+			endTime: req.body.endTime,
 			user: req.user.userId,
 		})
-		const user = User.findByIdAndUpdate(req.user.userId, {
-			$push: { availability: availability._id },
-		}).populate("availability", "availability")
+		const savedAvailability = await newAvailability.save()
+		const user = await User.findByIdAndUpdate(req.user.userId, {
+			$push: { availability: savedAvailability },
+		}).populate("availability")
 		return res.status(200).json({
 			success: true,
 			user,
+			availability: savedAvailability,
 			message: "Suceesfully added your availability",
 		})
 	} catch (error) {

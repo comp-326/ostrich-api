@@ -7,12 +7,12 @@ export type UserModelType = {
 	lastName: string
 	middleName: string
 	gender: string
-	firstTimeSignOn:boolean
+	firstTimeSignOn: boolean
 	accountType: string
 	password: string
 	role: string
 	email: string
-	firstTimeSignOn:boolean
+	firstTimeSignOn: boolean
 	profilePic: string
 	isActive: boolean
 	activationDate: Date
@@ -51,22 +51,39 @@ export type UserModelType = {
 // 	endTime: string | Date
 // 	_doc: any
 // } & Document
+// export type UserAvailabilityType = {
+// 	user: unknown
+// 	days: AvailabilityType
+// 	_doc: any
+// } & Document
+
 export type UserAvailabilityType = {
+	startTime: string
+	endTime: string
+	days: AvailabilityDaysType[]
 	user: unknown
-	availability: AvailabilityType
-	_doc: any
 } & Document
+export type AvailabilityDaysType = {
+	day: string
+	value: string
+	initial: string
+	position: number
+}
+export type DayInitialType = string
 
 export type WorkspaceModelType = {
-	[props:string]:any
+	[props: string]: any
 	images: unknown[]
 	logoUrl: string
 	owner: unknown
-	workspaceName: string
+	messages: unknown[]
+	name: string
 	admins: unknown[]
 	creators: unknown[]
+	creator_lite: unknown[]
 	counselors: unknown[]
 	members: unknown[]
+	messages: unknown[]
 	institutions: unknown[]
 	settings: { [props: string]: any }
 	active: boolean
@@ -121,15 +138,9 @@ export type CommentModelType = {
 	_doc: any
 } & Document
 
-export type AvailabilityType = {
-	startTime: string
-	endTime: string
-	days: AvailabilityDaysType[]
+export type WorkspaceMessageType = {
+	title: string
+	template: string
+	author: unknown
+	workspace: unknown
 }
-export type AvailabilityDaysType = {
-	day: string
-	value: string
-	initial: string
-	position: number
-}
-export type DayInitialType = string
