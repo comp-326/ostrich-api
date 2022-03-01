@@ -1,3 +1,4 @@
+import { createWorkspaceMessage, updateMessage } from "./../Services/Workspace.service"
 import { Authorize, AuthorizeWorkspaceAdmin } from "../Middlewares/AuthJwt"
 import { Router } from "express"
 import {
@@ -19,13 +20,23 @@ import {
 	emptyCommentBody,
 	emptyWorkspaceName,
 } from "../Middlewares/form/form.validator"
-import { checkWorkspaceExist, checkWorkspaceIfExist } from "../Middlewares/model/models.validators"
+import {
+	checkWorkspaceExist,
+	checkWorkspaceIfExist,
+} from "../Middlewares/model/models.validators"
 
 const router = Router()
 // New workspace
-router.post("/user/new", Authorize, emptyWorkspaceName,checkWorkspaceIfExist ,createWorkspace)
+router.post(
+	"/user/new",
+	Authorize,
+	emptyWorkspaceName,
+	checkWorkspaceIfExist,
+	createWorkspace,
+)
 // New staff
 router.post("/:workspaceId/intake/new", AuthorizeAdmin, createIntakes)
+router.post("/:workspaceId/update/:intakeId", AuthorizeAdmin, createIntakes)
 // New institution
 router.post(
 	"/:workspaceId/institution/new",
@@ -65,6 +76,8 @@ router.put(
 )
 // Get user workspaces
 router.get("/user/workspace", Authorize, userWorkspace)
+
+// Messages
+router.post("/message/new", Authorize, createWorkspaceMessage)
+router.put("/message/update/:id",Authorize,updateMessage)
 export default router
-
-

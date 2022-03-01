@@ -86,7 +86,7 @@ const UserSchema = new Schema<UserModelType>(
 		},
 		PasswordToken: {
 			value: { type: String },
-			isUsed: { type: Boolean },
+			isUsed: { type: Boolean, default: true },
 			select: false,
 		},
 		availability: {

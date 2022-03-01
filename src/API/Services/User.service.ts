@@ -66,14 +66,14 @@ export const userProfile = async (
 	next: NextFunction,
 ) => {
 	try {
-		const user = await User.findById(req.params.id).populate(
-			"availability",
-			"availability",
-		)
-		if (!user) {
+		const dbUser = await User.findById(req.user.userId).populate("availability")
+		// console.log(dbUser)
+
+		if (!dbUser) {
 			throw new ErrorResponse("No profile data", 400)
 		} else {
-			return res.status(200).json({ success: true, profile: user })
+			const { password, ...user } = dbUser._doc
+			return res.status(200).json({ success: true, user })
 		}
 	} catch (error) {
 		next(error)
@@ -116,16 +116,24 @@ export const createAvailability = async (
 	next: NextFunction,
 ) => {
 	try {
-		const availability = await Availability.create({
-			...req.body,
+		const newAvailability = new Availability({
+			days: [...req.body.days],
+			startTime: req.body.startTime,
+			endTime: req.body.endTime,
 			user: req.user.userId,
 		})
-		const user = User.findByIdAndUpdate(req.user.userId, {
-			$push: { availability: availability._id },
-		}).populate("availability", "availability")
+		const savedAvailability = await newAvailability.save()
+		const user = await User.findByIdAndUpdate(
+			req.user.userId,
+			{
+				$push: { availability: savedAvailability },
+			},
+			{ new: true },
+		).populate("availability")
 		return res.status(200).json({
 			success: true,
 			user,
+			availability: savedAvailability,
 			message: "Suceesfully added your availability",
 		})
 	} catch (error) {
@@ -144,10 +152,14 @@ export const deleteAvailability = async (
 	try {
 		const availabilityId = req.params.availabilityId
 		await Availability.findByIdAndDelete(availabilityId)
-		User.findByIdAndUpdate(req.user.userId, {
-			$pull: { availability: availabilityId },
-		})
-			.populate("availability", "availability")
+		User.findByIdAndUpdate(
+			req.user.userId,
+			{
+				$pull: { availability: availabilityId },
+			},
+			{ new: true },
+		)
+			.populate("availability")
 			.exec(async function (err, user) {
 				if (err) {
 					return next(err)

@@ -10,6 +10,7 @@ import { UserRoles } from "../../constants/roles"
 import { mailTransport } from "../Cservices/Mail.service"
 import jwt from "jsonwebtoken"
 import { SECRET_KEY } from "../../config"
+import Message from "./../../Models/WorkspaceMessageTemplate.model"
 
 export const createWorkspace = async (
 	req: RequestType,
@@ -84,9 +85,18 @@ export const getWorkspace = async (
 ) => {
 	try {
 		const workspace = await Workspace.findOne({ owner: req.user.userId })
-			.populate("admins","firstName role lastName createdAt updatedAt isActive")
-			.populate("counselors","firstName role lastName createdAt updatedAt isActive")
-			.populate("members", "firstName role lastName createdAt updatedAt isActive")
+			.populate(
+				"admins",
+				"firstName role lastName createdAt updatedAt isActive",
+			)
+			.populate(
+				"counselors",
+				"firstName role lastName createdAt updatedAt isActive",
+			)
+			.populate(
+				"members",
+				"firstName role lastName createdAt updatedAt isActive",
+			)
 			.populate("institutions")
 		if (!workspace) {
 			return next(new ErrorResponse("No workspace found", 404))
@@ -287,7 +297,7 @@ export const userWorkspace = async (
 			.populate("admins")
 			.populate("institutions")
 			.populate("creators")
-			.populate("counselors")
+			.populate("creator_lite")
 		if (!workspace) {
 			return res.status(404).json({
 				success: true,
@@ -300,5 +310,51 @@ export const userWorkspace = async (
 		})
 	} catch (e) {
 		next(e)
+	}
+}
+
+export const createWorkspaceMessage = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const { title, template }: { title: string; template: string } = req.body
+		if (!title) {
+			return next(new ErrorResponse("Please provide message title", 400))
+		}
+		if (!template) {
+			return next(new ErrorResponse("Please provide message body", 400))
+		}
+
+		const message = await Message.create({
+			...req.body,
+			workspace: req.body.workspaceId,
+			author: req.user.userId,
+		})
+		if (message) {
+			await Workspace.findOneAndUpdate(req.body.workspaceId, {
+				$push: { messages: message._id },
+			})
+			return res.status(200).json({ success: true, message })
+		}
+	} catch (err) {
+		return next(err)
+	}
+}
+export const updateMessage = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const message = await Message.findByIdAndUpdate({
+			...req.body,
+		})
+		if (message) {
+			return res.status(200).json({ success: true, message })
+		}
+	} catch (err) {
+		return next(err)
 	}
 }
