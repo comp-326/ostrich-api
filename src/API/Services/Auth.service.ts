@@ -1,3 +1,4 @@
+import { activateAccountTemplate } from "./../Cservices/Mail.service"
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -88,13 +89,15 @@ export const register = async (
 			token,
 			CLIENT_URL: WEB_CLIENT!,
 		})
-		const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(link!)
+		const mailTemplate = activateAccountTemplate(link!)
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		try {
 			const res = await mailTransport.sendMail({
 				to: req.body.email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
+				textEncoding: "base64",
+				subject: "Activate your account",
 			})
 			res && (sent = true)
 		} catch (err) {
