@@ -91,15 +91,16 @@ export type WorkspaceModelType = {
 } & Document
 
 export type AppointmentModelType = {
-	duration: number
-	owner: unknown
-	intakeId: unknown
-	startTime: Date
-	meetingLink: string
+	[props: string]: any
+	author: unknown
 	title: string
-	status: string
-	intakePhoneNumber: string
-	message: string
+	attendees: string
+	phoneNumber: string
+	meetingLink: string
+	meetingLength: string
+	when: string
+	category: string
+	messageSpecialist: string
 	_doc: any
 } & Document
 
