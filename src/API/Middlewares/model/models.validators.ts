@@ -49,7 +49,11 @@ export const checkWorkspaceIfExist = async (
 	try {
 		const { name }: { name: string } = req.body
 		const workspace = await Workspace.findOne({ name })
-		if (workspace) throw new ErrorResponse("Workspace name already exist", 404)
+		console.log(workspace)
+
+		if (workspace !== null) {
+			return next(new ErrorResponse("Workspace name already exist", 404))
+		}
 		return next()
 	} catch (error) {
 		return next(error)
