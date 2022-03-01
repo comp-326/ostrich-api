@@ -15,7 +15,7 @@ import Workspace from "./../../Models/Workspace.model"
 import Comment from "./../../Models/Comment.model"
 import verifyAccountLink from "./../../helpers/verifyAccountLink"
 import {
-	getEmailAccountConfirmationLinkMailTemplate,
+	activationAccountTemplate,
 	mailTransport,
 } from "../Cservices/Mail.service"
 
@@ -28,7 +28,9 @@ export const login = async (
 		// console.log('Body',req.body)
 
 		const { email } = req.body
-		const user = await User.findOne({ email }).select("+password +fisTime")
+		const user = await User.findOne({ email })
+			.select("+password +fisTime")
+			.populate("availability")
 		if (!(await user!.passwordMatch(req.body.password)))
 			return res
 				.status(401)
@@ -83,15 +85,17 @@ export const register = async (
 			},
 			SECRET_KEY!,
 		)
-		const link = await verifyAccountLink({
+		const link = verifyAccountLink({
 			device: "web",
 			token,
 			CLIENT_URL: WEB_CLIENT!,
 		})
-		const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(link!)
+		const mailTemplate = activationAccountTemplate(link!)
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		try {
 			const res = await mailTransport.sendMail({
+				date: new Date().toLocaleString(),
+				subject: "Activate your ostrich Account",
 				to: req.body.email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
@@ -215,7 +219,9 @@ export const getActivationToken = async (
 			token,
 			CLIENT_URL: WEB_CLIENT!,
 		})
-		const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(link!)
+		console.log("Link", link, "Web", WEB_CLIENT!)
+
+		const mailTemplate = activationAccountTemplate(link!)
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		try {
 			const res = await mailTransport.sendMail({

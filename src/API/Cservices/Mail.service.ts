@@ -18,14 +18,6 @@ export const resetPasswordTemplate = (link: string) => {
 	return `
 	<!DOCTYPE html>
 <html lang="en">
-<style>
-    a{
-            padding: 10px;
-            text-decoration: none;
-            padding: 10px;
-            background-color:dodgerblue;
-        }
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,18 +34,10 @@ export const resetPasswordTemplate = (link: string) => {
 	`
 }
 
-export const getEmailAccountConfirmationLinkMailTemplate = (link: string) => {
+export const activationAccountTemplate = (link: string) => {
 	return `
 	<!DOCTYPE html>
 <html lang="en">
-<style>
-        a{
-            padding: 10px 20px;
-            text-decoration: none;
-            padding: 10px;
-            background-color:dodger-blue;
-        }
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

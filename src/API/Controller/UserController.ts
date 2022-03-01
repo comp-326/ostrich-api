@@ -23,6 +23,6 @@ router.get("/profile/:userId", Authorize, userProfile)
 router.put("/profile/:userId/update", Authorize, updateUserProfile)
 // new availability
 router.post("/profile/availability/new", Authorize, createAvailability)
-router.post("/profile/availability/delete/:availabilityId", Authorize, deleteAvailability)
+router.delete("/profile/availability/delete/:availabilityId", Authorize, deleteAvailability)
 
 export default router
