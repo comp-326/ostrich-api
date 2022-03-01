@@ -167,7 +167,7 @@ export const sendPasswordResetLink = async (
 				to: user!.email,
 				from: EMAIL_ACCOUNT,
 				html: mailTemplate,
-				subject: "Reset your password",
+				subject: "Reset your account password",
 			})
 			res && (sent = true)
 		} catch (err) {

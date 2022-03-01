@@ -1,4 +1,4 @@
-import { createAvailability } from "./../Services/User.service"
+import { createAvailability, deleteAvailability } from "./../Services/User.service"
 import { Router } from "express"
 import { Authorize } from "../Middlewares/AuthJwt"
 import {
@@ -23,5 +23,6 @@ router.get("/profile/:userId", Authorize, userProfile)
 router.put("/profile/:userId/update", Authorize, updateUserProfile)
 // new availability
 router.post("/profile/availability/new", Authorize, createAvailability)
+router.delete("/profile/availability/delete/:availabilityId", Authorize, deleteAvailability)
 
 export default router

@@ -64,7 +64,7 @@ body{font-size:1rem;}
 	`
 }
 
-export const getEmailAccountConfirmationLinkMailTemplate = (link: string) => {
+export const activationAccountTemplate = (link: string) => {
 	return `
 	<!DOCTYPE html>
 <html lang="en">
