@@ -3,36 +3,37 @@ import { AppointmentModelType } from "./types"
 
 const AppointmentSchema = new Schema<AppointmentModelType>(
 	{
-		intakeId: {
+		author: {
 			type: SchemaTypes.ObjectId,
 			ref: "User",
-			required: [true, "Intake id must be provided"],
-		},
-		status: {
-			type: String,
-			default: "pending",
-		},
-
-		startTime: {
-			type: SchemaTypes.Date,
-			required: [true, "Start time must be provided"],
-		},
-		duration: {
-			type: Number,
-			required: [true, "Meeting duration must be provided"],
-		},
-		owner: {
-			type: SchemaTypes.ObjectId,
-			ref: "User",
-			required: [true, "User id is required"],
 		},
 		title: {
 			type: String,
-			required: [true, "Title field is required"],
+			required: [true, "Meeting title must be provided"],
+		},
+		attendees: {
+			type: String,
+		},
+		meetingLength: {
+			type: String,
+			required: [true, "Meeting length required"],
+		},
+		category: {
+			type: String,
 		},
 		meetingLink: {
 			type: String,
-			required: [true, "Please provide meeting link"],
+			required: [true, "Meeting link required"],
+		},
+		messageSpecialist: {
+			type: String,
+		},
+		phoneNumber: {
+			type: String,
+			required: [true, "Phone number required"],
+		},
+		when: {
+			type: String,
 		},
 	},
 	{ timestamps: true },

@@ -1,9 +1,13 @@
-import { createAvailability, deleteAvailability } from "./../Services/User.service"
+import {
+	createAvailability,
+	deleteAvailability,
+} from "./../Services/User.service"
 import { Router } from "express"
 import { Authorize } from "../Middlewares/AuthJwt"
 import {
 	cancelAppointment,
 	createAppointment,
+	getAppointments,
 	rescheduleAppointment,
 	updateAppointment,
 } from "../Services/Appointment.service"
@@ -11,6 +15,9 @@ import { updateUserProfile, userProfile } from "../Services/User.service"
 
 const router = Router()
 
+/**
+ * Appointments
+ */
 router.post("/appointment/create/new", Authorize, createAppointment)
 router.put("/appointment/cancel/:appointmentId", Authorize, cancelAppointment)
 router.put(
@@ -18,11 +25,18 @@ router.put(
 	Authorize,
 	rescheduleAppointment,
 )
+router.get("/appointments/details/", Authorize, getAppointments)
 router.put("/appointment/update/:appointmentId", Authorize, updateAppointment)
 router.get("/profile/:userId", Authorize, userProfile)
 router.put("/profile/:userId/update", Authorize, updateUserProfile)
-// new availability
+/**
+ * Availability
+ */
 router.post("/profile/availability/new", Authorize, createAvailability)
-router.delete("/profile/availability/delete/:availabilityId", Authorize, deleteAvailability)
+router.delete(
+	"/profile/availability/delete/:availabilityId",
+	Authorize,
+	deleteAvailability,
+)
 
 export default router

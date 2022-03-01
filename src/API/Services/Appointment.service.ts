@@ -104,3 +104,23 @@ export const confirmAppointment = async (
 		return next(error)
 	}
 }
+export const getAppointments = async (
+	req: RequestType,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const appointments = await Appointment.find({
+			author: req.user.userId,
+		})
+			.limit(10)
+			.sort({ createsAt: "asc" })
+		return res.status(200).json({
+			message: "Appointment cancelled",
+			appointments,
+			success: true,
+		})
+	} catch (error) {
+		return next(error)
+	}
+}
