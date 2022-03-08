@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "start": "node ./dist/server.js",
+    "start": "node ./dist/index.js",
     "prestart": "npm install && eslint --fix && npm run build",
     "build": "tsc",
-    "dev:start": "nodemon ./src/server.ts"
+    "dev:start": "nodemon ./src/index.ts"
   },
   "keywords": [],
   "author": "",
