@@ -126,84 +126,9 @@ class UserFormMiddleware {
 			return next(e)
 		}
 	}
-	confirmPasswordMatch = async (
-		req: IRequest,
-		res: Response,
-		next: NextFunction,
-	) => {
-		try {
-			const {
-				password,
-				confirmPassword,
-			}: {
-				password: string
-				confirmPassword: string
-			} = req.body
 
-			if (!(password === confirmPassword)) {
-				return next(new ExpressError("Passwords don't match", 400))
-			}
-			return next()
-		} catch (e) {
-			return next(e)
-		}
-	}
-	confirmNewPasswordField = async function (
-		req: IRequest,
-		res: Response,
-		next: NextFunction,
-	) {
-		try {
-			const { confirmNewPassword }: { confirmNewPassword: string } =
-				req.body
-			if (!confirmNewPassword) {
-				return next(
-					new ExpressError(
-						"Confirm new password field required",
-						400,
-					),
-				)
-			}
-			return next()
-		} catch (e) {
-			return next(e)
-		}
-	}
-	newPasswordField = async (
-		req: IRequest,
-		res: Response,
-		next: NextFunction,
-	) => {
-		try {
-			const { newPassword }: { newPassword: string } = req.body
-			if (!newPassword) {
-				return next(
-					new ExpressError("New password cannot be empty", 400),
-				)
-			}
-			return next()
-		} catch (e) {
-			return next(e)
-		}
-	}
-	newPasswordMatchConfirmNewPassword = async (
-		req: IRequest,
-		res: Response,
-		next: NextFunction,
-	) => {
-		try {
-			const {
-				newPassword,
-				confirmNewPassword,
-			}: { newPassword: string; confirmNewPassword: string } = req.body
-			if (!(newPassword === confirmNewPassword)) {
-				return next(new ExpressError("Passwords do not match", 400))
-			}
-			return next()
-		} catch (error) {
-			return next(error)
-		}
-	}
+
+
 	currentPasswordField = async function (
 		req: IRequest,
 		res: Response,

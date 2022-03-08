@@ -4,6 +4,7 @@ import { UserModel } from "../models/index"
 import { IRequest } from "../types/request"
 import { Response, NextFunction } from "express"
 import ExpressError from "../errors/errorRequest"
+import { IUserDocument } from "./../models/types"
 
 class User {
 	getAllUsers = async function (
@@ -67,22 +68,38 @@ class User {
 		next: NextFunction,
 	) {
 		try {
-			UserModel.findByIdAndUpdate(
-				req.user.userId,
-				{ ...req.body },
-				{ new: true },
-			).exec(async function (err, user) {
-				if (err) {
-					return next(err)
+			const user: IUserDocument | null = <IUserDocument>(<unknown>UserModel.findByIdAndUpdate(req.user.userId, { ...req.body },
+				{ new: true }))
+			if (user) {
+				if (req.body.password) {
+					await user.hashPassword(req.body.password)
 				}
-				return res.status(200).json({
-					success: true,
-					message: "Successfully updated your profile",
-					user,
-				})
-			})
+				return res.status(200).json({ success: true, message: "User profile update success" })
+			}
+			return res.json({})
+
 		} catch (error) {
-			next(error)
+			return next(error)
+		}
+	}
+	updatePassword = async function (
+		req: IRequest,
+		res: Response,
+		next: NextFunction,
+	) {
+		try {
+			const user: IUserDocument | null = <IUserDocument>(<unknown>UserModel.findById(req.user.userId
+			))
+			if (user) {
+				if (req.body.password) {
+					await user.hashPassword(req.body.password)
+				}
+				return res.status(200).json({ success: true, message: "User profile update success" })
+			}
+			return res.json({})
+
+		} catch (error) {
+			return next(error)
 		}
 	}
 }

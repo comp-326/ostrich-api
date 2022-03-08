@@ -21,7 +21,7 @@ router.route("/register").post(
 	ufm.passwordField,
 	ufm.passwordRegex,
 	ufm.passwordFieldMatch,
-	umm.isRegistered,
+	umm.accountExist,
 	service.register,
 )
 /**
@@ -54,8 +54,7 @@ router.route("/account/password/new/:resetToken").post(
 	ufm.validPasswordResetLink,
 	ufm.passwordField,
 	ufm.passwordRegex,
-	ufm.confirmPasswordMatch,
-	ufm.newPasswordMatchConfirmNewPassword,
+	ufm.passwordFieldMatch,
 	ufm.emailPasswordReset
 )
 /**
