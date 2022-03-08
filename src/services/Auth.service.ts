@@ -11,7 +11,7 @@ import {
 	getEmailAccountConfirmationLinkMailTemplate,
 	mailTransport,
 	resetPasswordTemplate,
-} from "src/Mailer/mailer"
+} from "./../Mailer/mailer"
 import { passwordLink } from "../utils/passwordResetLinks"
 import { IUserDocument } from "../models/types"
 import verifyAccountLink from "../utils/verifyAccountLink"

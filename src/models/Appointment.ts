@@ -21,6 +21,6 @@ AppointmentSchema.statics.getByTitle = async function (title: string) {
     return await Appointment.findOne({ title })
 }
 export const Appointment = model<IAppointmentDocument, IAppointmentModel>(
-    "Comment",
+    "Appointment",
     AppointmentSchema,
 )

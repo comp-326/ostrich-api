@@ -1,4 +1,4 @@
-import * as mongoose from "mongoose"
+import mongoose from "mongoose"
 import { IAvailabilityDocument, IAvailabilityModel } from "./types"
 
 const AvailabilitySchema: mongoose.Schema<IAvailabilityDocument> = new mongoose.Schema(
