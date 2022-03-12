@@ -1,8 +1,8 @@
-import { IRequest } from "./../../types/request.d"
+import { IRequest } from "../../types/request"
 import { NextFunction, Response } from "express"
-import ExpressError from "./../../errors/errorRequest"
-import passRegex from "./../../utils/passRegex"
-import { UserModel } from "./../../models"
+import ExpressError from "../../errors/errorRequest"
+import passRegex from "../../utils/passRegex"
+import { UserModel } from "../../models"
 
 class UserMiddleware {
 	validateUserRegistrationDetails = async (
