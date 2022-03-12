@@ -1,6 +1,6 @@
 import { Router } from "express"
 import JwtAuth from "./../auth/JwtAuth"
-import { UserService, UserMiddleware as UM } from "./../services"
+import { UserService, UserMiddleware as UM } from "../services/index.service"
 
 const router = Router()
 const service = new UserService()

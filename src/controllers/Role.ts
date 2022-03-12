@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { RoleService } from "./../services"
+import { RoleService } from "../services/index.service"
 import JwtAuth from "./../auth/JwtAuth"
 const router = Router()
 

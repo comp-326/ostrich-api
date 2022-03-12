@@ -1,7 +1,7 @@
 import { Router } from "express"
 import {
 	FolderService,
-} from "./../services"
+} from "../services/index.service"
 import JwtAuth from "./../auth/JwtAuth"
 const router = Router()
 
