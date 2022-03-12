@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from "mongoose"
 /**
  * ****************** USER ********************
  */
 
-import { IImageAsset } from ".";
+import { IImageAsset } from "."
 
 export type IUser = {
 	username: string
@@ -52,7 +53,8 @@ export type IUserDocument = {
 	[x: string]: any
 	hashPassword: (password: string) => Promise<void>
 	comparePassword: (password: string) => Promise<boolean>
-} & IUser & mongoose.Document
+} & IUser &
+	mongoose.Document
 
 export type IUserModel = {
 	findByEmail: (email: string) => Promise<IUserDocument>
@@ -63,4 +65,4 @@ export type IUserModel = {
 		email?: string
 		username?: string
 	}) => Promise<IUserDocument>
-} & mongoose.Model<IUserDocument> 
+} & mongoose.Model<IUserDocument>

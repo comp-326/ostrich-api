@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from "mongoose"
 /**
  * ************ APPOINTMENT *****************
@@ -8,6 +9,7 @@ export interface IAppointment {
 	owner: Record<string,any>
 	intakeId: Record<string,any>
 	startTime: Date
+	endTime: Date
 	meetingLink: string
 	title: string
 	status: string

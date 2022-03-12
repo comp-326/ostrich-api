@@ -5,7 +5,7 @@ const router = Router()
 
 const service = new RoleService()
 const auth = new JwtAuth()
-router.post("/create", auth.superAdminRequired, service.insertRoles)
+router.post("/create",auth.adminRequired,service.insertRoles)
 router.get("/all", service.allRoles)
 // router.delete("/permissions/reset",service.resetRoles)
 

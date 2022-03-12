@@ -1,11 +1,9 @@
 import { Router } from "express"
 import JwtAuth from "./../auth/JwtAuth"
-import { UserService, UserModelMiddleware, UserFormMiddleware } from "./../services"
+import { UserService, UserMiddleware as UM } from "./../services"
 
 const router = Router()
 const service = new UserService()
-const umm = new UserModelMiddleware()
-const ufm = new UserFormMiddleware()
 
 const auth = new JwtAuth()
 
@@ -20,15 +18,8 @@ router
 	.put(auth.userRequired, service.updateProfile)
 //Update user password
 router
-	.route("/user/password/update")
-	.put(auth.userRequired,
-		ufm.currentPasswordField,
-		umm.isMatchCurrentPassword,
-		ufm.passwordField,
-		ufm.passwordRegex,
-		ufm.passwordFieldMatch,
-		service.updatePassword)
+	.route("/profile/password/update")
+	.put( UM.validatePasswordDetails, service.updatePassword)
 // DELETE user
 router.route("/").delete(auth.adminRequired)
 export default router
-

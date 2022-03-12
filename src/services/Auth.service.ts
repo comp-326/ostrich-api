@@ -6,7 +6,14 @@ import jwt from "jsonwebtoken"
 import { IRequest } from "../types/request"
 import { EMAIL_ACCOUNT, SECRET_KEY, WEB_CLIENT } from "../config"
 import ExpressError from "../errors/errorRequest"
-import { AvailabilityModel, CommentModel, FolderModel, UserModel, WorkspaceModel } from "../models"
+import {
+	AvailabilityModel,
+	CommentModel,
+	FolderModel,
+	RoleModel,
+	UserModel,
+	WorkspaceModel,
+} from "../models"
 import {
 	getEmailAccountConfirmationLinkMailTemplate,
 	mailTransport,
@@ -19,16 +26,20 @@ import verifyAccountLink from "../utils/verifyAccountLink"
 class Auth {
 	register = async (req: IRequest, res: Response, next: NextFunction) => {
 		try {
+			console.log("Registering")
+
 			let sent = false
 			const uniqueName = `User#${new Date().getTime()}`
+			const defaultRole = await RoleModel.getDefaultRole()
 			const newUser = await UserModel.create({
 				...req.body,
 				accountType: "basic",
-				role: "user",
+				role: defaultRole,
 				username: uniqueName,
 			})
-			if (!newUser)
-				throw new ExpressError("Account could not be created", 500)
+			await newUser.hashPassword(req.body.password)
+
+			if (!newUser) throw new ExpressError("Account could not be created", 500)
 			const { password, ...props } = newUser._doc
 			const token = jwt.sign(
 				{
@@ -43,9 +54,7 @@ class Auth {
 				token,
 				CLIENT_URL: WEB_CLIENT!,
 			})
-			const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(
-				link!,
-			)
+			const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(link!)
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			try {
 				const res = await mailTransport.sendMail({
@@ -73,6 +82,8 @@ class Auth {
 				})
 			}
 		} catch (error) {
+			console.log(error.message)
+
 			return next(error)
 		}
 	}
@@ -117,34 +128,23 @@ class Auth {
 		next: NextFunction,
 	) => {
 		try {
-			const token = req.params.token
+			const token = req.params.activationToken
 			if (!token) {
-				return next(
-					new ExpressError("Please provide a valid token", 400),
-				)
+				return next(new ExpressError("Please provide a valid token", 400))
 			}
 			return jwt.verify(token, SECRET_KEY!, async (err, payload) => {
 				if (err) {
-					return next(
-						new ExpressError("Invalid activation link", 400),
-					)
+					return next(new ExpressError("Invalid activation link", 400))
 				}
 				if (payload) {
-					const dbUser = await UserModel.findById(
-						req.user?.userId,
-					).select("+ActivationToken")
+					const dbUser = await UserModel.findById(req.user?.userId).select(
+						"+ActivationToken",
+					)
 					if (dbUser?.isActive) {
-						return next(
-							new ExpressError("Account already activated", 400),
-						)
+						return next(new ExpressError("Account already activated", 400))
 					}
 					if (dbUser?.ActivationToken.isUsed) {
-						return next(
-							new ExpressError(
-								"Activation link already used",
-								400,
-							),
-						)
+						return next(new ExpressError("Activation link already used", 400))
 					}
 					await dbUser?.updateOne(
 						{
@@ -205,9 +205,7 @@ class Auth {
 			}).select("+ActivationToken")
 			// Check if user account already activated
 			if (!user) {
-				return next(
-					new ExpressError("User account does not exist", 400),
-				)
+				return next(new ExpressError("User account does not exist", 400))
 			}
 			const token = jwt.sign({ userId: user?._id }, SECRET_KEY!, {
 				expiresIn: "24h",
@@ -218,9 +216,7 @@ class Auth {
 				token,
 				CLIENT_URL: WEB_CLIENT!,
 			})
-			const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(
-				link!,
-			)
+			const mailTemplate = getEmailAccountConfirmationLinkMailTemplate(link!)
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			try {
 				const res = await mailTransport.sendMail({
@@ -274,9 +270,7 @@ class Auth {
 			const password = req.body.newPassword
 
 			const user: IUserDocument | null = <IUserDocument | null>(
-				(<unknown>(
-					UserModel.findById(req.user.userId).select("+password")!
-				))
+				(<unknown>UserModel.findById(req.user.userId).select("+password")!)
 			)
 			if (user) {
 				await user.hashPassword(password)
@@ -284,8 +278,7 @@ class Auth {
 					success: true,
 					message: "Password updated successfully",
 				})
-			}
-			else {
+			} else {
 				return res.status(200).json({
 					success: false,
 					message: "Could not update",
@@ -332,9 +325,7 @@ class Auth {
 				device: string
 			} = req.body
 			if (!device) {
-				return next(
-					new ExpressError("Please provide your device type", 400),
-				)
+				return next(new ExpressError("Please provide your device type", 400))
 			}
 			const user = await UserModel.findOne({ email })
 			const confirmationToken = jwt.sign(
@@ -433,7 +424,7 @@ class Auth {
 		next: NextFunction,
 	) => {
 		try {
-			const activationToken = req.params.token
+			const activationToken = req.params.activationToken
 			// console.log("Paramas", req.params)
 
 			if (!activationToken)
@@ -449,7 +440,5 @@ class Auth {
 			return next(e)
 		}
 	}
-
-
 }
 export default Auth

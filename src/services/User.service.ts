@@ -55,9 +55,7 @@ class User {
 			if (!user) {
 				throw new ExpressError("User not found", 404)
 			}
-			return res
-				.status(200)
-				.json({ message: "Success", success: true, user })
+			return res.status(200).json({ message: "Success", success: true, user })
 		} catch (error) {
 			next(error)
 		}
@@ -68,16 +66,24 @@ class User {
 		next: NextFunction,
 	) {
 		try {
-			const user: IUserDocument | null = <IUserDocument>(<unknown>UserModel.findByIdAndUpdate(req.user.userId, { ...req.body },
-				{ new: true }))
+			const user: IUserDocument | null = <IUserDocument>(
+				(<unknown>(
+					UserModel.findByIdAndUpdate(
+						req.user.userId,
+						{ ...req.body },
+						{ new: true },
+					)
+				))
+			)
 			if (user) {
 				if (req.body.password) {
 					await user.hashPassword(req.body.password)
 				}
-				return res.status(200).json({ success: true, message: "User profile update success" })
+				return res
+					.status(200)
+					.json({ success: true, message: "User profile update success" })
 			}
 			return res.json({})
-
 		} catch (error) {
 			return next(error)
 		}
@@ -88,17 +94,22 @@ class User {
 		next: NextFunction,
 	) {
 		try {
-			const user: IUserDocument | null = <IUserDocument>(<unknown>UserModel.findById(req.user.userId
+			const user = await (<IUserDocument>(
+				(<unknown>UserModel.findByEmail(req.body.email))
 			))
+
 			if (user) {
 				if (req.body.password) {
 					await user.hashPassword(req.body.password)
 				}
-				return res.status(200).json({ success: true, message: "User profile update success" })
+				return res
+					.status(200)
+					.json({ success: true, message: "User profile update success" })
 			}
 			return res.json({})
-
 		} catch (error) {
+			console.log(error.message)
+
 			return next(error)
 		}
 	}

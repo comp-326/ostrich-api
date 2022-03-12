@@ -5,7 +5,11 @@ const router = Router()
 
 const service = new AvailabilityService()
 const auth = new JwtAuth()
-router.post("/create", auth.superAdminRequired, service.func)
-// router.delete("/permissions/reset",service.resetRoles)
+// Create user availability
+router.route("/availability/new").post( auth.adminRequired, service.func)
+// Update availability
+router.route("/availability/update/:id").put(auth.adminRequired, service.func)
+//Delete availability
+router.route("/availability/delete/:id").delete(auth.adminRequired, service.func)
 
 export default router

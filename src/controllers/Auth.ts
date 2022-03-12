@@ -1,71 +1,66 @@
 import { Router } from "express"
 // import JWTauth from "./../auth/JwtAuth"
-import {
-	UserModelMiddleware,
-	UserFormMiddleware,
-	AuthService,
-} from "./../services"
+import { UserMiddleware as UM, AuthService, UserService } from "./../services"
 const router = Router()
-const ufm = new UserFormMiddleware()
-const umm = new UserModelMiddleware()
 const service = new AuthService()
+const userS = new UserService()
 // const auth = new JWTauth()
 
 /**
  * Create account
  */
-router.route("/register").post(
-	ufm.emailField,
-	ufm.firstNameField,
-	ufm.lastNameField,
-	ufm.passwordField,
-	ufm.passwordRegex,
-	ufm.passwordFieldMatch,
-	umm.accountExist,
-	service.register,
-)
+router
+	.route("/register")
+	.post(
+		UM.validateAccountDoesNotExist,
+		UM.validateAccountDoesNotExist,
+		service.register,
+	)
 /**
  * Get email activation link
  */
 router
 	.route("/account/activate/email")
-	.post(ufm.emptyEmailField, umm.isRegistered, service.getActivationToken)
+	.post(
+		UM.validateAccountExist,
+		UM.validateAccountIsActive,
+		service.getActivationToken,
+	)
 /**
  * Activate account
  */
-router.
-	route("/account/activate/:activationToken")
-	.post(umm.isRegistered,
+router
+	.route("/account/activate/:activationToken")
+	.post(
 		service.validAccountActivationToken,
-		service.confirmAccountEmail)
+		service.confirmAccountEmail,
+	)
 /**
  * Get password reset link
  */
 router
 	.route("/account/password/forgot")
-	.post(ufm.emailField,
-		umm.isRegistered,
-		service.sendPasswordResetLink)
+	.post(
+		UM.validateAccountExist,
+		UM.validateAccountIsActive,
+		service.sendPasswordResetLink,
+	)
 /**
  * Reset password
  */
-router.route("/account/password/new/:resetToken").post(
-	ufm.confirmPasswordResetToken,
-	ufm.validPasswordResetLink,
-	ufm.passwordField,
-	ufm.passwordRegex,
-	ufm.passwordFieldMatch,
-	ufm.emailPasswordReset
-)
+router
+	.route("/account/password/new/:resetToken")
+	.post(
+		UM.validateAccountExist,
+		UM.validateAccountIsActive,
+		userS.updatePassword,
+	)
 /**
  * Login to account
  */
 
 router
 	.route("/login")
-	.post(ufm.emailField,
-		ufm.passwordField,
-		umm.isActive,
-		service.login)
+	.post(UM.validateLoginDetails, UM.validateAccountIsActive, service.login)
 
 export default router
