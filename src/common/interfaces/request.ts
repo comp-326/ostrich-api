@@ -1,8 +1,8 @@
-import { Request } from "express";
-import multer from "multer";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Request } from "express"
 
- type IRequest={
-    [x:string]:any
-}& Request
+type IRequest = {
+	[x: string]: any
+} & Request
 
-export default  IRequest
+export default IRequest
