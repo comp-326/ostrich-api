@@ -1,11 +1,19 @@
-import { AppPropType } from "./../types/app.d"
-import { createServer } from "http"
-import { PORT } from "./../config"
+import { Application } from "express"
+import { DATABASE_URL, PORT } from "../config"
+import http from "http"
+import db from "../db"
 
-export default (props: AppPropType) => {
-	const server = createServer(props.app)
+
+
+/**
+ *
+ * @param {{app:express.Application}} param0
+ */
+export default ({ app }:{app:Application}) => {
+	db({ DATABASE_URL })
+	const server = http.createServer(app)
 	server.listen(PORT, () => {
-		const msg = `Server running on http://localhost:${PORT}`
+		const msg = `Server listening on port ${PORT}`
 		console.log(msg)
 	})
 }

@@ -1,6 +1,4 @@
-import app from "./app"
 import server from "./server"
-import settings from "./settings"
+import app from "./app"
 
-settings({ app })
 server({ app })
