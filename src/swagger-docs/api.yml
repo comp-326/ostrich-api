@@ -1,0 +1,113 @@
+swagger: "2.0"
+info:
+  title: "Todo API"
+  version: "1.0.0"
+  contact:
+    name: Felix Orinda
+    email: forinda82@gmail.com
+basePath: /api/v1
+host: localhost:4001
+schemes:
+  - http
+  - https
+tags:
+  - name: Metadata
+    description: Metadata related requests
+
+paths:
+  /todos/all:
+    get:
+      parameters:
+        - name: limit
+          in: query
+          type: number
+          default: 10
+        - name: page
+          in: query
+          type: number
+          default: 1
+      responses:
+        200:
+          description: successful query
+  /todos/new:
+    post:
+      consumes:
+        - application/json
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      tags:
+        - todo
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              title: Sample todo
+              body: Doing some chores
+              author: Jane Doe
+              scheduledDate: 04/30/2022
+              done: false
+      responses:
+        "201":
+          description: Successful entry
+  /todos/update/{id}:
+    put:
+      consumes:
+        - application/json
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      tags:
+        - todo
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Todo id to be updated
+        - name: body
+          in: body
+          description: Todo body
+          schema:
+            example:
+              title: Sample todo
+              body: Doing some chores
+              author: Jane Doe
+              scheduledDate: 04/30/2022
+              done: false
+
+      responses:
+        "400":
+          description: Given field is required
+        "201":
+          description: Successful entry creation
+  /todos/delete/{id}:
+    delete:
+      description: Delete a given todo
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Valid Id
+      responses:
+        200:
+          description: Ok
+        "404":
+          description: Not found
+  /todos/title/search:
+    post:
+      parameters:
+        - name: title
+          in: query
+          required: true
+          type: string
+          description: Input existing title 
+      responses:
+        "200":
+          description: Ok
+        "404":
+          description: Not found
