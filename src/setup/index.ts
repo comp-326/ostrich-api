@@ -6,6 +6,7 @@ import morgan from "morgan"
 import helmet from "helmet"
 import expressWinston from "express-winston"
 import { HTTPerrorLogOptions, HTTPLogOptions } from "@root/utils/logger"
+import ErrorHandler from "@root/common/errors/ErrorHandler"
 
 export default function ({ app }: { app: Application }) {
 	app.use(express.json({ limit: "30mb" }))
@@ -17,5 +18,8 @@ export default function ({ app }: { app: Application }) {
 	app.use(expressWinston.errorLogger(HTTPerrorLogOptions))
 
 	app.use("/api/v1", v1())
+
+	/* Error handler*/
+	app.use(ErrorHandler)
 	return app
 }

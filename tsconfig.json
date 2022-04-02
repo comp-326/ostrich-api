@@ -27,7 +27,7 @@
       "@base/*" : ["./*"],
       "@root/*": ["./src/*"],
       "@setup": ["./src/setup"],
-      "@domains": ["./src/domains/*"],
+      "@domains/*": ["./src/domains/*"],
       "@models/*": ["./src/models/*"],
       "@common/*": ["./src/common/*"]
     }
