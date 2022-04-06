@@ -27,7 +27,7 @@ export default function makeCreateUserEntity({
 		if (!lastName) {
 			throw new ExpressError("Last name required", 400)
 		}
-		if (password.length < 16) {
+		if (password.length < 30) {
 			console.log("password length is less than 16")
 		}
 		const { ok, errors } = isValidPassword({

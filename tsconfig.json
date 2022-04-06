@@ -29,7 +29,9 @@
       "@setup": ["./src/setup"],
       "@domains/*": ["./src/domains/*"],
       "@models/*": ["./src/models/*"],
-      "@common/*": ["./src/common/*"]
+      "@common/*": ["./src/common/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@middlewares/*": ["./src/middlewares/*"]
     }
   },
   "exclude": ["node_modules"],

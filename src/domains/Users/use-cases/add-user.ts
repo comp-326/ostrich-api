@@ -10,7 +10,6 @@ export default function makeAddUserUseCase({
 	return async function addUserUseCase(userInfo: IUser) {
 		const user = createUser(userInfo)
 		const existing = await userDB.findByEmail(user.getEmail())
-		console.log("Here now")
 
 		if (existing) {
 			throw new ExpressError("User email already exist", 400)

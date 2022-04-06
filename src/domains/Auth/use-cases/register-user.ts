@@ -10,7 +10,6 @@ export default function makeRegisterUserUseCase({
 	return async function registerUserUseCase(userInfo: IUser) {
 		const user = await createUser(userInfo)
 		const existing = await userDB.findByEmail(user.getEmail())
-		console.log("Creating user")
 		if (existing) {
 			throw new ExpressError("User email already exist", 400)
 		}

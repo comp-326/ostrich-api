@@ -1,7 +1,7 @@
 import multer from "multer"
 import { BASE_DIR } from "@root/config"
 import path from "path"
-import { createDirectory } from "@root/utils/uploadUtils"
+import { createDirectory } from "@base/src/utils/fileSystem"
 
 /**
  * ************************* UPLOAD ONLY VIDEOS *****************
@@ -28,7 +28,8 @@ const videoFileFilters: multer.Options["fileFilter"] = (_req, file, cb) => {
 		mime === "video/3gpp" ||
 		mime === "video/x-fvl" ||
 		mime === "video/quicktime" ||
-		mime === "video/x-ms-wmv"
+		mime === "video/x-ms-wmv" ||
+		mime === "video/x-matroska"
 	) {
 		cb(null, true)
 	}
@@ -62,7 +63,8 @@ const audioFileFilters: multer.Options["fileFilter"] = (_req, file, cb) => {
 		mime === "audio/ogg" ||
 		mime === "audio/vnd.wav" ||
 		mime === "audio/x-aiff" ||
-		mime === "audio/basic"
+		mime === "audio/basic" ||
+		mime === "audio/x-matroska"
 	) {
 		cb(null, true)
 	}

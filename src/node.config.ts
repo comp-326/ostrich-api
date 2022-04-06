@@ -4,17 +4,41 @@ import path from "path"
 
 dotenv.config()
 const config = {
-	["ENV"]: {
-		["PORT"]: process.env.PORT,
-		["NODE_ENV"]: process.env.NODE_ENV,
+	ENV: {
+		PORT: process.env.PORT!,
+		NODE_ENV: process.env.NODE_ENV!,
+		SECRET_KEY:process.env.SECRET_KEY!,
+		REFRESH_KEY:process.env.REFRESH_KEY!,
 	},
-	["PATHS"]: {
-		["BASE_DIR"]: path.join(path.dirname(__filename), "."),
+	MAIL: {
+		EMAIL_ACCOUNT: process.env.EMAIL_ACCOUNT!,
+		EMAIL_PASSWORD: process.env.EMAIL_PASSWORD!,
+	},
+	PATHS: {
+		BASE_DIR: path.join(path.dirname(__filename), "."),
 	},
 
-	["DB"]: {
-		["MONGOOSE"]: {
-			["DB_URL"]: process.env.DATABASE_URL!,
+	DB: {
+		MONGOOSE: {
+			DB_URL: process.env.DATABASE_URL!,
+		},
+		MONGO_DB: {
+			DB_USER: "",
+			DB_PASSWORD: "",
+			DB_NAME: "",
+			DB_PORT: "",
+		},
+		MYSQL: {
+			DB_USER: "",
+			DB_PASSWORD: "",
+			DB_NAME: "",
+			DB_PORT: "",
+		},
+		POSTGRESQL: {
+			DB_USER: "",
+			DB_PASSWORD: "",
+			DB_NAME: "",
+			DB_PORT: "",
 		},
 	},
 }

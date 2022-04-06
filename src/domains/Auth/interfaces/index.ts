@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IUser {
+	[x:string]:any
 	firstName: string
 	lastName: string
 	dateOfBirth: string
@@ -25,7 +26,7 @@ export interface IAuthRepository {
 	login: (
 		email: string,
 		password: string,
-	) => Promise<{ passwordMatch: boolean; user: IUser }>
+	) => Promise<any>
 	createUser: (user: IUser) => Promise<any>
 	findByEmail: (email: string) => Promise<any>
 }

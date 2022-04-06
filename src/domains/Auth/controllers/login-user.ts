@@ -1,6 +1,7 @@
 import { ExpressError } from "@base/src/common/errors/ExpressError"
 import { IAuthRequest } from "../interfaces"
 import { loginUserUseCase } from "../use-cases"
+import generateToken from "../utils/create-token"
 
 export default function makeBuildLoginUserController({
 	login,
@@ -15,17 +16,12 @@ export default function makeBuildLoginUserController({
 		if (!password) {
 			return new ExpressError("Password required", 400)
 		}
-		const { user, passwordMatch } = await login(email, password)
+		const { passwordMatch, user } = await login(email, password)
 
-		if (!user) {
-			throw new ExpressError(
-				"User account does not exist create one",
-				404,
-			)
-		}
 		if (!passwordMatch) {
-			throw new ExpressError("Incorrect email or password", 400)
+			throw new ExpressError("Incorrect email or password", 401)
 		}
-		return { statusCode: 200, body: user }
+		const AuthToken = generateToken(user._id,user.email)
+		return { statusCode: 200, body: { user, AuthToken } }
 	}
 }

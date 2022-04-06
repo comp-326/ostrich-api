@@ -21,6 +21,9 @@ class UserInfoValidator implements IUserValidator {
 					}
 				}
 			}
+			if (props["password"].length>25) {
+				errors += "Password must should not be more than 25 characters\n"
+			}
 			if (!/[a-z]/.test(props["password"])) {
 				errors += "Password must contain at least 1 lowercase letter\n"
 			}
