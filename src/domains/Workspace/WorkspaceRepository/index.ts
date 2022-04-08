@@ -11,12 +11,6 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			...workspace,
 			$push: { members: workspace.owner, admins: workspace.owner },
 		})
-		// await newWorkspace.updateOne(
-		// 	{
-		// 		$push: { members: workspace.owner, admins: workspace.owner },
-		// 	},
-		// 	{ new: true },
-		// )
 		return newWorkspace
 	}
 	findById = async (id: string) => {
@@ -27,6 +21,11 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		const workspaces = await WorkspaceModel.find({
 			$in: { members: [userId] },
 		})
+			.populate("members", "firstName lastName -_id email")
+			.populate("admins", "firstName lastName -_id email")
+			.populate("creators", "firstName lastName -_id email")
+			.populate("creatorLites", "firstName lastName -_id email")
+
 		return workspaces
 	}
 	find = async (

@@ -76,7 +76,7 @@ function setEnvironmentVariables(envFilePath: string) {
 	data["REFRESH_KEY"] = crypto.randomBytes(64).toString("hex")
 	data["API_VERSION"] = "/api/v1"
 	data["HOST"] = "localhost"
-	data["DATABASE_URL"] = "mongodb://localhost:27017/ostrich-test"
+	data["DATABASE_URL"] = "mongodb://localhost:27017/ostrich-dev-db"
 	const buffer = Object.entries(data).map(([key, value]) => {
 		return `${key}=${value}`
 	})

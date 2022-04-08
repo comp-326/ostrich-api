@@ -6,6 +6,15 @@ Install all the dependencies
 ```sh
 $ yarn
 ```
+#####
+App domains
+1. [x] Users
+1. [x] Availability
+1. [x] Services
+1. [x] Folders
+1. [x] Roles
+1. [x] Workspace
+#
 Populate the `.env` with values from `.env.example` file
 
 Once done run:

@@ -1,15 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from "mongoose"
-
+export type dayValueType =
+	| "Monday"
+	| "Tuesday"
+	| "Wednesday"
+	| "Thursday"
+	| "Friday"
+	| "Saturday"
+	| "Sunday"
+export type dayInitialType =
+	| "mon"
+	| "tue"
+	| "wed"
+	| "thu"
+	| "fri"
+	| "sat"
+	| "sun"
+export type dayType = "M" | "T" | "W" | "F" | "S"
 export type AvailabilityType = {
 	startTime: string
 	endTime: string
 	days: AvailabilityDayType[]
 }
 export type AvailabilityDayType = {
-	day: string
-	value: string
-	initial: string
+	day: dayType
+	value: dayValueType
+	initial: dayInitialType
 	position: number
 }
 

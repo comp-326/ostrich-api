@@ -62,16 +62,6 @@ const WorkspaceSchema:mongoose.Schema<WorkspaceDocumentType> = new mongoose.Sche
 			default: [],
 			ref: "User",
 		},
-		services: {
-			type: [mongoose.SchemaTypes.ObjectId],
-			ref: "Service",
-			default: [],
-		},
-		folders: {
-			type: [mongoose.SchemaTypes.ObjectId],
-			ref: "Folder",
-			default: [],
-		},
 		isActive: Boolean,
 	},
 	{ timestamps: true },

@@ -7,8 +7,8 @@ const config = {
 	ENV: {
 		PORT: process.env.PORT!,
 		NODE_ENV: process.env.NODE_ENV!,
-		SECRET_KEY:process.env.SECRET_KEY!,
-		REFRESH_KEY:process.env.REFRESH_KEY!,
+		SECRET_KEY: process.env.SECRET_KEY!,
+		REFRESH_KEY: process.env.REFRESH_KEY!,
 	},
 	MAIL: {
 		EMAIL_ACCOUNT: process.env.EMAIL_ACCOUNT!,
@@ -17,7 +17,11 @@ const config = {
 	PATHS: {
 		BASE_DIR: path.join(path.dirname(__filename), "."),
 	},
-
+	CLOUDINARY: {
+		CLOUDINARY_NAME: process.env.CLOUDINARY_NAME!,
+		CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY!,
+		CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET!,
+	},
 	DB: {
 		MONGOOSE: {
 			DB_URL: process.env.DATABASE_URL!,
