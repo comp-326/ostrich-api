@@ -10,7 +10,7 @@ const swaggerDocument =
 
 const options = {
 	explorer: true,
-	customSiteTitle: "Todo api",
+	customSiteTitle: "Ostrich app API",
 }
 
 const SwaggerSetup = swaggerUI.setup(swaggerDocument, options)
