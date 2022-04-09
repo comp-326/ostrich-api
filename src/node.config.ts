@@ -9,6 +9,7 @@ const config = {
 		NODE_ENV: process.env.NODE_ENV!,
 		SECRET_KEY: process.env.SECRET_KEY!,
 		REFRESH_KEY: process.env.REFRESH_KEY!,
+		BASE_URL: process.env.BASE_URL!,
 	},
 	MAIL: {
 		EMAIL_ACCOUNT: process.env.EMAIL_ACCOUNT!,

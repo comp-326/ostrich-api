@@ -30,6 +30,7 @@
       "@domains/*": ["./src/domains/*"],
       "@models/*": ["./src/models/*"],
       "@common/*": ["./src/common/*"],
+      "@services/*": ["./src/Services/*"],
       "@utils/*": ["./src/utils/*"],
       "@middlewares/*": ["./src/middlewares/*"]
     }

@@ -5,5 +5,5 @@ import { getUserWorkspaces } from "../controller"
 const qRouter = Router()
 export async function makeQueryUserWorkspaceApiCall(app: Router) {
 	app.use("/member", qRouter)
-	qRouter.get("/", authorize.loginRequired,MakeRequestAdapter(getUserWorkspaces))
+	qRouter.get("/:userId", authorize.loginRequired,MakeRequestAdapter(getUserWorkspaces))
 }

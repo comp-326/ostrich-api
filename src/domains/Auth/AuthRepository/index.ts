@@ -26,8 +26,6 @@ class AuthRepository implements IAuthRepository {
 
 	login = async (email: string, password: string) => {
 		const user = await UserModel.findOne({ email }).select("+password")
-		console.log(user)
-
 		const passwordMatch = await user?.comparePassword(password)
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { password: _userPass, ...props } = user!._doc

@@ -1,7 +1,7 @@
 import { ExpressError } from "@base/src/common/errors/ExpressError"
+import tokenGenerator from "@root/helpers/tokenGenerator"
 import { IAuthRequest } from "../interfaces"
 import { loginUserUseCase } from "../use-cases"
-import generateToken from "../utils/create-token"
 
 export default function makeBuildLoginUserController({
 	login,
@@ -21,7 +21,10 @@ export default function makeBuildLoginUserController({
 		if (!passwordMatch) {
 			throw new ExpressError("Incorrect email or password", 401)
 		}
-		const AuthToken = generateToken(user._id,user.email)
+		const AuthToken = tokenGenerator.generateAuthToken({
+			email: user.email,
+			userId: user._id,
+		})("270h")
 		return { statusCode: 200, body: { user, AuthToken } }
 	}
 }

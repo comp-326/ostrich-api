@@ -8,11 +8,11 @@ export default function makeBuildPostUserController({
 	create: typeof addUserUseCase
 }) {
 	
-	return async function postTodo(httpRequest: IUserRequest) {
-		const todo = await create(httpRequest.body)
+	return async function postUser(httpRequest: IUserRequest) {
+		const user = await create(httpRequest.body)
 		return {
 			statusCode: 201,
-			body: { todo },
+			body: { user },
 		}
 	}
 }

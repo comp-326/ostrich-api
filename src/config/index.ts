@@ -1,7 +1,7 @@
 import config from "@base/src/node.config"
 
 const {
-	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY },
+	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY, BASE_URL },
 	DB: {
 		MONGOOSE: { DB_URL },
 	},
@@ -22,6 +22,7 @@ export default Object.freeze({
 	CLOUDINARY_API_KEY,
 	CLOUDINARY_NAME,
 	CLOUDINARY_SECRET,
+	BASE_URL,
 })
 
 export {
@@ -36,4 +37,5 @@ export {
 	CLOUDINARY_API_KEY,
 	CLOUDINARY_NAME,
 	CLOUDINARY_SECRET,
+	BASE_URL,
 }

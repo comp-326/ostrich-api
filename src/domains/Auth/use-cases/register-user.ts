@@ -13,7 +13,12 @@ export default function makeRegisterUserUseCase({
 		if (existing) {
 			throw new ExpressError("User email already exist", 400)
 		}
-		// const password =
+		if ((userInfo.password !== userInfo.confirmPassword)) {
+			throw new ExpressError(
+				"Password and confirm password does not match",
+				400,
+			)
+		}
 		const created = await userDB.createUser({
 			email: user.getEmail(),
 			password: user.getPassword(),

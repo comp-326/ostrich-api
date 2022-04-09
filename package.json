@@ -21,6 +21,7 @@
     "@models": "./src/models",
     "@common": "./src/common",
     "@utils": "./src/utils",
+    "@services": "./src/Services",
     "@middlewares": "./src/middlewares"
   },
   "author": "Orinda Felix Ochieng <forinda82@gmail.com>",

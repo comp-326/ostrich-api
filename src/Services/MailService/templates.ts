@@ -4,7 +4,9 @@
  * @returns
  */
 export const EmailActivationTemp = function ({
-	firstName, lastName, link,
+	firstName,
+	lastName,
+	link,
 }: {
 	firstName: string
 	lastName: string
@@ -57,7 +59,15 @@ export const WorkspaceInviteTemp = () => `
  * @param {{link:string,firstName:string,lastName:string}} param0
  * @returns
  */
-export const ForgotPasswordTemp = ({ link, firstName, lastName }: { link: string; firstName: string; lastName: string} ): string => `
+export const ForgotPasswordTemp = ({
+	link,
+	firstName,
+	lastName,
+}: {
+	link: string
+	firstName: string
+	lastName: string
+}): string => `
 <html>
 <head>
 <title>Email reset password</title>
@@ -82,8 +92,16 @@ Use the link below to reset your password
  * @returns
  */
 export const WorkspaceTeamMemberTemp = function ({
-	password, firstName, lastName, email,
-}: { password: string; firstName: string; lastName: string; email: string} ): string {
+	password,
+	firstName,
+	lastName,
+	email,
+}: {
+	password: string
+	firstName: string
+	lastName: string
+	email: string
+}): string {
 	return `
 <html>
 <head>

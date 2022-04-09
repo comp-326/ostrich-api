@@ -9,8 +9,8 @@ class UserRepository implements IUserRepository {
 		const newUser = await UserModel.create(user)
 		return newUser
 	}
-	findByEmail: (title: string) => Promise<any> = async (title: string) => {
-		const todo = await UserModel.findByTitle(title)
+	findByEmail: (email: string) => Promise<any> = async (email: string) => {
+		const todo = await UserModel.findByEmail(email)
 		return todo
 	}
 	findById = async (id: string) => {
