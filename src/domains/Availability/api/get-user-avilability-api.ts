@@ -1,9 +1,9 @@
 import { Router } from "express"
 import MakeRequestAdapter from "../adapters"
-import { findUsers } from "../controllers"
+import { findUserAvailability } from "../controllers"
 
 const qRouter = Router()
 export function makeQueryUserVailabilityApiCall(app: Router) {
 	app.use("/", qRouter)
-	qRouter.get("/", MakeRequestAdapter(findUsers))
+	qRouter.get("/", MakeRequestAdapter(findUserAvailability))
 }

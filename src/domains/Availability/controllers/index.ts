@@ -1,40 +1,45 @@
 import {
-	addUserUseCase,
-	editUserUseCase,
-	listUserByIdUseCase,
-	listUserByEmailUseCase,
-	listUsersUseCase,
-	removeUserUseCase,
+	addAvailabilityUseCase,
+	editAvailabilityUseCase,
+	listUserAvailabilityUseCase,
+	listAvailabilityById,
+	removeAvailabilityUseCase,
 } from "../use-cases"
-import makeBuildDeleteUserController from "./delete-user"
-import makeBuildFindByIdUserController from "./find-by-id"
-import makeBuildFindByTitleUserController from "./find-by-email"
-import makeBuildFindUsersController from "./find-users"
-import makeBuildPostUserController from "./post-user"
-import makeBuildUpdateByIdUserController from "./put-user"
+import makeBuildPostAvailabilityController from "./post-availability"
+import makeBuildFindUserAvailabilityController from "./find-availability"
+import makeBuildFindAvailabilityByIdController from "./find-by-id"
+import makeBuildPutAvailabilityController from "./put-availability"
+import makeBuildDeleteAvailabilityController from "./delete-availability"
 
-const postUser = makeBuildPostUserController({ create: addUserUseCase })
-const putUser = makeBuildUpdateByIdUserController({ update: editUserUseCase })
-const deleteUser = makeBuildDeleteUserController({ remove: removeUserUseCase })
-const findById = makeBuildFindByIdUserController({ listById: listUserByIdUseCase })
-const findByTitle = makeBuildFindByTitleUserController({ listByEmail: listUserByEmailUseCase })
-const findUsers = makeBuildFindUsersController({ find: listUsersUseCase })
-
-export default Object.freeze({
-	postUser,
-	putUser,
-	deleteUser,
-	findById,
-	findByTitle,
-	findUsers
+const postAvailability = makeBuildPostAvailabilityController({
+	create: addAvailabilityUseCase,
+})
+const findUserAvailability = makeBuildFindUserAvailabilityController({
+	find: listUserAvailabilityUseCase,
+})
+const findById = makeBuildFindAvailabilityByIdController({
+	listById: listAvailabilityById,
+})
+const putById = makeBuildPutAvailabilityController({
+	update: editAvailabilityUseCase,
+})
+const deleteById = makeBuildDeleteAvailabilityController({
+	remove: removeAvailabilityUseCase,
 })
 
-export { postUser, putUser, deleteUser, findById, findByTitle,findUsers }
+export default Object.freeze({
+	postAvailability,
+	findUserAvailability,
+	putById,
+	deleteById,
+	findById,
+})
 
-export type UserControllerType =
-	| typeof postUser
-	| typeof putUser
-	| typeof deleteUser
+export { postAvailability, findUserAvailability, putById, deleteById, findById }
+
+export type AvailabilityControllerType =
+	| typeof postAvailability
+	| typeof findUserAvailability
+	| typeof putById
 	| typeof findById
-	| typeof findByTitle
-	| typeof findUsers
+	| typeof deleteById

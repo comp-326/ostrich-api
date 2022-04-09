@@ -8,6 +8,7 @@
     "prestart": "yarn run prod:buildTs",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "predev:start": "ts-node ./src/env.ts",
+    "dev":"yarn run dev:start",
     "prod:buildTs": "gulp buildTS",
     "test": "jest"
   },

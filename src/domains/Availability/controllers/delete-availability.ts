@@ -1,12 +1,12 @@
-import { IUserRequest } from "../interfaces"
-import { removeUserUseCase } from "../use-cases"
+import { IAvailabilityRequest } from "../interfaces"
+import { removeAvailabilityUseCase } from "../use-cases"
 
 export default function makeBuildDeleteUserController({
 	remove,
 }: {
-	remove: typeof removeUserUseCase
+	remove: typeof removeAvailabilityUseCase
 }) {
-	return async function (httpRequest: IUserRequest) {
+	return async function (httpRequest: IAvailabilityRequest) {
 		const { id } = httpRequest.params
 		if (!id) {
 			return {

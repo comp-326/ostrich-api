@@ -1,12 +1,12 @@
-import { IUserRequest } from "../interfaces"
-import { listUserByIdUseCase } from "../use-cases"
+import { IAvailabilityRequest } from "../interfaces"
+import { listAvailabilityById } from "../use-cases"
 
 export default function makeBuildFindByIdController({
 	listById,
 }: {
-	listById: typeof listUserByIdUseCase
+	listById: typeof listAvailabilityById
 }) {
-	return async function (httpRequest: IUserRequest) {
+	return async function (httpRequest: IAvailabilityRequest) {
 		const { id } = httpRequest.params
 
 		if (!id) {

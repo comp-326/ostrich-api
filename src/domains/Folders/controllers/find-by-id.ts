@@ -1,14 +1,13 @@
-import { IUserRequest } from "../interfaces"
-import { listUserByIdUseCase } from "../use-cases"
+import { IFolderRequest } from "../interfaces"
+import { listFolderByIdUseCase } from "../use-cases"
 
 export default function makeBuildFindByIdController({
 	listById,
 }: {
-	listById: typeof listUserByIdUseCase
+	listById: typeof listFolderByIdUseCase
 }) {
-	return async function (httpRequest: IUserRequest) {
+	return async function (httpRequest: IFolderRequest) {
 		const { id } = httpRequest.params
-
 		if (!id) {
 			return {
 				statusCode: 400,

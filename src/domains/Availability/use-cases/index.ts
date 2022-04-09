@@ -2,6 +2,7 @@ import AvailabilityRepository from "../AvailabilityRepository"
 import makeAddAvailabilityUseCase from "./add-availability"
 import makeEditAvailabilityUseCase from "./edit-availability"
 import makeListUserAvailabilityUseCase from "./list-user-availability"
+import makeListAvailabilityByIdUseCase from "./list-availability-by-id"
 import makeRemoveAvailabilityUseCase from "./remove-availability"
 
 const addAvailabilityUseCase = makeAddAvailabilityUseCase({
@@ -16,12 +17,16 @@ const editAvailabilityUseCase = makeEditAvailabilityUseCase({
 const removeAvailabilityUseCase = makeRemoveAvailabilityUseCase({
 	availabilityDB: AvailabilityRepository,
 })
+const listAvailabilityById = makeListAvailabilityByIdUseCase({
+	avaialbilityDB: AvailabilityRepository,
+})
 
 export default Object.freeze({
 	addAvailabilityUseCase,
 	listUserAvailabilityUseCase,
 	editAvailabilityUseCase,
 	removeAvailabilityUseCase,
+	listAvailabilityById
 })
 
 export {
@@ -29,6 +34,7 @@ export {
 	listUserAvailabilityUseCase,
 	editAvailabilityUseCase,
 	removeAvailabilityUseCase,
+	listAvailabilityById
 }
 
 export type AvailabilityUseCasesType =
@@ -36,3 +42,4 @@ export type AvailabilityUseCasesType =
 	| typeof listUserAvailabilityUseCase
 	| typeof editAvailabilityUseCase
 	| typeof removeAvailabilityUseCase
+	| typeof listAvailabilityById

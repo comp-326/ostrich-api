@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { INext, IRequest, IResponse } from "@common/types"
-import { UserControllerType } from "../controllers"
+import { AvailabilityControllerType } from "../controllers"
 import { IAvailabilityRequest } from "../interfaces"
 
-export default function MakeRequestAdapter(controller: UserControllerType) {
+export default function MakeRequestAdapter(controller: AvailabilityControllerType) {
 	return async function (req: IRequest, res: IResponse,next:INext) {
 		const httpRequest: IAvailabilityRequest = {
 			body: req.body,

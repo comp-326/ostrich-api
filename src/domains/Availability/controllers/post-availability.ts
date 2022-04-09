@@ -1,15 +1,15 @@
 import "reflect-metadata"
-import { IUserRequest } from "../interfaces"
-import { addUserUseCase } from "../use-cases"
+import { IAvailabilityRequest } from "../interfaces"
+import { addAvailabilityUseCase } from "../use-cases"
 
 export default function makeBuildPostUserController({
 	create,
 }: {
-	create: typeof addUserUseCase
+	create: typeof addAvailabilityUseCase
 }) {
-	
-	return async function postTodo(httpRequest: IUserRequest) {
-		const todo = await create(httpRequest.body)
+	return async function postTodo(httpRequest: IAvailabilityRequest) {
+		const { userId } = httpRequest.user
+		const todo = await create(userId, httpRequest.body)
 		return {
 			statusCode: 201,
 			body: { todo },
