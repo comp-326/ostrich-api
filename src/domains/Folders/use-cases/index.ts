@@ -1,40 +1,61 @@
-import UserRepository from "../UserRepository"
-import makeAddUserUseCase from "./add-user"
-import makeEditUserUseCase from "./edit-user"
-import makeListUserByIdUseCase from "./list-user-by-id"
-import makeListUserByEmail from "./list-user-by-email"
-import makeListUsersUseCase from "./list-users"
-import makeRemoveUserUseCase from "./remove-user"
+import FolderRepository from "../FolderRepository"
+import makeAddFolderUseCase from "./add-folder"
+import makeCopyFolderUseCase from "./copy-folder"
+import makeEditFolderUseCase from "./edit-folder"
+import makeListFolderById from "./list-folder-by-id"
+import makeListFolderByNameUseCase from "./list-folder-by-name"
+import makeListFoldersUseCase from "./list-folders"
+import makeListWorkspaceFoldersUseCase from "./list-workspace-folders"
+import makeMoveFolderUseCase from "./move-folder"
+import makeRemoveFolderUseCase from "./remove-folder"
 
-const addUserUseCase = makeAddUserUseCase({ userDB: UserRepository })
-const listUserByIdUseCase = makeListUserByIdUseCase({ userDB: UserRepository })
-const listUsersUseCase = makeListUsersUseCase({ userDB: UserRepository })
-const listUserByEmailUseCase = makeListUserByEmail({ userDB: UserRepository })
-const editUserUseCase = makeEditUserUseCase({ userDB: UserRepository })
-const removeUserUseCase = makeRemoveUserUseCase({ userDB: UserRepository })
+const addFolderUseCase = makeAddFolderUseCase({ folderDB: FolderRepository })
+const editFolderUseCase = makeEditFolderUseCase({ folderDB: FolderRepository })
+const listFolderByNameUseCase = makeListFolderByNameUseCase({
+	folderDB: FolderRepository,
+})
+const listFolderByIdUseCase = makeListFolderById({ folderDB: FolderRepository })
+const copyFolderUseCase = makeCopyFolderUseCase({ folderDB: FolderRepository })
+const listWorkspaceFoldersUseCase = makeListWorkspaceFoldersUseCase({
+	folderDB: FolderRepository,
+})
+const moveFolderUseCase = makeMoveFolderUseCase({ folderDB: FolderRepository })
+const listFoldersUseCase = makeListFoldersUseCase({ folderDB: FolderRepository })
+const removeFolderUseCase = makeRemoveFolderUseCase({
+	folderDB: FolderRepository,
+})
 
 export default Object.freeze({
-	addUserUseCase,
-	listUserByIdUseCase,
-	listUsersUseCase,
-	listUserByEmailUseCase,
-	editUserUseCase,
-	removeUserUseCase,
+	addFolderUseCase,
+	editFolderUseCase,
+	listFolderByNameUseCase,
+	listFolderByIdUseCase,
+	copyFolderUseCase,
+	removeFolderUseCase,
+	listWorkspaceFoldersUseCase,
+	listFoldersUseCase,
+	moveFolderUseCase,
 })
 
 export {
-	addUserUseCase,
-	listUserByIdUseCase,
-	listUsersUseCase,
-	listUserByEmailUseCase,
-	editUserUseCase,
-	removeUserUseCase,
+	addFolderUseCase,
+	editFolderUseCase,
+	listFolderByNameUseCase,
+	listFolderByIdUseCase,
+	copyFolderUseCase,
+	removeFolderUseCase,
+	listWorkspaceFoldersUseCase,
+	listFoldersUseCase,
+	moveFolderUseCase,
 }
 
-export type TodoUseCasesType =
-	| typeof addUserUseCase
-	| typeof listUserByIdUseCase
-	| typeof listUsersUseCase
-	| typeof listUserByEmailUseCase
-	| typeof editUserUseCase
-	| typeof removeUserUseCase
+export type FolderUseCasesType =
+	| typeof addFolderUseCase
+	| typeof editFolderUseCase
+	| typeof listFolderByNameUseCase
+	| typeof listFolderByIdUseCase
+	| typeof copyFolderUseCase
+	| typeof removeFolderUseCase
+	| typeof listWorkspaceFoldersUseCase
+	| typeof listFoldersUseCase
+	| typeof moveFolderUseCase

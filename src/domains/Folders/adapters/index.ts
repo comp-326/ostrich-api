@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { INext, IRequest, IResponse } from "@common/types"
-import { UserControllerType } from "../controllers"
-import { IUserRequest } from "../interfaces"
+import { FolderControllerType } from "../controllers"
+import { IFolderRequest } from "../interfaces"
 
-export default function MakeRequestAdapter(controller: UserControllerType) {
-	return async function (req: IRequest, res: IResponse,next:INext) {
-		const httpRequest: IUserRequest = {
+export default function MakeRequestAdapter(controller: FolderControllerType) {
+	return async function (req: IRequest, res: IResponse, next: INext) {
+		const httpRequest: IFolderRequest = {
 			body: req.body,
 			headers: req.headers,
 			params: req.params,

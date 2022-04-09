@@ -1,40 +1,82 @@
 import {
-	addUserUseCase,
-	editUserUseCase,
-	listUserByIdUseCase,
-	listUserByEmailUseCase,
-	listUsersUseCase,
-	removeUserUseCase,
+	addFolderUseCase,
+	copyFolderUseCase,
+	editFolderUseCase,
+	listFolderByIdUseCase,
+	listFolderByNameUseCase,
+	listFoldersUseCase,
+	listWorkspaceFoldersUseCase,
+	moveFolderUseCase,
+	removeFolderUseCase,
 } from "../use-cases"
-import makeBuildDeleteUserController from "./delete-user"
-import makeBuildFindByIdUserController from "./find-by-id"
-import makeBuildFindByTitleUserController from "./find-by-email"
-import makeBuildFindUsersController from "./find-users"
-import makeBuildPostUserController from "./post-user"
-import makeBuildUpdateByIdUserController from "./put-user"
+import makeBuildPostFolderController from "./post-folder"
+import makeBuildFindByIdFolderController from "./find-by-id"
+import makeBuildFindByNameFolderController from "./find-by-name"
+import makeBuildFindFoldersController from "./find-folders"
+import makeBuildFindWorkspaceFoldersController from "./find-workspace-folders"
+import makeBuildUpdateByIdFolderController from "./put-folder"
+import makeBuildUpdateCopyFolderController from "./put-copy-folder"
+import makeBuildUpdateMoveFolderController from "./put-move-folder"
+import makeBuildDeleteFolderController from "./delete-folder"
 
-const postUser = makeBuildPostUserController({ create: addUserUseCase })
-const putUser = makeBuildUpdateByIdUserController({ update: editUserUseCase })
-const deleteUser = makeBuildDeleteUserController({ remove: removeUserUseCase })
-const findById = makeBuildFindByIdUserController({ listById: listUserByIdUseCase })
-const findByTitle = makeBuildFindByTitleUserController({ listByEmail: listUserByEmailUseCase })
-const findUsers = makeBuildFindUsersController({ find: listUsersUseCase })
-
-export default Object.freeze({
-	postUser,
-	putUser,
-	deleteUser,
-	findById,
-	findByTitle,
-	findUsers
+const postFolder = makeBuildPostFolderController({ create: addFolderUseCase })
+const findById = makeBuildFindByIdFolderController({
+	listById: listFolderByIdUseCase,
+})
+const findByName = makeBuildFindByNameFolderController({
+	listByName: listFolderByNameUseCase,
+})
+const findFolders = makeBuildFindFoldersController({
+	find: listFoldersUseCase,
+})
+const findWorkspaceFolders = makeBuildFindWorkspaceFoldersController({
+	find: listWorkspaceFoldersUseCase,
+})
+const putFolder = makeBuildUpdateByIdFolderController({
+	update: editFolderUseCase,
+})
+const putCopyFolder = makeBuildUpdateCopyFolderController({
+	copy: copyFolderUseCase,
+})
+const putMoveFolder = makeBuildUpdateMoveFolderController({
+	move: moveFolderUseCase,
 })
 
-export { postUser, putUser, deleteUser, findById, findByTitle,findUsers }
+const deleteFolder = makeBuildDeleteFolderController({
+	remove: removeFolderUseCase,
+})
 
-export type UserControllerType =
-	| typeof postUser
-	| typeof putUser
-	| typeof deleteUser
+export default Object.freeze({
+	postFolder,
+	findById,
+	findByName,
+	findFolders,
+	findWorkspaceFolders,
+	putFolder,
+	putCopyFolder,
+	putMoveFolder,
+	deleteFolder,
+})
+
+export {
+	postFolder,
+	findById,
+	findByName,
+	findFolders,
+	findWorkspaceFolders,
+	putFolder,
+	putCopyFolder,
+	putMoveFolder,
+	deleteFolder,
+}
+
+export type FolderControllerType =
+	| typeof postFolder
 	| typeof findById
-	| typeof findByTitle
-	| typeof findUsers
+	| typeof findByName
+	| typeof findFolders
+	| typeof findWorkspaceFolders
+	| typeof putFolder
+	| typeof putCopyFolder
+	| typeof putMoveFolder
+	| typeof deleteFolder

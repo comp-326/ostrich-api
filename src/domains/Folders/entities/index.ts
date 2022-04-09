@@ -1,12 +1,10 @@
-import Password from "../utils/Password"
-import UserInfoValidator from "../utils/UserInfoValidator"
-import makeCreateUserEntity from "./user"
+import FolderInfoValidator from "../utils/FolderValidator"
+import makeCreateFolderEntity from "./folder"
 
-const createUser = makeCreateUserEntity({
-	validator: UserInfoValidator,
-	passwordUtil: Password,
+const createFolder = makeCreateFolderEntity({
+	validator: FolderInfoValidator,
 })
 
-export default createUser
+export default createFolder
 
 // export type UserInfoValidator = typeof Validate

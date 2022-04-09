@@ -1,13 +1,17 @@
 import { Router } from "express"
 import api from "./api"
 
-const forlderRouter = Router()
-export default function userDomain(app: Router) {
-	app.use("/users", forlderRouter)
-	api.makeUpdateUserApiCall(forlderRouter)
-	api.makeQueryIdUserApiCall(forlderRouter)
-	api.makeQueryEmailUserApiCall(forlderRouter)
-	api.makeQueryUserApiCall(forlderRouter)
-	api.makeDeleteUserApiCall(forlderRouter)
+const folderRouter = Router()
+export default function folderDomain(app: Router) {
+	app.use("/folders", folderRouter)
+	api.makeQueryNewFolderApiCall(folderRouter)
+	api.makeQueryIdFolderApiCall(folderRouter)
+	api.makeQueryFolderByNameApiCall(folderRouter)
+	api.makeQueryFoldersApiCall(folderRouter)
+	api.makeQueryWorkspaceFoldersApiCall(folderRouter)
+	api.makeQueryUpdateMoveFolderApiCall(folderRouter)
+	api.makeQueryUpdateCopyFolderApiCall(folderRouter)
+	api.makeQueryUpdateFolderApiCall(folderRouter)
+	api.makeQueryDeleteFolderApiCall(folderRouter)
 	return app
 }
