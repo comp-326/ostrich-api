@@ -1,6 +1,6 @@
 <<<<<<< HEAD
-# Simple todo app setup with TS
-This is my sample setup for the SOLID principles design architecture
+# Ostrich app setup with TS
+Check the instructions below to setup your environment
 
 Running project in dev mode
 Install all the dependencies
