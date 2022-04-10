@@ -1,4 +1,4 @@
-import { PORT } from "../config"
+import { PORT } from '@root/config';
 
 
 /**
@@ -13,7 +13,7 @@ function createWorkspaceInviteLink({
 	role: string,
 	workspaceId: string,
 }) {
-	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`
+	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
 }
 
 /**
@@ -22,7 +22,7 @@ function createWorkspaceInviteLink({
  * @returns
  */
 function createAccountActivationLink({ token }: { token: string }) {
-	return `http://localhost:${PORT}/account/activate/${token}`
+	return `http://localhost:${PORT}/account/activate/${token}`;
 }
 /**
  *
@@ -30,11 +30,11 @@ function createAccountActivationLink({ token }: { token: string }) {
  * @returns
  */
 function createForgotPasswordLink({ baseUrl, token }:{baseUrl:string,token:string}) {
-	return `${baseUrl}/${token}`
+	return `${baseUrl}/${token}`;
 }
-export { createWorkspaceInviteLink, createAccountActivationLink,createForgotPasswordLink, }
+export { createWorkspaceInviteLink, createAccountActivationLink,createForgotPasswordLink, };
 export default Object.freeze({
 	createWorkspaceInviteLink,
 	createAccountActivationLink,
 	createForgotPasswordLink,
-})
+});
