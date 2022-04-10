@@ -1,1 +1,2 @@
-import  "./src/scripts/tasks/buildTs"
+require('module-alias/register');
+import '@root/scripts/tasks/buildTs';
