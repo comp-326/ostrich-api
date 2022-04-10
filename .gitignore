@@ -143,5 +143,9 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn
 
+<<<<<<< HEAD
+
+=======
 ## Testing rest clients
 *.rest
+>>>>>>> dd29b02b825cbd4ff8e4b473b795ee90be46c125

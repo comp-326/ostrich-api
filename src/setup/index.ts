@@ -1,38 +1,25 @@
-import { Application } from "express"
-import express from "express"
-import expressWinston from "express-winston"
-import cors from "cors"
+import compression from "compression"
+import v1 from "@root/api/v1"
+import shouldCompress from "@root/utils/compression"
+import express, { Application } from "express"
+import morgan from "morgan"
 import helmet from "helmet"
-import { HTTPLogOptions, HTTPerrorLogOptions }from "./../logger"
-import UserRouter from "../routes/UserRouter"
-import AuthRouter from "./../routes/AuthRouter"
-import RoleRouter from "./../routes/RoleRouter"
-import FolderRouter from "./../routes/FolderRouter"
-import ServicesRouter from "./../routes/ServiceRouter"
-import AvailabilityRouter from "./../routes/AvailabilityRouter"
-import WorkspaceRouter from "./../routes/WorkspaceRouter"
-import  ExpressError from "./../ErrorHandler/ExpressError"
-import path from "path"
-import { BASE_DIR } from "../config"
-/**
- *
- * @param {{app:express.Application}} param0
- */
-export default ({ app }:{app:Application}) => {
-	app.use(express.json({ limit: "100mb" }))
-	app.use(cors({ origin: "*" }))
-	app.use(helmet())
+import expressWinston from "express-winston"
+import { HTTPerrorLogOptions, HTTPLogOptions } from "@root/utils/logger"
+import ErrorHandler from "@root/common/errors/ErrorHandler"
+
+export default function ({ app }: { app: Application }) {
+	app.use(express.json({ limit: "30mb" }))
 	app.use(express.urlencoded({ extended: true }))
-	app.use(express.static(path.join(BASE_DIR,"public/uploads")))
-	app.use(express.static(path.join(BASE_DIR,"public")))
+	app.use(morgan("dev"))
+	app.use(compression({ filter: shouldCompress }))
+	app.use(helmet())
 	app.use(expressWinston.logger(HTTPLogOptions))
-	app.use("/users", UserRouter)
-	app.use("/roles", RoleRouter)
-	app.use("/auth", AuthRouter)
-	app.use("/workspaces", WorkspaceRouter)
-	app.use("/folders", FolderRouter)
-	app.use("/availability", AvailabilityRouter)
-	app.use("/services", ServicesRouter)
 	app.use(expressWinston.errorLogger(HTTPerrorLogOptions))
-	app.use(ExpressError)
+
+	app.use("/api/v1", v1())
+
+	/* Error handler*/
+	app.use(ErrorHandler)
+	return app
 }

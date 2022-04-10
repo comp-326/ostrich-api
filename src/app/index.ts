@@ -1,6 +1,7 @@
 import express from "express"
-import setup from "./../setup"
+import setup from "@setup"
+
 const app = express()
-setup({app})
+setup({ app })
 
 export default app

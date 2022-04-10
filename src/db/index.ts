@@ -1,16 +1,11 @@
-import mongoose from "mongoose"
+import { connect } from "mongoose"
 
-/**
- *
- * @param {{DATABASE_URL:string}} param0
- */
-export default ({ DATABASE_URL }: { DATABASE_URL: string }) => {
-	mongoose
-		.connect(DATABASE_URL)
+export default function connectDB({ DB_URL }: { DB_URL: string }) {
+	connect(DB_URL, {})
 		.then(() => {
-			console.log("Database connected")
+			console.log("Mongodb connected")
 		})
 		.catch((err) => {
-			console.log(err.message)
+			console.log(`Could not connect mongodb: reason-> ${err.message}`)
 		})
 }
