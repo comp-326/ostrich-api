@@ -23,7 +23,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       # NPM install and production script run
-    - name: YARN Scripts
+    - name: NPM Scripts
       uses: actions/setup-node@v2
       with:
         node-version: '15.x'
@@ -32,15 +32,15 @@ jobs:
       with:
         path: |
           **/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/yarn-lock.json') }}
+        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      run: yarn ci
+      run: npm ci
 
     - name: Run the tests
-      run: yarn test --passWithNoTests --ci
+      run: npm test --passWithNoTests --ci
 
     - name: Build
-      run: yarn run build
+      run: npm run build
 
     - name: Deploy to Staging Site
       uses: easingthemes/ssh-deploy@v2.1.4
