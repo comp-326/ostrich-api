@@ -25,7 +25,8 @@ const config = {
 	},
 	DB: {
 		MONGOOSE: {
-			DB_URL: process.env.DATABASE_URL!,
+			DATABASE_URL: process.env.DATABASE_URL!,
+			TEST_DB_URL: process.env.TEST_DB_URL!,
 		},
 		MONGO_DB: {
 			DB_USER: "",

@@ -3,12 +3,14 @@ import config from "@base/src/node.config"
 const {
 	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY, BASE_URL },
 	DB: {
-		MONGOOSE: { DB_URL },
+		MONGOOSE: { DATABASE_URL: db_url, TEST_DB_URL: t_dbUrl },
 	},
 	PATHS: { BASE_DIR },
 	MAIL: { EMAIL_ACCOUNT, EMAIL_PASSWORD },
 	CLOUDINARY: { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET },
 } = config
+
+const DB_URL = NODE_ENV === "testing" ? t_dbUrl : db_url
 
 export default Object.freeze({
 	PORT,

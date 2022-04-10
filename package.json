@@ -10,8 +10,8 @@
     "predev:start": "ts-node ./src/env.ts",
     "dev": "yarn run dev:start",
     "lint": "eslint  --ext .ts --fix",
-    "prod:buildTs": "gulp buildTS",
-    "test": "jest"
+    "prod:buildTs": "gulp buildTs",
+    "test": "NODE_ENV=testing jest"
   },
   "_moduleAliases": {
     "@base": "./",
@@ -80,6 +80,7 @@
     "gulp-ts-alias": "^2.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^27.4.5",
+    "module-alias-jest": "^0.0.3",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "supertest": "^6.1.6",
