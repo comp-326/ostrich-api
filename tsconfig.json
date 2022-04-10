@@ -17,7 +17,6 @@
     "noImplicitReturns": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "esModuleInterop":true,
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
