@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/src/server.js",
-    "prestart": "yarn run prod:buildTs",
+    "prestart": "yarn run build",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "predev:start": "ts-node ./src/env.ts",
     "dev": "yarn run dev:start",
     "lint": "eslint  --ext .ts --fix",
-    "prod:buildTs": "gulp buildTs",
+    "build": "gulp buildTS",
     "test": "NODE_ENV=testing jest"
   },
   "_moduleAliases": {
