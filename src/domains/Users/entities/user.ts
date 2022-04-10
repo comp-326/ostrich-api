@@ -28,25 +28,23 @@ export default function makeCreateUserEntity({
 			throw new ExpressError("Last name required", 400)
 		}
 		if (password.length < 30) {
-			console.log("password length is less than 16")
+			const { ok, errors } = isValidPassword({
+				props: { firstName, lastName, password },
+				fields: [
+					{ fieldName: "firstName", name: "First name" },
+					{ fieldName: "email", name: "Email address" },
+					{ fieldName: "lastName", name: "Last name" },
+				],
+			})
+			if (!ok) {
+				throw new ExpressError(errors, 400)
+			}
 		}
-		const { ok, errors } = isValidPassword({
-			props: { firstName, lastName, password },
-			fields: [
-				{ fieldName: "firstName", name: "First name" },
-				{ fieldName: "email", name: "Email address" },
-				{ fieldName: "lastName", name: "Last name" },
-			],
-		})
-		if (!ok) {
-			throw new ExpressError(errors, 400)
-		}
-
-		if (password)
+		if (password && password.length < 30)
 			hashPassword(password)
 				.then((res) => (newPassword = res))
 				.catch((err) => {
-					throw new ExpressError(err.message, 400)
+					console.log(err.message)
 				})
 
 		const activationToken = { value: "", used: true }
