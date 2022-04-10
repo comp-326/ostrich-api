@@ -1,10 +1,11 @@
 import { Router } from "express"
 import api from "./api"
 
-const todoRouter = Router()
+const authRouter = Router()
 export default function authDomain(app: Router) {
-	app.use("/auth", todoRouter)
-	api.makeQueryLoginApiCall(todoRouter)
-	api.makeQueryRegisterApiCall(todoRouter)
+	app.use("/auth", authRouter)
+	api.makeQueryLoginApiCall(authRouter)
+	api.makeQueryRegisterApiCall(authRouter)
+	api.makeQueryRolesApiCall(authRouter)
 	return app
 }

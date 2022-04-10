@@ -15,8 +15,10 @@ export default function makeLoginUserByUseCase({
 		}
 		const existing = await userDB.findByEmail(email)
 		if (!existing) {
-			throw new ExpressError("User not found", 404)
+			throw new ExpressError("Account does not exist", 404)
 		}
-		return existing
+		const auth = await userDB.login(email, password)
+
+		return auth
 	}
 }

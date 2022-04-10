@@ -1,15 +1,20 @@
-import authDomain from "@base/src/domains/Auth"
+import workspaceDomain from "@domains/Workspace"
+import authDomain from "@domains/Auth"
 import userDomain from "@domains/Users"
-import { swaggerServe, SwaggerSetup } from "@root/utils/docs"
-import { Request, Response, Router } from "express"
+import { swaggerServe, SwaggerSetup } from "@utils/docs"
+import { Router } from "express"
+import availabilityDomain from "@domains/Availability"
+import folderDomain from "@domains/Folders"
+import test_route from "./test_route"
 
 export default function () {
 	const apiRoute = Router()
 	userDomain(apiRoute)
 	authDomain(apiRoute)
-	apiRoute.get("/", (_req: Request, res: Response) => {
-		return res.status(200).send({ api: "Working" })
-	})
+	workspaceDomain(apiRoute)
+	availabilityDomain(apiRoute)
+	folderDomain(apiRoute)
+	apiRoute.get("/", test_route)
 	apiRoute.use("/docs", swaggerServe, SwaggerSetup)
 	return apiRoute
 }

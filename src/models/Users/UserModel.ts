@@ -59,23 +59,23 @@ const UserSchema: mongoose.Schema<UserDocumentType> = new mongoose.Schema(
 			type: {
 				value: String,
 				used: Boolean,
+				select:false
 			},
 			default: {
 				value: "",
 				used: true,
 			},
-			select: false,
 		},
 		activationToken: {
 			type: {
 				value: String,
 				used: Boolean,
+				select:false
 			},
 			default: {
 				value: "",
 				used: true,
 			},
-			select: false,
 		},
 	},
 	{ timestamps: true },

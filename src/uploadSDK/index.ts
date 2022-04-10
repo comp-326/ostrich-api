@@ -2,7 +2,7 @@ import {
 	CLOUDINARY_NAME,
 	CLOUDINARY_API_KEY,
 	CLOUDINARY_SECRET,
-} from "../config"
+} from "@root/config"
 
 import { v2 as cloudinary } from "cloudinary"
 
