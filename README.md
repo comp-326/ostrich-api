@@ -1,5 +1,6 @@
 # Ostrich backend app
-This is my sample setup for the SOLID principles design architecture
+###  Ostrich app setup with TS
+Check the instructions below to setup your environment
 
 Running project in dev mode
 Install all the dependencies
@@ -41,5 +42,10 @@ Then...
 $ yarn start
 ```
 # Dev-Endpoints docs
+<<<<<<< HEAD
 The deault port is `4001`
 Navigate to `http://localhost:4001/api/v1/docs`
+=======
+
+Navigate to `http://localhost:${PORT}/api/v1/docs`
+>>>>>>> 6407b9ab1a4bb6429412347daf5ac1b8aef2db9e
