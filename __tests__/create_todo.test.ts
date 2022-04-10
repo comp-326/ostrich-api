@@ -1,5 +1,5 @@
 // import { addTodo } from "../src/domains/todo/use-cases"
-import  create  from "./../src/domains/todo/entities"
+import  create  from "./../src/domains/todo/use-cases"
 
 test("Throw an exception", async () => {
 	// const mock = jest.fn()

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Simple todo app setup with TS
 This is my sample setup for the SOLID principles design architecture
 
