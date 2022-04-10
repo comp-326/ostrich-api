@@ -149,3 +149,4 @@ dist
 
 ## Testing rest clients
 *.rest
+yarn-lock.json
