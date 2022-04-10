@@ -42,10 +42,5 @@ Then...
 $ yarn start
 ```
 # Dev-Endpoints docs
-<<<<<<< HEAD
 The deault port is `4001`
 Navigate to `http://localhost:4001/api/v1/docs`
-=======
-
-Navigate to `http://localhost:${PORT}/api/v1/docs`
->>>>>>> 6407b9ab1a4bb6429412347daf5ac1b8aef2db9e
