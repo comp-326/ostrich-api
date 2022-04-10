@@ -1,18 +1,18 @@
 {
-  "name": "todo-app",
+  "name": "ostrich-backend",
   "version": "1.0.0",
-  "description": "This is my sample setup for the SOLID principles design architecture",
+  "description": "Ostrich backend application",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/src/server.js",
     "prestart": "yarn run prod:buildTs",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "predev:start": "ts-node ./src/env.ts",
-    "dev":"yarn run dev:start",
+    "dev": "yarn run dev:start",
+    "lint": "eslint  --ext .ts --fix",
     "prod:buildTs": "gulp buildTS",
     "test": "jest"
   },
-  "keywords": [],
   "_moduleAliases": {
     "@base": "./",
     "@root": "./src",
@@ -24,6 +24,7 @@
     "@services": "./src/Services",
     "@middlewares": "./src/middlewares"
   },
+  "keywords": [],
   "author": "Orinda Felix Ochieng <forinda82@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -85,5 +86,16 @@
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
     "typescript": "^4.6.3"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reduzersolutions/ostrich-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reduzersolutions/ostrich-api/issues"
+  },
+  "homepage": "https://github.com/reduzersolutions/ostrich-api#readme"
 }
