@@ -10,7 +10,7 @@
     "predev:start": "ts-node ./src/env.ts",
     "dev": "yarn run dev:start",
     "lint": "eslint  --ext .ts --fix",
-    "build": "gulp buildTs",
+    "build": "gulp buildTS",
     "test": "NODE_ENV=testing jest"
   },
   "_moduleAliases": {
