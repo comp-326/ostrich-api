@@ -1,5 +1,5 @@
-import { BASE_URL, PORT } from "../config"
-import { NODE_ENV } from "@root/config"
+import { BASE_URL, PORT } from '../config';
+import { NODE_ENV } from '@root/config';
 
 /**
  *
@@ -8,12 +8,12 @@ import { NODE_ENV } from "@root/config"
  */
 function createWorkspaceInviteLink({
 	role,
-	workspaceId,
+	workspaceId
 }: {
-	role: string
-	workspaceId: string
+	role: string;
+	workspaceId: string;
 }) {
-	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`
+	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
 }
 
 /**
@@ -22,7 +22,7 @@ function createWorkspaceInviteLink({
  * @returns
  */
 function createAccountActivationLink({ token }: { token: string }) {
-	return `http://localhost:${PORT}/account/activate/${token}`
+	return `http://localhost:${PORT}/account/activate/${token}`;
 }
 /**
  *
@@ -31,19 +31,19 @@ function createAccountActivationLink({ token }: { token: string }) {
  */
 function createForgotPasswordLink(token: string) {
 	const baseUrl =
-		NODE_ENV === ("development" || "testing")
+		NODE_ENV === ('development' || 'testing')
 			? `http://localhost:${PORT}/api/v1/users/account/password/reset/${token}`
-			: `${BASE_URL}/api/v1/users/account/password/reset/${token}`
+			: `${BASE_URL}/api/v1/users/account/password/reset/${token}`;
 
-	return baseUrl
+	return baseUrl;
 }
 export {
 	createWorkspaceInviteLink,
 	createAccountActivationLink,
-	createForgotPasswordLink,
-}
+	createForgotPasswordLink
+};
 export default Object.freeze({
 	createWorkspaceInviteLink,
 	createAccountActivationLink,
-	createForgotPasswordLink,
-})
+	createForgotPasswordLink
+});

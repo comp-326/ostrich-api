@@ -1,7 +1,7 @@
-import express from "express"
-import setup from "@setup"
+import express from 'express';
+import setup from '@setup';
 
-const app = express()
-setup({ app })
+const app = express();
+setup({ app });
 
-export default app
+export default app;

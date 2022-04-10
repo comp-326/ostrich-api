@@ -5,7 +5,7 @@ Check the instructions below to setup your environment
 Running project in dev mode
 Install all the dependencies
 ```sh
-$ yarn
+$ npm install
 ```
 #####
 App domains
@@ -19,7 +19,7 @@ App domains
 # Running the project
 Run
 ```sh
-$ yarn dev
+$ npm run dev
 ```
 The above script command should populate the `.env` from the `.env.example` snapshot properly.
 
@@ -28,24 +28,19 @@ This will setup the project in the most convenient way for all devs workflow
 
 Once done run:
 ```sh
-$ yarn run dev:start
+$ npm run dev:start
 ```
 
 # Pre-Production
 Run
 ```sh
-$ yarn run dev:buildTs
+$ npm run dev:buildTs
 ```
 This will build the typescript project to js
 Then...
 ```sh
-$ yarn start
+$ npm start
 ```
 # Dev-Endpoints docs
-<<<<<<< HEAD
 The deault port is `4001`
 Navigate to `http://localhost:4001/api/v1/docs`
-=======
-
-Navigate to `http://localhost:${PORT}/api/v1/docs`
->>>>>>> 6407b9ab1a4bb6429412347daf5ac1b8aef2db9e

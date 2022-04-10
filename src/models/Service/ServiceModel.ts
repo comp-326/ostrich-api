@@ -1,27 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 export type ServiceType = {
-	category: string
-	feeRate: number | string
-	tags: string[]
-	crmTags: []
-	providerFirstName: string
-	providerLastName: string
-	providerEmail: string
-	providerPhone: string
-	group: string
-	cost: string
-	_doc: any
-}
+	category: string;
+	feeRate: number | string;
+	tags: string[];
+	crmTags: [];
+	providerFirstName: string;
+	providerLastName: string;
+	providerEmail: string;
+	providerPhone: string;
+	group: string;
+	cost: string;
+	_doc: any;
+};
 
 export type ServiceDocumentType = {
-	[x: string]: any
+	[x: string]: any;
 } & ServiceType &
-	mongoose.Document
+	mongoose.Document;
 
 export type ServiceModelType = {
-	findByName: (name: string) => Promise<ServiceDocumentType>
-} & mongoose.Model<ServiceDocumentType>
+	findByName: (name: string) => Promise<ServiceDocumentType>;
+} & mongoose.Model<ServiceDocumentType>;
 
 const ServiceSchema = new mongoose.Schema(
 	{
@@ -35,13 +35,13 @@ const ServiceSchema = new mongoose.Schema(
 		providerEmail: { type: String },
 		providerPhone: { type: String },
 		group: { type: String },
-		cost: { type: Number },
+		cost: { type: Number }
 	},
-	{ timestamps: true },
-)
+	{ timestamps: true }
+);
 
 const ServiceModel = mongoose.model<ServiceDocumentType, ServiceModelType>(
-	"Service",
-	ServiceSchema,
-)
-export default ServiceModel
+	'Service',
+	ServiceSchema
+);
+export default ServiceModel;
