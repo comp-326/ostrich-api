@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node ./dist/src/server.js",
     "prestart": "npm run build",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
-    "predev:start": "ts-node ./src/env.ts",
+    "env": "ts-node ./src/env.ts",
     "dev": "npm run dev:start",
     "lint": "eslint  --ext .ts --fix",
     "build": "gulp buildTS",
