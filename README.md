@@ -17,9 +17,11 @@ App domains
 1. [x] Appointments
 1. [x] Workspace
 # Running the project
-Run
+To set environment variables
+Make sure to run this before you start development otherwise
+the server won't start properly
 ```sh
-$ npm run dev
+$ npm run env
 ```
 The above script command should populate the `.env` from the `.env.example` snapshot properly.
 
@@ -27,11 +29,18 @@ Check the `.env` file and fill the empty fields
 This will setup the project in the most convenient way for all devs workflow
 
 Once done run:
+This is to run the development server
 ```sh
-$ npm run dev:start
+$ npm run dev
 ```
+# Dev-Endpoints docs
+To access the API docs head over to the `url` below
+The deault port is `4001`
+Navigate to 
 
+`http://localhost:4001/api/v1/docs`
 # Pre-Production
+This is a pre-deployment script
 Run
 ```sh
 $ npm run dev:buildTs
@@ -41,6 +50,4 @@ Then...
 ```sh
 $ npm start
 ```
-# Dev-Endpoints docs
-The deault port is `4001`
-Navigate to `http://localhost:4001/api/v1/docs`
+
