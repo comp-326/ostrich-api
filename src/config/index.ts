@@ -1,41 +1,45 @@
-import dotenv from "dotenv"
-import path from "path"
+import config from '@base/src/node.config';
 
-dotenv.config()
+const {
+	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY, BASE_URL, ENC_KEY },
+	DB: {
+		MONGOOSE: { DATABASE_URL: db_url, TEST_DB_URL: t_dbUrl }
+	},
+	PATHS: { BASE_DIR },
+	MAIL: { EMAIL_ACCOUNT, EMAIL_PASSWORD },
+	CLOUDINARY: { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET }
+} = config;
 
-const BASE_DIR = path.dirname(__dirname)
+const DB_URL = NODE_ENV === 'testing' ? t_dbUrl : db_url;
 
-const DATABASE_URL = process.env.DATABASE_URL
-const PORT = process.env.PORT
-const SECRET_KEY = process.env.SECRET_KEY
-const HOST = process.env.HOST
-const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD
-const EMAIL_ACCOUNT = process.env.EMAIL_ACCOUNT
-const REFRESH_KEY = process.env.REFRESH_KEY
-const WEB_CLIENT = process.env.WEB_CLIENT_PASSWORD_RESET_URL
-const API = process.env.API
-
-export default {
+export default Object.freeze({
 	PORT,
-	SECRET_KEY,
-	REFRESH_KEY,
-	HOST,
-	DATABASE_URL,
-	API,
+	DB_URL,
+	BASE_DIR,
+	NODE_ENV,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
-	BASE_DIR,
-	WEB_CLIENT,
-}
+	REFRESH_KEY,
+	SECRET_KEY,
+	CLOUDINARY_API_KEY,
+	CLOUDINARY_NAME,
+	CLOUDINARY_SECRET,
+	BASE_URL,
+	ENC_KEY
+});
+
 export {
 	PORT,
-	SECRET_KEY,
-	REFRESH_KEY,
-	HOST,
-	DATABASE_URL,
-	WEB_CLIENT,
-	API,
+	DB_URL,
+	BASE_DIR,
+	NODE_ENV,
 	EMAIL_ACCOUNT,
 	EMAIL_PASSWORD,
-	BASE_DIR,
-}
+	REFRESH_KEY,
+	SECRET_KEY,
+	CLOUDINARY_API_KEY,
+	CLOUDINARY_NAME,
+	CLOUDINARY_SECRET,
+	BASE_URL,
+	ENC_KEY
+};

@@ -1,11 +1,11 @@
 import { connect } from "mongoose"
 
-export default async function (configuration: { databaseUrl: string }) {
-	connect(configuration.databaseUrl)
+export default function connectDB({ DB_URL }: { DB_URL: string }) {
+	connect(DB_URL, {})
 		.then(() => {
-			console.log("Database connection succesful")
+			console.log("Mongodb connected")
 		})
 		.catch((err) => {
-			console.log(err.message)
+			console.log(`Could not connect mongodb: reason-> ${err.message}`)
 		})
 }
