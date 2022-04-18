@@ -1,10 +1,10 @@
-import FolderInfoValidator from "../utils/FolderValidator"
-import makeCreateFolderEntity from "./folder"
+import FolderInfoValidator from '../utils/FolderValidator';
+import makeCreateFolderEntity from './folder';
 
 const createFolder = makeCreateFolderEntity({
-	validator: FolderInfoValidator,
-})
+	validator: FolderInfoValidator
+});
 
-export default createFolder
+export default createFolder;
 
 // export type UserInfoValidator = typeof Validate

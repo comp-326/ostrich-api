@@ -1,30 +1,21 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import tokenGenerator from "@root/helpers/tokenGenerator"
-import { IAuthRequest } from "../interfaces"
-import { loginUserUseCase } from "../use-cases"
+import TokenGEN from '@base/src/helpers/TokenGEN';
+import { IAuthRequest } from '../interfaces';
+import { loginUserUseCase } from '../use-cases';
 
 export default function makeBuildLoginUserController({
-	login,
+	login
 }: {
-	login: typeof loginUserUseCase
+	login: typeof loginUserUseCase;
 }) {
 	return async function (httpRequest: IAuthRequest) {
-		const { email, password } = httpRequest.body
-		if (!email) {
-			return new ExpressError("Email required", 400)
-		}
-		if (!password) {
-			return new ExpressError("Password required", 400)
-		}
-		const { passwordMatch, user } = await login(email, password)
+		const { email, password } = httpRequest.body;
+		const user = await login(email, password);
 
-		if (!passwordMatch) {
-			throw new ExpressError("Incorrect email or password", 401)
-		}
-		const AuthToken = tokenGenerator.generateAuthToken({
-			email: user.email,
+		const AuthToken = TokenGEN.generateToken({
 			userId: user._id,
-		})("270h")
-		return { statusCode: 200, body: { user, AuthToken } }
-	}
+			email: user.email
+		});
+
+		return { statusCode: 200, body: { user, AuthToken } };
+	};
 }

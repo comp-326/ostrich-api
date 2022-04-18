@@ -1,21 +1,40 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import validateMongodbId from "@base/src/utils/mongo/ObjectId-validator"
-import createFolder from "../entities"
-import { IFolder, IFolderRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import validateMongodbId from '@base/src/utils/mongo/ObjectId-validator';
+import createFolder from '../entities';
+import { IFolder, IFolderRepository } from '../interfaces';
 
-export default function makeEditFolderUseCase({ folderDB }: { folderDB: IFolderRepository }) {
+export default function makeEditFolderUseCase({
+	folderDB
+}: {
+	folderDB: IFolderRepository;
+}) {
 	return async function editFolderUseCase(id: string, data: IFolder) {
 		if (!id) {
-			throw new ExpressError("Please provide an id", 400)
+			throw new ExpressError({
+				message: 'Please provide folder id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
 		if (!validateMongodbId(id)) {
-			throw new ExpressError("Please provide a valid user id", 400)
+			throw new ExpressError({
+				message: 'Please provide a valid folder id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
-		const existing = await folderDB.findById(id)
+		const existing = await folderDB.findById(id);
 		if (!existing) {
-			throw new ExpressError("Folder does not exist", 404)
+			throw new ExpressError({
+				message: 'Folder does not exist',
+				data: {},
+				status: 'warning',
+				statusCode: 404
+			});
 		}
-		const folder = createFolder({ ...existing, ...data })
+		const folder = createFolder({ ...existing, ...data });
 		const edited = await folderDB.updateById(id, {
 			address: folder.getAddress(),
 			comments: folder.getComments(),
@@ -27,9 +46,9 @@ export default function makeEditFolderUseCase({ folderDB }: { folderDB: IFolderR
 			prompts: folder.getPrompts(),
 			size: folder.getSize(),
 			type: folder.getType(),
-			views: folder.getViews(),
-		})
+			views: folder.getViews()
+		});
 
-		return { ...existing._doc, ...edited }
-	}
+		return { ...existing._doc, ...edited };
+	};
 }

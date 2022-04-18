@@ -1,12 +1,12 @@
-import { IFolderRepository } from "../interfaces"
+import { IFolderRepository } from '../interfaces';
 
 export default function makeListFoldersUseCase({
-	folderDB,
+	folderDB
 }: {
-	folderDB: IFolderRepository
+	folderDB: IFolderRepository;
 }) {
 	return async function listFoldersUseCase(limit: number, page: number) {
-		const todos = await folderDB.find(limit, page)
-		return todos
-	}
+		const folders = await folderDB.find(limit, page);
+		return folders;
+	};
 }

@@ -1,23 +1,23 @@
-import { IUserRequest } from "../interfaces"
-import { removeUserUseCase } from "../use-cases"
+import { IUserRequest } from '../interfaces';
+import { removeUserUseCase } from '../use-cases';
 
 export default function makeBuildDeleteUserController({
-	remove,
+	remove
 }: {
-	remove: typeof removeUserUseCase
+	remove: typeof removeUserUseCase;
 }) {
 	return async function (httpRequest: IUserRequest) {
-		const { id } = httpRequest.params
+		const { id } = httpRequest.params;
 		if (!id) {
 			return {
 				statusCode: 404,
-				body: "User not found",
-			}
+				body: 'User not found'
+			};
 		}
-		await remove(id)
+		await remove(id);
 		return {
 			statusCode: 200,
-			body: { id, deleted: true },
-		}
-	}
+			body: { id, deleted: true }
+		};
+	};
 }

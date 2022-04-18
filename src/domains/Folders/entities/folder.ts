@@ -1,10 +1,10 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import { IFolder, IFolderValidator } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { IFolder, IFolderValidator } from '../interfaces';
 
 export default function makeCreateFOlderEntity({
-	validator,
+	validator
 }: {
-	validator: IFolderValidator
+	validator: IFolderValidator;
 }) {
 	return function createFolder({
 		address,
@@ -17,11 +17,16 @@ export default function makeCreateFOlderEntity({
 		prompts,
 		size,
 		type,
-		views,
+		views
 	}: IFolder) {
-		const { isValidFolder } = validator
+		const { isValidFolder } = validator;
 		if (!isValidFolder(name)) {
-			throw new ExpressError("Please provide a valid folder", 400)
+			throw new ExpressError({
+				message: 'Please provide a valid folder name',
+				statusCode: 400,
+				status: 'warning',
+				data: {}
+			});
 		}
 		return Object.freeze({
 			getName: () => name,
@@ -34,7 +39,7 @@ export default function makeCreateFOlderEntity({
 			getPrompts: () => prompts,
 			getSize: () => size,
 			getType: () => type,
-			getViews: () => views,
-		})
-	}
+			getViews: () => views
+		});
+	};
 }

@@ -1,22 +1,35 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import createUser from "../entities"
-import { IUser, IUserRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import createUser from '../entities';
+import { IUser, IUserRepository } from '../interfaces';
 
 export default function makeEditUserPasswordUseCase({
-	userDB,
+	userDB
 }: {
-	userDB: IUserRepository
+	userDB: IUserRepository;
 }) {
-	return async function editUserUserPasswordUseCase(email: string, data: IUser) {
+	return async function editUserUserPasswordUseCase(
+		email: string,
+		data: IUser
+	) {
 		if (!email) {
-			throw new ExpressError("Please provide your email", 400)
+			throw new ExpressError({
+				message: 'Please provide an email',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
-		
-		const existing = await userDB.findByEmail(email)
+
+		const existing = await userDB.findByEmail(email);
 		if (!existing) {
-			throw new ExpressError("User account does not exist", 404)
+			throw new ExpressError({
+				message: 'User does not exist',
+				statusCode: 404,
+				data: {},
+				status: 'warning'
+			});
 		}
-		const user = createUser({ ...existing, ...data })
+		const user = createUser({ ...existing, ...data });
 		const edited = await userDB.updateById(existing._id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
@@ -26,9 +39,9 @@ export default function makeEditUserPasswordUseCase({
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
 			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture(),
-		})
+			profilePic: user.getProfilePicture()
+		});
 
-		return { ...existing._doc, ...edited }
-	}
+		return { ...existing._doc, ...edited };
+	};
 }

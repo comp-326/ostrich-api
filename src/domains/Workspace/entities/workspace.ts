@@ -1,28 +1,43 @@
-import { IWorkspaceEntity } from "../interfaces"
-import { ExpressError } from "@base/src/common/errors/ExpressError"
+import { IWorkspaceEntity } from '../interfaces';
+import { ExpressError } from '@base/src/common/errors/ExpressError';
 
 export default function makeCreateWorkspaceEntity() {
 	return function createWorkspace({
 		name,
 		owner,
 		type,
-		logo,
+		logo
 	}: IWorkspaceEntity) {
 		if (!name) {
-			throw new ExpressError("Workspace name required", 400)
+			throw new ExpressError({
+				message: 'Workspace name required',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
 		if (!type) {
-			throw new ExpressError("Workspace type required", 400)
+			throw new ExpressError({
+				message: 'Workspace type required',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
 		if (!owner) {
-			throw new ExpressError("Workspace owner", 400)
+			throw new ExpressError({
+				message: 'Workspace owner required',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
 
 		return {
 			getName: () => name,
 			getType: () => type,
 			getOwner: () => owner,
-			getLogo: () => logo,
-		}
-	}
+			getLogo: () => logo
+		};
+	};
 }
