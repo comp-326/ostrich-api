@@ -1,23 +1,30 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import createUser from "../entities"
-import { IUser, IAuthRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import createUser from '../entities';
+import { IUser, IAuthRepository } from '../interfaces';
 
 export default function makeRegisterUserUseCase({
-	userDB,
+	userDB
 }: {
-	userDB: IAuthRepository
+	userDB: IAuthRepository;
 }) {
 	return async function registerUserUseCase(userInfo: IUser) {
-		const user = await createUser(userInfo)
-		const existing = await userDB.findByEmail(user.getEmail())
+		const user = await createUser(userInfo);
+		const existing = await userDB.findByEmail(user.getEmail());
 		if (existing) {
-			throw new ExpressError("User email already exist", 400)
+			throw new ExpressError({
+				message: 'User email already exists',
+				data: {},
+				status: 'warning',
+				statusCode: 409
+			});
 		}
-		if ((userInfo.password !== userInfo.confirmPassword)) {
-			throw new ExpressError(
-				"Password and confirm password does not match",
-				400,
-			)
+		if (userInfo.password !== userInfo.confirmPassword) {
+			throw new ExpressError({
+				message: 'Passwords do not match',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
 		const created = await userDB.createUser({
 			email: user.getEmail(),
@@ -28,8 +35,8 @@ export default function makeRegisterUserUseCase({
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
 			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture(),
-		})
-		return created
-	}
+			profilePic: user.getProfilePicture()
+		});
+		return created;
+	};
 }

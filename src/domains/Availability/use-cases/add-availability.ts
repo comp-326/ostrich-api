@@ -1,21 +1,21 @@
-import createAvailability from "../entities"
-import { IAvailabilityRepository, IAvailability } from "../interfaces"
+import createAvailability from '../entities';
+import { IAvailabilityRepository, IAvailability } from '../interfaces';
 
 export default function makeAddAvailabilityUseCase({
-	availabilityDB,
+	availabilityDB
 }: {
-	availabilityDB: IAvailabilityRepository
+	availabilityDB: IAvailabilityRepository;
 }) {
 	return async function addAvailabilityUseCase(
 		userId: string,
-		availabilityInfo: IAvailability,
+		availabilityInfo: IAvailability
 	) {
-		const availability = createAvailability(availabilityInfo)
+		const availability = createAvailability(availabilityInfo);
 		const created = await availabilityDB.createAvailability(userId, {
 			startTime: availability.getStartTime(),
 			days: availability.getDays(),
-			endTime: availability.getEndTime(),
-		})
-		return created
-	}
+			endTime: availability.getEndTime()
+		});
+		return created;
+	};
 }

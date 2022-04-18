@@ -71,7 +71,13 @@ paths:
           description: Forbidden
         "404":
           description: Not found
-
+  /auth/logout:
+    post:
+      description: Logout User
+      tags: Auth
+      responses:
+        "200":
+          description: "Ok"
   /users/delete/{id}:
     delete:
       description: Delete user

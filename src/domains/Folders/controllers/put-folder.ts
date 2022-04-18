@@ -1,17 +1,14 @@
-import { IFolderRequest } from "../interfaces"
-import { editFolderUseCase } from "../use-cases"
+import { IFolderRequest } from '../interfaces';
+import { editFolderUseCase } from '../use-cases';
 
 export default function makeBuildUpdateByIdFolderController({
-	update,
+	update
 }: {
-	update: typeof editFolderUseCase
+	update: typeof editFolderUseCase;
 }) {
 	return async function (httpRequest: IFolderRequest) {
-		const { id } = httpRequest.params
-		if (!id) {
-			return { statusCode: 400, body: "id required" }
-		}
-		const folder = await update(id, httpRequest.body)
-		return { statusCode: 200, body: {folder} }
-	}
+		const { id } = httpRequest.params;
+		const folder = await update(id, httpRequest.body);
+		return { statusCode: 200, body: { folder } };
+	};
 }

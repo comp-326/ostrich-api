@@ -1,23 +1,18 @@
-import { IAvailabilityRequest } from "../interfaces"
-import { removeAvailabilityUseCase } from "../use-cases"
+import { IAvailabilityRequest } from '../interfaces';
+import { removeAvailabilityUseCase } from '../use-cases';
 
 export default function makeBuildDeleteUserController({
-	remove,
+	remove
 }: {
-	remove: typeof removeAvailabilityUseCase
+	remove: typeof removeAvailabilityUseCase;
 }) {
 	return async function (httpRequest: IAvailabilityRequest) {
-		const { id } = httpRequest.params
-		if (!id) {
-			return {
-				statusCode: 404,
-				body: "User not found",
-			}
-		}
-		await remove(id)
+		const { id } = httpRequest.params;
+
+		await remove(id);
 		return {
 			statusCode: 200,
-			body: { id, deleted: true },
-		}
-	}
+			body: { id, deleted: true }
+		};
+	};
 }

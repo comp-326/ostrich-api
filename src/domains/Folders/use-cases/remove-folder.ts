@@ -1,24 +1,39 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import validateMongodbId from "@root/utils/mongo/ObjectId-validator"
-import { IFolderRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import validateMongodbId from '@root/utils/mongo/ObjectId-validator';
+import { IFolderRepository } from '../interfaces';
 
 export default function makeRemoveFolderUseCase({
-	folderDB,
+	folderDB
 }: {
-	folderDB: IFolderRepository
+	folderDB: IFolderRepository;
 }) {
 	return async function removerFolderUseCase(id: string) {
 		if (!id) {
-			throw new ExpressError("Please provide user id", 400)
+			throw new ExpressError({
+				message: 'Please provide folder id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
 		if (!validateMongodbId(id)) {
-			throw new ExpressError("Invalid folder id", 400)
+			throw new ExpressError({
+				message: 'Please provide a valid folder id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
-		const exist = await folderDB.findById(id)
+		const exist = await folderDB.findById(id);
 		if (!exist) {
-			return { deleted: false, id, error: "Folder does not exist" }
+			throw new ExpressError({
+				message: 'Folder does not exist',
+				data: {},
+				status: 'warning',
+				statusCode: 404
+			});
 		}
-		await folderDB.deleteById(id)
-		return { deleted: true, id, error: "Folder deleted succesfully" }
-	}
+		await folderDB.deleteById(id);
+		return { deleted: true, id, error: 'Folder deleted succesfully' };
+	};
 }

@@ -29,10 +29,14 @@ function setEnvironmentVariables(envFilePath: string) {
 	data['PORT'] = '4001';
 	data['SECRET_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['REFRESH_KEY'] = crypto.randomBytes(64).toString('hex');
+	data['ENC_KEY'] = crypto.randomBytes(64).toString('hex');
+	data['APP_NAME'] = 'ostrich';
 	data['API_VERSION'] = '/api/v1';
 	data['HOST'] = 'localhost';
-	data['DATABASE_URL'] = 'mongodb://localhost:27017/ostrich-dev-db';
-	data['TEST_DB_URL'] = 'mongodb://localhost:27017/ostrich-testing-dev-db';
+	data['DATABASE_URL'] = `mongodb://localhost:27017/${data['APP_NAME']}-dev-db`;
+	data[
+		'TEST_DB_URL'
+	] = `mongodb://localhost:27017/${data['APP_NAME']}-testing-dev-db`;
 
 	const envExist = dirExistSync(path.join(path.dirname(envFilePath), '.env'));
 	if (envExist) {
