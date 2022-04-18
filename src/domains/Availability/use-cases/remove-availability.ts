@@ -1,24 +1,39 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import validateMongodbId from "@root/utils/mongo/ObjectId-validator"
-import { IAvailabilityRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import validateMongodbId from '@root/utils/mongo/ObjectId-validator';
+import { IAvailabilityRepository } from '../interfaces';
 
 export default function makeRemoveAvailabilityUseCase({
-	availabilityDB,
+	availabilityDB
 }: {
-	availabilityDB: IAvailabilityRepository
+	availabilityDB: IAvailabilityRepository;
 }) {
 	return async function removerAvailabilityUseCase(id: string) {
 		if (!id) {
-			throw new ExpressError("Please provide availability id", 400)
+			throw new ExpressError({
+				message: 'Please provide availability id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
 		if (!validateMongodbId(id)) {
-			throw new ExpressError("Invalid availability id", 400)
+			throw new ExpressError({
+				message: 'Please provide a valid availability id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
-		const exist = await availabilityDB.deleteById(id)
+		const exist = await availabilityDB.deleteById(id);
 		if (!exist) {
-			return { deleted: false, id, error: "User does not exist" }
+			throw new ExpressError({
+				message: 'Availability does not exist',
+				data: {},
+				status: 'warning',
+				statusCode: 404
+			});
 		}
-		await availabilityDB.deleteById(id)
-		return { deleted: true, id, error: "User deleted succesfully" }
-	}
+		await availabilityDB.deleteById(id);
+		return { deleted: true, id, error: 'User deleted succesfully' };
+	};
 }

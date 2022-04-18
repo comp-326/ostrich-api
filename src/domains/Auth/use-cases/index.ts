@@ -1,17 +1,17 @@
-import AuthRepository from "../AuthRepository"
-import makeLoginUserByUseCase from "./login-user"
-import makeRegisterUserUseCase from "./register-user"
+import AuthRepository from '../AuthRepository';
+import makeLoginUserByUseCase from './login-user';
+import makeRegisterUserUseCase from './register-user';
 
-const loginUserUseCase = makeLoginUserByUseCase({ userDB: AuthRepository })
-const registerUserUseCase = makeRegisterUserUseCase({ userDB: AuthRepository })
+const loginUserUseCase = makeLoginUserByUseCase({ userDB: AuthRepository });
+const registerUserUseCase = makeRegisterUserUseCase({ userDB: AuthRepository });
 
 export default Object.freeze({
 	loginUserUseCase,
-	registerUserUseCase,
-})
+	registerUserUseCase
+});
 
-export { loginUserUseCase, registerUserUseCase }
+export { loginUserUseCase, registerUserUseCase };
 
 export type TodoUseCasesType =
 	| typeof loginUserUseCase
-	| typeof registerUserUseCase
+	| typeof registerUserUseCase;

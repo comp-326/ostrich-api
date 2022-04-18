@@ -1,17 +1,21 @@
-import { IUserRequest } from "../interfaces"
-import { editUserUseCase } from "../use-cases"
+import { IUserRequest } from '../interfaces';
+import { editUserUseCase } from '../use-cases';
 
 export default function makeBuildUpdateByIdUserController({
-	update,
+	update
 }: {
-	update: typeof editUserUseCase
+	update: typeof editUserUseCase;
 }) {
 	return async function (httpRequest: IUserRequest) {
-		const { id } = httpRequest.params
-		if (!id) {
-			return { statusCode: 400, body: "id required" }
+		const { id } = httpRequest.params;
+		if (httpRequest.file) {
+			const { filename } = httpRequest.file;
+			httpRequest.body.profilePic = {
+				url: filename,
+				public_id: new Date().getTime()
+			};
 		}
-		const todo = await update(id, httpRequest.body)
-		return { statusCode: 200, body: todo }
-	}
+		const todo = await update(id, httpRequest.body);
+		return { statusCode: 200, body: todo };
+	};
 }

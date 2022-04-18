@@ -1,20 +1,29 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import { IFolderRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { IFolderRepository } from '../interfaces';
 
 export default function makeListFolderBynameUseCase({
-	folderDB,
+	folderDB
 }: {
-	folderDB: IFolderRepository
+	folderDB: IFolderRepository;
 }) {
 	return async function listUserByNameUseCase(name: string) {
-
 		if (!name) {
-			throw new ExpressError("Name required",400)
+			throw new ExpressError({
+				message: 'Please provide folder name',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
-		const existing = await folderDB.findByName(name)
+		const existing = await folderDB.findByName(name);
 		if (!existing) {
-			throw new ExpressError("Folder not found",404)
+			throw new ExpressError({
+				message: 'Folder does not exist',
+				data: {},
+				status: 'warning',
+				statusCode: 404
+			});
 		}
-		return existing
-	}
+		return existing;
+	};
 }

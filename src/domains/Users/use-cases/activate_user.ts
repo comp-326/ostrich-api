@@ -1,28 +1,48 @@
-import { ExpressError } from "@common/errors/ExpressError"
-import validateMongodbId from "@utils/mongo/ObjectId-validator"
-import createTodo from "../entities"
-import { IUser, IUserRepository } from "../interfaces"
+import { ExpressError } from '@common/errors/ExpressError';
+import validateMongodbId from '@utils/mongo/ObjectId-validator';
+import createTodo from '../entities';
+import { IUser, IUserRepository } from '../interfaces';
 
 export default function makeEditActivateUserUseCase({
-	userDB,
+	userDB
 }: {
-	userDB: IUserRepository
+	userDB: IUserRepository;
 }) {
 	return async function editActivateUserUserUseCase(id: string, data: IUser) {
 		if (!id) {
-			throw new ExpressError("Please provide an id", 400)
+			throw new ExpressError({
+				message: 'Please provide an id',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
 		if (!validateMongodbId(id)) {
-			throw new ExpressError("Please provide a valid user id", 400)
+			throw new ExpressError({
+				message: 'Please provide a valid user id',
+				statusCode: 400,
+				data: {},
+				status: 'warning'
+			});
 		}
-		const existing = await userDB.findById(id)
+		const existing = await userDB.findById(id);
 		if (!existing) {
-			throw new ExpressError("User does not exist", 404)
+			throw new ExpressError({
+				message: 'User does not exist',
+				statusCode: 404,
+				data: {},
+				status: 'warning'
+			});
 		}
 		if (existing.isActive) {
-			throw new ExpressError("User account already activated", 400)
+			throw new ExpressError({
+				message: 'User account already activated',
+				statusCode: 400,
+				status: 'warning',
+				data: {}
+			});
 		}
-		const user = createTodo({ ...existing, ...data })
+		const user = createTodo({ ...existing, ...data });
 		const edited = await userDB.updateById(id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
@@ -32,9 +52,9 @@ export default function makeEditActivateUserUseCase({
 			isActive: true,
 			lastName: user.getLastName(),
 			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture(),
-		})
+			profilePic: user.getProfilePicture()
+		});
 
-		return { ...existing._doc, ...edited }
-	}
+		return { ...existing._doc, ...edited };
+	};
 }

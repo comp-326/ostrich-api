@@ -1,18 +1,23 @@
-import { ExpressError } from "@base/src/common/errors/ExpressError"
-import createUser from "../entities"
-import { IUser, IUserRepository } from "../interfaces"
+import { ExpressError } from '@base/src/common/errors/ExpressError';
+import createUser from '../entities';
+import { IUser, IUserRepository } from '../interfaces';
 
 export default function makeAddUserUseCase({
-	userDB,
+	userDB
 }: {
-	userDB: IUserRepository
+	userDB: IUserRepository;
 }) {
 	return async function addUserUseCase(userInfo: IUser) {
-		const user = createUser(userInfo)
-		const existing = await userDB.findByEmail(user.getEmail())
+		const user = createUser(userInfo);
+		const existing = await userDB.findByEmail(user.getEmail());
 
 		if (existing) {
-			throw new ExpressError("User email already exist", 400)
+			throw new ExpressError({
+				message: 'User already exists',
+				statusCode: 400,
+				status: 'warning',
+				data: {}
+			});
 		}
 		const created = await userDB.createUser({
 			email: user.getEmail(),
@@ -23,8 +28,8 @@ export default function makeAddUserUseCase({
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
 			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture(),
-		})
-		return created
-	}
+			profilePic: user.getProfilePicture()
+		});
+		return created;
+	};
 }

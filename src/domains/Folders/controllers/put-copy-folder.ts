@@ -1,15 +1,15 @@
-import { IFolderRequest } from "../interfaces"
-import { copyFolderUseCase } from "../use-cases"
+import { IFolderRequest } from '../interfaces';
+import { copyFolderUseCase } from '../use-cases';
 
 export default function makeBuildPutCopyFolderController({
-	copy,
+	copy
 }: {
-	copy: typeof copyFolderUseCase
+	copy: typeof copyFolderUseCase;
 }) {
 	return async function (httpRequest: IFolderRequest) {
-		const { workspaceId, folderId } = httpRequest.params
+		const { workspaceId, folderId } = httpRequest.params;
 
-		const folder = await copy(workspaceId, folderId)
-		return { statusCode: 200, body: { folder } }
-	}
+		const folder = await copy(workspaceId, folderId);
+		return { statusCode: 200, body: { folder } };
+	};
 }

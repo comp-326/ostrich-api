@@ -1,12 +1,12 @@
-import Password from "../utils/Password"
-import UserInfoValidator from "../utils/UserInfoValidator"
-import makeCreateUserEntity from "./user"
+import Password from '../utils/Password';
+import UserInfoValidator from '../utils/UserInfoValidator';
+import makeCreateUserEntity from './user';
 
 const createUser = makeCreateUserEntity({
 	validator: UserInfoValidator,
-	passwordUtil: Password,
-})
+	passwordUtil: Password
+});
 
-export default createUser
+export default createUser;
 
 // export type UserInfoValidator = typeof Validate

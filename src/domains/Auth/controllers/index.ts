@@ -1,18 +1,18 @@
-import { loginUserUseCase, registerUserUseCase } from "../use-cases"
+import { loginUserUseCase, registerUserUseCase } from '../use-cases';
 
-import makeBuildRegisterUserController from "./register-user"
-import makeBuildLoginUserController from "./login-user"
+import makeBuildRegisterUserController from './register-user';
+import makeBuildLoginUserController from './login-user';
 
 const postUser = makeBuildRegisterUserController({
-	create: registerUserUseCase,
-})
-const loginUser = makeBuildLoginUserController({ login: loginUserUseCase })
+	create: registerUserUseCase
+});
+const loginUser = makeBuildLoginUserController({ login: loginUserUseCase });
 
 export default Object.freeze({
 	loginUser,
-	postUser,
-})
+	postUser
+});
 
-export { postUser, loginUser }
+export { postUser, loginUser };
 
-export type UserControllerType = typeof postUser | typeof loginUser
+export type UserControllerType = typeof loginUser | typeof postUser;

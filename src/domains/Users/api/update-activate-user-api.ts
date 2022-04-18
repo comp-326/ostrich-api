@@ -1,13 +1,13 @@
-import authorize from "@base/src/middlewares/Auth/authorize"
-import { Router } from "express"
-import MakeRequestAdapter from "../adapters"
-import { activateAccount } from "../controllers"
-const qRouter = Router()
+import authorize from '@base/src/middlewares/Auth/authorize';
+import { Router } from 'express';
+import MakeRequestAdapter from '../adapters';
+import { activateAccount } from '../controllers';
+const qRouter = Router();
 export async function makeUpdateActivateUserApiCall(app: Router) {
-	app.use("/account/activate", qRouter)
+	app.use('/account/activate', qRouter);
 	qRouter.put(
-		"/:activationToken",
+		'/:activationToken',
 		authorize.loginRequired,
-		MakeRequestAdapter(activateAccount),
-	)
+		MakeRequestAdapter(activateAccount)
+	);
 }
