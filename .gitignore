@@ -1,9 +1,9 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/node,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,yarn
 
 ### Node ###
 # Logs
+.vscode
 logs
 *.log
 npm-debug.log*
@@ -46,6 +46,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+uploads/
+src/public/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -145,3 +147,6 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn
 
 
+## Testing rest clients
+*.rest
+yarn-lock.json
