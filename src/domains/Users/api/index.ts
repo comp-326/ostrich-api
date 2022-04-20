@@ -3,6 +3,7 @@ import { makeQueryIdUserApiCall } from './get-user-by-id-api';
 import { makeQueryEmailUserApiCall } from './get-user-by-email-api';
 import { makeQueryUserApiCall } from './get-user-api';
 import { makeUpdateUserApiCall } from './update-user-api';
+import { makeQueryActivateAccountApiCall } from './post_account_activation_link';
 import { makeQueryGetPasswordResetApiCall } from './post_password_reset_link';
 import { makeUpdateActivateUserApiCall } from './update-activate-user-api';
 import { makeUpdateUserPasswordApiCall } from './update-user-password-reset-api';
@@ -17,5 +18,6 @@ export default Object.freeze({
 	makeDeleteUserApiCall,
 	makeUpdateActivateUserApiCall,
 	makeUpdateUserPasswordApiCall,
-	makeQueryGetPasswordResetApiCall
+	makeQueryGetPasswordResetApiCall,
+	makeQueryActivateAccountApiCall
 });

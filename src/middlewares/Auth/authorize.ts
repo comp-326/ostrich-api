@@ -28,8 +28,7 @@ class AuthMiddleware {
 			return next(error);
 		}
 	};
-	loginRequired = (req: IRequest, res: IResponse, next: INext) => {
-		console.log('Cookies', req.cookies);
+	verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
 		if (!req.cookies) {
 			throw new ExpressError({
 				message: 'Please login to access this page',
@@ -70,44 +69,29 @@ class AuthMiddleware {
 		}
 	};
 
-	verifyJwt = async (req: IRequest, res: Response, next: NextFunction) => {
+	loginRequired = async (req: IRequest, res: Response, next: NextFunction) => {
 		try {
-			const AuthHeader = req.headers['authorization'];
-			if (!AuthHeader) {
-				return res.status(401).json('Please provide an auth token');
-			}
-			const token = AuthHeader.split(' ')[1];
-			if (!token) {
-				return res.status(401).json('Please provide an auth token');
-			}
-			return jwt.verify(token, SECRET_KEY, async (error, payload) => {
-				if (error) {
-					return res.status(401).redirect('/auth/login');
+			this.verifyCookie(req, res, async () => {
+				const user = await this.user.findById(req.user.userId);
+				if (!user.isActive) {
+					throw new ExpressError({
+						message: 'Please activate your account',
+						status: 'warning',
+						statusCode: 401,
+						data: {}
+					});
 				}
-				const decodedPayload = payload as JWTPayloadType;
-				req.user = decodedPayload;
+				const role = await this.role.findById(user.role);
+				const permitted = await role.hasPermission(Permissions.USER);
+				if (!permitted) {
+					return res.sendStatus(403);
+				}
 				return next();
 			});
 		} catch (error) {
 			return next(error);
 		}
 	};
-
-	// loginRequired = async (req: IRequest, res: Response, next: NextFunction) => {
-	// 	try {
-	// 		this.verifyJwt(req, res, async () => {
-	// 			const user = await this.user.findById(req.user.userId);
-	// 			const role = await this.role.findById(user.role);
-	// 			const permitted = await role.hasPermission(Permissions.USER);
-	// 			if (!permitted) {
-	// 				return res.status(403).json({ errorMessage: 'Forbidden' });
-	// 			}
-	// 			return next();
-	// 		});
-	// 	} catch (error) {
-	// 		return next(error);
-	// 	}
-	// };
 	adminRequired = async (req: IRequest, res: Response, next: NextFunction) => {
 		try {
 			this.loginRequired(req, res, async () => {
@@ -115,7 +99,7 @@ class AuthMiddleware {
 				const role = await this.role.findById(user.role);
 				const permitted = await role.hasPermission(Permissions.ADMIN);
 				if (!permitted) {
-					return res.status(403).json({ errorMessage: 'Forbidden' });
+					return res.sendStatus(403);
 				}
 				return next();
 			});

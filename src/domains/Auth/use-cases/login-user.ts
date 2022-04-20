@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { IUserData } from '../../Users/interfaces/IUserData';
 import { IAuthRepository } from '../interfaces';
 
 export default function makeLoginUserByUseCase({
@@ -33,6 +35,14 @@ export default function makeLoginUserByUseCase({
 				statusCode: 404
 			});
 		}
+		if (!existing.isActive) {
+			throw new ExpressError({
+				message: 'User account is not activated',
+				data: {},
+				status: 'warning',
+				statusCode: 403
+			});
+		}
 		const { passwordMatch, user } = await userDB.login(email, password);
 		if (!passwordMatch) {
 			throw new ExpressError({
@@ -42,6 +52,6 @@ export default function makeLoginUserByUseCase({
 				statusCode: 400
 			});
 		}
-		return user;
+		return user as Pick<any,IUserData >;
 	};
 }

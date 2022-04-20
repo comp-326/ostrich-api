@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from '@base/src/common/errors/ExpressError';
 import createUser from '../entities';
 import { IUser, IUserRepository } from '../interfaces';
+import { IUserData } from '../interfaces/IUserData';
 
 export default function makeAddUserUseCase({
 	userDB
@@ -22,14 +24,13 @@ export default function makeAddUserUseCase({
 		const created = await userDB.createUser({
 			email: user.getEmail(),
 			password: user.getPassword(),
-			activationToken: user.getActivationToken(),
 			dateOfBirth: user.getDateOfBirth(),
 			firstName: user.getFirsName(),
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
-			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture()
+			avatar: user.getAvatar()
 		});
-		return created;
+		
+		return created as Pick<any, IUserData>;
 	};
 }

@@ -1,7 +1,7 @@
 import { DB_URL } from '@base/src/config';
 import UserModel from '@base/src/models/Users/UserModel';
 import mongoose from 'mongoose';
-import users from '../../seeds/user';
+import users from '../seeds/user';
 
 beforeAll(async () => {
 	await mongoose.connect(DB_URL);

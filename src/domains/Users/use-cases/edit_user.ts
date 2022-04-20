@@ -34,17 +34,15 @@ export default function makeEditUserUseCase({
 				status: 'warning'
 			});
 		}
-		const user = createUser({ ...existing, ...data });
+		const user = createUser({ ...existing._doc, ...data });
 		const edited = await userDB.updateById(id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
-			activationToken: user.getActivationToken(),
 			dateOfBirth: user.getDateOfBirth(),
 			firstName: user.getFirsName(),
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
-			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture()
+			avatar: user.getAvatar()
 		});
 
 		return { ...existing._doc, ...edited };

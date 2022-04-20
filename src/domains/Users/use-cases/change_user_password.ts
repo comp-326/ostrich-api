@@ -21,6 +21,8 @@ export default function makeEditUserPasswordUseCase({
 		}
 
 		const existing = await userDB.findByEmail(email);
+		console.log('User', existing);
+
 		if (!existing) {
 			throw new ExpressError({
 				message: 'User does not exist',
@@ -33,13 +35,11 @@ export default function makeEditUserPasswordUseCase({
 		const edited = await userDB.updateById(existing._id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
-			activationToken: user.getActivationToken(),
 			dateOfBirth: user.getDateOfBirth(),
 			firstName: user.getFirsName(),
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
-			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture()
+			avatar: user.getAvatar()
 		});
 
 		return { ...existing._doc, ...edited };

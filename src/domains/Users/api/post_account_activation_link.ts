@@ -3,7 +3,7 @@ import MakeRequestAdapter from '../adapters';
 import { postRequestActivation } from '../controllers';
 
 const qRouter = Router();
-export async function makeQueryGetPasswordResetApiCall(app: Router) {
-	app.use('/account/activate/link', qRouter);
+export async function makeQueryActivateAccountApiCall(app: Router) {
+	app.use('/account/activate', qRouter);
 	qRouter.post('/', MakeRequestAdapter(postRequestActivation));
 }
