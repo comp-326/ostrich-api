@@ -16,9 +16,9 @@ export default function makeAuthRequestAdapter(controller: UserControllerType) {
 		};
 		try {
 			const httpResponse: any = await controller(httpRequest);
-			if (httpResponse.body.AuthToken) {
+			if (httpResponse.AuthToken) {
 				return res
-					.cookie('access_token', httpResponse.body.AuthToken, {
+					.cookie('access_token', httpResponse.AuthToken, {
 						httpOnly: true,
 						secure: true,
 						maxAge: 1000 * 60 * 60 * 24 * 7,

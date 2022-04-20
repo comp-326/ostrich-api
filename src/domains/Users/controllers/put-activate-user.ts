@@ -1,5 +1,6 @@
 import { IUserRequest } from '../interfaces';
 import { activateUserUseCase } from '../use-cases';
+import { activateUserTokenDecode } from '../utils/activateUserToken';
 
 export default function makeBuildActivateUserController({
 	update
@@ -7,9 +8,10 @@ export default function makeBuildActivateUserController({
 	update: typeof activateUserUseCase;
 }) {
 	return async function (httpRequest: IUserRequest) {
-		const { id } = httpRequest.params;
+		const { activationToken } = httpRequest.params;
+		const { userId } = activateUserTokenDecode(activationToken);
 
-		const user = await update(id, httpRequest.body);
+		const user = await update(userId);
 		return { statusCode: 200, body: { user } };
 	};
 }

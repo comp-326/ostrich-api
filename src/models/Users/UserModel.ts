@@ -7,13 +7,10 @@ export type UserType = {
 	lastName: string;
 	username: string;
 	email: string;
-	profilePic: { public_id: string; url: string };
+	avatar: string;
 	password: string;
 	role: Record<string, any>;
 	isActive: boolean;
-	firstLogin: boolean;
-	passToken: { value: string; used: boolean };
-	activationToken: { value: string; used: boolean };
 };
 
 export type UserDocumentType = {
@@ -34,16 +31,7 @@ const UserSchema: mongoose.Schema<UserDocumentType> = new mongoose.Schema(
 		lastName: { type: String, required: true },
 		username: { type: String, default: `User${new Date().getTime()}` },
 		email: { type: String, required: true, unique: true },
-		profilePic: {
-			type: {
-				public_id: { type: String },
-				url: { type: String }
-			},
-			default: {
-				public_id: '',
-				url: ''
-			}
-		},
+		avatar:String,
 		password: { type: String, required: true, minlength: 8, select: false },
 		role: {
 			type: mongoose.SchemaTypes.ObjectId,
@@ -55,28 +43,6 @@ const UserSchema: mongoose.Schema<UserDocumentType> = new mongoose.Schema(
 			default: false
 		},
 		firstLogin: { type: Boolean, default: true },
-		passToken: {
-			type: {
-				value: String,
-				used: Boolean,
-				select: false
-			},
-			default: {
-				value: '',
-				used: true
-			}
-		},
-		activationToken: {
-			type: {
-				value: String,
-				used: Boolean,
-				select: false
-			},
-			default: {
-				value: '',
-				used: true
-			}
-		}
 	},
 	{ timestamps: true }
 );

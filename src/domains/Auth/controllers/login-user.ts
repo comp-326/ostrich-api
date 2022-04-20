@@ -16,6 +16,6 @@ export default function makeBuildLoginUserController({
 			email: user.email
 		});
 
-		return { statusCode: 200, body: { user, AuthToken } };
+		return { statusCode: 200, AuthToken,body: { user } };
 	};
 }
