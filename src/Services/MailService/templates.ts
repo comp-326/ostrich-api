@@ -6,11 +6,11 @@
 export const EmailActivationTemp = function ({
 	firstName,
 	lastName,
-	link,
+	link
 }: {
-	firstName: string
-	lastName: string
-	link: string
+	firstName: string;
+	lastName: string;
+	link: string;
 }): string {
 	return `
 <html>
@@ -26,10 +26,6 @@ body{
 <body>
 <h2>Hello ${firstName} ${lastName} and welcome to Ostrich</h2>
 <p>
-Please contact the workspace owner to give you the login link
-<br/>
-Use the details above to login to your account
-<br/>
 Please click the link below to activate your account
 <br/>
 The link will expire after 24hrs
@@ -38,22 +34,22 @@ The link will expire after 24hrs
 </p>
 </body>
 </html>
-`
-}
+`;
+};
 export const PasswordResetTemp = () => `
 <html>
 <head>
 <title>Password reset</title>
 </head>
 </html>
-`
+`;
 export const WorkspaceInviteTemp = () => `
 <html>
 <head>
 <title>Email Invite to workspace</title>
 </head>
 </html>
-`
+`;
 /**
  *
  * @param {{link:string,firstName:string,lastName:string}} param0
@@ -62,11 +58,11 @@ export const WorkspaceInviteTemp = () => `
 export const ForgotPasswordTemp = ({
 	link,
 	firstName,
-	lastName,
+	lastName
 }: {
-	link: string
-	firstName: string
-	lastName: string
+	link: string;
+	firstName: string;
+	lastName: string;
 }): string => `
 <html>
 <head>
@@ -84,7 +80,7 @@ Use the link below to reset your password
 </p>
 </body>
 </html>
-`
+`;
 
 /**
  *
@@ -95,12 +91,12 @@ export const WorkspaceTeamMemberTemp = function ({
 	password,
 	firstName,
 	lastName,
-	email,
+	email
 }: {
-	password: string
-	firstName: string
-	lastName: string
-	email: string
+	password: string;
+	firstName: string;
+	lastName: string;
+	email: string;
 }): string {
 	return `
 <html>
@@ -127,12 +123,12 @@ Use the details above to login to your account
 </p>
 </body>
 </html>
-`
-}
+`;
+};
 export default Object.freeze({
 	WorkspaceTeamMemberTemp,
 	PasswordResetTemp,
 	EmailActivationTemp,
 	WorkspaceInviteTemp,
-	ForgotPasswordTemp,
-})
+	ForgotPasswordTemp
+});

@@ -1,4 +1,5 @@
 import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { generateGravatarUrl } from '@base/src/common/gravatar';
 import { IPassword, IUserValidator } from '../../Users/interfaces';
 import { IUser } from '../interfaces';
 
@@ -14,7 +15,8 @@ export default function makeCreateUserEntity({
 		email,
 		firstName,
 		lastName,
-		password
+		password,
+		avatar
 	}: IUser) {
 		const { isValidEmail, isValidPassword } = validator;
 		const { hashPassword } = passwordUtil;
@@ -42,7 +44,14 @@ export default function makeCreateUserEntity({
 				statusCode: 400
 			});
 		}
-
+		if (!password) {
+			throw new ExpressError({
+				message: 'Password required',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
+		}
 		if (password.length < 40) {
 			const { ok, errors } = isValidPassword({
 				props: { firstName, lastName, password },
@@ -62,17 +71,13 @@ export default function makeCreateUserEntity({
 			}
 			password = await hashPassword(password);
 		}
-		const activationToken = { value: '', used: true };
-		const profile = { public_id: '', url: 'string' };
+		const profile = avatar ? avatar : generateGravatarUrl(email);
 		return Object.freeze({
 			getFirsName: () => firstName,
 			getLastName: () => lastName,
 			getDateOfBirth: () => dateOfBirth,
-			getActivationToken: () => activationToken,
 			getIsActive: () => false,
-			getPasswordToken: () => activationToken,
-			getRole: () => 'User',
-			getProfilePicture: () => profile,
+			getAvatar: () => profile,
 			getPassword: () => password,
 			getEmail: () => email
 		});

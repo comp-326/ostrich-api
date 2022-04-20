@@ -42,17 +42,15 @@ export default function makeEditActivateUserUseCase({
 				data: {}
 			});
 		}
-		const user = createTodo({ ...existing, ...data });
+		const user = createTodo({ ...existing._doc, isActive: true });
 		const edited = await userDB.updateById(id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
-			activationToken: user.getActivationToken(),
 			dateOfBirth: user.getDateOfBirth(),
 			firstName: user.getFirsName(),
 			isActive: true,
 			lastName: user.getLastName(),
-			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture()
+			avatar: user.getAvatar()
 		});
 
 		return { ...existing._doc, ...edited };

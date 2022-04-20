@@ -29,13 +29,11 @@ export default function makeRegisterUserUseCase({
 		const created = await userDB.createUser({
 			email: user.getEmail(),
 			password: user.getPassword(),
-			activationToken: user.getActivationToken(),
 			dateOfBirth: user.getDateOfBirth(),
 			firstName: user.getFirsName(),
 			isActive: user.getIsActive(),
 			lastName: user.getLastName(),
-			passToken: user.getPasswordToken(),
-			profilePic: user.getProfilePicture()
+			avatar: user.getAvatar()
 		});
 		return created;
 	};

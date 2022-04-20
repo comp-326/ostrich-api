@@ -8,9 +8,7 @@ export interface IUser {
 	password: string
 	role?: Record<string, any>
 	isActive: boolean
-	profilePic?: { public_id: string; url: string }
-	passToken: { value: string; used: boolean }
-	activationToken: { value: string; used: boolean }
+	avatar?: string
 }
 
 export interface IAuthRequest {

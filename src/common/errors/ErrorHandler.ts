@@ -5,6 +5,8 @@ import { INext, IResponse, IRequest } from '../types';
 import { ExpressError } from './ExpressError';
 
 export default function (err: any, req: IRequest, res: IResponse, next: INext) {
+	console.log('Error------', err.message);
+
 	if (err instanceof ExpressError) {
 		const error = err as ExpressError;
 

@@ -4,6 +4,6 @@ import { findById } from '../controllers';
 
 const qRouter = Router();
 export async function makeQueryIdUserApiCall(app: Router) {
-	app.use('/single', qRouter);
+	app.use('/profile', qRouter);
 	qRouter.get('/:id', MakeRequestAdapter(findById));
 }
