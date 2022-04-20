@@ -11,7 +11,7 @@ export default function makeBuildActivateUserController({
 		const { activationToken } = httpRequest.params;
 		const { userId } = activateUserTokenDecode(activationToken);
 
-		const user = await update(userId, httpRequest.body);
+		const user = await update(userId);
 		return { statusCode: 200, body: { user } };
 	};
 }

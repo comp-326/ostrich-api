@@ -1,14 +1,14 @@
 import { ExpressError } from '@common/errors/ExpressError';
 import validateMongodbId from '@utils/mongo/ObjectId-validator';
 import createTodo from '../entities';
-import { IUser, IUserRepository } from '../interfaces';
+import { IUserRepository } from '../interfaces';
 
 export default function makeEditActivateUserUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
 }) {
-	return async function editActivateUserUserUseCase(id: string, data: IUser) {
+	return async function editActivateUserUserUseCase(id: string) {
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide an id',
