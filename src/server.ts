@@ -1,10 +1,8 @@
 require('module-alias/register');
-import { PORT, DB_URL } from './config';
+import { PORT } from './config';
 import app from './app';
 import http from 'http';
-import connectDB from './db';
 
-connectDB({ DB_URL });
 const server = http.createServer(app);
 
 server.listen(PORT, () => {
