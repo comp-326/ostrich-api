@@ -1,26 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import validateMongodbId from "@utils/mongo/ObjectId-validator"
-import { ExpressError } from "@base/src/common/errors/ExpressError"
+import validateMongodbId from '@utils/mongo/ObjectId-validator';
+import { ExpressError } from '@base/src/common/errors/ExpressError';
 
 export default function makeJoinUserWorkspaceUsecase({
-	workspaceDB,
+	workspaceDB
 }: {
-	workspaceDB: any
+	workspaceDB: any;
 }) {
 	return async function joinUserToWorkspaceUseCase({
 		userId,
-		workspaceId,
+		workspaceId
 	}: {
-		userId: string
-		workspaceId: string
+		userId: string;
+		workspaceId: string;
 	}) {
 		if (!validateMongodbId(userId)) {
-			throw new ExpressError("Invalid user id", 402)
+			throw new ExpressError({
+				message: 'Invalid user id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
 		if (!validateMongodbId(workspaceId)) {
-			throw new ExpressError("Invalid workspace id", 402)
+			throw new ExpressError({
+				message: 'Invalid workspace id',
+				data: {},
+				status: 'warning',
+				statusCode: 400
+			});
 		}
-		const existing = await workspaceDB.find()
-		return existing
-	}
+		const existing = await workspaceDB.find();
+		return existing;
+	};
 }

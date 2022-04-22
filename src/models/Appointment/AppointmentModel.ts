@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
+import '@root/db';
 /**
  * ************ APPOINTMENT *****************
  */

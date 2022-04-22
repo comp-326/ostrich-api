@@ -1,6 +1,6 @@
 import { ExpressError } from '@common/errors/ExpressError';
 import validateMongodbId from '@utils/mongo/ObjectId-validator';
-import createTodo from '../entities';
+import createUser from '../entities';
 import { IUserRepository } from '../interfaces';
 
 export default function makeEditActivateUserUseCase({
@@ -42,7 +42,7 @@ export default function makeEditActivateUserUseCase({
 				data: {}
 			});
 		}
-		const user = createTodo({ ...existing._doc, isActive: true });
+		const user = createUser({ ...existing._doc, isActive: true });
 		const edited = await userDB.updateById(id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
