@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
-
+import '@root/db';
 export type FolderType = {
 	workspace: Record<string, any>;
 	name: string;
