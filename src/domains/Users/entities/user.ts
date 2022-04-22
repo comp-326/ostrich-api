@@ -70,12 +70,15 @@ export default function makeCreateUserEntity({
 				});
 			}
 		}
-		if (password && password.length < 30)
+		if (password && password.length < 30) {
 			hashPassword(password)
-				.then(res => (newPassword = res))
+				.then(res => {
+					newPassword = res;
+				})
 				.catch(err => {
 					console.log(err.message);
 				});
+		}
 
 		const profilePic = avatar ? avatar : generateGravatarUrl(email);
 		return Object.freeze({

@@ -2,7 +2,7 @@ import { mailTransport } from '@base/src/Services/MailService';
 import 'reflect-metadata';
 import { IUserRequest } from '../interfaces';
 import { requestAccountActivation } from '../use-cases';
-import sendAccountActivationLink from '../utils/mail/sendAccountActivationLink';
+import UserAccountMailer from '../utils/mail/UserAccountMailer';
 
 export default function makeBuildPostRequestAccountActivationController({
 	requestActivation
@@ -14,9 +14,9 @@ export default function makeBuildPostRequestAccountActivationController({
 	) {
 		const user = await requestActivation(httpRequest.body.email);
 		if (user) {
-			const sendLink = await sendAccountActivationLink({
+			const sendLink = await UserAccountMailer.sendEmailActivationLink({
 				mailer: mailTransport
-			})(user.email, user.firstName, user.lastName, user._id);
+			})({ ...user });
 			if (sendLink)
 				return {
 					statusCode: 200,

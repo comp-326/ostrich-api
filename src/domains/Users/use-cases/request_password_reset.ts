@@ -1,5 +1,7 @@
 import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { mailTransport } from '@base/src/Services/MailService';
 import { IUserRepository } from '../interfaces';
+import UserAccountMailer from '../utils/mail/UserAccountMailer';
 
 export default function makeRequestPasswordReset({
 	userDB
@@ -24,6 +26,12 @@ export default function makeRequestPasswordReset({
 				status: 'warning'
 			});
 		}
+		await UserAccountMailer.sendPasswordResetLink({ mailer: mailTransport })({
+			_id: existing._id,
+			email: existing.email,
+			firstName: existing.firstName,
+			lastName: existing.lastName
+		});
 		return existing;
 	};
 }

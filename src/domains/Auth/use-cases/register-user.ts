@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { mailTransport } from '@base/src/Services/MailService';
+import UserAccountMailer from '../../Users/utils/mail/UserAccountMailer';
 import createUser from '../entities';
 import { IUser, IAuthRepository } from '../interfaces';
 
@@ -35,6 +38,19 @@ export default function makeRegisterUserUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
-		return created;
+		const {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			password: _pass,
+			role: { name },
+			...props
+		} = created._doc;
+
+		await UserAccountMailer.sendEmailActivationLink({ mailer: mailTransport })({
+			_id: created._id,
+			email: created.email,
+			firstName: created.firstName,
+			lastName: created.lastName
+		});
+		return { ...props, role: name };
 	};
 }

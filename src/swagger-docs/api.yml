@@ -74,7 +74,8 @@ paths:
   /auth/logout:
     post:
       description: Logout User
-      tags: Auth
+      tags: 
+        - Auth
       responses:
         "200":
           description: "Ok"
