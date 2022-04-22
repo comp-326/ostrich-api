@@ -1,5 +1,5 @@
 require('module-alias/register');
-import { PORT} from './config';
+import { PORT } from './config';
 import app from './app';
 import http from 'http';
 
