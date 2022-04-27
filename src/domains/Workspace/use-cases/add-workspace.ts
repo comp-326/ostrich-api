@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import createWorkspace from "../entities"
-import { IWorkspaceEntity, IWorkspaceRepository } from "../interfaces"
+import createWorkspace from '../entities';
+import { IWorkspaceEntity, IWorkspaceRepository } from '../interfaces';
 
 export default function makeAddUserUseCase({
 	workspaceDB,
@@ -8,7 +8,7 @@ export default function makeAddUserUseCase({
 	workspaceDB: IWorkspaceRepository
 }) {
 	return async function addWorkspaceUseCase(workspaceInfo: IWorkspaceEntity) {
-		const workspace = createWorkspace(workspaceInfo)
+		const workspace = createWorkspace(workspaceInfo);
 		// const existing = await workspaceDB.findByName(workspace.getName())
 
 		const newWorkspace = await workspaceDB.create({
@@ -16,7 +16,7 @@ export default function makeAddUserUseCase({
 			owner: workspace.getOwner(),
 			type: workspace.getType(),
 			logo: workspace.getLogo(),
-		})
-		return newWorkspace
-	}
+		});
+		return newWorkspace;
+	};
 }

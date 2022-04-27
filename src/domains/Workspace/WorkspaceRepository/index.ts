@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { UserDocumentType } from "@base/src/models/Users/UserModel"
-import WorkspaceModel from "@models/Workspace/WorkspaceModel"
-import { IWorkspaceEntity, IWorkspaceRepository } from "../interfaces"
+import { UserDocumentType } from '@base/src/models/Users/UserModel';
+import WorkspaceModel from '@models/Workspace/WorkspaceModel';
+import { IWorkspaceEntity, IWorkspaceRepository } from '../interfaces';
 
 class WorkspaceRepository implements IWorkspaceRepository {
 	create = async (workspace: IWorkspaceEntity) => {
 		const newWorkspace = await WorkspaceModel.create({
 			...workspace,
 			$push: { members: workspace.owner, admins: workspace.owner },
-		})
-		return newWorkspace
-	}
+		});
+		return newWorkspace;
+	};
 	findById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id)
-		return workspace
-	}
+		const workspace = await WorkspaceModel.findById(id);
+		return workspace;
+	};
 	findUserWorkspaces = async (userId: string) => {
 		const workspaces = await WorkspaceModel.find({
 			$in: { members: [userId] },
 		})
-			.populate("members", "firstName lastName -_id email")
-			.populate("admins", "firstName lastName -_id email")
-			.populate("creators", "firstName lastName -_id email")
-			.populate("creatorLites", "firstName lastName -_id email")
+			.populate('members', 'firstName lastName -_id email')
+			.populate('admins', 'firstName lastName -_id email')
+			.populate('creators', 'firstName lastName -_id email')
+			.populate('creatorLites', 'firstName lastName -_id email');
 
-		return workspaces
-	}
+		return workspaces;
+	};
 	find = async (
 		limit: number,
 		offset: number,
@@ -38,29 +38,29 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			{
 				id: 1,
 				name: 1,
-				date_created: { $month: "$createdAt" },
-				number_of_members: { $size: "$members" },
-				number_of_creators: { $size: "$creators" },
+				date_created: { $month: '$createdAt' },
+				number_of_members: { $size: '$members' },
+				number_of_creators: { $size: '$creators' },
 				number_of_creator_lites: {
-					$size: "$creatorLites",
+					$size: '$creatorLites',
 				},
-				year_created: { $year: "$createdAt" },
+				year_created: { $year: '$createdAt' },
 			},
-			{ count: { $size: "allDocuments" } },
+			{ count: { $size: 'allDocuments' } },
 		)
 			.skip((Number(offset) - 1) * Number(limit))
 			.limit(Number(limit))
-			.populate("members", "firstName lastName -_id email")
-			.populate("admins", "firstName lastName -_id email")
-			.populate("creators", "firstName lastName -_id email")
-			.populate("creatorLites", "firstName lastName -_id email")
+			.populate('members', 'firstName lastName -_id email')
+			.populate('admins', 'firstName lastName -_id email')
+			.populate('creators', 'firstName lastName -_id email')
+			.populate('creatorLites', 'firstName lastName -_id email');
 
-		return workspaces
-	}
+		return workspaces;
+	};
 	delete = async (id: string) => {
-		const workspace = await WorkspaceModel.findByIdAndDelete(id)
-		return { deleted: true, workspace }
-	}
+		const workspace = await WorkspaceModel.findByIdAndDelete(id);
+		return { deleted: true, workspace };
+	};
 	updateById = async (id: string, data: IWorkspaceEntity) => {
 		const workspace = await WorkspaceModel.findByIdAndUpdate(
 			id,
@@ -68,30 +68,30 @@ class WorkspaceRepository implements IWorkspaceRepository {
 				...data,
 			},
 			{ new: true },
-		)
-		return workspace
-	}
+		);
+		return workspace;
+	};
 	changeUserRole = async (
 		userId: string,
 		workspaceId: string,
 		role: string,
 	) => {
 		const workspace = await WorkspaceModel.findById(workspaceId)!
-			.populate("members")
-			.populate("admins")
-			.populate("creators")
-			.populate("creatorLites")
-		if (role.toLowerCase() === "admin") {
+			.populate('members')
+			.populate('admins')
+			.populate('creators')
+			.populate('creatorLites');
+		if (role.toLowerCase() === 'admin') {
 			if (
 				workspace!.creatorLites.some(function (
 					user: Partial<UserDocumentType>,
 				) {
-					return user._id === userId
+					return user._id === userId;
 				})
 			) {
 				await workspace!.updateOne({
 					$pull: { creatorLites: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.creators.some(
@@ -100,16 +100,16 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			) {
 				await workspace!.updateOne({
 					$pull: { creators: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.admins.some(
 					(user: Partial<UserDocumentType>) => user._id === userId,
 				)
 			)
-				await workspace!.updateOne({ $push: { admins: userId } })
+				await workspace!.updateOne({ $push: { admins: userId } });
 		}
-		if (role.toLowerCase() === "creator") {
+		if (role.toLowerCase() === 'creator') {
 			if (
 				workspace!.admins.some(
 					(user: Partial<UserDocumentType>) => user._id === userId,
@@ -117,7 +117,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			) {
 				await workspace!.updateOne({
 					$pull: { creatorLites: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.creatorLites.some(
@@ -126,16 +126,16 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			) {
 				await workspace!.updateOne({
 					$pull: { creatorLites: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.creators.some(
 					(user: Partial<UserDocumentType>) => user._id === userId,
 				)
 			)
-				await workspace!.updateOne({ $push: { creators: userId } })
+				await workspace!.updateOne({ $push: { creators: userId } });
 		}
-		if (role.toLowerCase() === "creator_lite") {
+		if (role.toLowerCase() === 'creator_lite') {
 			if (
 				workspace!.admins.some(
 					(user: Partial<UserDocumentType>) => user._id === userId,
@@ -143,7 +143,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			) {
 				await workspace!.updateOne({
 					$pull: { admins: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.creators.some(
@@ -152,17 +152,17 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			) {
 				await workspace!.updateOne({
 					$pull: { creators: { $in: [userId] } },
-				})
+				});
 			}
 			if (
 				workspace!.creatorLites.some(
 					(user: Partial<UserDocumentType>) => user._id === userId,
 				)
 			)
-				await workspace!.updateOne({ $push: { admins: userId } })
+				await workspace!.updateOne({ $push: { admins: userId } });
 		}
-		return workspace
-	}
+		return workspace;
+	};
 }
 
-export default new WorkspaceRepository()
+export default new WorkspaceRepository();

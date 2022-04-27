@@ -1,7 +1,7 @@
-import { JWTPayloadType } from '@base/src/common/types';
+import { JWTPayloadType } from '@ostrich-common/types';
 import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
-import config from '@root/config';
+import config from '@ostrich-config';
 
 const { ENC_KEY, SECRET_KEY } = config;
 

@@ -1,9 +1,9 @@
-import { v2 as cloudinary } from "cloudinary"
+import { v2 as cloudinary } from 'cloudinary';
 import {
 	CLOUDINARY_NAME,
 	CLOUDINARY_API_KEY,
 	CLOUDINARY_SECRET,
-} from "@root/config"
+} from '@ostrich-config';
 
 
 export default cloudinary.config({
@@ -11,4 +11,4 @@ export default cloudinary.config({
 	api_key: CLOUDINARY_API_KEY,
 	api_secret: CLOUDINARY_SECRET,
 	secure: true,
-})
+});

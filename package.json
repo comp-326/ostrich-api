@@ -9,20 +9,9 @@
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "env": "ts-node ./src/env.ts",
     "dev": "npm run dev:start",
-    "lint": "eslint  --ext .ts --fix",
+    "lint": "eslint ./src  --ext .ts --fix",
     "build": "gulp buildTS",
     "test": "NODE_ENV=testing jest"
-  },
-  "_moduleAliases": {
-    "@base": "./",
-    "@root": "./src",
-    "@setup": "./src/setup",
-    "@domains": "./src/domains",
-    "@models": "./src/models",
-    "@common": "./src/common",
-    "@utils": "./src/utils",
-    "@services": "./src/Services",
-    "@middlewares": "./src/middlewares"
   },
   "keywords": [],
   "author": "Orinda Felix Ochieng <forinda82@gmail.com>",
@@ -36,13 +25,13 @@
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-validator": "^6.14.0",
     "express-winston": "^4.2.0",
     "helmet": "^5.0.2",
     "html-to-text": "^8.1.0",
     "jsonwebtoken": "^8.5.1",
-    "module-alias": "^2.2.2",
     "mongoose": "^6.2.9",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
@@ -91,7 +80,8 @@
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "typescript-transform-paths": "^3.3.1"
   },
   "directories": {
     "doc": "docs"

@@ -1,6 +1,5 @@
-require('module-alias/register');
-import { PORT } from './config';
-import app from './app';
+import { PORT } from '@ostrich-config';
+import app from '@ostrich-base/v1';
 import http from 'http';
 
 const server = http.createServer(app);

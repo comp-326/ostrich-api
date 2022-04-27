@@ -1,4 +1,4 @@
-import { IUser } from '@base/src/domains/Auth/interfaces';
+import { IUser } from '@ostrich-domains/Auth/interfaces';
 
 const users: IUser[] = [
 	{

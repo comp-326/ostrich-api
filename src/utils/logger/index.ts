@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IResponse,IRequest } from "@root/common/types"
-import winston from "winston"
+import { IResponse,IRequest } from '@ostrich-common/types';
+import winston from 'winston';
 /**
  * ----------------------------  LOG HTTP ERROR REQUESTS OPTIONS -------------------------
  */
@@ -12,7 +12,7 @@ export const HTTPerrorLogOptions = {
 		winston.format.json(),
 	),
 
-}
+};
 /**
  * ---------------------------- LOG HTTP REQUESTS -----------------------------------
  */
@@ -23,11 +23,11 @@ export const HTTPLogOptions = {
 		winston.format.json(),
 	),
 	meta: true,
-	msg: "HTTP {{req.method}} {{req.url}}",
+	msg: 'HTTP {{req.method}} {{req.url}}',
 	expressFormat: true,
 	colorize: false,
 	// eslint-disable-next-line no-unused-vars
 	ignoreRoute: function (_req: IRequest, _res: IResponse) {
-		return false
+		return false;
 	},
-}
+};

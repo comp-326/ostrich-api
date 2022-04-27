@@ -1,5 +1,22 @@
 {
+  "compileOnSave": false,
+  "ts-node": {
+    "transpileOnly": true,
+    "require": ["typescript-transform-paths/register"]
+  },
   "compilerOptions": {
+     "types": ["node", "jest"],
+     "plugins": [
+       {
+         "transform": "typescript-transform-paths",
+         "exclude": ["**/node_modules/**"]
+       },
+       {
+         "transform": "typescript-transform-paths",
+         "afterDeclarations": true,
+         "exclude": ["**/node_modules/**"]
+       }
+     ],
     "target": "es2017",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
@@ -24,15 +41,20 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@base/*" : ["./*"],
-      "@root/*": ["./src/*"],
-      "@setup": ["./src/setup"],
-      "@domains/*": ["./src/domains/*"],
-      "@models/*": ["./src/models/*"],
-      "@common/*": ["./src/common/*"],
-      "@services/*": ["./src/Services/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@middlewares/*": ["./src/middlewares/*"]
+      "@ostrich/*" : ["./*"],
+      "@ostrich-base/*": ["./src/*"],
+      "@ostrich-config": ["./src/config"],
+      "@ostrich-api/*": ["./src/api/*"],
+      "@ostrich-setup": ["./src/setup"],
+      "@ostrich-domains/*": ["./src/domains/*"],
+      "@ostrich-models/*": ["./src/models/*"],
+      "@ostrich-common/*": ["./src/common/*"],
+      "@ostrich-services/*": ["./src/Services/*"],
+      "@ostrich-helpers/*": ["./src/helpers/*"],
+      "@ostrich-utils/*": ["./src/utils/*"],
+      "@ostrich-constants/*": ["./src/constants/*"],
+      "@ostrich-db": ["./src/db"],
+      "@ostrich-middlewares/*": ["./src/middlewares/*"]
     }
   },
   "exclude": ["node_modules"],

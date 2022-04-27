@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { SECRET_KEY } from '@root/config';
+import { SECRET_KEY } from '@ostrich-config';
 class GenerateJWTTokens {
 	generatePasswordResetToken = function ({ userId }: { userId: string }) {
 		return function generate(duration = '') {

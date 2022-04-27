@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
-import '@root/db';
+import '@ostrich-db';
 export type ServiceType = {
 	category: string;
 	feeRate: number | string;

@@ -1,5 +1,5 @@
-import makeCreateWorkspaceEntity from "./workspace"
+import makeCreateWorkspaceEntity from './workspace';
 
-const createWorkspace = makeCreateWorkspaceEntity()
+const createWorkspace = makeCreateWorkspaceEntity();
 
-export default createWorkspace
+export default createWorkspace;

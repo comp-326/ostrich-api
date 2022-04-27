@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { INext, IRequest, IResponse } from "@common/types"
-import { WorkspaceControllerType } from "../controller"
+import { INext, IRequest, IResponse } from '@common/types';
+import { WorkspaceControllerType } from '../controller';
 
 export default function MakeRequestAdapter(
 	controller: WorkspaceControllerType,
@@ -9,16 +9,16 @@ export default function MakeRequestAdapter(
 		controller(req)
 			.then((httpResponse) => {
 				if (req.file || req.files) {
-					return next()
+					return next();
 				}
 				return res
 					.status(httpResponse.statusCode)
-					.json({ ...httpResponse.body })
+					.json({ ...httpResponse.body });
 			})
 			.catch((err) => {
-				return next(err)
-			})
+				return next(err);
+			});
 		// res.type("json")
 		// return res.status(httpResponse.statusCode).json(httpResponse.body)
-	}
+	};
 }

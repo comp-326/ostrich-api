@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
-import '@root/db';
-import Permissions from '@root/constants/permissions';
+import '@ostrich-db';
+import Permissions from '@ostrich-constants/permissions';
 
 export type RoleType = {
 	name: string;

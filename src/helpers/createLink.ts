@@ -1,4 +1,4 @@
-import { PORT } from '@root/config';
+import { PORT } from '@ostrich-config';
 
 
 /**
