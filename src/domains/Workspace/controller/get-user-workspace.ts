@@ -1,5 +1,5 @@
-import { listUserWorkspaces } from '../use-cases';
-import { IRequest } from '@common/types';
+import { listUserWorkspaces } from '@ostrich-domains/Workspace/use-cases';
+import { IRequest } from '@ostrich-common/types';
 
 export default function makeBuildGetUserWorkspacesController({
 	get

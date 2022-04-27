@@ -1,5 +1,5 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import { mailTransport } from '@base/src/Services/MailService';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { mailTransport } from '@ostrich-services/MailService';
 import { IUserRepository } from '../interfaces';
 import UserAccountMailer from '../utils/mail/UserAccountMailer';
 

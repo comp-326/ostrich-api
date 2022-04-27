@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import AvailabilityModel from '@base/src/models/Availability/AvailabilityModel';
+import AvailabilityModel from '@ostrich-models/Availability/AvailabilityModel';
 import { IAvailability, IAvailabilityRepository } from '../interfaces';
 
 class AvailabilityRepository implements IAvailabilityRepository {

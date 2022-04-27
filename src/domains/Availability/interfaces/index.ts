@@ -3,7 +3,7 @@ import {
 	dayInitialType,
 	dayType,
 	dayValueType,
-} from '@base/src/models/Availability/AvailabilityModel';
+} from '@ostrich-models/Availability/AvailabilityModel';
 
 export interface IAvailability {
 	startTime: string

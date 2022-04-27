@@ -1,4 +1,4 @@
-import { mailTransport } from '@base/src/Services/MailService';
+import { mailTransport } from '@ostrich-services/MailService';
 import 'reflect-metadata';
 import { IUserRequest } from '../interfaces';
 import { requestAccountActivation } from '../use-cases';

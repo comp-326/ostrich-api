@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IWorkspaceEntity, IWorkspaceRepository } from '../interfaces';
-import { ExpressError } from '@common/errors/ExpressError';
-import createWorkspace from '../entities';
-import validateMongodbId from '@utils/mongo/ObjectId-validator';
+import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import createWorkspace from '@ostrich-domains/Workspace/entities';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
 
 export default function makeEditWorkspaceUseCase({
 	workspaceDB
@@ -29,7 +29,7 @@ export default function makeEditWorkspaceUseCase({
 		const existing = await workspaceDB.findById(id);
 		if (!existing) {
 			throw new ExpressError({
-				message: 'Mesage does not exist',
+				message: 'Message does not exist',
 				data: {},
 				status: 'warning',
 				statusCode: 400

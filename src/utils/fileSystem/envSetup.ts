@@ -26,7 +26,7 @@ function setEnvironmentVariables(envFilePath: string) {
 			}
 		});
 
-	data['PORT'] = '4001';
+	data['PORT'] = '6200';
 	data['SECRET_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['REFRESH_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['ENC_KEY'] = crypto.randomBytes(64).toString('hex');

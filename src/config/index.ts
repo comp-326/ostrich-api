@@ -1,4 +1,4 @@
-import config from '@base/src/node.config';
+import config from '@ostrich-base/node.config';
 
 const {
 	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY, BASE_URL, ENC_KEY },

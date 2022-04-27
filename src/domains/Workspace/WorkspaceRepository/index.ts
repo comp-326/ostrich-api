@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { UserDocumentType } from '@base/src/models/Users/UserModel';
-import WorkspaceModel from '@models/Workspace/WorkspaceModel';
-import { IWorkspaceEntity, IWorkspaceRepository } from '../interfaces';
+import { UserDocumentType } from '@ostrich-models/Users/UserModel';
+import WorkspaceModel from '@ostrich-models/Workspace/WorkspaceModel';
+import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
 
 class WorkspaceRepository implements IWorkspaceRepository {
 	create = async (workspace: IWorkspaceEntity) => {

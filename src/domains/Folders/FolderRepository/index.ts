@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import FolderModel from '@base/src/models/Folder/FolderModel';
-import WorkspaceModel from '@base/src/models/Workspace/WorkspaceModel';
+import FolderModel from '@ostrich-models/Folder/FolderModel';
+import WorkspaceModel from '@ostrich-models/Workspace/WorkspaceModel';
 import { IFolder, IFolderRepository } from '../interfaces';
 
 class FolderRepository implements IFolderRepository {

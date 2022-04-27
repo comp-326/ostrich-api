@@ -1,7 +1,7 @@
-import authorize from '@base/src/middlewares/Auth/authorize';
+import authorize from '@ostrich-middlewares/Auth/authorize';
 import { Router } from 'express';
-import MakeRequestAdapter from '../Adapter';
-import { getWorkspaces } from '../controller';
+import MakeRequestAdapter from '@ostrich-domains/Workspace/Adapter';
+import { getWorkspaces } from '@ostrich-domains/Workspace/controller';
 const qRouter = Router();
 export async function makeQueryAllWorkspaceApiCall(app: Router) {
 	app.use('/', qRouter);

@@ -4,7 +4,7 @@ import deleteFile from '@ostrich-utils/fileSystem/deleteFile';
 import dirExistSync from '@ostrich-utils/fileSystem/dirExist';
 import dirExistAsync from '@ostrich-utils/fileSystem/dirExistAsync';
 
-// import { NODE_ENV } from "@root/config"
+// import { NODE_ENV } from "@ostrich-config"
 import setEnvironmentVariables from '@ostrich-utils/fileSystem/envSetup';
 
 export default Object.freeze({

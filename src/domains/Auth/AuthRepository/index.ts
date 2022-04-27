@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import RoleModel from '@base/src/models/Roles/RoleModel';
-import UserModel from '@base/src/models/Users/UserModel';
+import RoleModel from '@ostrich-models/Roles/RoleModel';
+import UserModel from '@ostrich-models/Users/UserModel';
 // import Password from "../../Users/utils/Password"
 import { IUser, IAuthRepository } from '../interfaces';
 

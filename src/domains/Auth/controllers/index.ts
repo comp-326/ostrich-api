@@ -1,7 +1,7 @@
-import { loginUserUseCase, registerUserUseCase } from '../use-cases';
+import { loginUserUseCase, registerUserUseCase } from '@ostrich-domains/Auth/use-cases';
 
-import makeBuildRegisterUserController from './register-user';
-import makeBuildLoginUserController from './login-user';
+import makeBuildRegisterUserController from '@ostrich-domains/Auth/controllers/register-user';
+import makeBuildLoginUserController from '@ostrich-domains/Auth/controllers/login-user';
 
 const postUser = makeBuildRegisterUserController({
 	create: registerUserUseCase

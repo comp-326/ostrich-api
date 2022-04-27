@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import createWorkspace from '../entities';
-import { IWorkspaceEntity, IWorkspaceRepository } from '../interfaces';
+import createWorkspace from '@ostrich-domains/Workspace/entities';
+import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
 
 export default function makeAddUserUseCase({
 	workspaceDB,

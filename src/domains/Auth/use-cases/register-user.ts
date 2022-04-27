@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import { mailTransport } from '@base/src/Services/MailService';
-import UserAccountMailer from '../../Users/utils/mail/UserAccountMailer';
-import createUser from '../entities';
-import { IUser, IAuthRepository } from '../interfaces';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { mailTransport } from '@ostrich-services/MailService';
+import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
+import createUser from '@ostrich-domains/Auth/entities';
+import { IUser, IAuthRepository } from '@ostrich-domains/Auth/interfaces';
 
 export default function makeRegisterUserUseCase({
 	userDB

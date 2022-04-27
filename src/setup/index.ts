@@ -1,10 +1,10 @@
 import compression from 'compression';
-import v1 from '@ostrich-api/v1';
+// import v1 from '@ostrich-api/v1';
 import shouldCompress from '@ostrich-utils/compression';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import cookierParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import expressWinston from 'express-winston';
 import { HTTPerrorLogOptions, HTTPLogOptions } from '@ostrich-utils/logger';
 import ErrorHandler from '@ostrich-common/errors/ErrorHandler';
@@ -15,11 +15,14 @@ export default function ({ app }: { app: Application }) {
 	app.use(morgan('dev'));
 	app.use(compression({ filter: shouldCompress }));
 	app.use(helmet());
-	app.use(cookierParser());
+	app.use(cookieParser());
 	app.use(expressWinston.logger(HTTPLogOptions));
 	app.use(expressWinston.errorLogger(HTTPerrorLogOptions));
 
-	app.use('/api/v1', v1());
+	// app.use('/api/v1', v1());
+	app.get('/',(req,res)=>{
+		res.status(200).json('Working');
+	});
 
 	/* Error handler*/
 	app.use(ErrorHandler);

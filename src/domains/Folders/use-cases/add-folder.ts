@@ -1,6 +1,6 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import WorkspaceModel from '@base/src/models/Workspace/WorkspaceModel';
-import validateMongodbId from '@base/src/utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import WorkspaceModel from '@ostrich-models/Workspace/WorkspaceModel';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
 import createFolder from '../entities';
 import { IFolder, IFolderRepository } from '../interfaces';
 

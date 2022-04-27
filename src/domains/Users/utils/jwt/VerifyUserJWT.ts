@@ -1,6 +1,6 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import { JWTPayloadType } from '@base/src/common/types';
-import { SECRET_KEY } from '@base/src/config';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { JWTPayloadType } from '@ostrich-common/types';
+import { SECRET_KEY } from '@ostrich-config';
 import jwt from 'jsonwebtoken';
 class VerifyUserJWT {
 	verifyPasswordToken = async (token: string) => {

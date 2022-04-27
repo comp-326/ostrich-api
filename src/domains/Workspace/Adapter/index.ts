@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { INext, IRequest, IResponse } from '@common/types';
-import { WorkspaceControllerType } from '../controller';
+import { INext, IRequest, IResponse } from '@ostrich-common/types';
+import { WorkspaceControllerType } from '@ostrich-domains/Workspace/controller';
 
 export default function MakeRequestAdapter(
 	controller: WorkspaceControllerType,

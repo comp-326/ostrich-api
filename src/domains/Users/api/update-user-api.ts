@@ -1,5 +1,5 @@
-import authorize from '@base/src/middlewares/Auth/authorize';
-import uploader from '@base/src/uploader';
+import authorize from '@ostrich-middlewares/Auth/authorize';
+import uploader from '@ostrich-base/uploader';
 import { Router } from 'express';
 import MakeRequestAdapter from '../adapters';
 import { putUser } from '../controllers';

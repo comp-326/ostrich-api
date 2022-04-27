@@ -1,6 +1,6 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import { IPassword, IUser, IUserValidator } from '../interfaces';
-import { generateGravatarUrl } from '@common/gravatar';
+import { generateGravatarUrl } from '@ostrich-common/gravatar';
 
 export default function makeCreateUserEntity({
 	validator,

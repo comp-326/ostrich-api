@@ -1,12 +1,12 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import { EMAIL_ACCOUNT } from '@base/src/config';
-import createLinks from '@base/src/helpers/createLinks';
-import tokenGenerator from '@base/src/helpers/tokenGenerator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { EMAIL_ACCOUNT } from '@ostrich-config';
+import createLinks from '@ostrich-helpers/createLinks';
+import tokenGenerator from '@ostrich-helpers/tokenGenerator';
 import {
 	EmailActivationTemp,
 	ForgotPasswordTemp
-} from '@base/src/Services/MailService/templates';
-import MailerType from '@base/src/Services/MailService/transport';
+} from '@ostrich-services/MailService/templates';
+import MailerType from '@ostrich-services/MailService/transport';
 
 class Accountmailer {
 	sendPasswordResetLink = ({ mailer }: { mailer: typeof MailerType }) => {

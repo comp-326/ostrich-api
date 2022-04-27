@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import createUser from '../entities';
 import { IUser, IUserRepository } from '../interfaces';
 import VerifyUserJWT from '../utils/jwt/VerifyUserJWT';

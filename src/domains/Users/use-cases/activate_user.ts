@@ -1,5 +1,5 @@
-import { ExpressError } from '@common/errors/ExpressError';
-import validateMongodbId from '@utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
 import createUser from '../entities';
 import { IUserRepository } from '../interfaces';
 

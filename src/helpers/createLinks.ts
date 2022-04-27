@@ -1,5 +1,5 @@
 import { BASE_URL, PORT } from '../config';
-import { NODE_ENV } from '@root/config';
+import { NODE_ENV } from '@ostrich-config';
 
 /**
  *

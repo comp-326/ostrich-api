@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import MakeRequestAdapter from '../adapters';
-import { postUser } from '../controllers';
+import MakeRequestAdapter from '@ostrich-domains/Auth/adapters';
+import { postUser } from '@ostrich-domains/Auth/controllers';
 const qRouter = Router();
 export async function makeQueryRegisterApiCall(app: Router) {
 	app.use('/register', qRouter);

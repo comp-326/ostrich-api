@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAuthRequest } from '../interfaces';
-import { registerUserUseCase } from '../use-cases';
+import { IAuthRequest } from '@ostrich-domains/Auth/interfaces';
+import { registerUserUseCase } from '@ostrich-domains/Auth/use-cases';
 
 export default function makeBuildRegisterUserController({
 	create

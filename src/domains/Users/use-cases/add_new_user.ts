@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import createUser from '../entities';
 import { IUser, IUserRepository } from '../interfaces';
 import { IUserData } from '../interfaces/IUserData';

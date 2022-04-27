@@ -1,6 +1,6 @@
-import TokenGEN from '@base/src/helpers/TokenGEN';
-import { IAuthRequest } from '../interfaces';
-import { loginUserUseCase } from '../use-cases';
+import TokenGEN from '@ostrich-helpers/tokenGEN';
+import { IAuthRequest } from '@ostrich-domains/Auth/interfaces';
+import { loginUserUseCase } from '@ostrich-domains/Auth/use-cases';
 
 export default function makeBuildLoginUserController({
 	login

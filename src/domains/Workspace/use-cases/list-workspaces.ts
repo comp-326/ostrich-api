@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@common/errors/ExpressError';
-import { IWorkspaceRepository } from '../interfaces';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
 export default function makeListWorkspaceUseCase({
 	workspaceDB
 }: {

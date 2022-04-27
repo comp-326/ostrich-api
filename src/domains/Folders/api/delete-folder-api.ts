@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import MakeRequestAdapter from '../adapters';
 import { deleteFolder } from '../controllers';
-import authorize from '@base/src/middlewares/Auth/authorize';
+import authorize from '@ostrich-middlewares/Auth/authorize';
 
 const qRouter = Router();
 export async function makeQueryDeleteFolderApiCall(app: Router) {
