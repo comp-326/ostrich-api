@@ -1,7 +1,6 @@
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import { mailTransport } from '@ostrich-services/MailService';
-import { IUserRepository } from '../interfaces';
-import UserAccountMailer from '../utils/mail/UserAccountMailer';
+import { IUserRepository } from '@ostrich-domains/Users/interfaces';
+import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
 
 export default function makeRequestPasswordReset({
 	userDB
@@ -26,7 +25,7 @@ export default function makeRequestPasswordReset({
 				status: 'warning'
 			});
 		}
-		await UserAccountMailer.sendPasswordResetLink({ mailer: mailTransport })({
+		await UserAccountMailer.sendPasswordResetLink()({
 			_id: existing._id,
 			email: existing.email,
 			firstName: existing.firstName,

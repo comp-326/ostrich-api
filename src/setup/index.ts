@@ -1,5 +1,5 @@
 import compression from 'compression';
-// import v1 from '@ostrich-api/v1';
+import v1 from '@ostrich-api/v1';
 import shouldCompress from '@ostrich-utils/compression';
 import express, { Application } from 'express';
 import morgan from 'morgan';
@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import expressWinston from 'express-winston';
 import { HTTPerrorLogOptions, HTTPLogOptions } from '@ostrich-utils/logger';
 import ErrorHandler from '@ostrich-common/errors/ErrorHandler';
+import pages from '@ostrich-base/setup/pages';
 
 export default function ({ app }: { app: Application }) {
 	app.use(express.json({ limit: '30mb' }));
@@ -19,10 +20,8 @@ export default function ({ app }: { app: Application }) {
 	app.use(expressWinston.logger(HTTPLogOptions));
 	app.use(expressWinston.errorLogger(HTTPerrorLogOptions));
 
-	// app.use('/api/v1', v1());
-	app.get('/',(req,res)=>{
-		res.status(200).json('Working');
-	});
+	app.use('/api/v1', v1());
+	pages({app});
 
 	/* Error handler*/
 	app.use(ErrorHandler);

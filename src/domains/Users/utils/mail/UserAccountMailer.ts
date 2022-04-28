@@ -1,15 +1,15 @@
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import { EMAIL_ACCOUNT } from '@ostrich-config';
 import createLinks from '@ostrich-helpers/createLinks';
 import tokenGenerator from '@ostrich-helpers/tokenGenerator';
 import {
-	EmailActivationTemp,
-	ForgotPasswordTemp
-} from '@ostrich-services/MailService/templates';
-import MailerType from '@ostrich-services/MailService/transport';
+	accountActivationEmailTemplate,
+	passwordResetEmailTemplate
+} from '@ostrich-services/MailService';
+import { mailConfig } from '@ostrich/src/config';
+import { OstrichMailer } from '@ostrich/src/Services/MailService';
 
 class Accountmailer {
-	sendPasswordResetLink = ({ mailer }: { mailer: typeof MailerType }) => {
+	sendPasswordResetLink = () => {
 		return async function ({
 			firstName,
 			lastName,
@@ -27,16 +27,16 @@ class Accountmailer {
 			);
 
 			const link = createLinks.createForgotPasswordLink(token);
-			const template = ForgotPasswordTemp({
+			const template = passwordResetEmailTemplate({
 				firstName,
 				lastName,
 				link
 			});
 
 			try {
-				const res = await mailer.sendMail({
+				const res = await OstrichMailer.sendMail({
 					to: email,
-					from: EMAIL_ACCOUNT,
+					from: mailConfig.EMAIL_ACCOUNT,
 					subject: 'Reset your password',
 					html: template
 				});
@@ -52,7 +52,7 @@ class Accountmailer {
 			}
 		};
 	};
-	sendEmailActivationLink = ({ mailer }: { mailer: typeof MailerType }) => {
+	sendEmailActivationLink = () => {
 		return async function ({
 			email,
 			firstName,
@@ -70,16 +70,16 @@ class Accountmailer {
 			);
 
 			const link = createLinks.createAccountActivationLink({ token });
-			const template = EmailActivationTemp({
+			const template = accountActivationEmailTemplate({
 				firstName,
 				lastName,
 				link
 			});
 
 			try {
-				const res = await mailer.sendMail({
+				const res = await OstrichMailer.sendMail({
 					to: email,
-					from: EMAIL_ACCOUNT,
+					from: mailConfig.EMAIL_ACCOUNT,
 					subject: 'Activate your account',
 					html: template
 				});

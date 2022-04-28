@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import { mailTransport } from '@ostrich-services/MailService';
 import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
 import createUser from '@ostrich-domains/Auth/entities';
 import { IUser, IAuthRepository } from '@ostrich-domains/Auth/interfaces';
@@ -45,7 +44,7 @@ export default function makeRegisterUserUseCase({
 			...props
 		} = created._doc;
 
-		await UserAccountMailer.sendEmailActivationLink({ mailer: mailTransport })({
+		await UserAccountMailer.sendEmailActivationLink()({
 			_id: created._id,
 			email: created.email,
 			firstName: created.firstName,

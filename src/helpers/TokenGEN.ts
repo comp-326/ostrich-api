@@ -1,9 +1,9 @@
 import { JWTPayloadType } from '@ostrich-common/types';
 import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
-import config from '@ostrich-config';
+import {environmentConfig} from '@ostrich-config';
 
-const { ENC_KEY, SECRET_KEY } = config;
+const { ENC_KEY, SECRET_KEY } = environmentConfig;
 
 class TokenGEN {
 	// constructor() {}

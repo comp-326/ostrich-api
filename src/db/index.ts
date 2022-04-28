@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { DB_URL } from '../config';
+import { mongoConfig, environmentConfig } from '../config';
 
 const options = {
 	autoIndex: true, // Don't build indexes
@@ -16,5 +16,5 @@ const connection = async (DB_URL: string) => {
 		console.error(`Could not connect to db: Reason -> ${error.message}`);
 	}
 };
-
-export default connection(DB_URL);
+const url =environmentConfig.NODE_ENV === ('development' || 'production') ? mongoConfig.DATABASE_URL : mongoConfig.TEST_DB_URL;
+export default connection(url);
