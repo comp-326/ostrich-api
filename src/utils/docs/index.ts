@@ -1,10 +1,10 @@
-import { BASE_DIR, NODE_ENV } from '@ostrich-config';
+import { BASE_DIR, environmentConfig } from '@ostrich-config';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import yaml from 'yamljs';
 
 const swaggerDocument =
-	NODE_ENV === 'development'
+	environmentConfig.NODE_ENV === 'development'
 		? yaml.load(path.join(BASE_DIR, 'swagger-docs/api.yml'))
 		: null;
 

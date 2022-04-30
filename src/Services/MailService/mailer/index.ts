@@ -139,8 +139,8 @@ class Mailer implements IMailer {
 
 	protected getMailerPassword = () => this.password;
 
-	protected setTransporterOptions = () =>{
-		const options ={
+	protected setTransporterOptions = () => {
+		const options = {
 			host: this.host,
 			port: this.port,
 			secure: this.secure,
@@ -149,7 +149,7 @@ class Mailer implements IMailer {
 				user: this.username,
 				pass: this.password
 			}
-		} as any;
+		};
 		return nodemailer.createTransport(options);
 	};
 
@@ -160,11 +160,11 @@ class Mailer implements IMailer {
 	};
 }
 
-const OstrichMailer =new Mailer();
-OstrichMailer
-	.setHost(mailConfig.EMAIL_HOST)
+const OstrichMailer = new Mailer();
+OstrichMailer.setHost(mailConfig.EMAIL_HOST)
 	.setMailerPassword(mailConfig.EMAIL_PASSWORD)
 	.setPort(mailConfig.EMAIL_PORT)
-	.setSecure(mailConfig.EMAIL_SECURE)
-	.setMailerUsername(mailConfig.EMAIL_ACCOUNT);
+	// .setSecure(mailConfig.EMAIL_SECURE)
+	.setMailerUsername(mailConfig.EMAIL_USER);
+// .setProxy(mailConfig.EMAIL_PROXY);
 export default OstrichMailer;

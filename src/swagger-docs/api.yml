@@ -6,7 +6,7 @@ info:
     name: Felix Orinda
     email: forinda82@gmail.com
 basePath: /api/v1
-host: localhost:4001
+host: localhost:6200
 schemes:
   - http
   - https

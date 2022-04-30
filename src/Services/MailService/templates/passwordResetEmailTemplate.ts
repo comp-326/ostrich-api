@@ -22,7 +22,7 @@ export default function passwordResetEmailTemplate(props: {
 	firstName: string;
 	lastName: string;
 }){
-	return ejs.render(template,props);
+	return ejs.render(template,{data:props});
 }
 
 

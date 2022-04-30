@@ -1,4 +1,4 @@
-import TokenGEN from '@ostrich-helpers/tokenGEN';
+import TokenGEN from '@ostrich/src/helpers/tokenGEN';
 import { IAuthRequest } from '@ostrich-domains/Auth/interfaces';
 import { loginUserUseCase } from '@ostrich-domains/Auth/use-cases';
 

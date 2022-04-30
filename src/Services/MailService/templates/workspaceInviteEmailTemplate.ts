@@ -25,5 +25,5 @@ export default function workspaceInviteEmailTemplate(props: {
 	lastName: string;
 	workspaceName:string
 }){
-	return ejs.render(template,props);
+	return ejs.render(template,{data:props});
 }

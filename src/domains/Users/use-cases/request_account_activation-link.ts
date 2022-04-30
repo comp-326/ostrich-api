@@ -1,5 +1,6 @@
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import { IUserRepository } from '../interfaces';
+import UserAccountMailer from '../utils/mail/UserAccountMailer';
 
 export default function makeRequestAccountActivation({
 	userDB
@@ -33,6 +34,12 @@ export default function makeRequestAccountActivation({
 				status: 'warning'
 			});
 		}
-		return existing;
+		const sent = await UserAccountMailer.sendEmailActivationLink()({
+			_id: existing._id,
+			email: existing.email,
+			firstName: existing.firstName,
+			lastName: existing.lastName
+		});
+		return sent;
 	};
 }

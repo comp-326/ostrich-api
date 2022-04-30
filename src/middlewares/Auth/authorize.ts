@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken';
 import { NextFunction, Response } from 'express';
 import { Model } from 'mongoose';
 import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-common/types';
-import { SECRET_KEY } from '@ostrich-config';
+import { environmentConfig } from '@ostrich-config';
 import Permissions from '@ostrich-constants/permissions';
 import UserModel from '@ostrich-models/Users/UserModel';
 import RoleModel from '@ostrich-models/Roles/RoleModel';
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import TokenGEN from '@ostrich-helpers/TokenGEN';
+import TokenGEN from '@ostrich/src/helpers/tokenGEN';
 
 class AuthMiddleware {
 	constructor(private role: typeof Model, private user: typeof Model) {}
@@ -56,7 +56,7 @@ class AuthMiddleware {
 			});
 		}
 		try {
-			const payload = jwt.verify(jwtToken, SECRET_KEY) as JWTPayloadType;
+			const payload = jwt.verify(jwtToken, environmentConfig.SECRET_KEY) as JWTPayloadType;
 			req.user = payload;
 			return next();
 		} catch {

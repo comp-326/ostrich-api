@@ -7,9 +7,7 @@ export default function makeBuildPostRequestPasswordResetController({
 	requestPassword: typeof requestPasswordReset;
 }) {
 	return async function postPasswordReset(httpRequest: IUserRequest) {
-		const user = await requestPassword(httpRequest.body.email);
-		console.log(user);
-
+		await requestPassword(httpRequest.body.email);
 		return {
 			statusCode: 200,
 			body: {

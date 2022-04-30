@@ -54,5 +54,5 @@ export default function accountCreationEmailTemplate(props: {
 	lastName: string;
 	email: string;
 }){
-	return ejs.render(template,props);
+	return ejs.render(template,{data:props});
 }
