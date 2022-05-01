@@ -1,12 +1,16 @@
 import jwt from 'jsonwebtoken';
 import { NextFunction, Response } from 'express';
 import { Model } from 'mongoose';
-import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-common/types';
+import {
+	INext,
+	IRequest,
+	IResponse,
+	JWTPayloadType
+} from '@ostrich-common/types';
 import { environmentConfig } from '@ostrich-config';
 import Permissions from '@ostrich-constants/permissions';
 import UserModel from '@ostrich-models/Users/UserModel';
 import RoleModel from '@ostrich-models/Roles/RoleModel';
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import TokenGEN from '@ostrich/src/helpers/tokenGEN';
 
 class AuthMiddleware {
@@ -29,38 +33,41 @@ class AuthMiddleware {
 		}
 	};
 	verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
-		if (!req.cookies) {
-			throw new ExpressError({
-				message: 'Please login to access this page',
-				status: 'warning',
-				statusCode: 401,
-				data: {}
-			});
-		}
-		const token = req.cookies['access_token'];
-		if (!token) {
-			throw new ExpressError({
-				message: 'Please login to access this page',
-				status: 'warning',
-				statusCode: 401,
-				data: {}
-			});
-		}
-		const jwtToken = TokenGEN.decodeToken(token);
-		if (!jwtToken) {
-			throw new ExpressError({
-				message: 'Please login to access this page',
-				status: 'warning',
-				statusCode: 401,
-				data: {}
-			});
-		}
 		try {
-			const payload = jwt.verify(jwtToken, environmentConfig.SECRET_KEY) as JWTPayloadType;
+			if (!req.cookies) {
+				return res.status(401).json({
+					message: 'Please login to access this page',
+					status: 'warning',
+					statusCode: 401,
+					data: {}
+				});
+			}
+			const token = req.cookies['access_token'];
+			if (!token) {
+				return res.status(401).json({
+					message: 'Please login to access this page',
+					status: 'warning',
+					statusCode: 401,
+					data: {}
+				});
+			}
+			const jwtToken = TokenGEN.decodeToken(token);
+			if (!jwtToken) {
+				return res.status(401).json({
+					message: 'Please login to access this page',
+					status: 'warning',
+					statusCode: 401,
+					data: {}
+				});
+			}
+			const payload = jwt.verify(
+				jwtToken,
+				environmentConfig.SECRET_KEY
+			) as JWTPayloadType;
 			req.user = payload;
 			return next();
 		} catch {
-			throw new ExpressError({
+			return res.status(401).json({
 				message: 'Login session has expired',
 				status: 'warning',
 				statusCode: 401,
@@ -74,7 +81,7 @@ class AuthMiddleware {
 			this.verifyCookie(req, res, async () => {
 				const user = await this.user.findById(req.user.userId);
 				if (!user.isActive) {
-					throw new ExpressError({
+					return res.status(401).json({
 						message: 'Please activate your account',
 						status: 'warning',
 						statusCode: 401,

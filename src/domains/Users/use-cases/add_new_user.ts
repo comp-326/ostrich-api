@@ -10,7 +10,7 @@ export default function makeAddUserUseCase({
 	userDB: IUserRepository;
 }) {
 	return async function addUserUseCase(userInfo: IUser) {
-		const user = createUser(userInfo);
+		const user = await createUser(userInfo);
 		const existing = await userDB.findByEmail(user.getEmail());
 
 		if (existing) {

@@ -5,5 +5,5 @@ import { postRequestActivation } from '../controllers';
 const qRouter = Router();
 export async function makeQueryActivateAccountApiCall(app: Router) {
 	app.use('/account/activate', qRouter);
-	qRouter.post('/link', MakeRequestAdapter(postRequestActivation));
+	qRouter.post('/', MakeRequestAdapter(postRequestActivation));
 }

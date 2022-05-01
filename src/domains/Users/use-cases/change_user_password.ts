@@ -59,7 +59,7 @@ export default function makeEditUserPasswordUseCase({
 				status: 'warning'
 			});
 		}
-		const user = createUser({ ...existing._doc, ...data });
+		const user =await createUser({ ...existing._doc, ...data });
 		await userDB.updateById(existing._id, {
 			email: user.getEmail(),
 			password: user.getPassword(),

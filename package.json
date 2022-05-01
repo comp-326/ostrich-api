@@ -8,7 +8,7 @@
     "prestart": "npm run build",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "env": "ts-node ./src/env.ts",
-    "dev": "npm run dev:start",
+    "dev": "NODE_ENV=development nodemon",
     "lint": "eslint ./src  --ext .ts --fix",
     "build": "gulp buildTS",
     "test": "NODE_ENV=testing jest"

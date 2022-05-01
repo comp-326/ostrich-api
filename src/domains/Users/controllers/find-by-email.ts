@@ -7,8 +7,9 @@ export default function makeBuildFindByEmailUserController({
 	listByEmail: typeof listUserByEmailUseCase;
 }) {
 	return async function (httpRequest: IUserRequest) {
-		const { email } = httpRequest.query;
+		
+		const { email } = httpRequest.params;
 		const user = await listByEmail(email);
-		return { statusCode: 200, body: user };
+		return { statusCode: 200, body: {user} };
 	};
 }

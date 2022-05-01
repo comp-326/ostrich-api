@@ -19,9 +19,8 @@ function setEnvironmentVariables(envFilePath: string) {
 		.split(os.EOL)
 		.forEach(line => {
 			const [k, v] = line.trim().split('=');
-			if (key === k) {
-				data[k] = value;
-			} else {
+
+			if (key !== '') {
 				data[k] = v;
 			}
 		});
@@ -54,12 +53,18 @@ function setEnvironmentVariables(envFilePath: string) {
 				}
 			});
 	}
-	const env = Object.entries(data).map(([key, value]) => {
-		return `${key}=${value}`;
-	});
-	const sampleEnvBuffer = Object.entries(data).map(([key]) => {
-		return `${key}=`;
-	});
+	const env = Object.entries(data)
+		.sort((a, b) => {
+			return a[0].localeCompare(b[0]);
+		})
+		.map(([k, v]) => {
+			return k !== '' && `${k}=${v}`;
+		});
+	const sampleEnvBuffer = Object.entries(data)
+		.sort((a, b) => a[0].localeCompare(b[0]))
+		.map(([k]) => {
+			return `${k}=`;
+		});
 	fs.writeFileSync(
 		path.join(path.dirname(envFilePath), '.env'),
 		env.join(os.EOL),

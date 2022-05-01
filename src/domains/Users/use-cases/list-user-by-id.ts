@@ -33,6 +33,8 @@ export default function makeListUserByIdUseCase({
 				status: 'warning'
 			});
 		}
-		return existing;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { password, ...user } = existing._doc;
+		return user;
 	};
 }

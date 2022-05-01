@@ -9,7 +9,7 @@ export default function makeListUserByEmail({
 	return async function listUserByEmailUseCase(email: string) {
 		if (!email) {
 			throw new ExpressError({
-				message: 'Please provide an email',
+				message: 'Please provide a valid email address',
 				statusCode: 400,
 				data: {},
 				status: 'warning'
@@ -24,6 +24,8 @@ export default function makeListUserByEmail({
 				status: 'warning'
 			});
 		}
-		return existing;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { password, ...user } = existing;
+		return user;
 	};
 }

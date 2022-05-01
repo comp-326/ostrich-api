@@ -44,6 +44,7 @@
       "@ostrich/*" : ["./*"],
       "@ostrich-base/*": ["./src/*"],
       "@ostrich-config": ["./src/config"],
+      "@ostrich-api": ["./src/api"],
       "@ostrich-api/*": ["./src/api/*"],
       "@ostrich-setup": ["./src/setup"],
       "@ostrich-domains/*": ["./src/domains/*"],
@@ -53,7 +54,9 @@
       "@ostrich-helpers/*": ["./src/helpers/*"],
       "@ostrich-utils/*": ["./src/utils/*"],
       "@ostrich-constants/*": ["./src/constants/*"],
-      "@ostrich-db": ["./src/db"],
+      "@ostrich-upload": ["./src/uploadSDK"],
+      "@ostrich-db/*": ["./src/databases/*"],
+      "@ostrich-db/mongodb": ["./src/databases/mongodb"],
       "@ostrich-middlewares/*": ["./src/middlewares/*"]
     }
   },

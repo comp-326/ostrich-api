@@ -102,8 +102,8 @@ paths:
       tags:
         - User
       parameters:
-        - name: title
-          in: query
+        - name: email
+          in: path
           required: true
           type: string
           description: Input existing title
@@ -137,7 +137,7 @@ paths:
           description: Invalid request
         "401":
           description: Unauthorized
-  /users/single/{id}:
+  /users/profile/{id}:
     get:
       description: Get single user
       tags:
@@ -187,7 +187,7 @@ paths:
           description: Unauthorized
         "403":
           description: Forbidden
-  /users/account/activate/link:
+  /users/account/activate:
     post:
       description: Activate user account
       tags:
