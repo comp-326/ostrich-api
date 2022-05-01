@@ -1,5 +1,6 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import { IUserRepository } from '../interfaces';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { IUserRepository } from '@ostrich-domains/Users/interfaces';
+import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
 
 export default function makeRequestPasswordReset({
 	userDB
@@ -24,6 +25,12 @@ export default function makeRequestPasswordReset({
 				status: 'warning'
 			});
 		}
+		await UserAccountMailer.sendPasswordResetLink()({
+			_id: existing._id,
+			email: existing.email,
+			firstName: existing.firstName,
+			lastName: existing.lastName
+		});
 		return existing;
 	};
 }

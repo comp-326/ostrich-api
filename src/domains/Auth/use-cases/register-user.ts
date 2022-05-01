@@ -1,6 +1,8 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import createUser from '../entities';
-import { IUser, IAuthRepository } from '../interfaces';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
+import createUser from '@ostrich-domains/Auth/entities';
+import { IUser, IAuthRepository } from '@ostrich-domains/Auth/interfaces';
 
 export default function makeRegisterUserUseCase({
 	userDB
@@ -35,6 +37,19 @@ export default function makeRegisterUserUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
-		return created;
+		const {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			password: _pass,
+			role: { name },
+			...props
+		} = created._doc;
+
+		await UserAccountMailer.sendEmailActivationLink()({
+			_id: created._id,
+			email: created.email,
+			firstName: created.firstName,
+			lastName: created.lastName
+		});
+		return { ...props, role: name };
 	};
 }

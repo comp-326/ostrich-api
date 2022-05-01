@@ -1,2 +1,2 @@
 require('module-alias/register');
-import '@root/scripts/tasks/buildTs';
+import '@ostrich-scripts/tasks/buildTs';

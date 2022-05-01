@@ -1,8 +1,8 @@
-import { JWTPayloadType } from '@base/src/common/types';
-import { SECRET_KEY } from '@base/src/config';
+import { JWTPayloadType } from '@ostrich-common/types';
+import { environmentConfig } from '@ostrich-config';
 import jwt from 'jsonwebtoken';
 
 export function activateUserTokenDecode(token: string) {
-	const decoded = jwt.verify(token, SECRET_KEY) as JWTPayloadType;
+	const decoded = jwt.verify(token, environmentConfig.SECRET_KEY) as JWTPayloadType;
 	return decoded;
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import validateMongodbId from '@utils/mongo/ObjectId-validator';
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 
 export default function makeJoinUserWorkspaceUsecase({
 	workspaceDB

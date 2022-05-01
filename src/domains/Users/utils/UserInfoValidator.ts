@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import emailRegex from '@base/src/constants/emailRegex';
+import emailRegex from '@ostrich-constants/emailRegex';
 import { IUserValidator, PasswordValidatorType } from '../interfaces';
 
 class UserInfoValidator implements IUserValidator {

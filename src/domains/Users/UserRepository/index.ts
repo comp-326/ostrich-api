@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import UserModel from '@base/src/models/Users/UserModel';
+import UserModel from '@ostrich-models/Users/UserModel';
 import { IUser, IUserRepository } from '../interfaces';
 
 class UserRepository implements IUserRepository {

@@ -1,6 +1,9 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import createUser from '../entities';
 import { IUser, IUserRepository } from '../interfaces';
+import VerifyUserJWT from '../utils/jwt/VerifyUserJWT';
 
 export default function makeEditUserPasswordUseCase({
 	userDB
@@ -8,21 +11,46 @@ export default function makeEditUserPasswordUseCase({
 	userDB: IUserRepository;
 }) {
 	return async function editUserUserPasswordUseCase(
-		email: string,
-		data: IUser
+		resetToken: string,
+		data: Pick<IUser, 'password'> & { confirmPassword: string }
 	) {
-		if (!email) {
+		if (!resetToken) {
 			throw new ExpressError({
-				message: 'Please provide an email',
+				message: 'Please provide a reset token',
 				statusCode: 400,
 				data: {},
 				status: 'warning'
 			});
 		}
 
-		const existing = await userDB.findByEmail(email);
-		console.log('User', existing);
-
+		const userId = (await VerifyUserJWT.verifyPasswordToken(
+			resetToken
+		)) as unknown as string;
+		if (!data.password) {
+			throw new ExpressError({
+				data: {},
+				message: 'Password required',
+				status: 'warning',
+				statusCode: 400
+			});
+		}
+		if (!data.confirmPassword) {
+			throw new ExpressError({
+				data: {},
+				message: 'Passwords do not match',
+				status: 'warning',
+				statusCode: 400
+			});
+		}
+		if (data.password !== data.confirmPassword) {
+			throw new ExpressError({
+				data: {},
+				message: 'Passwords do not match',
+				status: 'warning',
+				statusCode: 400
+			});
+		}
+		const existing = await userDB.findById(userId);
 		if (!existing) {
 			throw new ExpressError({
 				message: 'User does not exist',
@@ -31,8 +59,8 @@ export default function makeEditUserPasswordUseCase({
 				status: 'warning'
 			});
 		}
-		const user = createUser({ ...existing, ...data });
-		const edited = await userDB.updateById(existing._id, {
+		const user =await createUser({ ...existing._doc, ...data });
+		await userDB.updateById(existing._id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
 			dateOfBirth: user.getDateOfBirth(),
@@ -41,7 +69,7 @@ export default function makeEditUserPasswordUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
-
-		return { ...existing._doc, ...edited };
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		return true;
 	};
 }

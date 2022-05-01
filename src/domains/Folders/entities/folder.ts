@@ -1,4 +1,4 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import { IFolder, IFolderValidator } from '../interfaces';
 
 export default function makeCreateFOlderEntity({

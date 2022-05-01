@@ -1,45 +1,19 @@
-import config from '@base/src/node.config';
+import config from '@ostrich-base/node.config';
 
 const {
-	ENV: { PORT, NODE_ENV, REFRESH_KEY, SECRET_KEY, BASE_URL, ENC_KEY },
+	ENV,
 	DB: {
-		MONGOOSE: { DATABASE_URL: db_url, TEST_DB_URL: t_dbUrl }
+		MONGOOSE
 	},
 	PATHS: { BASE_DIR },
-	MAIL: { EMAIL_ACCOUNT, EMAIL_PASSWORD },
-	CLOUDINARY: { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET }
+	MAIL,
+	CLOUDINARY
 } = config;
 
-const DB_URL = NODE_ENV === 'testing' ? t_dbUrl : db_url;
-
-export default Object.freeze({
-	PORT,
-	DB_URL,
-	BASE_DIR,
-	NODE_ENV,
-	EMAIL_ACCOUNT,
-	EMAIL_PASSWORD,
-	REFRESH_KEY,
-	SECRET_KEY,
-	CLOUDINARY_API_KEY,
-	CLOUDINARY_NAME,
-	CLOUDINARY_SECRET,
-	BASE_URL,
-	ENC_KEY
-});
-
 export {
-	PORT,
-	DB_URL,
-	BASE_DIR,
-	NODE_ENV,
-	EMAIL_ACCOUNT,
-	EMAIL_PASSWORD,
-	REFRESH_KEY,
-	SECRET_KEY,
-	CLOUDINARY_API_KEY,
-	CLOUDINARY_NAME,
-	CLOUDINARY_SECRET,
-	BASE_URL,
-	ENC_KEY
+	MONGOOSE as mongoConfig,
+	MAIL as mailConfig,
+	ENV as environmentConfig,
+	CLOUDINARY as cloudinaryConfig,
+	BASE_DIR
 };

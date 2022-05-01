@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import capitalize from '../helpers/capitalize';
-import { INext, IResponse, IRequest } from '../types';
+import capitalize from '@ostrich-helpers/capitalize';
+import { INext, IResponse, IRequest } from '@ostrich-common/types';
 import { ExpressError } from './ExpressError';
 
 export default function (err: any, req: IRequest, res: IResponse, next: INext) {
@@ -39,7 +39,7 @@ export default function (err: any, req: IRequest, res: IResponse, next: INext) {
 	}
 	return res.status(500).json({
 		status: 'error',
-		message: 'Internal server error',
+		message: err.message ? err.message : 'Internal server error',
 		data: {}
 	});
 }

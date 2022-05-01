@@ -1,8 +1,8 @@
-
-export type IUserData = 'email' |
-	'dateOfBirth' |
-	'firstName' |
-	'lastName' |
-	'isActive' |
-	'avatar' |
-	'_id';
+export type IUserData =
+	| 'email'
+	| 'dateOfBirth'
+	| 'firstName'
+	| 'lastName'
+	| 'isActive'
+	| 'avatar'
+	| '_id';

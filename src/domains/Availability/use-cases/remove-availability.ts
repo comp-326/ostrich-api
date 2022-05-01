@@ -1,5 +1,5 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
-import validateMongodbId from '@root/utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
 import { IAvailabilityRepository } from '../interfaces';
 
 export default function makeRemoveAvailabilityUseCase({

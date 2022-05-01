@@ -7,9 +7,12 @@ export default function makeBuildEditUserPasswordController({
 	update: typeof editPasswordUseCase;
 }) {
 	return async function (httpRequest: IUserRequest) {
-		const { email } = httpRequest.body;
-	
-		const todo = await update(email, httpRequest.body);
-		return { statusCode: 200, body: todo };
+		const { resetToken } = httpRequest.params;
+
+		await update(resetToken, httpRequest.body);
+		return {
+			statusCode: 200,
+			body: { message: 'Password changed successfully' }
+		};
 	};
 }

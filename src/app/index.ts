@@ -1,5 +1,5 @@
 import express from 'express';
-import setup from '@setup';
+import setup from '@ostrich-setup';
 
 const app = express();
 setup({ app });

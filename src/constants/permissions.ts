@@ -7,4 +7,4 @@ enum Permissions  {
 	ADMIN= 32,
 }
 
-export default Permissions
+export default Permissions;

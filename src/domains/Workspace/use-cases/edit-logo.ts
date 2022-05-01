@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IRequest } from '@common/types';
-import { ExpressError } from '@common/errors/ExpressError';
-import createWorkspace from '../entities';
-import { IWorkspaceRepository } from '../interfaces';
+import { IRequest } from '@ostrich-common/types';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import createWorkspace from '@ostrich-domains/Workspace/entities';
+import { IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
 export default function makeEditLogoUseCase({
 	workspaceDB
 }: {

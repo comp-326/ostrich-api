@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from 'mongoose';
-import '@root/db';
+import mongoose from '@ostrich-db/mongodb';
 import bcrypt from 'bcryptjs';
 
 export type UserType = {

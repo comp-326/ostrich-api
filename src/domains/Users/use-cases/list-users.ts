@@ -1,4 +1,4 @@
-import { ExpressError } from '@base/src/common/errors/ExpressError';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import { IUserRepository } from '../interfaces';
 
 export default function makeListUsersUseCase({
@@ -7,8 +7,8 @@ export default function makeListUsersUseCase({
 	userDB: IUserRepository;
 }) {
 	return async function listUsersUseCase(limit: number, page: number) {
-		const todos = await userDB.find(limit, page);
-		if (todos.length < 1) {
+		const users = await userDB.find(limit, page);
+		if (users.length < 1) {
 			throw new ExpressError({
 				message: 'No users found',
 				statusCode: 404,
@@ -16,6 +16,6 @@ export default function makeListUsersUseCase({
 				status: 'warning'
 			});
 		}
-		return todos;
+		return users;
 	};
 }

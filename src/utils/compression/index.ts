@@ -1,11 +1,11 @@
-import { IRequest, IResponse } from "./../../common/types"
-import compression from "compression"
+import { IRequest, IResponse } from '@ostrich-common/types';
+import compression from 'compression';
 export default function (req: IRequest, res: IResponse) {
-	if (req.headers["x-no-compression"]) {
+	if (req.headers['x-no-compression']) {
 		// don't compress responses with this request header
-		return false
+		return false;
 	}
 
 	// fallback to standard filter function
-	return compression.filter(req, res)
+	return compression.filter(req, res);
 }

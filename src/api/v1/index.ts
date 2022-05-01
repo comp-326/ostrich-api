@@ -1,10 +1,10 @@
-import workspaceDomain from '@domains/Workspace';
-import authDomain from '@domains/Auth';
-import userDomain from '@domains/Users';
-import { swaggerServe, SwaggerSetup } from '@utils/docs';
+import workspaceDomain from '@ostrich-domains/Workspace';
+import authDomain from '@ostrich-domains/Auth';
+import userDomain from '@ostrich-domains/Users';
+import { swaggerServe, SwaggerSetup } from '@ostrich-utils/docs';
 import { Router } from 'express';
-import availabilityDomain from '@domains/Availability';
-import folderDomain from '@domains/Folders';
+import availabilityDomain from '@ostrich-domains/Availability';
+import folderDomain from '@ostrich-domains/Folders';
 import test_route from './test_route';
 
 export default function () {

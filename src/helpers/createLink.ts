@@ -1,4 +1,4 @@
-import { PORT } from '@root/config';
+import { environmentConfig } from '@ostrich-config';
 
 
 /**
@@ -13,7 +13,7 @@ function createWorkspaceInviteLink({
 	role: string,
 	workspaceId: string,
 }) {
-	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
+	return `http://localhost:${environmentConfig.PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
 }
 
 /**
@@ -22,7 +22,7 @@ function createWorkspaceInviteLink({
  * @returns
  */
 function createAccountActivationLink({ token }: { token: string }) {
-	return `http://localhost:${PORT}/account/activate/${token}`;
+	return `http://localhost:${environmentConfig.PORT}/account/activate/${token}`;
 }
 /**
  *

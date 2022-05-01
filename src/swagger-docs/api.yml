@@ -6,7 +6,7 @@ info:
     name: Felix Orinda
     email: forinda82@gmail.com
 basePath: /api/v1
-host: localhost:4001
+host: localhost:6200
 schemes:
   - http
   - https
@@ -74,7 +74,8 @@ paths:
   /auth/logout:
     post:
       description: Logout User
-      tags: Auth
+      tags: 
+        - Auth
       responses:
         "200":
           description: "Ok"
@@ -101,8 +102,8 @@ paths:
       tags:
         - User
       parameters:
-        - name: title
-          in: query
+        - name: email
+          in: path
           required: true
           type: string
           description: Input existing title
@@ -136,7 +137,7 @@ paths:
           description: Invalid request
         "401":
           description: Unauthorized
-  /users/single/{id}:
+  /users/profile/{id}:
     get:
       description: Get single user
       tags:
@@ -186,7 +187,7 @@ paths:
           description: Unauthorized
         "403":
           description: Forbidden
-  /users/account/activate/link:
+  /users/account/activate:
     post:
       description: Activate user account
       tags:

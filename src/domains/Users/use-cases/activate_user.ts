@@ -1,5 +1,5 @@
-import { ExpressError } from '@common/errors/ExpressError';
-import validateMongodbId from '@utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
 import createUser from '../entities';
 import { IUserRepository } from '../interfaces';
 
@@ -42,8 +42,8 @@ export default function makeEditActivateUserUseCase({
 				data: {}
 			});
 		}
-		const user = createUser({ ...existing._doc, isActive: true });
-		const edited = await userDB.updateById(id, {
+		const user =await createUser({ ...existing._doc, isActive: true });
+		await userDB.updateById(id, {
 			email: user.getEmail(),
 			password: user.getPassword(),
 			dateOfBirth: user.getDateOfBirth(),
@@ -52,7 +52,6 @@ export default function makeEditActivateUserUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
-
-		return { ...existing._doc, ...edited };
+		return {...existing._doc, isActive: true,password: undefined};
 	};
 }
