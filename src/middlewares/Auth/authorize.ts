@@ -11,7 +11,7 @@ import { environmentConfig } from '@ostrich-config';
 import Permissions from '@ostrich-constants/permissions';
 import UserModel from '@ostrich-models/Users/UserModel';
 import RoleModel from '@ostrich-models/Roles/RoleModel';
-import TokenGEN from '@ostrich/src/helpers/tokenGEN';
+import TokenGEN from '@ostrich-helpers/tokenGEN';
 
 class AuthMiddleware {
 	constructor(private role: typeof Model, private user: typeof Model) {}
