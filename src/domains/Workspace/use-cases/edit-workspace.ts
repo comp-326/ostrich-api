@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import createWorkspace from '@ostrich-domains/Workspace/entities';
-import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
+import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-app/domains/Workspace/interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import createWorkspace from '@ostrich-app/domains/Workspace/entities';
+import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
 
 export default function makeEditWorkspaceUseCase({
 	workspaceDB

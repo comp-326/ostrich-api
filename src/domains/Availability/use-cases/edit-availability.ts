@@ -1,5 +1,5 @@
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import validateMongodbId from '@ostrich-utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
 import createAvailability from '../entities';
 import { IAvailability, IAvailabilityRepository } from '../interfaces';
 

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import IRequest from '@ostrich/src/common/interfaces/request';
-import { IResponse } from '@ostrich/src/common/types';
-import { IUserController } from '@ostrich-domains/Users/interfaces';
+import IRequest from '@ostrich-app/common/interfaces/request';
+import { IResponse } from '@ostrich-app/common/types';
+import { IUserController } from '@ostrich-app/domains/Users/interfaces';
 import { IUserUseCases } from '../interfaces';
-import ResponseFormatter from '@ostrich/src/common/ResponseFormatter';
+import ResponseFormatter from '@ostrich-app/common/ResponseFormatter';
 
 /**
  *

@@ -1,8 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import IRequest from '@ostrich/src/common/interfaces/request';
-import { IResponse } from '@ostrich/src/common/types';
+import IRequest from '@ostrich-app/common/interfaces/request';
+import { IResponse } from '@ostrich-app/common/types';
 
 
 type FilesType =

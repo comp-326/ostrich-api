@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from 'express';
 import UserController from '../controllers';
-import UserRepository from '../UserRepository';
+import UserRepository from '../repository';
 import { UserUseCase } from '../use-cases';
 
 export default function updatePasswordRoute(app: Router){

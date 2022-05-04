@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import request from 'supertest';
-import app from '@ostrich-base/app';
+import app from '@ostrich-app/app';
 const url = '/api/v1';
 describe('Register User', () => {
 	it('Responds with a JSON data', async function (){

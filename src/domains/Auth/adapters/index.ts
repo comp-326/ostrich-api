@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { INext, IRequest, IResponse } from '@ostrich-common/types';
-import { UserControllerType } from '@ostrich-domains/Auth/controllers';
-import { IAuthRequest } from '@ostrich-domains/Auth/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { UserControllerType } from '@ostrich-app/domains/Auth/controllers';
+import { IAuthRequest } from '@ostrich-app/domains/Auth/interfaces';
 
 export default function makeAuthRequestAdapter(controller: UserControllerType){
 	return async function (req: IRequest, res: IResponse, next: INext){

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import { IUserData } from '@ostrich-domains/Users/interfaces/IUserData';
-import { IAuthRepository } from '@ostrich-domains/Auth/interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import { IAuthRepository } from '@ostrich-app/domains/Auth/interfaces';
+import { IUserData } from '@ostrich-app/domains/Users/interfaces';
 
 export default function makeLoginUserByUseCase({
 	userDB

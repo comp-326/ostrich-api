@@ -1,5 +1,5 @@
 import authorize from '@ostrich-middlewares/Auth/authorize';
-import RoleModel from '@ostrich-models/Roles/RoleModel';
+import RoleModel from '@ostrich-app/models/Roles/RoleModel';
 import { Router } from 'express';
 
 const qRouter = Router();

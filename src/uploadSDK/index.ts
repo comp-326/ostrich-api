@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { cloudinaryConfig } from '@ostrich-config';
+import { cloudinaryConfig } from '@ostrich-app/config';
 
 cloudinary.config({
 	cloud_name: cloudinaryConfig.CLOUDINARY_NAME,

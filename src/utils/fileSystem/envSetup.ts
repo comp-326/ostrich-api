@@ -1,8 +1,8 @@
-import path from 'path';
 import crypto from 'crypto';
-import os from 'os';
-import dirExistSync from '@ostrich-utils/fileSystem/dirExist';
+import dirExistSync from '@ostrich-app/utils/fileSystem/dirExist';
 import fs from 'fs';
+import os from 'os';
+import path from 'path';
 
 function setEnvironmentVariables(envFilePath: string){
 	let filepath = '';

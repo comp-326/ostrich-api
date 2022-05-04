@@ -1,4 +1,4 @@
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IAvailability, IAvailabilityValidator } from '../interfaces';
 
 export default function makeCreateUserEntity({

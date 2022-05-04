@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-db/mongodb';
 import bcrypt from 'bcryptjs';
+import mongoose from '@ostrich-app/db/mongodb';
 
 export type UserType = {
 	firstName: string;

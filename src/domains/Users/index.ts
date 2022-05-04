@@ -1,4 +1,4 @@
-// import { BaseDomain } from '@ostrich/src/common/base/baseDomain';
+// import { BaseDomain } from '@ostrich-app/common/base/baseDomain';
 // import { Router } from 'express';
 // import api from './routes';
 

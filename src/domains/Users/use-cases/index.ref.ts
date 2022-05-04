@@ -1,4 +1,4 @@
-import UserRepository from '../UserRepository';
+import UserRepository from '../repository';
 import makeAddUserUseCase from './add_new_user';
 import makeEditActivateUserUseCase from './activate_user';
 import makeEditUserPasswordUseCase from './change_user_password';

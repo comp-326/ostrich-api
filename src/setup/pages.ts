@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import path from 'path';
-import { BASE_DIR, environmentConfig } from '@ostrich-config';
+import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
 
 export default function ({ app }: { app: Application }){
 	app.set('view engine', 'ejs');

@@ -1,6 +1,6 @@
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import { IUserRepository } from '@ostrich-domains/Users/interfaces';
-import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import { IUserRepository } from '@ostrich-app/domains/Users/interfaces';
+import UserAccountMailer from '@ostrich-app/domains/Users/utils/mail/UserAccountMailer';
 
 export default function makeRequestPasswordReset({
 	userDB

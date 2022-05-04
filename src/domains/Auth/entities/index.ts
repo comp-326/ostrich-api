@@ -1,6 +1,6 @@
-import UserInfoValidator from '@ostrich-domains/Users/utils/UserInfoValidator';
-import Password from '@ostrich-domains/Users/utils/Password';
-import makeCreateUserEntity from '@ostrich-domains/Auth/entities/user';
+import UserInfoValidator from '@ostrich-app/domains/Users/utils/UserInfoValidator';
+import Password from '@ostrich-app/domains/Users/utils/Password';
+import makeCreateUserEntity from '@ostrich-app/domains/Auth/entities/user';
 
 const createUser = makeCreateUserEntity({
 	validator: UserInfoValidator,

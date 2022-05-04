@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import api from '@ostrich-domains/Auth/api';
+import api from '@ostrich-app/domains/Auth/api';
 
 const authRouter = Router();
 export default function authDomain(app: Router){

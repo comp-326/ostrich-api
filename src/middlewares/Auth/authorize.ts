@@ -6,12 +6,12 @@ import {
 	IRequest,
 	IResponse,
 	JWTPayloadType
-} from '@ostrich-common/types';
-import { environmentConfig } from '@ostrich-config';
+} from '@ostrich-app/common/types';
+import { environmentConfig } from '@ostrich-app/config';
 import Permissions from '@ostrich-constants/permissions';
-import UserModel from '@ostrich-models/Users/UserModel';
-import RoleModel from '@ostrich-models/Roles/RoleModel';
-import TokenGEN from '@ostrich-helpers/tokenGEN';
+import UserModel from '@ostrich-app/models/Users/UserModel';
+import RoleModel from '@ostrich-app/models/Roles/RoleModel';
+import TokenGEN from '@ostrich-app/helpers/tokenGEN';
 
 class AuthMiddleware{
 	constructor(private role: typeof Model, private user: typeof Model){}

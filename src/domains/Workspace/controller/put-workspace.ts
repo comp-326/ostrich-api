@@ -1,5 +1,5 @@
-import { editWorkspace } from '@ostrich-domains/Workspace/use-cases';
-import { IRequest } from '@ostrich-common/types';
+import { editWorkspace } from '@ostrich-app/domains/Workspace/use-cases';
+import { IRequest } from '@ostrich-app/common/types';
 export default function makeBuildPutWorkspaceController({
 	update
 }: {

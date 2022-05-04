@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import createUser from '../entities';
-import { IUser, IUserRepository } from '../interfaces';
-import { IUserData } from '../interfaces/IUserData';
+import { IUser, IUserRepository } from '@ostrich-app/domains/Users/interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import { IUserData } from '@ostrich-app/domains/Users/interfaces';
+import createUser from '@ostrich-app/domains/Users/entities';
 
 export default function makeAddUserUseCase({
 	userDB

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import api from './api';
+import api from './routes';
 
 const folderRouter = Router();
 export default function folderDomain(app: Router){

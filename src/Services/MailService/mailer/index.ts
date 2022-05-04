@@ -11,7 +11,7 @@ import {
 	TextEncoding
 } from 'nodemailer/lib/mailer';
 import { Readable } from 'stream';
-import { mailConfig } from '@ostrich-config';
+import { mailConfig } from '@ostrich-app/config';
 
 
 interface IMailer {

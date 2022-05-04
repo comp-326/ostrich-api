@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-config';
+import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-app/config';
 import winston from 'winston';
 import moment from 'moment';
 import path from 'path';

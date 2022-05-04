@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { IUser, IUserRepository } from '@ostrich-app/domains/Users/interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import VerifyUserJWT from '@ostrich-app/domains/Users/utils/jwt/verifyUserJWT';
 import createUser from '../entities';
-import { IUser, IUserRepository } from '../interfaces';
-import VerifyUserJWT from '../utils/jwt/VerifyUserJWT';
 
 export default function makeEditUserPasswordUseCase({
 	userDB

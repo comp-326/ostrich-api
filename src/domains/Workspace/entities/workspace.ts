@@ -1,5 +1,5 @@
-import { IWorkspaceEntity } from '@ostrich-domains/Workspace/interfaces';
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
+import { IWorkspaceEntity } from '@ostrich-app/domains/Workspace/interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 
 export default function makeCreateWorkspaceEntity(){
 	return function createWorkspace({

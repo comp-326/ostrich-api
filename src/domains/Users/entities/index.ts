@@ -1,5 +1,5 @@
-import Password from '../utils/Password';
-import UserInfoValidator from '../utils/UserInfoValidator';
+import Password from '../utils/password';
+import UserInfoValidator from '../utils/userInfoValidator';
 import makeCreateUserEntity from './user';
 
 const createUser = makeCreateUserEntity({

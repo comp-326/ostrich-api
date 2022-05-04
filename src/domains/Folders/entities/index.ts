@@ -1,5 +1,5 @@
-import FolderInfoValidator from '../utils/FolderValidator';
-import makeCreateFolderEntity from './folder';
+import FolderInfoValidator from '@ostrich-app/domains/Folders/utils/folderValidator';
+import makeCreateFolderEntity from '@ostrich-app/domains/Folders/entities/folder';
 
 const createFolder = makeCreateFolderEntity({
 	validator: FolderInfoValidator

@@ -1,5 +1,5 @@
-import { DB_URL } from '@ostrich-config';
-import UserModel from '@ostrich-models/Users/UserModel';
+import { DB_URL } from '@ostrich-app/config';
+import UserModel from '@ostrich-app/models/Users/UserModel';
 import mongoose from 'mongoose';
 import users from '../seeds/user';
 

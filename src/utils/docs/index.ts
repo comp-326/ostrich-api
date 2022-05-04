@@ -1,4 +1,4 @@
-import { BASE_DIR, environmentConfig } from '@ostrich-config';
+import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import yaml from 'yamljs';

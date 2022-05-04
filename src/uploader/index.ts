@@ -1,7 +1,7 @@
 import multer from 'multer';
-import { BASE_DIR } from '@ostrich-config';
+import { BASE_DIR } from '@ostrich-app/config';
 import path from 'path';
-import { createDirectory } from '@ostrich-utils/fileSystem';
+import { createDirectory } from '@ostrich-app/utils/fileSystem';
 
 /**
  * ************************* UPLOAD ONLY VIDEOS *****************

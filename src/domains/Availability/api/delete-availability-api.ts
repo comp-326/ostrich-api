@@ -1,7 +1,7 @@
-import { Router } from 'express';
 import MakeRequestAdapter from '../adapters';
+import { Router } from 'express';
+import authorize from '@ostrich-app/middlewares/Auth/authorize';
 import { deleteById } from '../controllers';
-import authorize from '@ostrich-middlewares/Auth/authorize';
 
 const qRouter = Router();
 export async function makeDeleteAvailabilityApiCall(app: Router){

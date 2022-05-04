@@ -1,4 +1,4 @@
-import makeCreateWorkspaceEntity from '@ostrich-domains/Workspace/entities/workspace';
+import makeCreateWorkspaceEntity from '@ostrich-app/domains/Workspace/entities/workspace';
 
 const createWorkspace = makeCreateWorkspaceEntity();
 

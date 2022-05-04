@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-db/mongodb';
+import mongoose from '@ostrich-app/db/mongodb';
 /**
  * ************ APPOINTMENT *****************
  */

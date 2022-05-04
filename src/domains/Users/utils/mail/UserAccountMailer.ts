@@ -1,13 +1,13 @@
-import { ExpressError } from '@ostrich-common/errors/ExpressError';
-import createLinks from '@ostrich-helpers/createLinks';
-import tokenGenerator from '@ostrich-helpers/tokenGenerator';
 import {
 	accountActivationEmailTemplate,
 	passwordResetEmailTemplate
 } from '@ostrich-services/MailService';
-import { mailConfig } from '@ostrich/src/config';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { OstrichMailer } from '@ostrich/src/Services/MailService';
+import createLinks from '@ostrich-app/helpers/createLinks';
+import { mailConfig } from '@ostrich-app/config';
 import moment from 'moment';
+import tokenGenerator from '@ostrich-app/helpers/tokenGenerator';
 
 class Accountmailer{
 	sendPasswordResetLink = () => {

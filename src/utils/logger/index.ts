@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IRequest, IResponse } from '@ostrich-common/types';
-import { BASE_DIR } from '@ostrich/src/config';
+import { IRequest, IResponse } from '@ostrich-app/common/types';
+import { BASE_DIR } from '@ostrich-app/config';
 import path from 'path';
 import winston from 'winston';
 import moment from 'moment';

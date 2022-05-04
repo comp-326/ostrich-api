@@ -1,5 +1,5 @@
-import { addWorkspace } from '@ostrich-domains/Workspace/use-cases';
-import { IRequest } from '@ostrich-common/types';
+import { addWorkspace } from '@ostrich-app/domains/Workspace/use-cases';
+import { IRequest } from '@ostrich-app/common/types';
 
 export default function makeBuildPostWorkspaceController({
 	add

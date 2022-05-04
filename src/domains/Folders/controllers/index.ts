@@ -1,82 +1,123 @@
-import {
-	addFolderUseCase,
-	copyFolderUseCase,
-	editFolderUseCase,
-	listFolderByIdUseCase,
-	listFolderByNameUseCase,
-	listFoldersUseCase,
-	listWorkspaceFoldersUseCase,
-	moveFolderUseCase,
-	removeFolderUseCase,
-} from '../use-cases';
-import makeBuildPostFolderController from './post-folder';
-import makeBuildFindByIdFolderController from './find-by-id';
-import makeBuildFindByNameFolderController from './find-by-name';
-import makeBuildFindFoldersController from './find-folders';
-import makeBuildFindWorkspaceFoldersController from './find-workspace-folders';
-import makeBuildUpdateByIdFolderController from './put-folder';
-import makeBuildUpdateCopyFolderController from './put-copy-folder';
-import makeBuildUpdateMoveFolderController from './put-move-folder';
-import makeBuildDeleteFolderController from './delete-folder';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IFolderController,IFolderUseCases } from '../interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 
-const postFolder = makeBuildPostFolderController({ create: addFolderUseCase });
-const findById = makeBuildFindByIdFolderController({
-	listById: listFolderByIdUseCase,
-});
-const findByName = makeBuildFindByNameFolderController({
-	listByName: listFolderByNameUseCase,
-});
-const findFolders = makeBuildFindFoldersController({
-	find: listFoldersUseCase,
-});
-const findWorkspaceFolders = makeBuildFindWorkspaceFoldersController({
-	find: listWorkspaceFoldersUseCase,
-});
-const putFolder = makeBuildUpdateByIdFolderController({
-	update: editFolderUseCase,
-});
-const putCopyFolder = makeBuildUpdateCopyFolderController({
-	copy: copyFolderUseCase,
-});
-const putMoveFolder = makeBuildUpdateMoveFolderController({
-	move: moveFolderUseCase,
-});
+class FolderController implements IFolderController{
+	constructor(private useCase:IFolderUseCases){}
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	softDelete=async(req: IRequest, res: IResponse, next: INext) => {
+		return {softDeleted: true};
+	};
+		/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	findFolders=async(req: IRequest, res: IResponse, next: INext) => {
+		return {folders: true};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	findById= async(req: IRequest, res: IResponse, next: INext) => {
+		return {finding:true}
+	}
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	findByName=async (req: IRequest, res: IResponse, next: INext) => {
+		return {finsfing: 'findByName'};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	findWorkspaceFolders=async (
+		req: IRequest,
+		res: IResponse,
+		next: INext
+	) => {
+		return {finding: 'workspace folders'};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	createFolder= async(req: IRequest, res: IResponse, next: INext) => {
+		return {created:true};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	copyFolder= async(req: IRequest, res: IResponse, next: INext) => {
+		return {copy:true};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	updateFolder=async(req: IRequest, res: IResponse, next: INext) => {
+		return {updating:true};
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	moveFolder =async (req: IRequest, res: IResponse, next: INext) => {
+		return { move: 'moveFolder' };
+	};
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	hardDeleteFolder = async (req: IRequest, res: IResponse, next: INext) => {
+		return { deleting: true };
+	};
+}
 
-const deleteFolder = makeBuildDeleteFolderController({
-	remove: removeFolderUseCase,
-});
-
-export default Object.freeze({
-	postFolder,
-	findById,
-	findByName,
-	findFolders,
-	findWorkspaceFolders,
-	putFolder,
-	putCopyFolder,
-	putMoveFolder,
-	deleteFolder,
-});
-
-export {
-	postFolder,
-	findById,
-	findByName,
-	findFolders,
-	findWorkspaceFolders,
-	putFolder,
-	putCopyFolder,
-	putMoveFolder,
-	deleteFolder,
-};
-
-export type FolderControllerType =
-	| typeof postFolder
-	| typeof findById
-	| typeof findByName
-	| typeof findFolders
-	| typeof findWorkspaceFolders
-	| typeof putFolder
-	| typeof putCopyFolder
-	| typeof putMoveFolder
-	| typeof deleteFolder
+export default FolderController;
