@@ -1,74 +1,77 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import { IStandout, IStandoutRepository } from '../interfaces';
+import StandoutModel from '@ostrich-app/features/standouts/models';
 
-class FolderRepository implements IFolderRepository{
+class StandoutRepository implements IStandoutRepository{
+	createFolder: (workspaceId: string, data: IStandout) =>
+		/* eslint-disable @typescript-eslint/no-non-null-assertion */
+		Promise<any>;
+	findWorkspaceFolders: (workspaceId: string, limit: number, page: number) => Promise<any>;
 	findByName = async (name: string) => {
-		const folder = await FolderModel.findOne({ name });
+		const folder = await StandoutModel.findOne({ name });
 		return folder;
 	};
 	findById = async (id: string) => {
-		const folder = await FolderModel.findById(id);
+		const folder = await StandoutModel.findById(id);
 		return folder;
 	};
 	findWorkspaceById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id);
+		const workspace = await StandoutModel.findById(id);
 		return workspace;
 	};
 	find = async (limit: number, page: number) => {
-		const folders = await FolderModel.find()
+		const folders = await StandoutModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 		return folders;
 	};
-	findWorkspaceFolders = async (
+	findWorkspaceStandouts = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceFolders = await FolderModel.find({
+		const workspaceStandouts = await StandoutModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return workspaceFolders;
+		return workspaceStandouts;
 	};
-	updateById = async (id: string, data: IFolder) => {
-		const editedFolder = await FolderModel.findByIdAndUpdate(
+	updateById = async (id: string, data: IStandout) => {
+		const editedStandout = await StandoutModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
-		return editedFolder;
+		return editedStandout;
 	};
 	deleteById = async (id: string) => {
-		await FolderModel.findByIdAndDelete(id);
+		await StandoutModel.findByIdAndDelete(id);
 		return true;
 	};
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
 	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
+		const movedStandout = await StandoutModel.findByIdAndUpdate(folderId, {
 			workspace: destinationWorkspace,
 		});
-		return movedFolder;
+		return movedStandout;
 	};
-	copy = async (destinationWorkspace: string, folderData: IFolder) => {
-		const copiedFolder = await FolderModel.create({
+	copy = async (destinationWorkspace: string, folderData: IStandout) => {
+		const copiedStandout = await StandoutModel.create({
 			...folderData,
 			workspace: destinationWorkspace,
 		});
-		return copiedFolder;
+		return copiedStandout;
 	};
-	createFolder = async (workspaceId: string, data: IFolder) => {
-		const newFolder = await FolderModel.create({
+	createStandout = async (workspaceId: string, data: IStandout) => {
+		const newStandout = await StandoutModel.create({
 			...data,
 			workspace: workspaceId,
 		});
-		return newFolder;
+		return newStandout;
 	};
 }
 
-export default new FolderRepository();
+export default new StandoutRepository();

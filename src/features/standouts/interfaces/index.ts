@@ -2,7 +2,7 @@ import { INext, IResponse } from '@ostrich-app/common/types';
 import IRequest from '@ostrich-app/common/interfaces/request';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface IFolder {
+export interface IStandout {
 	name: string;
 	isStandout: boolean;
 	type: string;
@@ -30,7 +30,7 @@ export interface IFolder {
 	comments: string[];
 }
 
-export interface IFolderRequest {
+export interface IStandoutRequest {
 	params: any;
 	body: any;
 	query: any;
@@ -39,8 +39,8 @@ export interface IFolderRequest {
 	file?: any;
 }
 
-export interface IFolderRepository {
-	createFolder: (workspaceId: string, data: IFolder) => Promise<any>;
+export interface IStandoutRepository {
+	createFolder: (workspaceId: string, data: IStandout) => Promise<any>;
 	findByName: (name: string) => Promise<any>;
 	findById: (id: string) => Promise<any>;
 	findWorkspaceById: (id: string) => Promise<any>;
@@ -50,32 +50,32 @@ export interface IFolderRepository {
 		limit: number,
 		page: number
 	) => Promise<any>;
-	updateById: (id: string, data: IFolder) => Promise<any>;
+	updateById: (id: string, data: IStandout) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
 	move: (destinationWorkspace: string, folderId: string) => Promise<any>;
-	copy: (destinationWorkspace: string, folderData: IFolder) => Promise<any>;
+	copy: (destinationWorkspace: string, folderData: IStandout) => Promise<any>;
 }
 
-export interface IFolderValidator {
+export interface IStandoutValidator {
 	isValidFolder: (email: string) => boolean;
 }
 
-export interface IFolderUseCases {
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+export interface IStandoutUseCases {
+	addFolder: (folderData: IStandout) => Promise<any>;
+	copyFolder: (folderData: IStandout) => Promise<any>;
+	editFolder: (folderData: IStandout) => Promise<any>;
+	listFolderById: (folderData: IStandout) => Promise<any>;
+	listFolderByName: (folderData: IStandout) => Promise<any>;
+	listFolders: (folderData: IStandout) => Promise<any>;
+	listWorkspaceFolders: (folderData: IStandout) => Promise<any>;
+	moveFolder: (folderData: IStandout) => Promise<any>;
+	softRemoveFolder: (folderData: IStandout) => Promise<any>;
+	hardRemoveFolder: (folderData: IStandout) => Promise<any>;
 }
 
-export interface IFolderController {
+export interface IStandoutController {
 	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
 	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
 	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
