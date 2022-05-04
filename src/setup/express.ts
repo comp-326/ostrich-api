@@ -3,6 +3,7 @@ import v1 from '@ostrich-api/v1';
 import shouldCompress from '@ostrich-utils/compression';
 import express, { Application } from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import expressWinston from 'express-winston';
@@ -15,13 +16,17 @@ export default function ({ app }: { app: Application }) {
 	app.use(express.urlencoded({ extended: true }));
 	app.use(morgan('dev'));
 	app.use(compression({ filter: shouldCompress }));
-	app.use(helmet());
 	app.use(cookieParser());
-	app.use(expressWinston.logger({...HTTPLogOptions}));
+	app.use(expressWinston.logger({ ...HTTPLogOptions }));
 	app.use(expressWinston.errorLogger(HTTPerrorLogOptions));
-
+	app.use(cors({ origin: '*' }));
+	app.enable('trust proxy');
+	app.set('trust proxy', 1);
+	if (process.env.NODE_ENV === 'production') {
+		app.use(helmet());
+	}
 	app.use('/api/v1', v1());
-	pages({app});
+	pages({ app });
 
 	/* Error handler*/
 	app.use(ErrorHandler);

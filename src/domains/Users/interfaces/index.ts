@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+
 type FilesType =
 	| {
 			[fieldname: string]: Express.Multer.File[];
@@ -52,3 +53,5 @@ export interface IPassword {
 	hashPassword: (password: string) => Promise<string>;
 	comparePassword: (password: string, hash: string) => Promise<boolean>;
 }
+
+

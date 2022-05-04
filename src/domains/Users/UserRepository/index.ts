@@ -10,8 +10,8 @@ class UserRepository implements IUserRepository {
 		return newUser;
 	};
 	findByEmail: (email: string) => Promise<any> = async (email: string) => {
-		const user = await UserModel.findByEmail(email);
-		return user;
+		const user = await UserModel.findByEmail(email) as unknown as any;
+		return user._doc;
 	};
 	findById = async (id: string) => {
 		const user = await UserModel.findById(id).select('+password');

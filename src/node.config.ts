@@ -21,12 +21,13 @@ const config = {
 		COOKIE_HTTPONLY: process.env.COOKIE_HTTPONLY!
 	},
 	MAIL: {
-		EMAIL_USER: process.env.EMAIL_USER!,
-		EMAIL_PASSWORD: process.env.EMAIL_PASSWORD!,
-		EMAIL_HOST: process.env.EMAIL_HOST!,
-		EMAIL_PORT: parseInt(<string>process.env.EMAIL_PORT)!,
-		EMAIL_SECURE: Boolean(<string>process.env.EMAIL_SECURE)!,
-		EMAIL_PROXY: process.env.EMAIL_PROXY!
+		EMAIL_USER: process.env.EMAIL_USER || '',
+		EMAIL_PASSWORD: process.env.EMAIL_PASSWORD || '',
+		EMAIL_HOST: process.env.EMAIL_HOST || '',
+		EMAIL_FROM: process.env.EMAIL_FROM || '',
+		EMAIL_PORT: parseInt(<string>process.env.EMAIL_PORT) || 0,
+		EMAIL_SECURE: process.env.EMAIL_SECURE === 'true' ? true : false,
+		EMAIL_PROXY: process.env.EMAIL_PROXY || ''
 	},
 	PATHS: {
 		BASE_DIR: path.join(path.dirname(__filename), '.')

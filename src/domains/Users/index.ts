@@ -1,8 +1,9 @@
+import { BaseDomain } from '@ostrich/src/common/base/baseDomain';
 import { Router } from 'express';
-import api from './api';
+import api from './routes';
 
 const userRouter = Router();
-export default function userDomain(app: Router) {
+export default function userDomain(app: Router){
 	app.use('/users', userRouter);
 	// Update user
 	api.makeUpdateUserApiCall(userRouter);
@@ -23,4 +24,15 @@ export default function userDomain(app: Router) {
 	// Ger password reset link
 	api.makeQueryGetPasswordResetApiCall(userRouter);
 	return app;
+}
+
+class UserDomain extends BaseDomain{
+	constructor(pathName:string,router:Router){
+		super(pathName,router);
+	}
+	expose= () => {
+
+		return this.expressRouter;
+	};
+	
 }

@@ -13,6 +13,7 @@ import {
 import { Readable } from 'stream';
 import { mailConfig } from '@ostrich-config';
 
+
 interface IMailer {
 	host: string;
 	port: number;
@@ -141,13 +142,13 @@ class Mailer implements IMailer {
 
 	protected setTransporterOptions = () => {
 		const options = {
-			host: this.host,
-			port: this.port,
-			secure: this.secure,
-			proxy: this.proxy,
+			proxy: this.getProxy(),
+			host: this.getHost(),
+			port: this.getPort(),
+			secure: this.getSecure(),
 			auth: {
-				user: this.username,
-				pass: this.password
+				user: this.getMailerUsername(),
+				pass: this.getMailerPassword()
 			}
 		};
 		return nodemailer.createTransport(options);
@@ -164,7 +165,9 @@ const OstrichMailer = new Mailer();
 OstrichMailer.setHost(mailConfig.EMAIL_HOST)
 	.setMailerPassword(mailConfig.EMAIL_PASSWORD)
 	.setPort(mailConfig.EMAIL_PORT)
-	// .setSecure(mailConfig.EMAIL_SECURE)
-	.setMailerUsername(mailConfig.EMAIL_USER);
-// .setProxy(mailConfig.EMAIL_PROXY);
+	.setSecure(mailConfig.EMAIL_SECURE)
+	.setMailerUsername(mailConfig.EMAIL_USER)
+	.setProxy(mailConfig.EMAIL_PROXY);
+
+
 export default OstrichMailer;

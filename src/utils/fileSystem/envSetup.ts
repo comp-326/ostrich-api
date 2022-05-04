@@ -6,8 +6,6 @@ import dirExistSync from '@ostrich-utils/fileSystem/dirExist';
 
 function setEnvironmentVariables(envFilePath: string) {
 	let filepath = '';
-	const key = '';
-	const value = '';
 	try {
 		filepath = path.join(path.dirname(envFilePath), '.env.example');
 	} catch (err) {
@@ -20,7 +18,7 @@ function setEnvironmentVariables(envFilePath: string) {
 		.forEach(line => {
 			const [k, v] = line.trim().split('=');
 
-			if (key !== '') {
+			if (k !== '') {
 				data[k] = v;
 			}
 		});

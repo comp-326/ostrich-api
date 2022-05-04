@@ -5,10 +5,10 @@ export default function makeBuildPostRequestAccountActivationController({
 	requestActivation
 }: {
 	requestActivation: typeof requestAccountActivation;
-}) {
+}){
 	return async function postAccountActivationRequest(
 		httpRequest: IUserRequest
-	) {
+	){
 		const sent = await requestActivation(httpRequest.body.email);
 		if (sent) {
 			return {

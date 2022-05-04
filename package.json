@@ -9,7 +9,8 @@
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "env": "ts-node ./src/env.ts",
     "dev": "NODE_ENV=development nodemon",
-    "lint": "eslint ./src  --ext .ts --fix",
+    "lint": "eslint .  --ext .ts",
+    "lint:fix": "eslint .  --ext .ts --fix",
     "build": "gulp buildTS",
     "test": "NODE_ENV=testing jest"
   },
@@ -18,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "cloudinary": "^1.29.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
