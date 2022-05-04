@@ -8,8 +8,8 @@ export default function makeEditWorkspaceUseCase({
 	workspaceDB
 }: {
 	workspaceDB: IWorkspaceRepository;
-}) {
-	return async function (id: string, data: IWorkspaceEntity) {
+}){
+	return async function (id: string, data: IWorkspaceEntity){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide workspace id',

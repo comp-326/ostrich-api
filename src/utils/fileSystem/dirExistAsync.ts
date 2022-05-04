@@ -5,11 +5,11 @@ import fs from 'fs';
 const dirExistAsync = async (path: string) => {
 	let exist = false;
 	fs.access(path, async err => {
-		if (err) {
+		if (err) 
 			exist = false;
-		} else {
+		 else 
 			exist = true;
-		}
+		
 	});
 	return exist;
 };

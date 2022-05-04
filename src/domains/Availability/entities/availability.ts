@@ -5,8 +5,8 @@ export default function makeCreateUserEntity({
 	validator
 }: {
 	validator: IAvailabilityValidator;
-}) {
-	return function createUser({ days, endTime, startTime }: IAvailability) {
+}){
+	return function createUser({ days, endTime, startTime }: IAvailability){
 		const { isValiDays } = validator;
 		if (!isValiDays(days)) {
 			throw new ExpressError({

@@ -2,14 +2,14 @@
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import UserAccountMailer from '@ostrich-domains/Users/utils/mail/UserAccountMailer';
 import createUser from '@ostrich-domains/Auth/entities';
-import { IUser, IAuthRepository } from '@ostrich-domains/Auth/interfaces';
+import { IAuthRepository, IUser } from '@ostrich-domains/Auth/interfaces';
 
 export default function makeRegisterUserUseCase({
 	userDB
 }: {
 	userDB: IAuthRepository;
-}) {
-	return async function registerUserUseCase(userInfo: IUser) {
+}){
+	return async function registerUserUseCase(userInfo: IUser){
 		const user = await createUser(userInfo);
 		const existing = await userDB.findByEmail(user.getEmail());
 		if (existing) {

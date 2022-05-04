@@ -4,8 +4,8 @@ import { INext, IRequest, IResponse } from '@ostrich-common/types';
 import { UserControllerType } from '@ostrich-domains/Auth/controllers';
 import { IAuthRequest } from '@ostrich-domains/Auth/interfaces';
 
-export default function makeAuthRequestAdapter(controller: UserControllerType) {
-	return async function (req: IRequest, res: IResponse, next: INext) {
+export default function makeAuthRequestAdapter(controller: UserControllerType){
+	return async function (req: IRequest, res: IResponse, next: INext){
 		const httpRequest: IAuthRequest = {
 			body: req.body,
 			headers: req.headers,

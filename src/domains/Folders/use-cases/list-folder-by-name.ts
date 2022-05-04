@@ -5,8 +5,8 @@ export default function makeListFolderBynameUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
-	return async function listUserByNameUseCase(name: string) {
+}){
+	return async function listUserByNameUseCase(name: string){
 		if (!name) {
 			throw new ExpressError({
 				message: 'Please provide folder name',

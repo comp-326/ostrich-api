@@ -5,8 +5,8 @@ export default function makeListUsersUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function listUsersUseCase(limit: number, page: number) {
+}){
+	return async function listUsersUseCase(limit: number, page: number){
 		const users = await userDB.find(limit, page);
 		if (users.length < 1) {
 			throw new ExpressError({

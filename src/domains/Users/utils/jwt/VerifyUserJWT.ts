@@ -2,7 +2,7 @@ import { ExpressError } from '@ostrich-common/errors/ExpressError';
 import { JWTPayloadType } from '@ostrich-common/types';
 import { environmentConfig } from '@ostrich-config';
 import jwt from 'jsonwebtoken';
-class VerifyUserJWT {
+class VerifyUserJWT{
 	verifyPasswordToken = async (token: string) => {
 		try {
 			const decoded = jwt.verify(token, environmentConfig.SECRET_KEY) as JWTPayloadType;
@@ -16,7 +16,7 @@ class VerifyUserJWT {
 			});
 		}
 	};
-	activateUserTokenDecode(token: string) {
+	activateUserTokenDecode(token: string){
 		try {
 			const decoded = jwt.verify(token, environmentConfig.SECRET_KEY) as JWTPayloadType;
 			return decoded.userId;

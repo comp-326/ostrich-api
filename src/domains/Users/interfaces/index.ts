@@ -1,6 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import IRequest from '@ostrich/src/common/interfaces/request';
+import { IResponse } from '@ostrich/src/common/types';
+
 
 type FilesType =
 	| {
@@ -55,3 +58,53 @@ export interface IPassword {
 }
 
 
+export  interface IUserController {
+	/**
+	 * @param {IRequest} req
+	 * @param {IResponse} res
+	 */
+	softDeleteUser: (req: IRequest, res: IResponse) => Promise<any>;
+	createUser: (req: IRequest, res: IResponse) => Promise<any>;
+	deleteUser: (req: IRequest, res: IResponse) => Promise<any>;
+	findUserByEmail: (req: IRequest, res: IResponse) => Promise<any>;
+	findUserById: (req: IRequest, res: IResponse) => Promise<any>;
+	getAccountActivationLink: (req: IRequest, res: IResponse) => Promise<any>;
+	getPasswordResetLink: (req: IRequest, res: IResponse) => Promise<any>;
+	resetAccountPassword: (req: IRequest, res: IResponse) => Promise<any>;
+	activateAccount: (req: IRequest, res: IResponse) => Promise<any>;
+	findUsers: (req: IRequest, res: IResponse) => Promise<any>;
+	updateAccount: (req: IRequest, res: IResponse) => Promise<any>;
+	updateProfilePic: (req: IRequest, res: IResponse) => Promise<any>;
+	updatePassword: (req: IRequest, res: IResponse) => Promise<any>;
+}
+
+export type IUserData =
+	| 'email'
+	| 'dateOfBirth'
+	| 'firstName'
+	| 'lastName'
+	| 'isActive'
+	| 'avatar'
+	| '_id';
+
+export interface IUserUseCases {
+
+		addNewUser: (userData: IUser) => Promise<any>;
+		editUserProfile: (userId:string,userData: Partial<IUser>) => Promise<any>;
+		listUserById: (id: string) => Promise<any>;
+		listUserByEmail: (email: string) => Promise<any>;
+		listUsers: (query: {
+			limit: number;
+			offset: number;
+			query?: any;
+		}) => Promise<any>;
+		activateUserAccount: (email: string) => Promise<any>;
+		changeUserPassword: (
+			data: Pick<IUser, 'password'> & { confirmPassword: string }
+		) => Promise<any>;
+		softRemoveUser: (id:string) => Promise<any>;
+		hardRemoveUser: (id:string) => Promise<any>;
+		sendAccountActivationLink: (email:string) => Promise<any>;
+		sendPasswordResetLink: (email:string) => Promise<any>;
+	}
+	

@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import { IPassword } from '../interfaces';
-class Password implements IPassword {
+class Password implements IPassword{
 	/**
 	 *
 	 * @param {string} password

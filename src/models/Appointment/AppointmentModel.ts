@@ -53,7 +53,7 @@ const AppointmentSchema: mongoose.Schema<IAppointmentDocument> =
 		{ timestamps: true }
 	);
 
-AppointmentSchema.statics.getByTitle = async function (title: string) {
+AppointmentSchema.statics.getByTitle = async function (title: string){
 	return await AppointmentModel.findOne({ title });
 };
 const AppointmentModel = mongoose.model<

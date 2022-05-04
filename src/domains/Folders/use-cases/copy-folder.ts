@@ -7,11 +7,11 @@ export default function makeCopyFolderUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
+}){
 	return async function copyFolderUseCase(
 		destinationWorkspaceId: string,
 		folderId: string
-	) {
+	){
 		if (!destinationWorkspaceId) {
 			throw new ExpressError({
 				message: 'Please provide destination workspace id',

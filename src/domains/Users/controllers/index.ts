@@ -1,87 +1,200 @@
-import {
-	addUserUseCase,
-	editUserUseCase,
-	listUserByIdUseCase,
-	listUserByEmailUseCase,
-	listUsersUseCase,
-	removeUserUseCase,
-	activateUserUseCase,
-	editPasswordUseCase,
-	requestPasswordReset,
-	requestAccountActivation
-} from '../use-cases';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import IRequest from '@ostrich/src/common/interfaces/request';
+import { IResponse } from '@ostrich/src/common/types';
+import { IUserController } from '@ostrich-domains/Users/interfaces';
+import { IUserUseCases } from '../interfaces';
+import ResponseFormatter from '@ostrich/src/common/ResponseFormatter';
 
-// Get
-import makeBuildFindByIdUserController from './find-by-id';
-import makeBuildFindByEmailUserController from './find-by-email';
-import makeBuildFindUsersController from './find-users';
-// Post
-import makeBuildPostUserController from './post-user';
-import makeBuildPostRequestPasswordResetController from './post_password_reset';
-import makeBuildPostRequestAccountActivationController from './post_account_activation_request';
-// Update
-import makeBuildActivateUserController from './put-activate-user';
-import makeBuildUpdateByIdUserController from './put-user';
-import makeBuildPutUserPasswordController from './put-user-password';
-// Delete
-import makeBuildDeleteUserController from './delete-user';
+/**
+ *
+ * Brief description of the class here
+ * @extends ParentClassNameHereIfAny
+ * @implements {IUserController}
+ */
+class UserController implements IUserController{
+	protected useCase: IUserUseCases;
+	constructor(useCase: IUserUseCases){
+		this.useCase = useCase;
+	}
+	/**
+	 * Soft delete a user from db
+	 * @summary A simple delete of user entity
+	 * @param {IRequest} req - Express default request obj
+	 * @param {IResponse} res - Express default rquest obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	softDeleteUser = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.softRemoveUser(
+			req.params.id
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	deleteUser = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.hardRemoveUser(
+			req.params.id
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	findUserByEmail = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.listUserByEmail(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	findUserById = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.listUserById(
+			req.params.id
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	createUser = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.sendAccountActivationLink(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	getAccountActivationLink = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.sendAccountActivationLink(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	getPasswordResetLink = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.sendPasswordResetLink(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	resetAccountPassword = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.sendPasswordResetLink(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	activateAccount = async (req: IRequest, res: IResponse) => {
+		const { status, data, msg } = await this.useCase.activateUserAccount(
+			req.body.email
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	findUsers = async (req: IRequest, res: IResponse) => {
+		const { limit, page } = req.params;
+		const { status, data, msg } = await this.useCase.listUsers({
+			limit: limit ? parseInt(limit) : 20,
+			offset: page ? parseInt(page) : 1
+		});
+		return res
+			.status(200)
+			.json(
+				ResponseFormatter.SucessWithData({ status, msg, data, statusCode: 200 })
+			);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	updateAccount = async (req: IRequest, res: IResponse) => {
+		const { id } = req.params;
+		const { status, data, msg } = await this.useCase.editUserProfile(
+			id,
+			req.body
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	updateProfilePic = async (req: IRequest, res: IResponse) => {
+		const { id } = req.params;
+		const { status, data, msg } = await this.useCase.changeUserPassword(
+			req.body
+		);
+		return res.status(200).json(data);
+	};
+	/**
+	 * Controller obj.
+	 * @summary Summary
+	 * @param {IRequest} req Express default request obj
+	 * @param {IResponse} res Express default response obj
+	 * @return {IResponse} Response date returned by user usecase
+	 */
+	updatePassword = async (req: IRequest, res: IResponse) => {
+		const { id } = req.params;
+		const { status, data, msg } = await this.useCase.changeUserPassword(
+			req.body
+		);
+		return res.status(200).json(data);
+	};
+}
 
-const postUser = makeBuildPostUserController({ create: addUserUseCase });
-const putUser = makeBuildUpdateByIdUserController({ update: editUserUseCase });
-const deleteUser = makeBuildDeleteUserController({ remove: removeUserUseCase });
-const postRequestActivation = makeBuildPostRequestAccountActivationController({
-	requestActivation: requestAccountActivation
-});
-const postRequestPasswordReset = makeBuildPostRequestPasswordResetController({
-	requestPassword: requestPasswordReset
-});
-const findById = makeBuildFindByIdUserController({
-	listById: listUserByIdUseCase
-});
-const findByEmail = makeBuildFindByEmailUserController({
-	listByEmail: listUserByEmailUseCase
-});
-const findUsers = makeBuildFindUsersController({ find: listUsersUseCase });
-const activateAccount = makeBuildActivateUserController({
-	update: activateUserUseCase
-});
-const updatePasword = makeBuildPutUserPasswordController({
-	update: editPasswordUseCase
-});
-
-export default Object.freeze({
-	postUser,
-	putUser,
-	deleteUser,
-	findById,
-	findByEmail,
-	findUsers,
-	activateAccount,
-	updatePasword,
-	postRequestPasswordReset,
-	postRequestActivation
-});
-
-export {
-	postUser,
-	putUser,
-	deleteUser,
-	findById,
-	findByEmail,
-	findUsers,
-	activateAccount,
-	updatePasword,
-	postRequestPasswordReset,
-	postRequestActivation
-};
-
-export type UserControllerType =
-	| typeof postUser
-	| typeof putUser
-	| typeof deleteUser
-	| typeof findById
-	| typeof findByEmail
-	| typeof findUsers
-	| typeof activateAccount
-	| typeof postRequestPasswordReset
-	| typeof postRequestActivation;
+export default UserController;

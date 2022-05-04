@@ -4,7 +4,7 @@ import { putWorkspace } from '../controller';
 import authorize from '@ostrich-middlewares/Auth/authorize';
 import uploader from '@ostrich-base/uploader';
 const qRouter = Router();
-export async function makeQueryUpdateWorkspaceApiCall(app: Router) {
+export async function makeQueryUpdateWorkspaceApiCall(app: Router){
 	app.use('/update', qRouter);
 	qRouter.post(
 		'/:id',

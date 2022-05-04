@@ -1,13 +1,13 @@
 import { IWorkspaceEntity } from '@ostrich-domains/Workspace/interfaces';
 import { ExpressError } from '@ostrich-common/errors/ExpressError';
 
-export default function makeCreateWorkspaceEntity() {
+export default function makeCreateWorkspaceEntity(){
 	return function createWorkspace({
 		name,
 		owner,
 		type,
 		logo
-	}: IWorkspaceEntity) {
+	}: IWorkspaceEntity){
 		if (!name) {
 			throw new ExpressError({
 				message: 'Workspace name required',

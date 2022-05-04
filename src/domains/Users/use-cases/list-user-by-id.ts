@@ -6,8 +6,8 @@ export default function makeListUserByIdUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function listTodoByIdUseCase(id: string) {
+}){
+	return async function listTodoByIdUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide an id',

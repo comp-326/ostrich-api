@@ -3,14 +3,14 @@
 import RoleModel from '@ostrich-models/Roles/RoleModel';
 import UserModel from '@ostrich-models/Users/UserModel';
 // import Password from "../../Users/utils/Password"
-import { IUser, IAuthRepository } from '../interfaces';
+import { IAuthRepository, IUser } from '../interfaces';
 
-class AuthRepository implements IAuthRepository {
+class AuthRepository implements IAuthRepository{
 	createUser = async (user: IUser) => {
 		const roles = await RoleModel.find();
-		if (roles.length < 1) {
+		if (roles.length < 1) 
 			await RoleModel.InsertRoles();
-		}
+		
 		const defaultRole = await RoleModel.findOne({ default: true });
 		const newUser = await UserModel.create({
 			...user,

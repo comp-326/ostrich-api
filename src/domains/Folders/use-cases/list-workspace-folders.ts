@@ -6,18 +6,18 @@ export default function makeListWorkspaceFoldersUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
+}){
 	return async function listWorkspaceFoldersUseCase(
 		workspaceId: string,
 		limit: number,
 		page: number
-	) {
-		if (!page) {
+	){
+		if (!page) 
 			page = 1;
-		}
-		if (!limit) {
+		
+		if (!limit) 
 			limit = 10;
-		}
+		
 		if (!workspaceId) {
 			throw new ExpressError({
 				message: 'Please provide workspace id',

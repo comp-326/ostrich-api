@@ -3,7 +3,7 @@
 import AvailabilityModel from '@ostrich-models/Availability/AvailabilityModel';
 import { IAvailability, IAvailabilityRepository } from '../interfaces';
 
-class AvailabilityRepository implements IAvailabilityRepository {
+class AvailabilityRepository implements IAvailabilityRepository{
 	createAvailability = async (userId: string, data: IAvailability) => {
 		const availability = AvailabilityModel.create({ user: userId, data });
 		return availability;

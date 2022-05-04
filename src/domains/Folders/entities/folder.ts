@@ -5,7 +5,7 @@ export default function makeCreateFOlderEntity({
 	validator
 }: {
 	validator: IFolderValidator;
-}) {
+}){
 	return function createFolder({
 		address,
 		comments,
@@ -18,7 +18,7 @@ export default function makeCreateFOlderEntity({
 		size,
 		type,
 		views
-	}: IFolder) {
+	}: IFolder){
 		const { isValidFolder } = validator;
 		if (!isValidFolder(name)) {
 			throw new ExpressError({

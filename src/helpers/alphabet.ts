@@ -13,27 +13,27 @@ const ALPHABET = () => {
 	/**
 	 * Generate lowercase letters
 	 */
-	for (let index = llRange[0]; index <= llRange[1]; index++) {
+	for (let index = llRange[0]; index <= llRange[1]; index++) 
 		LowerCaseLetters.push(String.fromCharCode(index));
-	}
+	
 	/**
 	 * Generate uppercase letters
 	 */
-	for (let index = uppRange[0]; index <= uppRange[1]; index++) {
+	for (let index = uppRange[0]; index <= uppRange[1]; index++) 
 		UpperCaseLetters.push(String.fromCharCode(index));
-	}
+	
 	/**
 	 * Generate numbers
 	 */
-	for (let index = numberRange[0]; index <= numberRange[1]; index++) {
+	for (let index = numberRange[0]; index <= numberRange[1]; index++) 
 		numbers.push(String.fromCharCode(index));
-	}
+	
 	/**
 	 * Generate Symbols
 	 */
-	for (let index = symbolRange[0]; index <= symbolRange[1]; index++) {
+	for (let index = symbolRange[0]; index <= symbolRange[1]; index++) 
 		symbols.push(String.fromCharCode(index));
-	}
+	
 	const alphabets = UpperCaseLetters.concat(LowerCaseLetters)
 		.concat(numbers)
 		.concat(symbols);

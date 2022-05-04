@@ -6,8 +6,8 @@ export default function makeRemoveAvailabilityUseCase({
 	availabilityDB
 }: {
 	availabilityDB: IAvailabilityRepository;
-}) {
-	return async function removerAvailabilityUseCase(id: string) {
+}){
+	return async function removerAvailabilityUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide availability id',

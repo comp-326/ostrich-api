@@ -8,11 +8,11 @@ export default function makeAddFolderUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
+}){
 	return async function addFolderUseCase(
 		workspaceId: string,
 		folderInfo: IFolder
-	) {
+	){
 		const folder = createFolder(folderInfo);
 		const existing = await folderDB.findByName(folder.getName());
 		if (!workspaceId) {

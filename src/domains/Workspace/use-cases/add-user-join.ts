@@ -6,14 +6,14 @@ export default function makeJoinUserWorkspaceUsecase({
 	workspaceDB
 }: {
 	workspaceDB: any;
-}) {
+}){
 	return async function joinUserToWorkspaceUseCase({
 		userId,
 		workspaceId
 	}: {
 		userId: string;
 		workspaceId: string;
-	}) {
+	}){
 		if (!validateMongodbId(userId)) {
 			throw new ExpressError({
 				message: 'Invalid user id',

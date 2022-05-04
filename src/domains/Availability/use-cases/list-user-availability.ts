@@ -6,8 +6,8 @@ export default function makeListUserAvailabilityUseCase({
 	avaialbilityDB
 }: {
 	avaialbilityDB: IAvailabilityRepository;
-}) {
-	return async function listUserVailabilityUseCase(userId: string) {
+}){
+	return async function listUserVailabilityUseCase(userId: string){
 		if (!userId) {
 			throw new ExpressError({
 				message: 'Please provide user id',

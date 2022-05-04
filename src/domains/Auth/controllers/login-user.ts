@@ -6,8 +6,8 @@ export default function makeBuildLoginUserController({
 	login
 }: {
 	login: typeof loginUserUseCase;
-}) {
-	return async function (httpRequest: IAuthRequest) {
+}){
+	return async function (httpRequest: IAuthRequest){
 		const { email, password } = httpRequest.body;
 		const user = await login(email, password);
 

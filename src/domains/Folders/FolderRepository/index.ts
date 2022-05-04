@@ -4,7 +4,7 @@ import FolderModel from '@ostrich-models/Folder/FolderModel';
 import WorkspaceModel from '@ostrich-models/Workspace/WorkspaceModel';
 import { IFolder, IFolderRepository } from '../interfaces';
 
-class FolderRepository implements IFolderRepository {
+class FolderRepository implements IFolderRepository{
 	findByName = async (name: string) => {
 		const folder = await FolderModel.findOne({ name });
 		return folder;

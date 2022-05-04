@@ -8,7 +8,7 @@ export default function makeCreateUserEntity({
 }: {
 	validator: IUserValidator;
 	passwordUtil: IPassword;
-}) {
+}){
 	return async function createUser({
 		dateOfBirth,
 		email,
@@ -18,7 +18,7 @@ export default function makeCreateUserEntity({
 		avatar,
 		isActive,
 		role
-	}: IUser) {
+	}: IUser){
 		const { isValidEmail, isValidPassword } = validator;
 		const { hashPassword } = passwordUtil;
 		if (!isValidEmail(email)) {
@@ -71,9 +71,9 @@ export default function makeCreateUserEntity({
 				});
 			}
 		}
-		if (userPassword && userPassword.length < 50) {
+		if (userPassword && userPassword.length < 50) 
 			userPassword = await hashPassword(userPassword);
-		}
+		
 		const profilePic = avatar ? avatar : generateGravatarUrl(email);
 		return Object.freeze({
 			getFirsName: () => firstName,

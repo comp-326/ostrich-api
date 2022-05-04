@@ -5,8 +5,8 @@ export default function makeBuildPostWorkspaceController({
 	add
 }: {
 	add: typeof addWorkspace;
-}) {
-	return async function (httpRequest: IRequest) {
+}){
+	return async function (httpRequest: IRequest){
 		const user = httpRequest.user;
 		const workspaceData = httpRequest.body;
 

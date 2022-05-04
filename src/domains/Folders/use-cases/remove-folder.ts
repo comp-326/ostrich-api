@@ -6,8 +6,8 @@ export default function makeRemoveFolderUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
-	return async function removerFolderUseCase(id: string) {
+}){
+	return async function removerFolderUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide folder id',

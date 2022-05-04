@@ -7,8 +7,8 @@ export default function makeEditActivateUserUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function editActivateUserUserUseCase(id: string) {
+}){
+	return async function editActivateUserUserUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide an id',

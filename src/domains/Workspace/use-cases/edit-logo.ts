@@ -7,8 +7,8 @@ export default function makeEditLogoUseCase({
 	workspaceDB
 }: {
 	workspaceDB: IWorkspaceRepository;
-}) {
-	return async function uploadLogo(fileRequest: IRequest) {
+}){
+	return async function uploadLogo(fileRequest: IRequest){
 		const file = fileRequest.file;
 		const { id } = fileRequest.params;
 		const existing = await workspaceDB.findById(id);

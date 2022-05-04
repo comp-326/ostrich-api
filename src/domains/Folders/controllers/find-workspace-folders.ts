@@ -5,8 +5,8 @@ export default function makeBuildFindFoldersController({
 	find
 }: {
 	find: typeof listWorkspaceFoldersUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { workspaceId } = httpRequest.params;
 
 		const limit: number = httpRequest.query.limit
@@ -18,9 +18,9 @@ export default function makeBuildFindFoldersController({
 
 		const folders = await find(workspaceId, limit, page);
 
-		if (folders.length > 0) {
+		if (folders.length > 0) 
 			return { statusCode: 200, body: { folders } };
-		}
+		
 		return { statusCode: 404, body: { folders } };
 	};
 }

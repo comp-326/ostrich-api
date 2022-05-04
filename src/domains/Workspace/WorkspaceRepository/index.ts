@@ -5,7 +5,7 @@ import { UserDocumentType } from '@ostrich-models/Users/UserModel';
 import WorkspaceModel from '@ostrich-models/Workspace/WorkspaceModel';
 import { IWorkspaceEntity, IWorkspaceRepository } from '@ostrich-domains/Workspace/interfaces';
 
-class WorkspaceRepository implements IWorkspaceRepository {
+class WorkspaceRepository implements IWorkspaceRepository{
 	create = async (workspace: IWorkspaceEntity) => {
 		const newWorkspace = await WorkspaceModel.create({
 			...workspace,
@@ -85,7 +85,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			if (
 				workspace!.creatorLites.some(function (
 					user: Partial<UserDocumentType>,
-				) {
+				){
 					return user._id === userId;
 				})
 			) {

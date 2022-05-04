@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IResponse, IRequest } from '@ostrich-common/types';
+import { IRequest, IResponse } from '@ostrich-common/types';
 import { BASE_DIR } from '@ostrich/src/config';
 import path from 'path';
 import winston from 'winston';
@@ -52,7 +52,7 @@ export const HTTPLogOptions = {
 	expressFormat: true,
 	colorize: false,
 	// eslint-disable-next-line no-unused-vars
-	ignoreRoute: function (_req: IRequest, _res: IResponse) {
+	ignoreRoute: function (_req: IRequest, _res: IResponse){
 		return false;
 	}
 };

@@ -6,8 +6,8 @@ export default function makeListFolderByIdUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
-	return async function listFolderByIdUseCase(id: string) {
+}){
+	return async function listFolderByIdUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide folder id',

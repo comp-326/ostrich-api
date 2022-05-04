@@ -5,8 +5,8 @@ export default function makeListUserWorkspaceUseCase({
 	workspaceDB
 }: {
 	workspaceDB: IWorkspaceRepository;
-}) {
-	return async function (id: string) {
+}){
+	return async function (id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide user id',

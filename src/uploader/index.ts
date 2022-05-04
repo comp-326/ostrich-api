@@ -30,9 +30,9 @@ const videoFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
 		mime === 'video/quicktime' ||
 		mime === 'video/x-ms-wmv' ||
 		mime === 'video/x-matroska'
-	) {
+	) 
 		cb(null, true);
-	}
+	
 	cb(null, false);
 };
 
@@ -65,9 +65,9 @@ const audioFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
 		mime === 'audio/x-aiff' ||
 		mime === 'audio/basic' ||
 		mime === 'audio/x-matroska'
-	) {
+	) 
 		cb(null, true);
-	}
+	
 	cb(null, false);
 };
 
@@ -94,9 +94,9 @@ const imageFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
 		mime === 'image/jpg' ||
 		mime === 'image/jpeg' ||
 		mime === 'image/webp'
-	) {
+	) 
 		cb(null, true);
-	}
+	
 	cb(null, false);
 };
 

@@ -13,8 +13,8 @@ import UserModel from '@ostrich-models/Users/UserModel';
 import RoleModel from '@ostrich-models/Roles/RoleModel';
 import TokenGEN from '@ostrich-helpers/tokenGEN';
 
-class AuthMiddleware {
-	constructor(private role: typeof Model, private user: typeof Model) {}
+class AuthMiddleware{
+	constructor(private role: typeof Model, private user: typeof Model){}
 
 	validateIsAccountActive = async (
 		req: IRequest,
@@ -24,9 +24,9 @@ class AuthMiddleware {
 		try {
 			const { email } = req.body;
 			const user = await this.user.findOne({ email });
-			if (!user.isActive) {
+			if (!user.isActive) 
 				return res.status(401).json('Please activate your account');
-			}
+			
 			return next();
 		} catch (error) {
 			return next(error);
@@ -90,9 +90,9 @@ class AuthMiddleware {
 				}
 				const role = await this.role.findById(user.role);
 				const permitted = await role.hasPermission(Permissions.USER);
-				if (!permitted) {
+				if (!permitted) 
 					return res.sendStatus(403);
-				}
+				
 				return next();
 			});
 		} catch (error) {
@@ -105,9 +105,9 @@ class AuthMiddleware {
 				const user = await this.user.findById(req.user.userId);
 				const role = await this.role.findById(user.role);
 				const permitted = await role.hasPermission(Permissions.ADMIN);
-				if (!permitted) {
+				if (!permitted) 
 					return res.sendStatus(403);
-				}
+				
 				return next();
 			});
 		} catch (error) {

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { IUser, IUserRepository } from '../interfaces'; 
 import UserModel from '@ostrich-models/Users/UserModel';
-import { IUser, IUserRepository } from '../interfaces';
 
-class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository{
 	createUser: (data: IUser) => Promise<any> = async (user: IUser) => {
 		// const {pass}=
 		const newUser = await UserModel.create(user);

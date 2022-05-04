@@ -5,18 +5,18 @@ export default function makeListWorkspaceUseCase({
 	workspaceDB
 }: {
 	workspaceDB: IWorkspaceRepository;
-}) {
+}){
 	return async function (
 		limit: number | string,
 		page: number | string,
 		query?: any
-	) {
-		if (!limit) {
+	){
+		if (!limit) 
 			limit = 20;
-		}
-		if (!page) {
+		
+		if (!page) 
 			page = 1;
-		}
+		
 		const workspaces = await workspaceDB.find(
 			Number(limit),
 			Number(page),

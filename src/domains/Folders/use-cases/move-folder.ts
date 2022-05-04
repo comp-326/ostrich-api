@@ -6,11 +6,11 @@ export default function makeMoveFolderUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
+}){
 	return async function moveFolderUseCase(
 		destinationWorkspaceId: string,
 		folderId: string
-	) {
+	){
 		if (!destinationWorkspaceId) {
 			throw new ExpressError({
 				message: 'Please provide destination workspace id',

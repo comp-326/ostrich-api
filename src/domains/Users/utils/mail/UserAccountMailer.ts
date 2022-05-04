@@ -9,7 +9,7 @@ import { mailConfig } from '@ostrich/src/config';
 import { OstrichMailer } from '@ostrich/src/Services/MailService';
 import moment from 'moment';
 
-class Accountmailer {
+class Accountmailer{
 	sendPasswordResetLink = () => {
 		return async function ({
 			firstName,
@@ -21,7 +21,7 @@ class Accountmailer {
 			firstName: string;
 			lastName: string;
 			_id: string;
-		}) {
+		}){
 			let sent = false;
 			const token = tokenGenerator.generatePasswordResetToken({ userId: _id })(
 				'24h'
@@ -66,7 +66,7 @@ class Accountmailer {
 			firstName: string;
 			lastName: string;
 			_id: string;
-		}) {
+		}){
 			let sent = false;
 			const token = tokenGenerator.generatePasswordResetToken({ userId: _id })(
 				'24h'

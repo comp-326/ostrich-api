@@ -5,8 +5,8 @@ export default function makeListUserByEmail({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function listUserByEmailUseCase(email: string) {
+}){
+	return async function listUserByEmailUseCase(email: string){
 		if (!email) {
 			throw new ExpressError({
 				message: 'Please provide a valid email address',

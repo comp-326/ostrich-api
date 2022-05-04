@@ -7,8 +7,8 @@ export default function makeBuildGetWorkspaceController({
 	get
 }: {
 	get: typeof listWorkspaces;
-}) {
-	return async function (httpRequest: IRequest) {
+}){
+	return async function (httpRequest: IRequest){
 		const { limit, page } = httpRequest.query as any;
 
 		const workspaces = await get(limit!, page!);

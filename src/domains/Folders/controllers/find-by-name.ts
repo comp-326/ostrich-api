@@ -5,8 +5,8 @@ export default function makeBuildFindByNameFolderController({
 	listByName
 }: {
 	listByName: typeof listFolderByNameUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { name } = httpRequest.query;
 
 		const folder = await listByName(name);

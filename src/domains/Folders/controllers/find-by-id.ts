@@ -5,8 +5,8 @@ export default function makeBuildFindByIdController({
 	listById
 }: {
 	listById: typeof listFolderByIdUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { id } = httpRequest.params;
 
 		const todo = await listById(id);

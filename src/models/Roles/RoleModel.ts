@@ -32,27 +32,27 @@ const RoleModelSchema: mongoose.Schema<RoleTypeDocument> = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-RoleModelSchema.methods.hasPermission = function (permission: number) {
+RoleModelSchema.methods.hasPermission = function (permission: number){
 	const permitted = (this.permissions & permission) === permission;
 	return permitted;
 };
 
-RoleModelSchema.methods.addPermission = function (permission: number) {
-	if (!this.hasPermission(permission)) {
+RoleModelSchema.methods.addPermission = function (permission: number){
+	if (!this.hasPermission(permission)) 
 		this.permissions += permission;
-	}
+	
 };
-RoleModelSchema.methods.removePermission = function (permission: number) {
-	if (this.hasPermission(permission)) {
+RoleModelSchema.methods.removePermission = function (permission: number){
+	if (this.hasPermission(permission)) 
 		this.permissions -= permission;
-	}
+	
 };
 
-RoleModelSchema.methods.resetPermission = function () {
+RoleModelSchema.methods.resetPermission = function (){
 	this.permissions = 0;
 };
 
-RoleModelSchema.statics.InsertRoles = async function () {
+RoleModelSchema.statics.InsertRoles = async function (){
 	const roles: { [key: string]: number[] } = {
 		['User']: [
 			Permissions.VIEW,
@@ -73,13 +73,13 @@ RoleModelSchema.statics.InsertRoles = async function () {
 	const defaultRole = 'User';
 	for (const r of Object.keys(roles)) {
 		let role = await RoleModel.findOne({ name: r });
-		if (!role) {
+		if (!role) 
 			role = new RoleModel({ name: r });
-		}
+		
 		role.resetPermission();
-		for (const perm of roles[r]) {
+		for (const perm of roles[r]) 
 			role.addPermission(perm);
-		}
+		
 		role.default = role.name === defaultRole;
 		await role.save();
 	}

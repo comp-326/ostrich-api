@@ -5,8 +5,8 @@ export default function makeBuildPutMoveFolderController({
 	move
 }: {
 	move: typeof moveFolderUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { workspaceId, folderId } = httpRequest.params;
 
 		const folder = await move(workspaceId, folderId);

@@ -7,8 +7,8 @@ export default function makeLoginUserByUseCase({
 	userDB
 }: {
 	userDB: IAuthRepository;
-}) {
-	return async function loginUserUseCase(email: string, password: string) {
+}){
+	return async function loginUserUseCase(email: string, password: string){
 		if (!email) {
 			throw new ExpressError({
 				message: 'Email required',

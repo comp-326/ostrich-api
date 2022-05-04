@@ -7,11 +7,11 @@ export default function makeEditAvailabilityUseCase({
 	availabilityDB
 }: {
 	availabilityDB: IAvailabilityRepository;
-}) {
+}){
 	return async function editAvailabilityUseCase(
 		id: string,
 		data: IAvailability
-	) {
+	){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide availability id',

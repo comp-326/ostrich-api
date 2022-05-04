@@ -2,7 +2,7 @@ import { Router } from 'express';
 import api from './api';
 
 const workspaceRouter = Router();
-export default function workspaceDomain(app: Router) {
+export default function workspaceDomain(app: Router){
 	app.use('/workspaces', workspaceRouter);
 	// Get all workspaces
 	api.makeQueryAllWorkspaceApiCall(workspaceRouter);

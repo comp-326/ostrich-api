@@ -5,8 +5,8 @@ export default function makeBuildDeleteUserController({
 	remove
 }: {
 	remove: typeof removeAvailabilityUseCase;
-}) {
-	return async function (httpRequest: IAvailabilityRequest) {
+}){
+	return async function (httpRequest: IAvailabilityRequest){
 		const { id } = httpRequest.params;
 
 		await remove(id);

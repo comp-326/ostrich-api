@@ -3,8 +3,8 @@ import { INext, IRequest, IResponse } from '@ostrich-common/types';
 import { AvailabilityControllerType } from '../controllers';
 import { IAvailabilityRequest } from '../interfaces';
 
-export default function MakeRequestAdapter(controller: AvailabilityControllerType) {
-	return async function (req: IRequest, res: IResponse,next:INext) {
+export default function MakeRequestAdapter(controller: AvailabilityControllerType){
+	return async function (req: IRequest, res: IResponse,next:INext){
 		const httpRequest: IAvailabilityRequest = {
 			body: req.body,
 			headers: req.headers,

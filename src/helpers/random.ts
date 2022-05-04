@@ -3,11 +3,11 @@ import Alphabet from './alphabet';
  *@param {number} length
  * @returns
  */
-export default function (length: number) {
+export default function (length: number){
 	try {
-		if (!(length >= 8) || length > 12) {
+		if (!(length >= 8) || length > 12) 
 			throw new Error('Length must be >= 8 and <=12');
-		}
+		
 		let password = '';
 		const alpha = Alphabet.ALPHABETS;
 		// console.log(alpha,Math.ceil( + 1)

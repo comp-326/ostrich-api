@@ -5,8 +5,8 @@ export default function makeBuildFindUsersController({
 	find
 }: {
 	find: typeof listUserAvailabilityUseCase;
-}) {
-	return async function (httpRequest: IAvailabilityRequest) {
+}){
+	return async function (httpRequest: IAvailabilityRequest){
 		const { userId } = httpRequest.params;
 		const availability = await find(userId);
 

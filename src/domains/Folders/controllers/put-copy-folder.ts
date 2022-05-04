@@ -5,8 +5,8 @@ export default function makeBuildPutCopyFolderController({
 	copy
 }: {
 	copy: typeof copyFolderUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { workspaceId, folderId } = httpRequest.params;
 
 		const folder = await copy(workspaceId, folderId);

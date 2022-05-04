@@ -1,20 +1,14 @@
-import workspaceDomain from '@ostrich-domains/Workspace';
-import authDomain from '@ostrich-domains/Auth';
-import userDomain from '@ostrich-domains/Users';
-import { swaggerServe, SwaggerSetup } from '@ostrich-utils/docs';
+import { SwaggerSetup, swaggerServe } from '@ostrich-utils/docs';
 import { Router } from 'express';
-import availabilityDomain from '@ostrich-domains/Availability';
-import folderDomain from '@ostrich-domains/Folders';
-import test_route from './test_route';
+import UserDomain from '@ostrich/src/domains/Users/routes';
+import { environmentConfig } from '@ostrich/src/config';
+import testRoute from './testRoute';
 
-export default function () {
-	const apiRoute = Router();
-	userDomain(apiRoute);
-	authDomain(apiRoute);
-	workspaceDomain(apiRoute);
-	availabilityDomain(apiRoute);
-	folderDomain(apiRoute);
-	apiRoute.get('/', test_route);
-	apiRoute.use('/docs', swaggerServe, SwaggerSetup);
+const apiRoute = Router();
+export default function (){
+	const basePath = environmentConfig.API_PREFIX;
+	UserDomain({ app: apiRoute, pathName: `${basePath}/users` });
+	apiRoute.get(`${basePath}/test`, testRoute);
+	apiRoute.use(`${basePath}/docs`, swaggerServe, SwaggerSetup);
 	return apiRoute;
 }

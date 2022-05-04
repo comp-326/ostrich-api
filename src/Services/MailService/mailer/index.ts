@@ -81,7 +81,7 @@ interface ISendMailOptions {
 	priority?: 'high' | 'normal' | 'low' | undefined;
 }
 
-class Mailer implements IMailer {
+class Mailer implements IMailer{
 	host: string;
 	port: number;
 	secure: boolean;
@@ -89,7 +89,7 @@ class Mailer implements IMailer {
 	password: string;
 	proxy: string;
 
-	constructor() {
+	constructor(){
 		this.host = '';
 		this.port = 0;
 		this.secure = false;

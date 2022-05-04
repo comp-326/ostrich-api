@@ -6,8 +6,8 @@ export default function makeBuildRegisterUserController({
 	create
 }: {
 	create: typeof registerUserUseCase;
-}) {
-	return async function registerUser(httpRequest: IAuthRequest) {
+}){
+	return async function registerUser(httpRequest: IAuthRequest){
 		const user = await create(httpRequest.body);
 
 		return {

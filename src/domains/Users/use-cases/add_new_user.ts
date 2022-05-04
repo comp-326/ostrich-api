@@ -8,8 +8,8 @@ export default function makeAddUserUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function addUserUseCase(userInfo: IUser) {
+}){
+	return async function addUserUseCase(userInfo: IUser){
 		const user = await createUser(userInfo);
 		const existing = await userDB.findByEmail(user.getEmail());
 

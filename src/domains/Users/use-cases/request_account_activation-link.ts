@@ -6,8 +6,8 @@ export default function makeRequestAccountActivation({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function requestAccountActivation(email: string) {
+}){
+	return async function requestAccountActivation(email: string){
 		if (!email) {
 			throw new ExpressError({
 				message: 'Please provide an email',

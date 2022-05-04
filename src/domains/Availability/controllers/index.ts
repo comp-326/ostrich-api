@@ -1,8 +1,8 @@
 import {
 	addAvailabilityUseCase,
 	editAvailabilityUseCase,
-	listUserAvailabilityUseCase,
 	listAvailabilityById,
+	listUserAvailabilityUseCase,
 	removeAvailabilityUseCase,
 } from '../use-cases';
 import makeBuildPostAvailabilityController from './post-availability';

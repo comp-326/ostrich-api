@@ -1,6 +1,6 @@
 import { IRequest, IResponse } from '@ostrich-common/types';
 import compression from 'compression';
-export default function (req: IRequest, res: IResponse) {
+export default function (req: IRequest, res: IResponse){
 	if (req.headers['x-no-compression']) {
 		// don't compress responses with this request header
 		return false;

@@ -7,8 +7,8 @@ export default function makeEditFolderUseCase({
 	folderDB
 }: {
 	folderDB: IFolderRepository;
-}) {
-	return async function editFolderUseCase(id: string, data: IFolder) {
+}){
+	return async function editFolderUseCase(id: string, data: IFolder){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide folder id',

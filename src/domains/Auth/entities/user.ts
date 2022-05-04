@@ -9,7 +9,7 @@ export default function makeCreateUserEntity({
 }: {
 	validator: IUserValidator;
 	passwordUtil: IPassword;
-}) {
+}){
 	return async function createUser({
 		dateOfBirth,
 		email,
@@ -17,7 +17,7 @@ export default function makeCreateUserEntity({
 		lastName,
 		password,
 		avatar
-	}: IUser) {
+	}: IUser){
 		const { isValidEmail, isValidPassword } = validator;
 		const { hashPassword } = passwordUtil;
 		if (!isValidEmail(email)) {

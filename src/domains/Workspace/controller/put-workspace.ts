@@ -4,8 +4,8 @@ export default function makeBuildPutWorkspaceController({
 	update
 }: {
 	update: typeof editWorkspace;
-}) {
-	return async function (httpRequest: IRequest) {
+}){
+	return async function (httpRequest: IRequest){
 		const { id } = httpRequest.params;
 
 		const user = httpRequest.user;

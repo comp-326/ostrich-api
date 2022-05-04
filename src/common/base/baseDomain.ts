@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 interface IBaseDomain{
     expressRouter:Router
-    expose:()=>Router
+    expose:(app:Router)=>Router
 }
 
 export abstract class BaseDomain implements IBaseDomain{
@@ -18,5 +18,5 @@ export abstract class BaseDomain implements IBaseDomain{
 	}
 
 
-	abstract expose:()=>Router
+	abstract expose:(app:Router)=>Router
 }

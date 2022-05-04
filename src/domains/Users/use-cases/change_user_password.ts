@@ -9,11 +9,11 @@ export default function makeEditUserPasswordUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
+}){
 	return async function editUserUserPasswordUseCase(
 		resetToken: string,
 		data: Pick<IUser, 'password'> & { confirmPassword: string }
-	) {
+	){
 		if (!resetToken) {
 			throw new ExpressError({
 				message: 'Please provide a reset token',

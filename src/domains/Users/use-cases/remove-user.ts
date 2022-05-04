@@ -6,8 +6,8 @@ export default function makeRemoveUserUseCase({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function removerUserUseCase(id: string) {
+}){
+	return async function removerUserUseCase(id: string){
 		if (!id) {
 			throw new ExpressError({
 				message: 'Please provide an id',

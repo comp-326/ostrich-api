@@ -47,17 +47,17 @@ const UserSchema: mongoose.Schema<UserDocumentType> = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-UserSchema.methods.hashPassword = async function (password: string) {
+UserSchema.methods.hashPassword = async function (password: string){
 	const salt = await bcrypt.genSalt(15);
 	const hashed = await bcrypt.hash(password, salt);
 	this.password = hashed;
 	await this.save();
 };
-UserSchema.methods.comparePassword = async function (password: string) {
+UserSchema.methods.comparePassword = async function (password: string){
 	const match = await bcrypt.compare(password, this.password);
 	return match;
 };
-UserSchema.statics.findByEmail = async function (email: string) {
+UserSchema.statics.findByEmail = async function (email: string){
 	const user = await UserModel.findOne({ email });
 	return user;
 };

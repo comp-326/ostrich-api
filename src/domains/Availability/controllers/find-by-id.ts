@@ -5,8 +5,8 @@ export default function makeBuildFindByIdController({
 	listById
 }: {
 	listById: typeof listAvailabilityById;
-}) {
-	return async function (httpRequest: IAvailabilityRequest) {
+}){
+	return async function (httpRequest: IAvailabilityRequest){
 		const { id } = httpRequest.params;
 
 		const todo = await listById(id);

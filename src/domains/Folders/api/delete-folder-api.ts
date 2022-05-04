@@ -4,7 +4,7 @@ import { deleteFolder } from '../controllers';
 import authorize from '@ostrich-middlewares/Auth/authorize';
 
 const qRouter = Router();
-export async function makeQueryDeleteFolderApiCall(app: Router) {
+export async function makeQueryDeleteFolderApiCall(app: Router){
 	app.use('/delete', qRouter);
 	qRouter.delete(
 		'/:id',

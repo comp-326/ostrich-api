@@ -5,8 +5,8 @@ export default function makeBuildDeleteFolderController({
 	remove
 }: {
 	remove: typeof removeFolderUseCase;
-}) {
-	return async function (httpRequest: IFolderRequest) {
+}){
+	return async function (httpRequest: IFolderRequest){
 		const { id } = httpRequest.params;
 		await remove(id);
 		return {

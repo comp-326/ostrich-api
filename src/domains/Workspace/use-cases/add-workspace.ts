@@ -6,8 +6,8 @@ export default function makeAddUserUseCase({
 	workspaceDB,
 }: {
 	workspaceDB: IWorkspaceRepository
-}) {
-	return async function addWorkspaceUseCase(workspaceInfo: IWorkspaceEntity) {
+}){
+	return async function addWorkspaceUseCase(workspaceInfo: IWorkspaceEntity){
 		const workspace = createWorkspace(workspaceInfo);
 		// const existing = await workspaceDB.findByName(workspace.getName())
 

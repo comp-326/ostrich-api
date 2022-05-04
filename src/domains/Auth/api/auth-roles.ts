@@ -3,7 +3,7 @@ import RoleModel from '@ostrich-models/Roles/RoleModel';
 import { Router } from 'express';
 
 const qRouter = Router();
-export function makeQueryRolesApiCall(app: Router) {
+export function makeQueryRolesApiCall(app: Router){
 	app.use('/roles', qRouter);
 	qRouter.get('/', authorize.loginRequired, async (_req, res) => {
 		const roles = await RoleModel.find();

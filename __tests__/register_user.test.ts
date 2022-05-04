@@ -3,7 +3,7 @@ import request from 'supertest';
 import app from '@ostrich-base/app';
 const url = '/api/v1';
 describe('Register User', () => {
-	it('Responds with a JSON data', async function () {
+	it('Responds with a JSON data', async function (){
 		await request(app)
 			.post(`${url}/auth/register`)
 			.send({

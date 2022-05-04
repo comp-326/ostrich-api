@@ -2,7 +2,7 @@ import { Router } from 'express';
 import api from './api';
 
 const availabilityRouter = Router();
-export default function availabilityDomain(app: Router) {
+export default function availabilityDomain(app: Router){
 	app.use('/availability', availabilityRouter);
 	api.makeQueryNewAvailabilityApiCall(availabilityRouter);
 	api.makeUpdateAvailabilityApiCall(availabilityRouter);

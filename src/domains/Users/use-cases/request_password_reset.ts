@@ -6,8 +6,8 @@ export default function makeRequestPasswordReset({
 	userDB
 }: {
 	userDB: IUserRepository;
-}) {
-	return async function requestPasswordReset(email: string) {
+}){
+	return async function requestPasswordReset(email: string){
 		if (!email) {
 			throw new ExpressError({
 				message: 'Please provide an email',
