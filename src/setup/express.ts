@@ -25,7 +25,7 @@ export default function ({ app }: { app: Application }){
 	if (process.env.NODE_ENV === 'production') 
 		app.use(helmet());
 	
-	app.use('/', v1());
+	app.use('/api/v1/', v1());
 	pages({ app });
 
 	/* Error handler */

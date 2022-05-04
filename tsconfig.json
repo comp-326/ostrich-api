@@ -47,7 +47,7 @@
       "@ostrich-app/setup": ["./src/setup"],
       "@ostrich-app/setup/*": ["./src/setup/*"],
       "@ostrich-app/scripts/tasks/*": ["./src/scripts/tasks/*"],
-      "@ostrich-app/domains/*": ["./src/domains/*"],
+      "@ostrich-app/features/*": ["src/features/*"],
       "@ostrich-app/models/*": ["./src/models/*"],
       "@ostrich-app/common/*": ["./src/common/*"],
       "@ostrich-app/services/*": ["./src/services/*"],
