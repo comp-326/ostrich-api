@@ -2,7 +2,7 @@
 import { IUserDocument, IUserDocumentModel } from '@ostrich-app/features/users/models/interfaces';
 import mongoose from '@ostrich-app/db/mongodb';
 
-const UserSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
+const userSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 	firstName: {
 		type: String,
 		required: true,
@@ -60,6 +60,6 @@ const UserSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 
 });
 
-const UserModel = mongoose.model<IUserDocument, IUserDocumentModel>('Users', UserSchema);
+const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('Users', userSchema);
 
-export default UserModel;
+export default userModel;

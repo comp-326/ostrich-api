@@ -83,10 +83,15 @@ interface ISendMailOptions {
 
 class Mailer implements IMailer{
 	host: string;
+
 	port: number;
+
 	secure: boolean;
+
 	username: string;
+
 	password: string;
+
 	proxy: string;
 
 	constructor(){

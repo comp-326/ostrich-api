@@ -8,6 +8,7 @@ import { NextFunction } from 'express';
 
 class FolderController implements IWorkspaceController{
 	constructor(private useCase: IWorkspaceUseCases){ }
+
 	hardDeleteWorkspace = async (
 		req: IRequest,
 		res: IResponse,
@@ -15,6 +16,7 @@ class FolderController implements IWorkspaceController{
 	) => {
 		return res.status(200).json({ working: 'Ok' });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -125,6 +127,7 @@ class FolderController implements IWorkspaceController{
 			message: 'softDelete'
 		});
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -136,6 +139,7 @@ class FolderController implements IWorkspaceController{
 	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ folders: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -147,6 +151,7 @@ class FolderController implements IWorkspaceController{
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -158,6 +163,7 @@ class FolderController implements IWorkspaceController{
 	findByName = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -169,6 +175,7 @@ class FolderController implements IWorkspaceController{
 	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -180,6 +187,7 @@ class FolderController implements IWorkspaceController{
 	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -191,6 +199,7 @@ class FolderController implements IWorkspaceController{
 	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -202,6 +211,7 @@ class FolderController implements IWorkspaceController{
 	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -213,6 +223,7 @@ class FolderController implements IWorkspaceController{
 	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary

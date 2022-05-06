@@ -65,12 +65,19 @@ export type StatusCodeType =
 	| 511; // Network Authentication Required200
 export class ExpressError extends Error implements IExpressError{
 	status: StatusType;
+
 	data: any;
+
 	isOperational: boolean;
+
 	statusCode: StatusCodeType;
+
 	name: string;
+
 	message: string;
+
 	stack?: string | undefined;
+
 	constructor({
 		data,
 		message,
@@ -88,6 +95,7 @@ export class ExpressError extends Error implements IExpressError{
 		this.statusCode = statusCode;
 		this.data = data;
 	}
+
 	toJSON = () => {
 		return {
 			message: this.message,

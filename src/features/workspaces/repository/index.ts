@@ -8,20 +8,24 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		const folder = await WorkspaceModel.findOne({ name });
 		return folder;
 	};
+
 	findById = async (id: string) => {
 		const folder = await WorkspaceModel.findById(id);
 		return folder;
 	};
+
 	findWorkspaceById = async (id: string) => {
 		const workspace = await WorkspaceModel.findById(id);
 		return workspace;
 	};
+
 	find = async (limit: number, page: number) => {
 		const folders = await WorkspaceModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 		return folders;
 	};
+
 	findWorkspaceWorkspaces = async (
 		workspaceId: string,
 		limit: number,
@@ -34,6 +38,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 			.skip(limit * (page - 1));
 		return workspaceWorkspaces;
 	};
+
 	updateById = async (id: string, data: IWorkspace) => {
 		const editedWorkspace = await WorkspaceModel.findByIdAndUpdate(
 			id,
@@ -42,18 +47,23 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		);
 		return editedWorkspace;
 	};
+
 	deleteById = async (id: string) => {
 		await WorkspaceModel.findByIdAndDelete(id);
 		return true;
 	};
+
 	comment: (id: string) => Promise<any>;
+
 	like: (userId: string, id: string) => Promise<any>;
+
 	move = async (destinationWorkspace: string, folderId: string) => {
 		const movedWorkspace = await WorkspaceModel.findByIdAndUpdate(folderId, {
 			workspace: destinationWorkspace,
 		});
 		return movedWorkspace;
 	};
+
 	copy = async (destinationWorkspace: string, folderData: IWorkspace) => {
 		const copiedWorkspace = await WorkspaceModel.create({
 			...folderData,
@@ -61,6 +71,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		});
 		return copiedWorkspace;
 	};
+
 	createWorkspace = async (workspaceId: string, data: IWorkspace) => {
 		const newWorkspace = await WorkspaceModel.create({
 			...data,

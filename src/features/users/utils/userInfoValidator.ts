@@ -7,6 +7,7 @@ class UserInfoValidator implements IUserValidator{
 		const mailRegex = new RegExp(emailRegex);
 		return mailRegex.test(email);
 	};
+
 	isValidPassword = ({ fields, props }: PasswordValidatorType) => {
 		let errors = '';
 		try {

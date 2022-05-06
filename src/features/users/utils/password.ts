@@ -10,6 +10,7 @@ class Password implements IPassword{
 		const hashedPassword = await bcryptjs.hash(password, salt);
 		return hashedPassword;
 	};
+
 	/**
 	 *
 	 * @param {string} password

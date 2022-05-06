@@ -32,6 +32,7 @@ class AuthMiddleware{
 			return next(error);
 		}
 	};
+
 	verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			if (!req.cookies) {
@@ -99,6 +100,7 @@ class AuthMiddleware{
 			return next(error);
 		}
 	};
+
 	adminRequired = async (req: IRequest, res: Response, next: NextFunction) => {
 		try {
 			this.loginRequired(req, res, async () => {

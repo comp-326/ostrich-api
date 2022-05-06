@@ -4,6 +4,7 @@ import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 
 class CommentsController implements ICommentsController{
 	constructor(private useCase: ICommentsUseCases){}
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -17,6 +18,7 @@ class CommentsController implements ICommentsController{
 			message: 'softDelete'
 		});
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -28,6 +30,7 @@ class CommentsController implements ICommentsController{
 	findCommentss = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ Commentss: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -39,6 +42,7 @@ class CommentsController implements ICommentsController{
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -50,6 +54,7 @@ class CommentsController implements ICommentsController{
 	findByName = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -61,6 +66,7 @@ class CommentsController implements ICommentsController{
 	findWorkspaceCommentss = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -72,6 +78,7 @@ class CommentsController implements ICommentsController{
 	createComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -83,6 +90,7 @@ class CommentsController implements ICommentsController{
 	copyComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -94,6 +102,7 @@ class CommentsController implements ICommentsController{
 	updateComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -105,6 +114,7 @@ class CommentsController implements ICommentsController{
 	moveComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary

@@ -5,9 +5,11 @@ import { IServicesController, IServicesUseCases } from '../interfaces';
 
 class ServicesController implements IServicesController{
 	constructor(private useCase: IServicesUseCases){ }
+
 	updateService = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ working: 'OK' });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -22,6 +24,7 @@ class ServicesController implements IServicesController{
 			message: 'softDelete'
 		});
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -33,6 +36,7 @@ class ServicesController implements IServicesController{
 	findServicess = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ Servicess: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -44,6 +48,7 @@ class ServicesController implements IServicesController{
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -55,6 +60,7 @@ class ServicesController implements IServicesController{
 	findByName = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -66,6 +72,7 @@ class ServicesController implements IServicesController{
 	findWorkspaceServicess = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -77,6 +84,7 @@ class ServicesController implements IServicesController{
 	createServices = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -88,6 +96,7 @@ class ServicesController implements IServicesController{
 	copyServices = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -99,6 +108,7 @@ class ServicesController implements IServicesController{
 	updateServices = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -110,6 +120,7 @@ class ServicesController implements IServicesController{
 	moveServices = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary

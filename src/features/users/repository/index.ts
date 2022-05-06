@@ -9,14 +9,17 @@ class UserRepository implements IUserRepository{
 		const newUser = await UserModel.create(user);
 		return newUser;
 	};
+
 	findByEmail: (email: string) => Promise<any> = async (email: string) => {
 		const user = await UserModel.findOne({email}) as unknown as any;
 		return user._doc;
 	};
+
 	findById = async (id: string) => {
 		const user = await UserModel.findById(id).select('+password');
 		return user;
 	};
+
 	find = async (limit: number, page: number) => {
 		const users = await UserModel.find({})
 			.populate('role', 'name -_id ')
@@ -24,6 +27,7 @@ class UserRepository implements IUserRepository{
 			.skip(limit * (page - 1));
 		return users;
 	};
+
 	updateById = async (id: string, data: IUser) => {
 		const updated = await UserModel.findByIdAndUpdate(
 			id,
@@ -32,6 +36,7 @@ class UserRepository implements IUserRepository{
 		).select('+password');
 		return updated!._doc;
 	};
+
 	deleteById = async (id: string) => {
 		const deleted = await UserModel.findByIdAndDelete(id);
 		return deleted!._doc;

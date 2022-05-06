@@ -4,6 +4,7 @@ import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 
 class FolderController implements IFolderController{
 	constructor(private useCase: IFolderUseCases){}
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -17,6 +18,7 @@ class FolderController implements IFolderController{
 			message: 'softDelete'
 		});
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -28,6 +30,7 @@ class FolderController implements IFolderController{
 	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ folders: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -39,6 +42,7 @@ class FolderController implements IFolderController{
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -50,6 +54,7 @@ class FolderController implements IFolderController{
 	findByName = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -61,6 +66,7 @@ class FolderController implements IFolderController{
 	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -72,6 +78,7 @@ class FolderController implements IFolderController{
 	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -83,6 +90,7 @@ class FolderController implements IFolderController{
 	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -94,6 +102,7 @@ class FolderController implements IFolderController{
 	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -105,6 +114,7 @@ class FolderController implements IFolderController{
 	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
+
 	/**
 	 * Brief desc
 	 * @summary Summary

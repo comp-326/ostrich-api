@@ -9,20 +9,24 @@ class FolderRepository implements IFolderRepository{
 		const folder = await FolderModel.findOne({ name });
 		return folder;
 	};
+
 	findById = async (id: string) => {
 		const folder = await FolderModel.findById(id);
 		return folder;
 	};
+
 	findWorkspaceById = async (id: string) => {
 		const workspace = await WorkspaceModel.findById(id);
 		return workspace;
 	};
+
 	find = async (limit: number, page: number) => {
 		const folders = await FolderModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 		return folders;
 	};
+
 	findWorkspaceFolders = async (
 		workspaceId: string,
 		limit: number,
@@ -35,6 +39,7 @@ class FolderRepository implements IFolderRepository{
 			.skip(limit * (page - 1));
 		return workspaceFolders;
 	};
+
 	updateById = async (id: string, data: IFolder) => {
 		const editedFolder = await FolderModel.findByIdAndUpdate(
 			id,
@@ -43,18 +48,23 @@ class FolderRepository implements IFolderRepository{
 		);
 		return editedFolder;
 	};
+
 	deleteById = async (id: string) => {
 		await FolderModel.findByIdAndDelete(id);
 		return true;
 	};
+
 	comment: (id: string) => Promise<any>;
+
 	like: (userId: string, id: string) => Promise<any>;
+
 	move = async (destinationWorkspace: string, folderId: string) => {
 		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
 			workspace: destinationWorkspace,
 		});
 		return movedFolder;
 	};
+
 	copy = async (destinationWorkspace: string, folderData: IFolder) => {
 		const copiedFolder = await FolderModel.create({
 			...folderData,
@@ -62,6 +72,7 @@ class FolderRepository implements IFolderRepository{
 		});
 		return copiedFolder;
 	};
+
 	createFolder = async (workspaceId: string, data: IFolder) => {
 		const newFolder = await FolderModel.create({
 			...data,

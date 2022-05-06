@@ -55,6 +55,7 @@ class Accountmailer{
 			}
 		};
 	};
+
 	sendEmailActivationLink = () => {
 		return async function ({
 			email,

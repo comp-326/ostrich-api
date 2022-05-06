@@ -7,10 +7,12 @@ class UserRoleRepository implements IUserRoleRepository{
 		if (role) return role;
 		return null;
 	};
+
 	createRoles = async () => {
 		const roles = await UserRoleModel.InsertRoles();
 		return roles;
 	};
+
 	findRoles = async () => {
 		const roles = await UserRoleModel.find({});
 		return roles;

@@ -2,7 +2,7 @@ import { IMediaDocument, IMediaDocumentModel } from '@ostrich-app/features/media
 import mongoose from '@ostrich-app/db/mongodb';
 
 
-const MediaSchema: mongoose.Schema<IMediaDocument> = new mongoose.Schema({
+const mediaSchema: mongoose.Schema<IMediaDocument> = new mongoose.Schema({
 	mediaType: {
 		type: String,
 		enum: ['image', 'video', 'audio'],
@@ -31,7 +31,7 @@ const MediaSchema: mongoose.Schema<IMediaDocument> = new mongoose.Schema({
 });
 
 
-const MediaModel = mongoose.model<IMediaDocument, IMediaDocumentModel>('Media', MediaSchema);
+const mediaModel = mongoose.model<IMediaDocument, IMediaDocumentModel>('Media', mediaSchema);
 
 
-export default MediaModel;
+export default mediaModel;

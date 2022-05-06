@@ -3,7 +3,7 @@ import { IUserRoleDocument, IUserRoleDocumentModel } from '@ostrich-app/features
 import Permissions from '@ostrich-app/constants/permissions';
 import mongoose from '@ostrich-app/db/mongodb';
 
-const UserRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
+const userRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
 	default: {
 		type: Boolean,
 	},
@@ -22,28 +22,28 @@ const UserRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
 	timestamps: true
 });
 
-const UserRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', UserRoleSchema);
-UserRoleSchema.methods.hasPermission = function (permission: number){
+const userRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', userRoleSchema);
+userRoleSchema.methods.hasPermission = function (permission: number){
 	const permitted = (this.permissions & permission) === permission;
 	return permitted;
 };
 
-UserRoleSchema.methods.addPermission = function (permission: number){
+userRoleSchema.methods.addPermission = function (permission: number){
 	if (!this.hasPermission(permission))
 		this.permissions += permission;
 
 };
-UserRoleSchema.methods.removePermission = function (permission: number){
+userRoleSchema.methods.removePermission = function (permission: number){
 	if (this.hasPermission(permission))
 		this.permissions -= permission;
 
 };
 
-UserRoleSchema.methods.resetPermission = function (){
+userRoleSchema.methods.resetPermission = function (){
 	this.permissions = 0;
 };
 
-UserRoleSchema.statics.InsertRoles = async function (){
+userRoleSchema.statics.InsertRoles = async function (){
 	const roles: { [key: string]: number[] } = {
 		['User']: [
 			Permissions.VIEW,
@@ -63,9 +63,9 @@ UserRoleSchema.statics.InsertRoles = async function (){
 	};
 	const defaultRole = 'User';
 	Object.keys(roles).forEach(async(r) => {
-		let role = await UserRoleModel.findOne({ name: r });
+		let role = await userRoleModel.findOne({ name: r });
 		if (!role)
-			role = new UserRoleModel({ name: r });
+			role = new userRoleModel({ name: r });
 
 		role.resetPermission();
 		for (const perm of roles[r])
@@ -76,4 +76,4 @@ UserRoleSchema.statics.InsertRoles = async function (){
 	});
 };
 
-export default UserRoleModel;
+export default userRoleModel;

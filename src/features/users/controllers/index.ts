@@ -13,9 +13,11 @@ import ResponseFormatter from '@ostrich-app/common/ResponseFormatter';
  */
 class UserController implements IUserController{
 	protected useCase: IUserUseCases;
+
 	constructor(useCase: IUserUseCases){
 		this.useCase = useCase;
 	}
+
 	/**
 	 * Soft delete a user from db
 	 * @summary A simple delete of user entity
@@ -29,6 +31,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -42,6 +45,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -55,6 +59,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -68,6 +73,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -81,6 +87,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -94,6 +101,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -107,6 +115,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -120,6 +129,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -133,6 +143,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -152,6 +163,7 @@ class UserController implements IUserController{
 				ResponseFormatter.SucessWithData({ status, msg, data, statusCode: 200 })
 			);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -167,6 +179,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary
@@ -181,6 +194,7 @@ class UserController implements IUserController{
 		);
 		return res.status(200).json(data);
 	};
+
 	/**
 	 * Controller obj.
 	 * @summary Summary

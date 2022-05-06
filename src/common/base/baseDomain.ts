@@ -7,7 +7,9 @@ interface IBaseDomain{
 
 export abstract class BaseDomain implements IBaseDomain{
 	public expressRouter: Router;
+
 	private _pathName:string;
+
 	constructor(pathName:string,router:Router){
 		this.expressRouter=router;
 		this._pathName = `/api/v1/${pathName}`;

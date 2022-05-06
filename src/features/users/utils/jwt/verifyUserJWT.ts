@@ -16,6 +16,7 @@ class VerifyUserJWT{
 			});
 		}
 	};
+
 	activateUserTokenDecode(token: string){
 		try {
 			const decoded = jwt.verify(token, environmentConfig.SECRET_KEY) as JWTPayloadType;

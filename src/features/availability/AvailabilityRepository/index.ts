@@ -8,16 +8,19 @@ class AvailabilityRepository implements IAvailabilityRepository{
 		const availability = AvailabilityModel.create({ user: userId, data });
 		return availability;
 	};
+
 	findById = async (id: string) => {
 		const availability = await AvailabilityModel.findById(id);
 		return availability;
 	};
+
 	find = async (userId: string) => {
 		const userAvailabilities = await AvailabilityModel.find({
 			owner: userId,
 		});
 		return userAvailabilities;
 	};
+
 	updateById = async (id: string, data: IAvailability) => {
 		const availability = await AvailabilityModel.findByIdAndUpdate(
 			id,
@@ -28,6 +31,7 @@ class AvailabilityRepository implements IAvailabilityRepository{
 		);
 		return availability;
 	};
+
 	deleteById = async (id: string) => {
 		await AvailabilityModel.findByIdAndDelete(id);
 		return { deleted: true };
