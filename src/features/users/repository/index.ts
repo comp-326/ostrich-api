@@ -1,20 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IUser, IUserRepository } from '../interfaces'; 
+import { IUser } from '@ostrich-app/features/users/models/interfaces';
+import { IUserRepository } from '@ostrich-app/features/users/interfaces';
 import UserModel from '@ostrich-app/features/users/models';
+import UserRoleModel from '@ostrich-app/features/userRoles/models';
+import { generateGravatarUrl } from '@ostrich-app/common/gravatar';
+import mediaModel from '@ostrich-app/features/media/models';
 
 class UserRepository implements IUserRepository{
-	createUser: (data: IUser) => Promise<any> = async (user: IUser) => {
-		// const {pass}=
-		const newUser = await UserModel.create(user);
 
-		return newUser;
+
+	createUser=async (userData: IUser) => {
+		const role = await UserRoleModel.getDefaultRole();
+		if (role) {
+			const profilePicture = await mediaModel.create({
+				type:'profile',
+				url:generateGravatarUrl(userData.email),
+				uploadId:userData.email,
+				size:200,
+				mediaType:'image'
+			});
+			
+			
+			const newUser = await UserModel.create({...userData,role,profilePicture});
+
+			return newUser;
+		}else {
+
+			await UserRoleModel.InsertRoles();
+			const defaultRole = await UserRoleModel.getDefaultRole();
+			const profilePicture = await mediaModel.create({
+				type:'profile',
+				url:generateGravatarUrl(userData.email),
+				uploadId:userData.email,
+				size:200,
+				mediaType:'image'
+			});
+			const newUser = await UserModel.create({ ...userData, role: defaultRole ,profilePicture});
+
+			return newUser;
+		}
 	};
 
-	findByEmail: (email: string) => Promise<any> = async (email: string) => {
+	findByEmail=async(email: string) => {
 		const user = await UserModel.findOne({email}) as unknown as any;
 
-		return user._doc;
+		return user;
 	};
 
 	findById = async (id: string) => {

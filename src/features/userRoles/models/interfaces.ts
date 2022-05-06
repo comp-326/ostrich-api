@@ -17,6 +17,6 @@ export interface IUserRoleDocument extends IUserRole, mongoose.Document {
 
 export interface IUserRoleDocumentModel extends mongoose.Model<IUserRoleDocument> {
     insertRoles: () => void;
-    getDefaultRole: () => Promise<IUserRoleDocument>;
+    getDefaultRole: () => Promise<any>;
     InsertRoles: () => Promise<any>;
 }  

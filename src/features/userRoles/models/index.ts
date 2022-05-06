@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUserRoleDocument, IUserRoleDocumentModel } from '@ostrich-app/features/userRoles/models/interfaces';
 import Permissions from '@ostrich-app/constants/permissions';
 import mongoose from '@ostrich-app/db/mongodb';
+import { IUserRoleDocument, IUserRoleDocumentModel } from '@ostrich-app/features/userRoles/models/interfaces';
 
 const userRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
 	default: {
@@ -22,7 +22,7 @@ const userRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
 	timestamps: true
 });
 
-const userRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', userRoleSchema);
+
 userRoleSchema.methods.hasPermission = function (permission: number){
 	const permitted = (this.permissions & permission) === permission;
 
@@ -44,6 +44,12 @@ userRoleSchema.methods.resetPermission = function (){
 	this.permissions = 0;
 };
 
+userRoleSchema.statics.getDefaultRole = async function (){
+	const defaultRole = await userRoleModel.findOne({ default: true });
+
+	return defaultRole;
+};
+
 userRoleSchema.statics.InsertRoles = async function (){
 	const roles: { [key: string]: number[] } = {
 		['User']: [
@@ -62,6 +68,7 @@ userRoleSchema.statics.InsertRoles = async function (){
 			Permissions.ADMIN
 		]
 	};
+
 	const defaultRole = 'User';
 	Object.keys(roles).forEach(async(r) => {
 		let role = await userRoleModel.findOne({ name: r });
@@ -76,5 +83,5 @@ userRoleSchema.statics.InsertRoles = async function (){
 		await role.save();
 	});
 };
-
+const userRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', userRoleSchema);
 export default userRoleModel;

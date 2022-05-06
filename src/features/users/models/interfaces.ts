@@ -6,11 +6,11 @@ export interface IUser {
     email: string
     gender: 'male' | 'female' | 'other' | 'rather not say'
     password: string
-    profilePicture: any
-    bio: string
-    isActive: boolean
-    role: any
-    isDeleted: boolean
+    profilePicture?: any
+    bio?: string
+    isActive?: boolean
+    role?: any
+    isDeleted?: boolean
 
 }
 

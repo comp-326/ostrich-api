@@ -1,6 +1,6 @@
-import { IPassword, IUser, IUserValidator } from '../interfaces';
 import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import { generateGravatarUrl } from '@ostrich-app/common/gravatar';
+import { IUser } from '@ostrich-app/features/users/models/interfaces';
+import { IPassword, IUserValidator } from '@ostrich-app/features/users/interfaces';
 
 export default function makeCreateUserEntity({
 	validator,
@@ -10,14 +10,12 @@ export default function makeCreateUserEntity({
 	passwordUtil: IPassword;
 }){
 	return async function createUser({
-		dateOfBirth,
 		email,
 		firstName,
 		lastName,
 		password: userPassword,
-		avatar,
 		isActive,
-		role
+		role, bio, gender, isDeleted, profilePicture
 	}: IUser){
 		const { isValidEmail, isValidPassword } = validator;
 		const { hashPassword } = passwordUtil;
@@ -71,19 +69,19 @@ export default function makeCreateUserEntity({
 				});
 			}
 		}
-		if (userPassword && userPassword.length < 50) 
+		if (userPassword && userPassword.length < 50)
 			userPassword = await hashPassword(userPassword);
-		
-		const profilePic = avatar ? avatar : generateGravatarUrl(email);
 
 		return Object.freeze({
 			getFirsName: () => firstName,
 			getLastName: () => lastName,
-			getDateOfBirth: () => dateOfBirth,
+			getBio: () => bio,
 			getIsActive: () => (isActive ? isActive : false),
 			getRole: () => (role ? role : 'user'),
-			getAvatar: () => profilePic,
+			getProfilePic: () => profilePicture,
 			getPassword: () => userPassword,
+			getIsDelete: () => isDeleted,
+			getGender: () => gender,
 			getEmail: () => email
 		});
 	};

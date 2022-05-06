@@ -1,5 +1,5 @@
-import { IMediaDocument, IMediaDocumentModel } from '@ostrich-app/features/media/models/interfaces';
 import mongoose from '@ostrich-app/db/mongodb';
+import { IMediaDocument, IMediaDocumentModel } from '@ostrich-app/features/media/models/interfaces';
 
 
 const mediaSchema: mongoose.Schema<IMediaDocument> = new mongoose.Schema({

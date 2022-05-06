@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUserDocument, IUserDocumentModel } from '@ostrich-app/features/users/models/interfaces';
 import mongoose from '@ostrich-app/db/mongodb';
+import { IUserDocument, IUserDocumentModel } from '@ostrich-app/features/users/models/interfaces';
 
 const userSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 	firstName: {

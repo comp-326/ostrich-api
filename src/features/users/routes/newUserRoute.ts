@@ -11,7 +11,7 @@ export default function newUserRoute(app:Router){
 		const controller = new UserController(userUseCase);
 		const userRouter = Router();
 		app.use(`${pathName}`,userRouter);
-		userRouter.get('/account/register',controller.createUser);
+		userRouter.post('/account/register',controller.createUser);
 
 	};
 }

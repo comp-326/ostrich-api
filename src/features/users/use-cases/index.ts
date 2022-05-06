@@ -1,5 +1,7 @@
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IUser } from '@ostrich-app/features/users/models/interfaces';
-import userRoleModel from '@ostrich-app/features/userRoles/models';
+import createUser from '@ostrich-app/features/users/entities';
+import entity from '@ostrich-app/features/users/entities';
 import { IUserRepository, IUserUseCases } from '../interfaces';
 
 
@@ -11,23 +13,27 @@ export class UserUseCase implements IUserUseCases{
 	}
 
 	addNewUser = async (userData: IUser) => {
-		const role = await userRoleModel.getDefaultRole();
-		if (role) {
+		const newUser = await entity(userData);
+		const existing = await this.repository.findByEmail(newUser.getEmail());
+		if(existing) {
+			throw new ExpressError({
+				message: 'User already exists',
+				status: 'warning',
+				statusCode: 409,
+				data: {
+					email: newUser.getEmail()}
 
-			const user = await this.repository.createUser({ ...userData, role });
 
-			return user._doc;
-		} else {
-			await userRoleModel.InsertRoles();
-			const defaultRole = await userRoleModel.getDefaultRole();
-			const newUser = await this.repository.createUser({...userData,role:defaultRole});
-
-			return newUser._doc;
+			});
 		}
+		const user = await this.repository.createUser({ ...userData});
+
+		return user;
+		
 	};
 
 	editUserProfile = async (userId: string, userData: IUser) => {
-		const newUserData = await this.repository.updateById(userId,userData);
+		const newUserData = await this.repository.updateById(userId, userData);
 
 		return newUserData;
 	};
@@ -44,20 +50,71 @@ export class UserUseCase implements IUserUseCases{
 		return user;
 	};
 
-	listUsers = async ({limit,offset}: { limit: number; offset: number; }) => {
-		const users = await this.repository.find(limit,offset);
+	listUsers = async ({ limit, offset }: { limit: number; offset: number; }) => {
+		const users = await this.repository.find(limit, offset);
+		if(users.length === 0) {
+			throw new ExpressError({
+				message: 'No users found',
+				status: 'warning',
+				statusCode: 404,
+				data: {
+					limit,
+					offset
+				}
+			});
+		}
 
 		return users;
 	};
 
 	activateUserAccount = async (email: string) => {
-		const user = await this.repository.findByEmail(email);
+		if(!email) {
+			throw new ExpressError({
+				message: 'Email is required',
+				status: 'warning',
+				statusCode: 400,
+				data: {
+					email
+				}
+			});
+		}
+		const existing = await this.repository.findByEmail(email);
+		if(!existing) {
+			throw new ExpressError({
+				message: 'User not found',
+				status: 'warning',
+				statusCode: 404,
+				data: {
+					email
+				}
+			});
+		}
+		if(existing.isActive) {
+			throw new ExpressError({
+				message: 'User account already activated',
+				status: 'warning',
+				statusCode: 409,
+				data: {
+				}
+			});
+		}
+		const updated = await createUser({...existing, isActive: true});
+		const user = await this.repository.updateById(existing._id, {
+			email: updated.getEmail(),
+			isActive: updated.getIsActive(),
+			firstName: updated.getFirsName(),
+			lastName: updated.getLastName(),
+			gender:updated.getGender(),
+			password:updated.getPassword(),
+			bio:updated.getBio(),
+			profilePicture:updated.getProfilePic()
+		});
 
 		return user;
 	};
 
-	changeUserPassword = async (id:string,data: IUser) => {
-		const user = await this.repository.updateById(id,data);
+	changeUserPassword = async (id: string, data: IUser) => {
+		const user = await this.repository.updateById(id, data);
 
 		return user;
 	};
