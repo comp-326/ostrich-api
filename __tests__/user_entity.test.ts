@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import createUser from '@domains/Users/entities';
+import createUser from '@ostrich-app/domains/users/entities';
 
 test('Create a user entity', () => {
 	const userData: any = { email: 'jane', password: 'password' };
-	expect(() => {
-		createUser(userData).getEmail();
+	expect(async () => {
+		await (await createUser(userData)).getEmail();
 	}).toThrow();
 });
 
 test('Create a user entity', () => {
 	const userData: any = { email: 'jane@gmail.com', password: 'password' };
-	expect(() => {
-		createUser(userData).getEmail();
+	expect(async () => {
+		(await createUser(userData)).getEmail();
 	}).toThrow();
 });
 
@@ -25,7 +25,7 @@ test('Create a user entity', () => {
 		firstName: 'Jane',
 		lastName: 'Doe'
 	};
-	expect(() => {
-		createUser(userData).getEmail();
+	expect(async () => {
+		(await createUser(userData)).getEmail();
 	}).toThrow();
 });

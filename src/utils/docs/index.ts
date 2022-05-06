@@ -1,20 +1,20 @@
-import { BASE_DIR, NODE_ENV } from "@root/config"
-import path from "path"
-import swaggerUI from "swagger-ui-express"
-import yaml from "yamljs"
+import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
+import path from 'path';
+import swaggerUI from 'swagger-ui-express';
+import yaml from 'yamljs';
 
 const swaggerDocument =
-	NODE_ENV === "development"
-		? yaml.load(path.join(BASE_DIR, "swagger-docs/api.yml"))
-		: null
+	environmentConfig.NODE_ENV === 'development'
+		? yaml.load(path.join(BASE_DIR, 'swagger-docs/api.yml'))
+		: null;
 
 const options = {
 	explorer: true,
-	customSiteTitle: "Ostrich app API",
-}
+	customSiteTitle: 'Ostrich app API',
+};
 
-const SwaggerSetup = swaggerUI.setup(swaggerDocument, options)
-const swaggerServe = swaggerUI.serve
+const swaggerSetup = swaggerUI.setup(swaggerDocument, options);
+const swaggerServe = swaggerUI.serve;
 
-export default Object.freeze({ swaggerServe, SwaggerSetup })
-export { swaggerServe, SwaggerSetup }
+export default Object.freeze({ swaggerServe, swaggerSetup });
+export { swaggerServe, swaggerSetup };

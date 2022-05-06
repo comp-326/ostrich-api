@@ -5,7 +5,9 @@ import path from 'path';
 dotenv.config();
 const config = {
 	ENV: {
-		PORT: process.env.PORT!,
+		PORT: process.env.PORT||'ostrich-app',
+		API_PREFIX: process.env.API_PREFIX||'/api/v1',
+		APP_NAME: process.env.APP_NAME!,
 		NODE_ENV: process.env.NODE_ENV!,
 		SECRET_KEY: process.env.SECRET_KEY!,
 		REFRESH_KEY: process.env.REFRESH_KEY!,
@@ -20,8 +22,13 @@ const config = {
 		COOKIE_HTTPONLY: process.env.COOKIE_HTTPONLY!
 	},
 	MAIL: {
-		EMAIL_ACCOUNT: process.env.EMAIL_ACCOUNT!,
-		EMAIL_PASSWORD: process.env.EMAIL_PASSWORD!
+		EMAIL_USER: process.env.EMAIL_USER || '',
+		EMAIL_PASSWORD: process.env.EMAIL_PASSWORD || '',
+		EMAIL_HOST: process.env.EMAIL_HOST || '',
+		EMAIL_FROM: process.env.EMAIL_FROM || '',
+		EMAIL_PORT: parseInt(<string>process.env.EMAIL_PORT) || 0,
+		EMAIL_SECURE: process.env.EMAIL_SECURE === 'true' ? true : false,
+		EMAIL_PROXY: process.env.EMAIL_PROXY || ''
 	},
 	PATHS: {
 		BASE_DIR: path.join(path.dirname(__filename), '.')

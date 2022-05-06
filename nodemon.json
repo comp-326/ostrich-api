@@ -12,5 +12,6 @@
     "delay": "3",
     "execMap": {
       "ts": "ts-node"
-    }
+    },
+    "exec":"ts-node ./src/server.ts"
   }

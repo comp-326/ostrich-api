@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import createDirectory from './createDirectory';
-import deleteFile from './deleteFile';
-import dirExistSync from './dirExist';
-import dirExistAsync from './dirExistAsync';
+import createDirectory from '@ostrich-app/utils/fileSystem/createDirectory';
+import deleteFile from '@ostrich-app/utils/fileSystem/deleteFile';
+import dirExistAsync from '@ostrich-app/utils/fileSystem/dirExistAsync';
+import dirExistSync from '@ostrich-app/utils/fileSystem/dirExist';
 
-// import { NODE_ENV } from "@root/config"
-import setEnvironmentVariables from './envSetup';
+// import { NODE_ENV } from "@ostrich-app/config"
+import setEnvironmentVariables from '@ostrich-app/utils/fileSystem/envSetup';
 
 export default Object.freeze({
 	dirExistAsync,

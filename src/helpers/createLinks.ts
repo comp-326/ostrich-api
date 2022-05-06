@@ -1,5 +1,4 @@
-import { BASE_URL, PORT } from '../config';
-import { NODE_ENV } from '@root/config';
+import { environmentConfig } from '@ostrich-app/config';
 
 /**
  *
@@ -12,8 +11,8 @@ function createWorkspaceInviteLink({
 }: {
 	role: string;
 	workspaceId: string;
-}) {
-	return `http://localhost:${PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
+}){
+	return `http://localhost:${environmentConfig.PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
 }
 
 /**
@@ -21,19 +20,20 @@ function createWorkspaceInviteLink({
  * @param {string} param0
  * @returns
  */
-function createAccountActivationLink({ token }: { token: string }) {
-	return `http://localhost:${PORT}/account/activate/${token}`;
+function createAccountActivationLink({ token }: { token: string }){
+	return `http://localhost:${environmentConfig.PORT}/account/activate/${token}`;
 }
+
 /**
  *
  * @param {{baseUrl:string,token:string}} param0
  * @returns
  */
-function createForgotPasswordLink(token: string) {
+function createForgotPasswordLink(token: string){
 	const baseUrl =
-		NODE_ENV === ('development' || 'testing')
-			? `http://localhost:${PORT}/api/v1/users/account/password/reset/${token}`
-			: `${BASE_URL}/api/v1/users/account/password/reset/${token}`;
+		environmentConfig.NODE_ENV === ('development' || 'testing')
+			? `http://localhost:${environmentConfig.PORT}/api/v1/users/account/password/reset/${token}`
+			: `${environmentConfig.BASE_URL}/api/v1/users/account/password/reset/${token}`;
 
 	return baseUrl;
 }

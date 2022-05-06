@@ -1,13 +1,12 @@
-import path from 'path';
 import crypto from 'crypto';
-import os from 'os';
+import dirExistSync from '@ostrich-app/utils/fileSystem/dirExist';
 import fs from 'fs';
-import dirExistSync from './dirExist';
+import os from 'os';
+import path from 'path';
 
-function setEnvironmentVariables(envFilePath: string) {
+function setEnvironmentVariables(envFilePath: string){
 	let filepath = '';
-	const key = '';
-	const value = '';
+
 	try {
 		filepath = path.join(path.dirname(envFilePath), '.env.example');
 	} catch (err) {
@@ -19,14 +18,13 @@ function setEnvironmentVariables(envFilePath: string) {
 		.split(os.EOL)
 		.forEach(line => {
 			const [k, v] = line.trim().split('=');
-			if (key === k) {
-				data[k] = value;
-			} else {
+
+			if (k !== '') 
 				data[k] = v;
-			}
+			
 		});
 
-	data['PORT'] = '4001';
+	data['PORT'] = '6200';
 	data['SECRET_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['REFRESH_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['ENC_KEY'] = crypto.randomBytes(64).toString('hex');
@@ -45,21 +43,27 @@ function setEnvironmentVariables(envFilePath: string) {
 			.forEach(line => {
 				if (line !== '') {
 					const [k, v] = line.trim().split('=');
-					if (v !== '') {
+					if (v !== '') 
 						data[k] = v;
-					}
-					if (!Object.keys(data).includes(k)) {
+					
+					if (!Object.keys(data).includes(k)) 
 						data[k] = v;
-					}
+					
 				}
 			});
 	}
-	const env = Object.entries(data).map(([key, value]) => {
-		return `${key}=${value}`;
-	});
-	const sampleEnvBuffer = Object.entries(data).map(([key]) => {
-		return `${key}=`;
-	});
+	const env = Object.entries(data)
+		.sort((a, b) => {
+			return a[0].localeCompare(b[0]);
+		})
+		.map(([k, v]) => {
+			return k !== '' && `${k}=${v}`;
+		});
+	const sampleEnvBuffer = Object.entries(data)
+		.sort((a, b) => a[0].localeCompare(b[0]))
+		.map(([k]) => {
+			return `${k}=`;
+		});
 	fs.writeFileSync(
 		path.join(path.dirname(envFilePath), '.env'),
 		env.join(os.EOL),
