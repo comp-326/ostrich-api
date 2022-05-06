@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import IRequest from '@ostrich-app/common/interfaces/request';
-import { IResponse } from '@ostrich-app/common/types';
-import { IUserController } from '@ostrich-app/features/users/interfaces';
-import { IUserUseCases } from '../interfaces';
-import ResponseFormatter from '@ostrich-app/common/ResponseFormatter';
+import responseFormatter from '@ostrich-app/common/responseFormatter';
+import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { IUserController, IUserUseCases } from '@ostrich-app/features/users/interfaces';
 
-/**
- *
- * Brief description of the class here
- * @extends ParentClassNameHereIfAny
- * @implements {IUserController}
- */
+
 class UserController implements IUserController{
 	protected useCase: IUserUseCases;
 
@@ -30,7 +23,13 @@ class UserController implements IUserController{
 			req.params.id
 		);
 
-		return res.status(200).json(data);
+		return res.status(200).json(responseFormatter.ResponseWithData({
+			data,
+			message: 'Success',
+			status: 'ok',
+			statusCode: 200,
+			params: {}
+		}));
 	};
 
 	/**
@@ -200,7 +199,7 @@ class UserController implements IUserController{
 	 */
 	updateProfilePic = async (req: IRequest, res: IResponse) => {
 		const { id } = req.params;
-		const { status, data, msg } = await this.useCase.changeUserPassword(
+		const { status, data, msg } = await this.useCase.addNewUser(
 			req.body
 		);
 
@@ -216,7 +215,7 @@ class UserController implements IUserController{
 	 */
 	updatePassword = async (req: IRequest, res: IResponse) => {
 		const { id } = req.params;
-		const { status, data, msg } = await this.useCase.changeUserPassword(
+		const { status, data, msg } = await this.useCase.addNewUser(
 			req.body
 		);
 

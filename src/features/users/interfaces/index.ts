@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IUser } from '@ostrich-app/features/users/models/interfaces';
 import { INext,IRequest,IResponse } from '@ostrich-app/common/types';
 
 
@@ -9,16 +10,6 @@ type FilesType =
 	  }
 	| Express.Multer.File[]
 	| undefined;
-export interface IUser {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	email: string;
-	password: string;
-	role?: Record<string, any>;
-	isActive: boolean;
-	avatar: string;
-}
 
 export interface IUserRequest {
 	params: any;
@@ -31,7 +22,7 @@ export interface IUserRequest {
 
 export interface IUserRepository {
 	createUser: (data: IUser) => Promise<any>;
-	findByEmail: (title: string) => Promise<any>;
+	findByEmail: (email: string) => Promise<any>;
 	findById: (id: string) => Promise<any>;
 	find: (limit: number, page: number) => Promise<any>;
 	updateById: (id: string, data: IUser) => Promise<any>;
@@ -57,10 +48,6 @@ export interface IPassword {
 
 
 export  interface IUserController {
-	/**
-	 * @param {IRequest} req
-	 * @param {IResponse} res
-	 */
 	softDeleteUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	createUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	deleteUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
@@ -88,7 +75,7 @@ export type IUserData =
 export interface IUserUseCases {
 
 		addNewUser: (userData: IUser) => Promise<any>;
-		editUserProfile: (userId:string,userData: Partial<IUser>) => Promise<any>;
+		editUserProfile: (userId:string,userData: IUser) => Promise<any>;
 		listUserById: (id: string) => Promise<any>;
 		listUserByEmail: (email: string) => Promise<any>;
 		listUsers: (query: {
@@ -97,8 +84,8 @@ export interface IUserUseCases {
 			query?: any;
 		}) => Promise<any>;
 		activateUserAccount: (email: string) => Promise<any>;
-		changeUserPassword: (
-			data: Pick<IUser, 'password'> & { confirmPassword: string }
+		changeUserPassword: (id:string,
+			data: IUser
 		) => Promise<any>;
 		softRemoveUser: (id:string) => Promise<any>;
 		hardRemoveUser: (id:string) => Promise<any>;

@@ -59,10 +59,10 @@
                 "memberSyntaxSortOrder": [
                     "none",
                     "all",
-                    "multiple",
-                    "single"
+                    "single",
+                    "multiple"
                 ],
-                "allowSeparatedGroups": false
+                "allowSeparatedGroups": true
             }
         ],
         "spaced-comment": [
