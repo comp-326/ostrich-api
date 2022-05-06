@@ -1,5 +1,4 @@
-import { INext, IResponse } from '@ostrich-app/common/types';
-import IRequest from '@ostrich-app/common/interfaces/request';
+import { INext,IRequest, IResponse } from '@ostrich-app/common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IStandout {
@@ -40,12 +39,12 @@ export interface IStandoutRequest {
 }
 
 export interface IStandoutRepository {
-	createFolder: (workspaceId: string, data: IStandout) => Promise<any>;
+	createStandout: (workspaceId: string, data: IStandout) => Promise<any>;
 	findByName: (name: string) => Promise<any>;
 	findById: (id: string) => Promise<any>;
 	findWorkspaceById: (id: string) => Promise<any>;
 	find: (limit: number, page: number) => Promise<any>;
-	findWorkspaceFolders: (
+	findWorkspaceStandouts: (
 		workspaceId: string,
 		limit: number,
 		page: number
@@ -54,36 +53,36 @@ export interface IStandoutRepository {
 	deleteById: (id: string) => Promise<any>;
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move: (destinationWorkspace: string, folderId: string) => Promise<any>;
-	copy: (destinationWorkspace: string, folderData: IStandout) => Promise<any>;
+	move: (destinationWorkspace: string, StandoutId: string) => Promise<any>;
+	copy: (destinationWorkspace: string, StandoutData: IStandout) => Promise<any>;
 }
 
 export interface IStandoutValidator {
-	isValidFolder: (email: string) => boolean;
+	isValidStandout: (email: string) => boolean;
 }
 
 export interface IStandoutUseCases {
-	addFolder: (folderData: IStandout) => Promise<any>;
-	copyFolder: (folderData: IStandout) => Promise<any>;
-	editFolder: (folderData: IStandout) => Promise<any>;
-	listFolderById: (folderData: IStandout) => Promise<any>;
-	listFolderByName: (folderData: IStandout) => Promise<any>;
-	listFolders: (folderData: IStandout) => Promise<any>;
-	listWorkspaceFolders: (folderData: IStandout) => Promise<any>;
-	moveFolder: (folderData: IStandout) => Promise<any>;
-	softRemoveFolder: (folderData: IStandout) => Promise<any>;
-	hardRemoveFolder: (folderData: IStandout) => Promise<any>;
+	addStandout: (StandoutData: IStandout) => Promise<any>;
+	copyStandout: (StandoutData: IStandout) => Promise<any>;
+	editStandout: (StandoutData: IStandout) => Promise<any>;
+	listStandoutById: (StandoutData: IStandout) => Promise<any>;
+	listStandoutByName: (StandoutData: IStandout) => Promise<any>;
+	listStandouts: (StandoutData: IStandout) => Promise<any>;
+	listWorkspaceStandouts: (StandoutData: IStandout) => Promise<any>;
+	moveStandout: (StandoutData: IStandout) => Promise<any>;
+	softRemoveStandout: (StandoutData: IStandout) => Promise<any>;
+	hardRemoveStandout: (StandoutData: IStandout) => Promise<any>;
 }
 
 export interface IStandoutController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+	softDelete:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findById:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findStandouts:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findByName:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findWorkspaceStandouts:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	createStandout:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	copyStandout:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	updateStandout:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	moveStandout:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	hardDeleteStandout:(req:IRequest,res:IResponse,next:INext) => Promise<any>
 }

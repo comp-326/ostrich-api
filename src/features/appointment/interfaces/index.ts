@@ -76,14 +76,14 @@ export interface IFolderUseCases {
 }
 
 export interface IFolderController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+	softDelete: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findById: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findFolders: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findByName: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findWorkspaceFolders: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	createFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	copyFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	updateFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	moveFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	hardDeleteFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

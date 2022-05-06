@@ -1,10 +1,3 @@
-import FolderInfoValidator from '@ostrich-app/features/Folders/utils/folderValidator';
-import makeCreateFolderEntity from '@ostrich-app/features/Folders/entities/folder';
+import * as entity from './notification';
 
-const createFolder = makeCreateFolderEntity({
-	validator: FolderInfoValidator
-});
-
-export default createFolder;
-
-// export type UserInfoValidator = typeof Validate
+export default entity;

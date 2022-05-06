@@ -2,7 +2,7 @@ import { INext, IResponse } from '@ostrich-app/common/types';
 import IRequest from '@ostrich-app/common/interfaces/request';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface IFolder {
+export interface INotification {
 	name: string;
 	isStandout: boolean;
 	type: string;
@@ -30,7 +30,7 @@ export interface IFolder {
 	comments: string[];
 }
 
-export interface IFolderRequest {
+export interface INotificationRequest {
 	params: any;
 	body: any;
 	query: any;
@@ -39,51 +39,51 @@ export interface IFolderRequest {
 	file?: any;
 }
 
-export interface IFolderRepository {
-	createFolder: (workspaceId: string, data: IFolder) => Promise<any>;
+export interface INotificationRepository {
+	createNotification: (workspaceId: string, data: INotification) => Promise<any>;
 	findByName: (name: string) => Promise<any>;
 	findById: (id: string) => Promise<any>;
 	findWorkspaceById: (id: string) => Promise<any>;
 	find: (limit: number, page: number) => Promise<any>;
-	findWorkspaceFolders: (
+	findWorkspaceNotifications: (
 		workspaceId: string,
 		limit: number,
 		page: number
 	) => Promise<any>;
-	updateById: (id: string, data: IFolder) => Promise<any>;
+	updateById: (id: string, data: INotification) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move: (destinationWorkspace: string, folderId: string) => Promise<any>;
-	copy: (destinationWorkspace: string, folderData: IFolder) => Promise<any>;
+	move: (destinationWorkspace: string, NotificationId: string) => Promise<any>;
+	copy: (destinationWorkspace: string, NotificationData: INotification) => Promise<any>;
 }
 
-export interface IFolderValidator {
-	isValidFolder: (email: string) => boolean;
+export interface INotificationValidator {
+	isValidNotification: (email: string) => boolean;
 }
 
-export interface IFolderUseCases {
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+export interface INotificationUseCases {
+	addNotification: (NotificationData: INotification) => Promise<any>;
+	copyNotification: (NotificationData: INotification) => Promise<any>;
+	editNotification: (NotificationData: INotification) => Promise<any>;
+	listNotificationById: (NotificationData: INotification) => Promise<any>;
+	listNotificationByName: (NotificationData: INotification) => Promise<any>;
+	listNotifications: (NotificationData: INotification) => Promise<any>;
+	listWorkspaceNotifications: (NotificationData: INotification) => Promise<any>;
+	moveNotification: (NotificationData: INotification) => Promise<any>;
+	softRemoveNotification: (NotificationData: INotification) => Promise<any>;
+	hardRemoveNotification: (NotificationData: INotification) => Promise<any>;
 }
 
-export interface IFolderController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+export interface INotificationController {
+	softDelete= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	findById= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	findNotifications= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	findByName= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	findWorkspaceNotifications= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	createNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	copyNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	updateNotification:(req:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	moveNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	hardDeleteNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
 }

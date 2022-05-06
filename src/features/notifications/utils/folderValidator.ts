@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {  IFolderValidator } from '../interfaces';
+import {  INotificationValidator } from '../interfaces';
 
-class UserInfoValidator implements IFolderValidator{
-	isValidFolder = (name: string) => {
+class UserInfoValidator implements INotificationValidator{
+	isValidNotification = (name: string) => {
 		if (name) 
 			return true;
 		

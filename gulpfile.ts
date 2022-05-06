@@ -1,2 +1,1 @@
-require('module-alias/register');
-import '@ostrich-app/scripts/tasks/buildTs';
+import './scripts/tasks/buildTs';

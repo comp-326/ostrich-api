@@ -1,16 +1,38 @@
-import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IComments, ICommentsRepository, ICommentsUseCases } from '@ostrich-app/features/comments/interfaces';
 
-export class FolderUseCase implements IFolderUseCases{
-	constructor(private repository: IFolderRepository){}
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
-	
+
+export class CommentsUseCase implements ICommentsUseCases{
+	constructor(repository: ICommentsRepository){ }
+	addComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	copyComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	editComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	listCommentsById = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	listCommentsByName = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	listCommentss = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	listWorkspaceCommentss = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	moveComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	softRemoveComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+	hardRemoveComments = async (CommentsData: IComments) => {
+		return { woing: 'OK' };
+	};
+
 }

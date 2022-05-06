@@ -11,7 +11,7 @@ export default function getWorkspaceFoldersRoute(app:Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.get('/workspace/:workspaceId',controller.findWorkspaceFolders);
+		folderRouter.get('/workspace/:workspaceId',controller.copyServices);
 
 	};
 }

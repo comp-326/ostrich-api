@@ -11,7 +11,7 @@ export default function newFolderRoute(app:Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.post('/new',controller.createFolder);
+		folderRouter.post('/new',controller.copyServices);
 
 	};
 }

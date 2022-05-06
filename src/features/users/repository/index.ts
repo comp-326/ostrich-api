@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { IUser, IUserRepository } from '../interfaces'; 
-import UserModel from '@ostrich-app/models/Users/UserModel';
+import UserModel from '@ostrich-app/features/users/models';
 
 class UserRepository implements IUserRepository{
 	createUser: (data: IUser) => Promise<any> = async (user: IUser) => {
@@ -10,7 +10,7 @@ class UserRepository implements IUserRepository{
 		return newUser;
 	};
 	findByEmail: (email: string) => Promise<any> = async (email: string) => {
-		const user = await UserModel.findByEmail(email) as unknown as any;
+		const user = await UserModel.findOne({email}) as unknown as any;
 		return user._doc;
 	};
 	findById = async (id: string) => {

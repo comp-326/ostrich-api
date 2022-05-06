@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import FolderController from '../controllers';
-import FolderRepository from '../repository';
-import {FolderUseCase} from '../use-cases';
+import NotificationController from '../controllers';
+import NotificationRepository from '../repository';
+import {NotificationUseCase} from '../use-cases';
 import { Router } from 'express';
 
 
-export default function getFoldersRoute( app: Router){
+export default function getNotificationsRoute( app: Router){
 	return (pathName:string)=>{
-		const folderUseCase = new FolderUseCase(FolderRepository);
-		const controller = new FolderController(folderUseCase);
-		const folderRouter = Router();
-		app.use(`${pathName}`,folderRouter);
-		folderRouter.get('/',controller.findFolders);
+		const notificationUseCase = new NotificationUseCase(NotificationRepository);
+		const controller = new NotificationController(notificationUseCase);
+		const NotificationRouter = Router();
+		app.use(`${pathName}`,NotificationRouter);
+		NotificationRouter.get('/',controller.findNotifications);
 
 	};
 }

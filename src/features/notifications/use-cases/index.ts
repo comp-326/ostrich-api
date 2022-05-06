@@ -1,16 +1,21 @@
-import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { INotification, INotificationRepository, INotificationUseCases } from '../interfaces';
 
-export class FolderUseCase implements IFolderUseCases{
-	constructor(private repository: IFolderRepository){}
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+export class NotificationUseCase implements INotificationUseCases{
+	constructor(private repository: INotificationRepository){}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	addNotification=async (notification: INotification) => {
+		
+		return await this.repository.comment('');
+	};
+	copyNotification: (notification: INotification) => Promise<any>;
+	editNotification: (NotificationData: INotification) => Promise<any>;
+	listNotificationById: (NotificationData: INotification) => Promise<any>;
+	listNotificationByName: (NotificationData: INotification) => Promise<any>;
+	listNotifications: (NotificationData: INotification) => Promise<any>;
+	listWorkspaceNotifications: (NotificationData: INotification) => Promise<any>;
+	moveNotification: (NotificationData: INotification) => Promise<any>;
+	softRemoveNotification: (NotificationData: INotification) => Promise<any>;
+	hardRemoveNotification: (NotificationData: INotification) => Promise<any>;
 	
 }

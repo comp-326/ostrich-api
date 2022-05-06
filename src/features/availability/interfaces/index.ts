@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-	dayInitialType,
-	dayType,
-	dayValueType,
-} from '@ostrich-app/models/Availability/AvailabilityModel';
+
 
 export interface IAvailability {
 	startTime: string
@@ -12,9 +8,9 @@ export interface IAvailability {
 }
 
 export type daysType = {
-	day: dayType
-	value: dayValueType
-	initial: dayInitialType
+	day: daysType
+	value: any
+	initial: any
 	position: number
 }
 export interface IAvailabilityRequest {

@@ -1,5 +1,4 @@
-import { INext, IResponse } from '@ostrich-app/common/types';
-import IRequest from '@ostrich-app/common/interfaces/request';
+import { INext, IRequest, IResponse} from '@ostrich-app/common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IFolder {
@@ -76,14 +75,14 @@ export interface IFolderUseCases {
 }
 
 export interface IFolderController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+	softDelete:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findById:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findFolders:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findByName:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findWorkspaceFolders:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	createFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	copyFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	moveFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	hardDeleteFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
 }

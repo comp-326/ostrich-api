@@ -1,8 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import IRequest from '@ostrich-app/common/interfaces/request';
-import { IResponse } from '@ostrich-app/common/types';
+import { INext,IRequest,IResponse } from '@ostrich-app/common/types';
 
 
 type FilesType =
@@ -63,19 +61,19 @@ export  interface IUserController {
 	 * @param {IRequest} req
 	 * @param {IResponse} res
 	 */
-	softDeleteUser: (req: IRequest, res: IResponse) => Promise<any>;
-	createUser: (req: IRequest, res: IResponse) => Promise<any>;
-	deleteUser: (req: IRequest, res: IResponse) => Promise<any>;
-	findUserByEmail: (req: IRequest, res: IResponse) => Promise<any>;
-	findUserById: (req: IRequest, res: IResponse) => Promise<any>;
-	getAccountActivationLink: (req: IRequest, res: IResponse) => Promise<any>;
-	getPasswordResetLink: (req: IRequest, res: IResponse) => Promise<any>;
-	resetAccountPassword: (req: IRequest, res: IResponse) => Promise<any>;
-	activateAccount: (req: IRequest, res: IResponse) => Promise<any>;
-	findUsers: (req: IRequest, res: IResponse) => Promise<any>;
-	updateAccount: (req: IRequest, res: IResponse) => Promise<any>;
-	updateProfilePic: (req: IRequest, res: IResponse) => Promise<any>;
-	updatePassword: (req: IRequest, res: IResponse) => Promise<any>;
+	softDeleteUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	createUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	deleteUser:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	findUserByEmail:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	findUserById:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	getAccountActivationLink:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	getPasswordResetLink:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	resetAccountPassword:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	activateAccount:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	findUsers:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	updateAccount:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	updateProfilePic:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
+	updatePassword:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 }
 
 export type IUserData =

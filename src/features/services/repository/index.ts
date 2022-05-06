@@ -1,74 +1,73 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import { IServices, IServicesRepository } from '@ostrich-app/features/services/interfaces';
+import ServicesModel from '@ostrich-app/features/services/models';
 
-class FolderRepository implements IFolderRepository{
+class ServicesRepository implements IServicesRepository{
 	findByName = async (name: string) => {
-		const folder = await FolderModel.findOne({ name });
-		return folder;
+		const Services = await ServicesModel.findOne({ name });
+		return Services;
 	};
 	findById = async (id: string) => {
-		const folder = await FolderModel.findById(id);
-		return folder;
+		const Services = await ServicesModel.findById(id);
+		return Services;
 	};
 	findWorkspaceById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id);
+		const workspace = await ServicesModel.findById(id);
 		return workspace;
 	};
 	find = async (limit: number, page: number) => {
-		const folders = await FolderModel.find()
+		const Servicess = await ServicesModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return folders;
+		return Servicess;
 	};
-	findWorkspaceFolders = async (
+	findWorkspaceServicess = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceFolders = await FolderModel.find({
+		const workspaceServicess = await ServicesModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return workspaceFolders;
+		return workspaceServicess;
 	};
-	updateById = async (id: string, data: IFolder) => {
-		const editedFolder = await FolderModel.findByIdAndUpdate(
+	updateById = async (id: string, data: IServices) => {
+		const editedServices = await ServicesModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
-		return editedFolder;
+		return editedServices;
 	};
 	deleteById = async (id: string) => {
-		await FolderModel.findByIdAndDelete(id);
+		await ServicesModel.findByIdAndDelete(id);
 		return true;
 	};
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
+	move = async (destinationWorkspace: string, ServicesId: string) => {
+		const movedServices = await ServicesModel.findByIdAndUpdate(ServicesId, {
 			workspace: destinationWorkspace,
 		});
-		return movedFolder;
+		return movedServices;
 	};
-	copy = async (destinationWorkspace: string, folderData: IFolder) => {
-		const copiedFolder = await FolderModel.create({
-			...folderData,
+	copy = async (destinationWorkspace: string, ServicesData: IServices) => {
+		const copiedServices = await ServicesModel.create({
+			...ServicesData,
 			workspace: destinationWorkspace,
 		});
-		return copiedFolder;
+		return copiedServices;
 	};
-	createFolder = async (workspaceId: string, data: IFolder) => {
-		const newFolder = await FolderModel.create({
+	createServices = async (workspaceId: string, data: IServices) => {
+		const newServices = await ServicesModel.create({
 			...data,
 			workspace: workspaceId,
 		});
-		return newFolder;
+		return newServices;
 	};
 }
 
-export default new FolderRepository();
+export default new ServicesRepository();

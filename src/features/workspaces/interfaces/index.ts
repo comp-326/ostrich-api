@@ -1,5 +1,4 @@
-import { INext, IResponse } from '@ostrich-app/common/types';
-import IRequest from '@ostrich-app/common/interfaces/request';
+import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IWorkspace {
@@ -76,14 +75,14 @@ export interface IWorkspaceUseCases {
 }
 
 export interface IWorkspaceController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaces: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceWorkspaces: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createWorkspace: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyWorkspace: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateWorkspace:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveWorkspace: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteWorkspace: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+	softDelete: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findById: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findWorkspaces: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findByName: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findWorkspaceWorkspaces: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	createWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	copyWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	updateWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	moveWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	hardDeleteWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

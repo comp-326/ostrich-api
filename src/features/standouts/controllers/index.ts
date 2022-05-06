@@ -3,121 +3,62 @@
 import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 import { IStandoutController, IStandoutUseCases } from '@ostrich-app/features/standouts/interfaces';
 
-class FolderController implements IStandoutController{
-	constructor(private useCase: IStandoutUseCases){}
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
+class StandoutController implements IStandoutController{
+	constructor(private useCase: IStandoutUseCases){ }
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
-		await this.useCase.addFolder(req.params.id as any);
-		return res.status(200).json({
-			message: 'softDelete'
-		});
+		return res.status(200).json({ working: 'OK' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
-	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ folders: true });
-	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ finding: true });
+		return res.status(200).json({ working: 'OK' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
+	findStandouts = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
 	findByName = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ finding: true });
+		return res.status(200).json({ working: 'OK' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
+	findWorkspaceStandouts = async (req: IRequest, res: IResponse
+		/* eslint-disable @typescript-eslint/no-explicit-any */
+		, /* eslint-disable @typescript-eslint/no-explicit-any */ next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	createStandout = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	copyStandout = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	updateStandout = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	moveStandout = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	hardDeleteStandout = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ working: 'OK' });
+	};
+	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ name: 'Working' });
+	};
 	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ finding: true });
+		return res.status(200).json({ name: 'Working' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ creating: true });
+		return res.status(200).json({ name: 'Working' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ copied: true });
+		return res.status(200).json({ name: 'Working' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ updated: true });
+		return res.status(200).json({ name: 'Working' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ moved: true });
+		return res.status(200).json({ name: 'Working' });
 	};
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
 	hardDeleteFolder = async (req: IRequest, res: IResponse, next: INext) => {
-		return { deleting: true };
+		return res.status(200).json({ name: 'Working' });
 	};
+
 }
 
-export default FolderController;
+export default StandoutController;

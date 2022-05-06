@@ -57,7 +57,7 @@
       "@ostrich-app/upload": ["./src/uploadSDK"],
       "@ostrich-app/db/*": ["./src/databases/*"],
       "@ostrich-app/db/mongodb": ["./src/databases/mongodb"],
-      "@ostrich-app/middlewares/*": ["./src/middlewares/*"]
+      "@ostrich-app/middlewares/*": ["./src/middlewares/*"],
     }
   },
   "exclude": ["node_modules"],

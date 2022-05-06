@@ -7,12 +7,14 @@ import {
 import { NextFunction } from 'express';
 
 class FolderController implements IWorkspaceController{
-	constructor(private useCase: IWorkspaceUseCases){}
-	hardDeleteWorkspace: (
+	constructor(private useCase: IWorkspaceUseCases){ }
+	hardDeleteWorkspace = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
-	) => Promise<any>;
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -21,11 +23,13 @@ class FolderController implements IWorkspaceController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findWorkspaces: (
+	findWorkspaces = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
-	) => Promise<any>;
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
 
 	/**
 	 * Brief desc
@@ -35,7 +39,7 @@ class FolderController implements IWorkspaceController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findWorkspaceWorkspaces=async (
+	findWorkspaceWorkspaces = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
@@ -52,11 +56,13 @@ class FolderController implements IWorkspaceController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	createWorkspace: (
+	createWorkspace = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
-	) => Promise<any>;
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
 
 	/**
 	 * Brief desc
@@ -66,25 +72,13 @@ class FolderController implements IWorkspaceController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	copyWorkspace: (
+	copyWorkspace = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
-	) => Promise<any>;
-	
-	/**
-	 * Brief desc
-	 * @summary Summary
-	 * @param {IRequest} req Default express req obj
-	 * @param {IResponse} res - Default express res obj
-	 * @param {INext} next - Next middleware
-	 * @return {IResponse|INext} Brief description of the returning value here.
-	 */
-	updateWorkspace: (
-		req: IRequest,
-		res: IResponse,
-		next: NextFunction
-	) => Promise<any>;
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
 
 	/**
 	 * Brief desc
@@ -94,11 +88,29 @@ class FolderController implements IWorkspaceController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	moveWorkspace: (
+	updateWorkspace = async (
 		req: IRequest,
 		res: IResponse,
 		next: NextFunction
-	) => Promise<any>;
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
+
+	/**
+	 * Brief desc
+	 * @summary Summary
+	 * @param {IRequest} req Default express req obj
+	 * @param {IResponse} res - Default express res obj
+	 * @param {INext} next - Next middleware
+	 * @return {IResponse|INext} Brief description of the returning value here.
+	 */
+	moveWorkspace = async (
+		req: IRequest,
+		res: IResponse,
+		next: NextFunction
+	) => {
+		return res.status(200).json({ working: 'Ok' });
+	};
 
 	/**
 	 * Brief desc

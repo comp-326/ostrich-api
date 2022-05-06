@@ -1,8 +1,7 @@
-import { INext, IResponse } from '@ostrich-app/common/types';
-import IRequest from '@ostrich-app/common/interfaces/request';
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface IFolder {
+import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+
+export interface IServices {
 	name: string;
 	isStandout: boolean;
 	type: string;
@@ -30,7 +29,7 @@ export interface IFolder {
 	comments: string[];
 }
 
-export interface IFolderRequest {
+export interface IServicesRequest {
 	params: any;
 	body: any;
 	query: any;
@@ -39,51 +38,51 @@ export interface IFolderRequest {
 	file?: any;
 }
 
-export interface IFolderRepository {
-	createFolder: (workspaceId: string, data: IFolder) => Promise<any>;
+export interface IServicesRepository {
+	createServices: (workspaceId: string, data: IServices) => Promise<any>;
 	findByName: (name: string) => Promise<any>;
 	findById: (id: string) => Promise<any>;
 	findWorkspaceById: (id: string) => Promise<any>;
 	find: (limit: number, page: number) => Promise<any>;
-	findWorkspaceFolders: (
+	findWorkspaceServicess: (
 		workspaceId: string,
 		limit: number,
 		page: number
 	) => Promise<any>;
-	updateById: (id: string, data: IFolder) => Promise<any>;
+	updateById: (id: string, data: IServices) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move: (destinationWorkspace: string, folderId: string) => Promise<any>;
-	copy: (destinationWorkspace: string, folderData: IFolder) => Promise<any>;
+	move: (destinationWorkspace: string, ServicesId: string) => Promise<any>;
+	copy: (destinationWorkspace: string, ServicesData: IServices) => Promise<any>;
 }
 
-export interface IFolderValidator {
-	isValidFolder: (email: string) => boolean;
+export interface IServicesValidator {
+	isValidServices: (email: string) => boolean;
 }
 
-export interface IFolderUseCases {
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+export interface IServicesUseCases {
+	addServices: (ServicesData: IServices) => Promise<any>;
+	copyServices: (ServicesData: IServices) => Promise<any>;
+	editServices: (ServicesData: IServices) => Promise<any>;
+	listServicesById: (ServicesData: IServices) => Promise<any>;
+	listServicesByName: (ServicesData: IServices) => Promise<any>;
+	listServicess: (ServicesData: IServices) => Promise<any>;
+	listWorkspaceServicess: (ServicesData: IServices) => Promise<any>;
+	moveServices: (ServicesData: IServices) => Promise<any>;
+	softRemoveServices: (ServicesData: IServices) => Promise<any>;
+	hardRemoveServices: (ServicesData: IServices) => Promise<any>;
 }
 
-export interface IFolderController {
-	softDelete: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findById: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findByName: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	findWorkspaceFolders: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	createFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	copyFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	moveFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
-	hardDeleteFolder: (req:IRequest,res:IResponse,next:INext) => Promise<any>;
+export interface IServicesController {
+	softDelete: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findById: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findServicess: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findByName: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findWorkspaceServicess: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	createServices: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	copyServices: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	updateService: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	moveServices: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	hardDeleteServices: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

@@ -11,7 +11,7 @@ export default function moveFolderRoute(app:Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.put('/folder/move/:folderId',controller.moveFolder);
+		folderRouter.put('/folder/move/:folderId',controller.copyServices);
 
 	};
 }

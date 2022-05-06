@@ -1,74 +1,73 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import { INotification, INotificationRepository } from '../interfaces';
+import NotificationModel from '@ostrich-app/features/notifications/models';
 
-class FolderRepository implements IFolderRepository{
+class NotificationRepository implements INotificationRepository{
 	findByName = async (name: string) => {
-		const folder = await FolderModel.findOne({ name });
-		return folder;
+		const Notification = await NotificationModel.findOne({ name });
+		return Notification;
 	};
 	findById = async (id: string) => {
-		const folder = await FolderModel.findById(id);
-		return folder;
+		const Notification = await NotificationModel.findById(id);
+		return Notification;
 	};
 	findWorkspaceById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id);
+		const workspace = await NotificationModel.findById(id);
 		return workspace;
 	};
 	find = async (limit: number, page: number) => {
-		const folders = await FolderModel.find()
+		const Notifications = await NotificationModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return folders;
+		return Notifications;
 	};
-	findWorkspaceFolders = async (
+	findWorkspaceNotifications = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceFolders = await FolderModel.find({
+		const workspaceNotifications = await NotificationModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return workspaceFolders;
+		return workspaceNotifications;
 	};
-	updateById = async (id: string, data: IFolder) => {
-		const editedFolder = await FolderModel.findByIdAndUpdate(
+	updateById = async (id: string, data: INotification) => {
+		const editedNotification = await NotificationModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
-		return editedFolder;
+		return editedNotification;
 	};
 	deleteById = async (id: string) => {
-		await FolderModel.findByIdAndDelete(id);
+		await NotificationModel.findByIdAndDelete(id);
 		return true;
 	};
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
+	move = async (destinationWorkspace: string, NotificationId: string) => {
+		const movedNotification = await NotificationModel.findByIdAndUpdate(NotificationId, {
 			workspace: destinationWorkspace,
 		});
-		return movedFolder;
+		return movedNotification;
 	};
-	copy = async (destinationWorkspace: string, folderData: IFolder) => {
-		const copiedFolder = await FolderModel.create({
-			...folderData,
+	copy = async (destinationWorkspace: string, NotificationData: INotification) => {
+		const copiedNotification = await NotificationModel.create({
+			...NotificationData,
 			workspace: destinationWorkspace,
 		});
-		return copiedFolder;
+		return copiedNotification;
 	};
-	createFolder = async (workspaceId: string, data: IFolder) => {
-		const newFolder = await FolderModel.create({
+	createNotification = async (workspaceId: string, data: INotification) => {
+		const newNotification = await NotificationModel.create({
 			...data,
 			workspace: workspaceId,
 		});
-		return newFolder;
+		return newNotification;
 	};
 }
 
-export default new FolderRepository();
+export default new NotificationRepository();

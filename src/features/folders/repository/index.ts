@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import FolderModel from '@ostrich-app/features/folders/models';
 
 class FolderRepository implements IFolderRepository{
 	findByName = async (name: string) => {
@@ -14,7 +13,7 @@ class FolderRepository implements IFolderRepository{
 		return folder;
 	};
 	findWorkspaceById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id);
+		const workspace = await FolderModel.findById(id);
 		return workspace;
 	};
 	find = async (limit: number, page: number) => {

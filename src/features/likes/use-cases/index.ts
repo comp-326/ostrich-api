@@ -1,6 +1,6 @@
 import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
 
-export class FolderUseCase implements IFolderUseCases{
+export class LikesUseCase implements IFolderUseCases{
 	constructor(private repository: IFolderRepository){}
 	addFolder: (folderData: IFolder) => Promise<any>;
 	copyFolder: (folderData: IFolder) => Promise<any>;

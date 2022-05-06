@@ -11,7 +11,7 @@ export default function getFoldersRoute( app: Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.get('/',controller.findFolders);
+		folderRouter.get('/',controller.copyServices);
 
 	};
 }

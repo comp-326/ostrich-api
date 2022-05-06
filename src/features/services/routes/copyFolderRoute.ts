@@ -11,7 +11,7 @@ export default function copyFolderRoute(app:Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.put('/copy/:folderId',controller.copyFolder);
+		folderRouter.put('/copy/:folderId',controller.copyServices);
 
 	};
 }

@@ -1,74 +1,73 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import { IComments, ICommentsRepository } from '../interfaces';
+import CommentsModel from '@ostrich-app/features/comments/models';
 
-class FolderRepository implements IFolderRepository{
+class CommentsRepository implements ICommentsRepository{
 	findByName = async (name: string) => {
-		const folder = await FolderModel.findOne({ name });
-		return folder;
+		const Comments = await CommentsModel.findOne({ name });
+		return Comments;
 	};
 	findById = async (id: string) => {
-		const folder = await FolderModel.findById(id);
-		return folder;
+		const Comments = await CommentsModel.findById(id);
+		return Comments;
 	};
 	findWorkspaceById = async (id: string) => {
-		const workspace = await WorkspaceModel.findById(id);
+		const workspace = await CommentsModel.findById(id);
 		return workspace;
 	};
 	find = async (limit: number, page: number) => {
-		const folders = await FolderModel.find()
+		const Commentss = await CommentsModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return folders;
+		return Commentss;
 	};
-	findWorkspaceFolders = async (
+	findWorkspaceCommentss = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceFolders = await FolderModel.find({
+		const workspaceCommentss = await CommentsModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
-		return workspaceFolders;
+		return workspaceCommentss;
 	};
-	updateById = async (id: string, data: IFolder) => {
-		const editedFolder = await FolderModel.findByIdAndUpdate(
+	updateById = async (id: string, data: IComments) => {
+		const editedComments = await CommentsModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
-		return editedFolder;
+		return editedComments;
 	};
 	deleteById = async (id: string) => {
-		await FolderModel.findByIdAndDelete(id);
+		await CommentsModel.findByIdAndDelete(id);
 		return true;
 	};
 	comment: (id: string) => Promise<any>;
 	like: (userId: string, id: string) => Promise<any>;
-	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
+	move = async (destinationWorkspace: string, CommentsId: string) => {
+		const movedComments = await CommentsModel.findByIdAndUpdate(CommentsId, {
 			workspace: destinationWorkspace,
 		});
-		return movedFolder;
+		return movedComments;
 	};
-	copy = async (destinationWorkspace: string, folderData: IFolder) => {
-		const copiedFolder = await FolderModel.create({
-			...folderData,
+	copy = async (destinationWorkspace: string, CommentsData: IComments) => {
+		const copiedComments = await CommentsModel.create({
+			...CommentsData,
 			workspace: destinationWorkspace,
 		});
-		return copiedFolder;
+		return copiedComments;
 	};
-	createFolder = async (workspaceId: string, data: IFolder) => {
-		const newFolder = await FolderModel.create({
+	createComments = async (workspaceId: string, data: IComments) => {
+		const newComments = await CommentsModel.create({
 			...data,
 			workspace: workspaceId,
 		});
-		return newFolder;
+		return newComments;
 	};
 }
 
-export default new FolderRepository();
+export default new CommentsRepository();

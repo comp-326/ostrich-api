@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import FolderController from '../controllers';
 import FolderRepository from '../repository';
-import {FolderUseCase} from '../use-cases';
+import {NotificationUseCase} from '../use-cases';
 import { Router } from 'express';
 
 
 export default function newFolderRoute(app:Router){
 	return (pathName:string)=>{
-		const folderUseCase = new FolderUseCase(FolderRepository);
+		const folderUseCase = new NotificationUseCase(FolderRepository);
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.post('/new',controller.createFolder);
+		folderRouter.post('/new',controller.copyNotification);
 
 	};
 }

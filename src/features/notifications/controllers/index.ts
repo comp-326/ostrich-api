@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFolderController, IFolderUseCases } from '../interfaces';
 import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INotificationController, INotificationUseCases } from '../interfaces';
 
-class FolderController implements IFolderController{
-	constructor(private useCase: IFolderUseCases){}
+class NotificationController implements INotificationController{
+	constructor(private useCase: INotificationUseCases){}
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -13,6 +14,7 @@ class FolderController implements IFolderController{
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.addNotification(req.body);
 		return res.status(200).json({
 			message: 'softDelete'
 		});
@@ -25,8 +27,8 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ folders: true });
+	findNotifications = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ Notifications: true });
 	};
 	/**
 	 * Brief desc
@@ -58,7 +60,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
+	findWorkspaceNotifications = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
 	/**
@@ -69,7 +71,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	createNotification = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
 	/**
@@ -80,7 +82,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	copyNotification = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
 	/**
@@ -91,7 +93,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	updateNotification = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
 	/**
@@ -102,7 +104,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	moveNotification = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
 	/**
@@ -113,9 +115,9 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	hardDeleteFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	hardDeleteNotification = async (req: IRequest, res: IResponse, next: INext) => {
 		return { deleting: true };
 	};
 }
 
-export default FolderController;
+export default NotificationController;

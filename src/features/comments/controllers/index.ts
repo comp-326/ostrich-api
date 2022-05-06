@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFolderController, IFolderUseCases } from '../interfaces';
+import { ICommentsController, ICommentsUseCases } from '../interfaces';
 import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 
-class FolderController implements IFolderController{
-	constructor(private useCase: IFolderUseCases){}
+class CommentsController implements ICommentsController{
+	constructor(private useCase: ICommentsUseCases){}
 	/**
 	 * Brief desc
 	 * @summary Summary
@@ -25,8 +25,8 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
-		return res.status(200).json({ folders: true });
+	findCommentss = async (req: IRequest, res: IResponse, next: INext) => {
+		return res.status(200).json({ Commentss: true });
 	};
 	/**
 	 * Brief desc
@@ -58,7 +58,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
+	findWorkspaceCommentss = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
 	/**
@@ -69,7 +69,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	createComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
 	/**
@@ -80,7 +80,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	copyComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
 	/**
@@ -91,7 +91,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	updateComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
 	/**
@@ -102,7 +102,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	moveComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
 	/**
@@ -113,9 +113,9 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	hardDeleteFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	hardDeleteComments = async (req: IRequest, res: IResponse, next: INext) => {
 		return { deleting: true };
 	};
 }
 
-export default FolderController;
+export default CommentsController;

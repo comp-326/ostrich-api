@@ -1,7 +1,7 @@
-import gulp from 'gulp';
-import ts from 'gulp-typescript';
 import alias from 'gulp-ts-alias';
+import gulp from 'gulp';
 import sourcemaps from 'gulp-sourcemaps';
+import ts from 'gulp-typescript';
 
 const tsProject = ts.createProject('tsconfig.json');
 const buildTS = () => {

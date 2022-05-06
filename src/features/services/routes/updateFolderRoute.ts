@@ -11,7 +11,7 @@ export default function updateFolderRoute(app:Router){
 		const controller = new FolderController(folderUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`,folderRouter);
-		folderRouter.put('/folder/update/:folderId',controller.updateFolder);
+		folderRouter.put('/folder/update/:folderId',controller.copyServices);
 
 	};
 }
