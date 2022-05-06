@@ -1,13 +1,14 @@
-import moment from 'moment';
-import { environmentConfig } from '@ostrich-config';
-import app from '@ostrich-base/app';
+import app from '@ostrich-app/app';
+import chalk from 'chalk';
+import { environmentConfig } from '@ostrich-app/config';
 import http from 'http';
+import moment from 'moment';
 
 const server = http.createServer(app);
 
 server.listen(environmentConfig.PORT, () => {
 	const time = moment((new Date().getTime())).format('LLLL');
-	const connectionString = `Server started on ${time} and running running on http://localhost:${environmentConfig.PORT}`;
+	const connectionString = `Server started on ${chalk.yellow(time)} \nApp running running on ${chalk.bold.yellow(`http://localhost:${environmentConfig.PORT}`)}`;
 	console.log(connectionString);
 });
 

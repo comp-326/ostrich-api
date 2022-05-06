@@ -1,20 +1,23 @@
+import { environmentConfig } from '@ostrich-app/config';
 import jwt from 'jsonwebtoken';
-import { environmentConfig } from '@ostrich-config';
-class GenerateJWTTokens {
-	generatePasswordResetToken = function ({ userId }: { userId: string }) {
-		return function generate(duration = '') {
+
+class GenerateJWTTokens{
+	generatePasswordResetToken = function ({ userId }: { userId: string }){
+		return function generate(duration = ''){
 			const token = jwt.sign({ userId }, environmentConfig.SECRET_KEY, {
 				expiresIn: duration ? duration : '24h'
 			});
+
 			return token;
 		};
 	};
 
-	generateEmailActivationToken = function ({ userId }: { userId: string }) {
-		return function generate(duration = '') {
+	generateEmailActivationToken = function ({ userId }: { userId: string }){
+		return function generate(duration = ''){
 			const token = jwt.sign({ userId }, environmentConfig.SECRET_KEY, {
 				expiresIn: duration ? duration : '24h'
 			});
+
 			return token;
 		};
 	};
@@ -25,11 +28,12 @@ class GenerateJWTTokens {
 	}: {
 		email: string;
 		userId: string;
-	}) {
-		return function generate(duration = '') {
+	}){
+		return function generate(duration = ''){
 			const token = jwt.sign({ email, userId }, environmentConfig.SECRET_KEY, {
 				expiresIn: duration ? duration : '24h'
 			});
+
 			return token;
 		};
 	};

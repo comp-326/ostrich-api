@@ -31,6 +31,130 @@
         "semi": [
             "error",
             "always"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxEOF": 2
+            }
+        ],
+        "camelcase": [
+            "error",
+            {
+                "properties": "always",
+                "ignoreDestructuring": true
+            }
+        ],
+        "curly": [
+            "error",
+            "multi-or-nest"
+        ],
+        "sort-imports": [
+            "error",
+            {
+                "ignoreCase": false,
+                "ignoreDeclarationSort": false,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": [
+                    "none",
+                    "all",
+                    "single",
+                    "multiple"
+                ],
+                "allowSeparatedGroups": true
+            }
+        ],
+        "spaced-comment": [
+            "error",
+            "always",
+            {
+                "line": {
+                    "markers": [
+                        "/"
+                    ],
+                    "exceptions": [
+                        "-",
+                        "+"
+                    ]
+                },
+                "block": {
+                    "markers": [
+                        "!"
+                    ],
+                    "exceptions": [
+                        "*"
+                    ],
+                    "balanced": true
+                }
+            }
+        ],
+        "space-before-blocks": [
+            "error",
+            {
+                "functions": "never",
+                "keywords": "always",
+                "classes": "never"
+            }
+        ],
+        "padding-line-between-statements": [
+            "error",
+            {
+                "blankLine": "always",
+                "prev": "directive",
+                "next": "*"
+            },
+            {
+                "blankLine": "any",
+                "prev": "directive",
+                "next": "directive"
+            }
+        ],
+        "@typescript-eslint/lines-between-class-members": [
+            "error",
+            "always",
+            {
+                "exceptAfterOverload": true
+            }
+        ],
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "variableLike",
+                "format": [
+                    "camelCase",
+                    "snake_case",
+                    "UPPER_CASE"
+                ]
+            },
+            {
+                "selector": "interface",
+                "format": [
+                    "PascalCase"
+                ],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": true
+                }
+            },
+            {
+                "selector": [
+                    "variable",
+                    "function"
+                ],
+                "format": [
+                    "camelCase"
+                ],
+                "leadingUnderscore": "allow"
+            }
+        ],
+        "@typescript-eslint/padding-line-between-statements": [
+            "error",
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": ["return","interface","type","function","class","try"]
+            }
         ]
     }
 }
