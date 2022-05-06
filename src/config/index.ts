@@ -1,4 +1,4 @@
-import config from '@ostrich-base/node.config';
+import config from '@ostrich-app/node.config';
 
 const {
 	ENV,

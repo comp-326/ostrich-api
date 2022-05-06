@@ -1,4 +1,4 @@
-import { environmentConfig } from '@ostrich-config';
+import { environmentConfig } from '@ostrich-app/config';
 
 /**
  *
@@ -11,7 +11,7 @@ function createWorkspaceInviteLink({
 }: {
 	role: string;
 	workspaceId: string;
-}) {
+}){
 	return `http://localhost:${environmentConfig.PORT}/invite/workspace?role=${role}&workspaceId=${workspaceId}`;
 }
 
@@ -20,15 +20,16 @@ function createWorkspaceInviteLink({
  * @param {string} param0
  * @returns
  */
-function createAccountActivationLink({ token }: { token: string }) {
+function createAccountActivationLink({ token }: { token: string }){
 	return `http://localhost:${environmentConfig.PORT}/account/activate/${token}`;
 }
+
 /**
  *
  * @param {{baseUrl:string,token:string}} param0
  * @returns
  */
-function createForgotPasswordLink(token: string) {
+function createForgotPasswordLink(token: string){
 	const baseUrl =
 		environmentConfig.NODE_ENV === ('development' || 'testing')
 			? `http://localhost:${environmentConfig.PORT}/api/v1/users/account/password/reset/${token}`

@@ -2,12 +2,14 @@ import { Router } from 'express';
 
 interface IBaseDomain{
     expressRouter:Router
-    expose:()=>Router
+    expose:(app:Router)=>Router
 }
 
 export abstract class BaseDomain implements IBaseDomain{
 	public expressRouter: Router;
+
 	private _pathName:string;
+
 	constructor(pathName:string,router:Router){
 		this.expressRouter=router;
 		this._pathName = `/api/v1/${pathName}`;
@@ -18,5 +20,5 @@ export abstract class BaseDomain implements IBaseDomain{
 	}
 
 
-	abstract expose:()=>Router
+	abstract expose:(app:Router)=>Router
 }

@@ -1,4 +1,4 @@
-import { BASE_DIR, environmentConfig } from '@ostrich-config';
+import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import yaml from 'yamljs';
@@ -13,8 +13,8 @@ const options = {
 	customSiteTitle: 'Ostrich app API',
 };
 
-const SwaggerSetup = swaggerUI.setup(swaggerDocument, options);
+const swaggerSetup = swaggerUI.setup(swaggerDocument, options);
 const swaggerServe = swaggerUI.serve;
 
-export default Object.freeze({ swaggerServe, SwaggerSetup });
-export { swaggerServe, SwaggerSetup };
+export default Object.freeze({ swaggerServe, swaggerSetup });
+export { swaggerServe, swaggerSetup };

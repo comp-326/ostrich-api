@@ -1,20 +1,15 @@
-import jwt from 'jsonwebtoken';
+import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
 import { NextFunction, Response } from 'express';
 import { Model } from 'mongoose';
-import {
-	INext,
-	IRequest,
-	IResponse,
-	JWTPayloadType
-} from '@ostrich-common/types';
-import { environmentConfig } from '@ostrich-config';
-import Permissions from '@ostrich-constants/permissions';
-import UserModel from '@ostrich-models/Users/UserModel';
-import RoleModel from '@ostrich-models/Roles/RoleModel';
-import TokenGEN from '@ostrich-helpers/tokenGEN';
+import Permissions from '@ostrich-app/constants/permissions';
+import RoleModel from '@ostrich-app/features/userRoles/models';
+import TokenGEN from '@ostrich-app/helpers/tokenGEN';
+import UserModel from '@ostrich-app/features/users/models';
+import { environmentConfig } from '@ostrich-app/config';
+import jwt from 'jsonwebtoken';
 
-class AuthMiddleware {
-	constructor(private role: typeof Model, private user: typeof Model) {}
+class AuthMiddleware{
+	constructor(private role: typeof Model, private user: typeof Model){}
 
 	validateIsAccountActive = async (
 		req: IRequest,
@@ -24,14 +19,15 @@ class AuthMiddleware {
 		try {
 			const { email } = req.body;
 			const user = await this.user.findOne({ email });
-			if (!user.isActive) {
+			if (!user.isActive) 
 				return res.status(401).json('Please activate your account');
-			}
+			
 			return next();
 		} catch (error) {
 			return next(error);
 		}
 	};
+
 	verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			if (!req.cookies) {
@@ -65,6 +61,7 @@ class AuthMiddleware {
 				environmentConfig.SECRET_KEY
 			) as JWTPayloadType;
 			req.user = payload;
+
 			return next();
 		} catch {
 			return res.status(401).json({
@@ -90,24 +87,25 @@ class AuthMiddleware {
 				}
 				const role = await this.role.findById(user.role);
 				const permitted = await role.hasPermission(Permissions.USER);
-				if (!permitted) {
+				if (!permitted) 
 					return res.sendStatus(403);
-				}
+				
 				return next();
 			});
 		} catch (error) {
 			return next(error);
 		}
 	};
+
 	adminRequired = async (req: IRequest, res: Response, next: NextFunction) => {
 		try {
 			this.loginRequired(req, res, async () => {
 				const user = await this.user.findById(req.user.userId);
 				const role = await this.role.findById(user.role);
 				const permitted = await role.hasPermission(Permissions.ADMIN);
-				if (!permitted) {
+				if (!permitted) 
 					return res.sendStatus(403);
-				}
+				
 				return next();
 			});
 		} catch (error) {

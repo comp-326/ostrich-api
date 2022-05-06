@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import createUser from '@ostrich-domains/users/entities';
+import createUser from '@ostrich-app/domains/users/entities';
 
 test('Create a user entity', () => {
 	const userData: any = { email: 'jane', password: 'password' };

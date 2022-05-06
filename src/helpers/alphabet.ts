@@ -1,9 +1,9 @@
 /**
  * ************ BUILD ALPHABETS *******
  */
-const ALPHABET = () => {
-	const LowerCaseLetters = [];
-	const UpperCaseLetters = [];
+const alphabets = () => {
+	const lowerCaseLetters = [];
+	const upperCaseLetters = [];
 	const symbols = [];
 	const numbers = [];
 	const llRange = [97, 122];
@@ -13,37 +13,38 @@ const ALPHABET = () => {
 	/**
 	 * Generate lowercase letters
 	 */
-	for (let index = llRange[0]; index <= llRange[1]; index++) {
-		LowerCaseLetters.push(String.fromCharCode(index));
-	}
+	for (let index = llRange[0]; index <= llRange[1]; index++) 
+		lowerCaseLetters.push(String.fromCharCode(index));
+	
 	/**
 	 * Generate uppercase letters
 	 */
-	for (let index = uppRange[0]; index <= uppRange[1]; index++) {
-		UpperCaseLetters.push(String.fromCharCode(index));
-	}
+	for (let index = uppRange[0]; index <= uppRange[1]; index++) 
+		upperCaseLetters.push(String.fromCharCode(index));
+	
 	/**
 	 * Generate numbers
 	 */
-	for (let index = numberRange[0]; index <= numberRange[1]; index++) {
+	for (let index = numberRange[0]; index <= numberRange[1]; index++) 
 		numbers.push(String.fromCharCode(index));
-	}
+	
 	/**
 	 * Generate Symbols
 	 */
-	for (let index = symbolRange[0]; index <= symbolRange[1]; index++) {
+	for (let index = symbolRange[0]; index <= symbolRange[1]; index++) 
 		symbols.push(String.fromCharCode(index));
-	}
-	const alphabets = UpperCaseLetters.concat(LowerCaseLetters)
+	
+	const alphabets = upperCaseLetters.concat(lowerCaseLetters)
 		.concat(numbers)
 		.concat(symbols);
-	return { alphabets, LowerCaseLetters, UpperCaseLetters, numbers, symbols };
+
+	return { alphabets, lowerCaseLetters, upperCaseLetters, numbers, symbols };
 };
-const alphabs = ALPHABET();
+const alphabs = alphabets();
 
 export default Object.freeze({
-	LOWERCASE: alphabs.LowerCaseLetters,
-	UPPERCASE: alphabs.UpperCaseLetters,
+	LOWERCASE: alphabs.lowerCaseLetters,
+	UPPERCASE: alphabs.upperCaseLetters,
 	SYMBOLS: alphabs.symbols,
 	NUMBERS: alphabs.numbers,
 	ALPHABETS: alphabs.alphabets,

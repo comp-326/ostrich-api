@@ -5,7 +5,8 @@ import path from 'path';
 dotenv.config();
 const config = {
 	ENV: {
-		PORT: process.env.PORT!,
+		PORT: process.env.PORT||'ostrich-app',
+		API_PREFIX: process.env.API_PREFIX||'/api/v1',
 		APP_NAME: process.env.APP_NAME!,
 		NODE_ENV: process.env.NODE_ENV!,
 		SECRET_KEY: process.env.SECRET_KEY!,

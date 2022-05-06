@@ -1,11 +1,12 @@
-import path from 'path';
 import crypto from 'crypto';
-import os from 'os';
+import dirExistSync from '@ostrich-app/utils/fileSystem/dirExist';
 import fs from 'fs';
-import dirExistSync from '@ostrich-utils/fileSystem/dirExist';
+import os from 'os';
+import path from 'path';
 
-function setEnvironmentVariables(envFilePath: string) {
+function setEnvironmentVariables(envFilePath: string){
 	let filepath = '';
+
 	try {
 		filepath = path.join(path.dirname(envFilePath), '.env.example');
 	} catch (err) {
@@ -18,9 +19,9 @@ function setEnvironmentVariables(envFilePath: string) {
 		.forEach(line => {
 			const [k, v] = line.trim().split('=');
 
-			if (k !== '') {
+			if (k !== '') 
 				data[k] = v;
-			}
+			
 		});
 
 	data['PORT'] = '6200';
@@ -42,12 +43,12 @@ function setEnvironmentVariables(envFilePath: string) {
 			.forEach(line => {
 				if (line !== '') {
 					const [k, v] = line.trim().split('=');
-					if (v !== '') {
+					if (v !== '') 
 						data[k] = v;
-					}
-					if (!Object.keys(data).includes(k)) {
+					
+					if (!Object.keys(data).includes(k)) 
 						data[k] = v;
-					}
+					
 				}
 			});
 	}

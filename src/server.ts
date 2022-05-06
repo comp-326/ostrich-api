@@ -1,8 +1,8 @@
-import moment from 'moment';
-import { environmentConfig } from '@ostrich-config';
-import app from '@ostrich-base/app';
-import http from 'http';
+import app from '@ostrich-app/app';
 import chalk from 'chalk';
+import { environmentConfig } from '@ostrich-app/config';
+import http from 'http';
+import moment from 'moment';
 
 const server = http.createServer(app);
 
