@@ -4,12 +4,12 @@ import UserController from '../controllers';
 import UserRepository from '../repository';
 import { UserUseCase } from '../use-cases';
 
-export default function updatePasswordRoute(app: Router){
+export default function updateAccountRoute(app: Router){
 	return (pathName: string) => {
 		const userUseCase = new UserUseCase(UserRepository);
 		const controller = new UserController(userUseCase);
 		const userRouter = Router();
 		app.use(`${pathName}`, userRouter);
-		userRouter.get('/account/profile/update/:id', controller.updateAccount);
+		userRouter.put('/account/profile/update/:id', controller.updateAccount);
 	};
 }

@@ -27,6 +27,7 @@ export interface IUserRepository {
 	find: (limit: number, page: number) => Promise<any>;
 	updateById: (id: string, data: IUser) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
+	softDeleteUser: (id: string) => Promise<any>;
 }
 
 export type PasswordValidatorType = {
@@ -75,6 +76,7 @@ export type IUserData =
 export interface IUserUseCases {
 
 		addNewUser: (userData: IUser) => Promise<any>;
+		editUserProfilePic: (userId:string,userData: IUser&{file:Express.Multer.File}) => Promise<any>;
 		editUserProfile: (userId:string,userData: IUser) => Promise<any>;
 		listUserById: (id: string) => Promise<any>;
 		listUserByEmail: (email: string) => Promise<any>;

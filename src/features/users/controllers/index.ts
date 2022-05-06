@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import responseFormatter from '@ostrich-app/common/responseFormatter';
 import verifyUserJWT from '@ostrich-app/features/users/utils/jwt/verifyUserJWT';
 import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
@@ -46,20 +47,26 @@ class UserController implements IUserController{
 
 
 	findUserByEmail = async (req: IRequest, res: IResponse, next: INext) => {
-		const { status, data, msg } = await this.useCase.listUserByEmail(
-			req.body.email
-		);
 
-		return res.status(200).json(data);
+		try {
+
+			const data = await this.useCase.listUserByEmail(
+				req.params.email
+			);
+
+			return res.status(200).json({ data });
+		} catch (err) {
+			return next(err);
+		}
 	};
 
 
 	findUserById = async (req: IRequest, res: IResponse, next: INext) => {
-		const { status, data, msg } = await this.useCase.listUserById(
+		const data = await this.useCase.listUserById(
 			req.params.id
 		);
 
-		return res.status(200).json(data);
+		return res.status(200).json({ data });
 	};
 
 
@@ -144,7 +151,7 @@ class UserController implements IUserController{
 
 	findUsers = async (req: IRequest, res: IResponse, next: INext) => {
 		const { limit, page } = req.params;
-		const { status, data, msg } = await this.useCase.listUsers({
+		const data = await this.useCase.listUsers({
 			limit: limit ? parseInt(limit) : 20,
 			offset: page ? parseInt(page) : 1
 		});
@@ -152,39 +159,65 @@ class UserController implements IUserController{
 		return res
 			.status(200)
 			.json(
-				responseFormatter.ResponseWithData({ status, message: msg, data, statusCode: 200 })
+				{
+					data,
+					message: 'Success',
+				}
 			);
 	};
 
 
 	updateAccount = async (req: IRequest, res: IResponse, next: INext) => {
-		const { id } = req.params;
-		const { status, data, msg } = await this.useCase.editUserProfile(
-			id,
-			req.body
-		);
+		try{
 
-		return res.status(200).json(data);
+			const { id } = req.params;
+			await this.useCase.editUserProfile(
+				id,
+				req.body
+			);
+				
+			return res.sendStatus(200);
+		}catch(err) {
+
+			return next(err);
+		}
+			
 	};
 
 
 	updateProfilePic = async (req: IRequest, res: IResponse, next: INext) => {
-		const { id } = req.params;
-		const { status, data, msg } = await this.useCase.addNewUser(
-			req.body
-		);
+		try {
+			if (!req.file) {
+				throw new ExpressError({
+					data: {},
+					message: 'No file uploaded',
+					status: 'warning',
+					statusCode: 400
+				});
+			}
+			req.body.file = req.file;
 
-		return res.status(200).json(data);
+			const { id } = req.params;
+			await this.useCase.editUserProfile(id,
+				req.body
+			);
+
+			return res.status(200).json({});
+		} catch (err) {
+			return next(err);
+		}
 	};
 
 
 	updatePassword = async (req: IRequest, res: IResponse, next: INext) => {
-		const { id } = req.params;
-		const { status, data, msg } = await this.useCase.addNewUser(
-			req.body
-		);
+		try {
+			const { userId } = await verifyUserJWT.verifyPasswordToken(req.params.token) as unknown as JWTPayloadType;
+			await this.useCase.changeUserPassword(userId, req.body);
 
-		return res.status(200).json(data);
+			return res.status(200).json('Success');
+		} catch (err) {
+			return next(err);
+		}
 	};
 }
 

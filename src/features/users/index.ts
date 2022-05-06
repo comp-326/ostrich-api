@@ -8,7 +8,8 @@ import getUserByIdRoute from '@ostrich-app/features/users/routes/getUserByIdRout
 import getUsersRoute from '@ostrich-app/features/users/routes/getUsersRoute';
 import newUserRoute from '@ostrich-app/features/users/routes/newUserRoute';
 import resetPasswordRoute from '@ostrich-app/features/users/routes/resetPasswordRoute';
-import updatePasswordRoute from '@ostrich-app/features/users/routes/updateProfileRoute';
+import updateProfilePic from '@ostrich-app/features/users/routes/updateProfilePic';
+import updateProfileRoute from '@ostrich-app/features/users/routes/updateProfileRoute';
 
 
 export default ({app,pathName}:{app:Router,pathName:string})=>{
@@ -21,5 +22,6 @@ export default ({app,pathName}:{app:Router,pathName:string})=>{
 	getUsersRoute(app)(pathName);
 	newUserRoute(app)(pathName);
 	resetPasswordRoute(app)(pathName);
-	updatePasswordRoute(app)(pathName);
+	updateProfilePic(app)(pathName);
+	updateProfileRoute(app)(pathName);
 };
