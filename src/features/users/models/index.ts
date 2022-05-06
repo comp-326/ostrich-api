@@ -60,6 +60,11 @@ const userSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 
 });
 
+userSchema.statics.findByEmail = async function(email: string){
+	const user = await userModel.findOne({ email });
+
+	return user;
+};
 const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('Users', userSchema);
 
 export default userModel;

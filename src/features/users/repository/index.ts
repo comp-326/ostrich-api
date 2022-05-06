@@ -9,41 +9,47 @@ import mediaModel from '@ostrich-app/features/media/models';
 
 class UserRepository implements IUserRepository{
 
+	softDeleteUser = async (id: string) => {
+		const user = await UserModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
 
-	createUser=async (userData: IUser) => {
+		return user;
+	};
+
+	createUser = async (userData: IUser) => {
 		const role = await UserRoleModel.getDefaultRole();
 		if (role) {
 			const profilePicture = await mediaModel.create({
-				type:'profile',
-				url:generateGravatarUrl(userData.email),
-				uploadId:userData.email,
-				size:200,
-				mediaType:'image'
+				type: 'profile',
+				url: generateGravatarUrl(userData.email),
+				uploadId: userData.email,
+				size: 200,
+				mediaType: 'image'
 			});
-			
-			
-			const newUser = await UserModel.create({...userData,role,profilePicture});
+
+
+			const newUser = await UserModel.create({ ...userData, role, profilePicture });
 
 			return newUser;
-		}else {
+		} else {
 
 			await UserRoleModel.InsertRoles();
 			const defaultRole = await UserRoleModel.getDefaultRole();
 			const profilePicture = await mediaModel.create({
-				type:'profile',
-				url:generateGravatarUrl(userData.email),
-				uploadId:userData.email,
-				size:200,
-				mediaType:'image'
+				type: 'profile',
+				url: generateGravatarUrl(userData.email),
+				uploadId: userData.email,
+				size: 200,
+				mediaType: 'image'
 			});
-			const newUser = await UserModel.create({ ...userData, role: defaultRole ,profilePicture});
+			const newUser = await UserModel.create({ ...userData, role: defaultRole, profilePicture });
 
 			return newUser;
 		}
 	};
 
-	findByEmail=async(email: string) => {
-		const user = await UserModel.findOne({email}) as unknown as any;
+	findByEmail = async (email: string) => {
+
+		const user = await UserModel.findByEmail(email );
 
 		return user;
 	};
@@ -70,13 +76,13 @@ class UserRepository implements IUserRepository{
 			{ new: true }
 		).select('+password');
 
-		return updated!._doc;
+		return updated;
 	};
 
 	deleteById = async (id: string) => {
 		const deleted = await UserModel.findByIdAndDelete(id);
 
-		return deleted!._doc;
+		return deleted;
 	};
 }
 
