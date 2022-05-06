@@ -28,6 +28,7 @@ export default function makeCreateFOlderEntity({
 				data: {}
 			});
 		}
+
 		return Object.freeze({
 			getName: () => name,
 			getComments: () => comments,

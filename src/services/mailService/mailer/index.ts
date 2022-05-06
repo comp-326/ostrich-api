@@ -1,6 +1,8 @@
+/* eslint-disable sort-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import nodemailer from 'nodemailer';
 import DKIM from 'nodemailer/lib/dkim';
+import { Readable } from 'stream';
+import nodemailer from 'nodemailer';
 import {
 	Address,
 	Attachment,
@@ -10,7 +12,6 @@ import {
 	ListHeaders,
 	TextEncoding
 } from 'nodemailer/lib/mailer';
-import { Readable } from 'stream';
 import { mailConfig } from '@ostrich-app/config';
 
 
@@ -105,6 +106,7 @@ class Mailer implements IMailer{
 
 	public setHost = (host: string) => {
 		this.host = host;
+
 		return this;
 	};
 
@@ -112,6 +114,7 @@ class Mailer implements IMailer{
 
 	public setPort = (port: number) => {
 		this.port = port;
+
 		return this;
 	};
 
@@ -119,6 +122,7 @@ class Mailer implements IMailer{
 
 	public setProxy = (proxy: string) => {
 		this.proxy = proxy;
+
 		return this;
 	};
 
@@ -126,6 +130,7 @@ class Mailer implements IMailer{
 
 	public setSecure = (secure: boolean) => {
 		this.secure = secure;
+
 		return this;
 	};
 
@@ -133,6 +138,7 @@ class Mailer implements IMailer{
 
 	public setMailerUsername = (username: string) => {
 		this.username = username;
+
 		return this;
 	};
 
@@ -140,6 +146,7 @@ class Mailer implements IMailer{
 
 	public setMailerPassword = (password: string) => {
 		this.password = password;
+
 		return this;
 	};
 
@@ -156,6 +163,7 @@ class Mailer implements IMailer{
 				pass: this.getMailerPassword()
 			}
 		};
+
 		return nodemailer.createTransport(options);
 	};
 
@@ -166,8 +174,8 @@ class Mailer implements IMailer{
 	};
 }
 
-const OstrichMailer = new Mailer();
-OstrichMailer.setHost(mailConfig.EMAIL_HOST)
+const ostrichMailer = new Mailer();
+ostrichMailer.setHost(mailConfig.EMAIL_HOST)
 	.setMailerPassword(mailConfig.EMAIL_PASSWORD)
 	.setPort(mailConfig.EMAIL_PORT)
 	.setSecure(mailConfig.EMAIL_SECURE)
@@ -175,4 +183,4 @@ OstrichMailer.setHost(mailConfig.EMAIL_HOST)
 	.setProxy(mailConfig.EMAIL_PROXY);
 
 
-export default OstrichMailer;
+export default ostrichMailer;

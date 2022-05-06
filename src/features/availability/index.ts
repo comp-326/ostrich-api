@@ -9,5 +9,6 @@ export default function availabilityDomain(app: Router){
 	api.makeQueryAvailabilityIdApiCall(availabilityRouter);
 	api.makeQueryUserVailabilityApiCall(availabilityRouter);
 	api.makeDeleteAvailabilityApiCall(availabilityRouter);
+
 	return app;
 }

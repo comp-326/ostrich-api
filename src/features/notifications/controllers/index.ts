@@ -16,6 +16,7 @@ class NotificationController implements INotificationController{
 	 */
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
 		await this.useCase.addNotification(req.body);
+
 		return res.status(200).json({
 			message: 'softDelete'
 		});

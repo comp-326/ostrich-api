@@ -6,16 +6,19 @@ import NotificationModel from '@ostrich-app/features/notifications/models';
 class NotificationRepository implements INotificationRepository{
 	findByName = async (name: string) => {
 		const Notification = await NotificationModel.findOne({ name });
+
 		return Notification;
 	};
 
 	findById = async (id: string) => {
 		const Notification = await NotificationModel.findById(id);
+
 		return Notification;
 	};
 
 	findWorkspaceById = async (id: string) => {
 		const workspace = await NotificationModel.findById(id);
+
 		return workspace;
 	};
 
@@ -23,6 +26,7 @@ class NotificationRepository implements INotificationRepository{
 		const Notifications = await NotificationModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return Notifications;
 	};
 
@@ -36,6 +40,7 @@ class NotificationRepository implements INotificationRepository{
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return workspaceNotifications;
 	};
 
@@ -45,11 +50,13 @@ class NotificationRepository implements INotificationRepository{
 			{ ...data },
 			{ new: true },
 		);
+
 		return editedNotification;
 	};
 
 	deleteById = async (id: string) => {
 		await NotificationModel.findByIdAndDelete(id);
+
 		return true;
 	};
 
@@ -61,6 +68,7 @@ class NotificationRepository implements INotificationRepository{
 		const movedNotification = await NotificationModel.findByIdAndUpdate(NotificationId, {
 			workspace: destinationWorkspace,
 		});
+
 		return movedNotification;
 	};
 
@@ -69,6 +77,7 @@ class NotificationRepository implements INotificationRepository{
 			...NotificationData,
 			workspace: destinationWorkspace,
 		});
+
 		return copiedNotification;
 	};
 
@@ -77,6 +86,7 @@ class NotificationRepository implements INotificationRepository{
 			...data,
 			workspace: workspaceId,
 		});
+
 		return newNotification;
 	};
 }

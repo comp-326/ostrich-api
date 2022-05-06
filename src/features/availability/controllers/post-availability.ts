@@ -10,6 +10,7 @@ export default function makeBuildPostUserController({
 	return async function postTodo(httpRequest: IAvailabilityRequest){
 		const { userId } = httpRequest.user;
 		const todo = await create(userId, httpRequest.body);
+
 		return {
 			statusCode: 201,
 			body: { todo }

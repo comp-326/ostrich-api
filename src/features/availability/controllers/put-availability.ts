@@ -9,6 +9,7 @@ export default function makeBuildUpdateByIdUserController({
 	return async function (httpRequest: IAvailabilityRequest){
 		const { id } = httpRequest.params;
 		const todo = await update(id, httpRequest.body);
+
 		return { statusCode: 200, body: todo };
 	};
 }

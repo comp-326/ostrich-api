@@ -69,6 +69,7 @@ export default function makeEditUserPasswordUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
+
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		return true;
 	};

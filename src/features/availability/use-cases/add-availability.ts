@@ -16,6 +16,7 @@ export default function makeAddAvailabilityUseCase({
 			days: availability.getDays(),
 			endTime: availability.getEndTime()
 		});
+
 		return created;
 	};
 }

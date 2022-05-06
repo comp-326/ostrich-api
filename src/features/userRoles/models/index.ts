@@ -25,6 +25,7 @@ const userRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({
 const userRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', userRoleSchema);
 userRoleSchema.methods.hasPermission = function (permission: number){
 	const permitted = (this.permissions & permission) === permission;
+
 	return permitted;
 };
 

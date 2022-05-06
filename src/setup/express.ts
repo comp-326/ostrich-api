@@ -30,5 +30,6 @@ export default function ({ app }: { app: Application }){
 
 	/* Error handler */
 	app.use(ErrorHandler);
+
 	return app;
 }

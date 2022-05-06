@@ -7,10 +7,11 @@ const dirExistAsync = async (path: string) => {
 	fs.access(path, async err => {
 		if (err) 
 			exist = false;
-		 else 
+		else 
 			exist = true;
 		
 	});
+
 	return exist;
 };
 

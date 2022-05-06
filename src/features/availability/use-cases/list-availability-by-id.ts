@@ -33,6 +33,7 @@ export default function makeListAvailabilityByIdAvailabilityUseCase({
 				statusCode: 404
 			});
 		}
+
 		return existing;
 	};
 }

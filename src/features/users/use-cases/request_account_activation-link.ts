@@ -40,6 +40,7 @@ export default function makeRequestAccountActivation({
 			firstName: existing.firstName,
 			lastName: existing.lastName
 		});
+
 		return sent;
 	};
 }

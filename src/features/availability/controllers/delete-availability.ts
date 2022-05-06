@@ -10,6 +10,7 @@ export default function makeBuildDeleteUserController({
 		const { id } = httpRequest.params;
 
 		await remove(id);
+
 		return {
 			statusCode: 200,
 			body: { id, deleted: true }

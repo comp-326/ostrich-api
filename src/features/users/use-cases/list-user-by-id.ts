@@ -35,6 +35,7 @@ export default function makeListUserByIdUseCase({
 		}
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { password, ...user } = existing._doc;
+
 		return user;
 	};
 }

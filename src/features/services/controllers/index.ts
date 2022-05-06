@@ -20,6 +20,7 @@ class ServicesController implements IServicesController{
 	 */
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
 		await this.useCase.addServices(req.body);
+
 		return res.status(200).json({
 			message: 'softDelete'
 		});

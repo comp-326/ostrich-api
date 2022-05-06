@@ -6,16 +6,19 @@ import CommentsModel from '@ostrich-app/features/comments/models';
 class CommentsRepository implements ICommentsRepository{
 	findByName = async (name: string) => {
 		const Comments = await CommentsModel.findOne({ name });
+
 		return Comments;
 	};
 
 	findById = async (id: string) => {
 		const Comments = await CommentsModel.findById(id);
+
 		return Comments;
 	};
 
 	findWorkspaceById = async (id: string) => {
 		const workspace = await CommentsModel.findById(id);
+
 		return workspace;
 	};
 
@@ -23,6 +26,7 @@ class CommentsRepository implements ICommentsRepository{
 		const Commentss = await CommentsModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return Commentss;
 	};
 
@@ -36,6 +40,7 @@ class CommentsRepository implements ICommentsRepository{
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return workspaceCommentss;
 	};
 
@@ -45,11 +50,13 @@ class CommentsRepository implements ICommentsRepository{
 			{ ...data },
 			{ new: true },
 		);
+
 		return editedComments;
 	};
 
 	deleteById = async (id: string) => {
 		await CommentsModel.findByIdAndDelete(id);
+
 		return true;
 	};
 
@@ -61,6 +68,7 @@ class CommentsRepository implements ICommentsRepository{
 		const movedComments = await CommentsModel.findByIdAndUpdate(CommentsId, {
 			workspace: destinationWorkspace,
 		});
+
 		return movedComments;
 	};
 
@@ -69,6 +77,7 @@ class CommentsRepository implements ICommentsRepository{
 			...CommentsData,
 			workspace: destinationWorkspace,
 		});
+
 		return copiedComments;
 	};
 
@@ -77,6 +86,7 @@ class CommentsRepository implements ICommentsRepository{
 			...data,
 			workspace: workspaceId,
 		});
+
 		return newComments;
 	};
 }

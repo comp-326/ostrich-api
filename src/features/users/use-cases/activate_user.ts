@@ -52,6 +52,7 @@ export default function makeEditActivateUserUseCase({
 			lastName: user.getLastName(),
 			avatar: user.getAvatar()
 		});
+
 		return {...existing._doc, isActive: true,password: undefined};
 	};
 }

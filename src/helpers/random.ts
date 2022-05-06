@@ -15,6 +15,7 @@ export default function (length: number){
 			const position = Math.random() * (alpha.length - 1);
 			password += alpha[Math.round(position)];
 		}
+
 		return password;
 	} catch (error) {
 		return error.message;

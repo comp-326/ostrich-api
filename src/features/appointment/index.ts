@@ -13,5 +13,6 @@ export default function folderDomain(app: Router){
 	api.makeQueryUpdateCopyFolderApiCall(folderRouter);
 	api.makeQueryUpdateFolderApiCall(folderRouter);
 	api.makeQueryDeleteFolderApiCall(folderRouter);
+
 	return app;
 }

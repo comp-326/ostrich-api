@@ -1,7 +1,7 @@
-import { JWTPayloadType } from '@ostrich-app/common/types';
 import CryptoJS from 'crypto-js';
-import jwt from 'jsonwebtoken';
+import { JWTPayloadType } from '@ostrich-app/common/types';
 import {environmentConfig} from '@ostrich-app/config';
+import jwt from 'jsonwebtoken';
 
 class TokenGEN{
 	// constructor() {}
@@ -9,6 +9,7 @@ class TokenGEN{
 	public generateToken(payload: JWTPayloadType): string{
 		const token = jwt.sign(payload, environmentConfig.SECRET_KEY, { expiresIn: '270h' });
 		const encryptedToken = CryptoJS.AES.encrypt(token, environmentConfig.ENC_KEY).toString();
+
 		return encryptedToken;
 	}
 

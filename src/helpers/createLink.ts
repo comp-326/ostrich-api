@@ -24,6 +24,7 @@ function createWorkspaceInviteLink({
 function createAccountActivationLink({ token }: { token: string }){
 	return `http://localhost:${environmentConfig.PORT}/account/activate/${token}`;
 }
+
 /**
  *
  * @param {{baseUrl:string,token:string}} param0

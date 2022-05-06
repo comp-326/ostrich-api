@@ -34,6 +34,7 @@ export default function makeRemoveUserUseCase({
 			});
 		}
 		await userDB.deleteById(id);
+
 		return { deleted: true, id, error: 'User deleted succesfully' };
 	};
 }

@@ -29,6 +29,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.softRemoveUser(
 			req.params.id
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -43,6 +44,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.hardRemoveUser(
 			req.params.id
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -57,6 +59,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.listUserByEmail(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -71,6 +74,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.listUserById(
 			req.params.id
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -85,6 +89,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.sendAccountActivationLink(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -99,6 +104,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.sendAccountActivationLink(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -113,6 +119,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.sendPasswordResetLink(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -127,6 +134,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.sendPasswordResetLink(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -141,6 +149,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.activateUserAccount(
 			req.body.email
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -157,6 +166,7 @@ class UserController implements IUserController{
 			limit: limit ? parseInt(limit) : 20,
 			offset: page ? parseInt(page) : 1
 		});
+
 		return res
 			.status(200)
 			.json(
@@ -177,6 +187,7 @@ class UserController implements IUserController{
 			id,
 			req.body
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -192,6 +203,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.changeUserPassword(
 			req.body
 		);
+
 		return res.status(200).json(data);
 	};
 
@@ -207,6 +219,7 @@ class UserController implements IUserController{
 		const { status, data, msg } = await this.useCase.changeUserPassword(
 			req.body
 		);
+
 		return res.status(200).json(data);
 	};
 }

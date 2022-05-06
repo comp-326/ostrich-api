@@ -10,6 +10,7 @@ export default function makeBuildFindByIdController({
 		const { id } = httpRequest.params;
 
 		const todo = await listById(id);
+
 		return {
 			statusCode: 200,
 			body: todo

@@ -1,25 +1,25 @@
-import multer from 'multer';
 import { BASE_DIR } from '@ostrich-app/config';
-import path from 'path';
 import { createDirectory } from '@ostrich-app/utils/fileSystem';
+import multer from 'multer';
+import path from 'path';
 
 /**
  * ************************* UPLOAD ONLY VIDEOS *****************
  */
 const videoStorage = multer.diskStorage({
-	destination: (_req, _file, cb) => {
+	destination: (req, file, cb) => {
 		const uploadPath = path.join(BASE_DIR, 'public/uploads/videos');
 		createDirectory(uploadPath);
 		cb(null, uploadPath);
 	},
-	filename: (_req, file, cb) => {
+	filename: (req, file, cb) => {
 		const fileName = `video_file_upload_${new Date().getTime()}${path.extname(
 			file.originalname
 		)}`;
 		cb(null, fileName);
 	}
 });
-const videoFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
+const videoFileFilters: multer.Options['fileFilter'] = (req, file, cb) => {
 	const mime = file.mimetype;
 	if (
 		mime === 'video/mp4' ||
@@ -40,19 +40,19 @@ const videoFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
  * ************************* UPLOAD ONLY AUDIOS *********************
  */
 const audioStorage = multer.diskStorage({
-	destination: (_req, _file, cb) => {
+	destination: (req, file, cb) => {
 		const uploadPath = path.join(BASE_DIR, 'public/uploads/audio');
 		createDirectory(uploadPath);
 		cb(null, uploadPath);
 	},
-	filename: (_req, file, cb) => {
+	filename: (req, file, cb) => {
 		const fileName = `audio_file_upload_${new Date().getTime()}${path.extname(
 			file.originalname
 		)}`;
 		cb(null, fileName);
 	}
 });
-const audioFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
+const audioFileFilters: multer.Options['fileFilter'] = (req, file, cb) => {
 	const mime = file.mimetype;
 	if (
 		mime === 'auido/L24' ||
@@ -75,19 +75,19 @@ const audioFileFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
  * ************************* UPLOAD ONLY IMAGES *********************
  */
 const imageStorage = multer.diskStorage({
-	destination: (_req, _file, cb) => {
+	destination: (req, file, cb) => {
 		const uploadPath = path.join(BASE_DIR, 'public/uploads/images');
 		createDirectory(uploadPath);
 		cb(null, uploadPath);
 	},
-	filename: (_req, file, cb) => {
+	filename: (req, file, cb) => {
 		const fileName = `image_file_upload_${new Date().getTime()}${path.extname(
 			file.originalname
 		)}`;
 		cb(null, fileName);
 	}
 });
-const imageFilters: multer.Options['fileFilter'] = (_req, file, cb) => {
+const imageFilters: multer.Options['fileFilter'] = (req, file, cb) => {
 	const mime = file.mimetype;
 	if (
 		mime === 'image/png' ||

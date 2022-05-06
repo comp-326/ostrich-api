@@ -44,6 +44,7 @@ class Accountmailer{
 					html: template
 				});
 				res && (sent = true);
+
 				return sent;
 			} catch (err) {
 				throw new ExpressError({
@@ -90,6 +91,7 @@ class Accountmailer{
 					html: template
 				});
 				res && (sent = true);
+
 				return sent;
 			} catch (err) {
 				throw new ExpressError({

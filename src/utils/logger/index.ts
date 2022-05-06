@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IRequest, IResponse } from '@ostrich-app/common/types';
 import { BASE_DIR } from '@ostrich-app/config';
+import moment from 'moment';
 import path from 'path';
 import winston from 'winston';
-import moment from 'moment';
 
 /**
  * ----------------------------  LOG HTTP ERROR REQUESTS OPTIONS -------------------------
  */
-export const HTTPerrorLogOptions = {
+export const httpErrorLogOptions = {
 	transports: [
 		new winston.transports.Console(),
 		new winston.transports.File({
@@ -30,7 +30,7 @@ export const HTTPerrorLogOptions = {
 /**
  * ---------------------------- LOG HTTP REQUESTS -----------------------------------
  */
-export const HTTPLogOptions = {
+export const httpLogOptions = {
 	transports: [
 		new winston.transports.Console(),
 		new winston.transports.File({
@@ -52,7 +52,7 @@ export const HTTPLogOptions = {
 	expressFormat: true,
 	colorize: false,
 	// eslint-disable-next-line no-unused-vars
-	ignoreRoute: function (_req: IRequest, _res: IResponse){
+	ignoreRoute: function (req: IRequest, res: IResponse){
 		return false;
 	}
 };

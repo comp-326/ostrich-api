@@ -1,5 +1,6 @@
 import { IPassword } from '../interfaces';
 import bcryptjs from 'bcryptjs';
+
 class Password implements IPassword{
 	/**
 	 *
@@ -8,6 +9,7 @@ class Password implements IPassword{
 	hashPassword = async (password: string) => {
 		const salt = await bcryptjs.genSalt(12);
 		const hashedPassword = await bcryptjs.hash(password, salt);
+
 		return hashedPassword;
 	};
 
@@ -19,6 +21,7 @@ class Password implements IPassword{
 	 */
 	comparePassword = async (password: string, passwordHash: string) => {
 		const match = await bcryptjs.compare(password, passwordHash);
+
 		return match;
 	};
 }

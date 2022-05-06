@@ -6,6 +6,7 @@ import path from 'path';
 
 function setEnvironmentVariables(envFilePath: string){
 	let filepath = '';
+
 	try {
 		filepath = path.join(path.dirname(envFilePath), '.env.example');
 	} catch (err) {

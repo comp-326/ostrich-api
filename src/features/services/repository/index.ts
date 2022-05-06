@@ -6,16 +6,19 @@ import ServicesModel from '@ostrich-app/features/services/models';
 class ServicesRepository implements IServicesRepository{
 	findByName = async (name: string) => {
 		const Services = await ServicesModel.findOne({ name });
+
 		return Services;
 	};
 
 	findById = async (id: string) => {
 		const Services = await ServicesModel.findById(id);
+
 		return Services;
 	};
 
 	findWorkspaceById = async (id: string) => {
 		const workspace = await ServicesModel.findById(id);
+
 		return workspace;
 	};
 
@@ -23,6 +26,7 @@ class ServicesRepository implements IServicesRepository{
 		const Servicess = await ServicesModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return Servicess;
 	};
 
@@ -36,6 +40,7 @@ class ServicesRepository implements IServicesRepository{
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return workspaceServicess;
 	};
 
@@ -45,11 +50,13 @@ class ServicesRepository implements IServicesRepository{
 			{ ...data },
 			{ new: true },
 		);
+
 		return editedServices;
 	};
 
 	deleteById = async (id: string) => {
 		await ServicesModel.findByIdAndDelete(id);
+
 		return true;
 	};
 
@@ -61,6 +68,7 @@ class ServicesRepository implements IServicesRepository{
 		const movedServices = await ServicesModel.findByIdAndUpdate(ServicesId, {
 			workspace: destinationWorkspace,
 		});
+
 		return movedServices;
 	};
 
@@ -69,6 +77,7 @@ class ServicesRepository implements IServicesRepository{
 			...ServicesData,
 			workspace: destinationWorkspace,
 		});
+
 		return copiedServices;
 	};
 
@@ -77,6 +86,7 @@ class ServicesRepository implements IServicesRepository{
 			...data,
 			workspace: workspaceId,
 		});
+
 		return newServices;
 	};
 }

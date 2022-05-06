@@ -10,6 +10,7 @@ const buildTS = () => {
 		.pipe(alias(tsProject.config.compilerOptions))
 		.pipe(sourcemaps.init())
 		.pipe(tsProject());
+
 	return compiled.js.pipe(sourcemaps.write('.')).pipe(gulp.dest('./dist/src'));
 };
 

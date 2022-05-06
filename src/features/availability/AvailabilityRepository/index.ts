@@ -6,11 +6,13 @@ import { IAvailability, IAvailabilityRepository } from '../interfaces';
 class AvailabilityRepository implements IAvailabilityRepository{
 	createAvailability = async (userId: string, data: IAvailability) => {
 		const availability = AvailabilityModel.create({ user: userId, data });
+
 		return availability;
 	};
 
 	findById = async (id: string) => {
 		const availability = await AvailabilityModel.findById(id);
+
 		return availability;
 	};
 
@@ -18,6 +20,7 @@ class AvailabilityRepository implements IAvailabilityRepository{
 		const userAvailabilities = await AvailabilityModel.find({
 			owner: userId,
 		});
+
 		return userAvailabilities;
 	};
 
@@ -29,11 +32,13 @@ class AvailabilityRepository implements IAvailabilityRepository{
 			},
 			{ new: true },
 		);
+
 		return availability;
 	};
 
 	deleteById = async (id: string) => {
 		await AvailabilityModel.findByIdAndDelete(id);
+
 		return { deleted: true };
 	};
 }

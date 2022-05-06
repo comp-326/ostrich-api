@@ -75,6 +75,7 @@ export default function makeCreateUserEntity({
 			userPassword = await hashPassword(userPassword);
 		
 		const profilePic = avatar ? avatar : generateGravatarUrl(email);
+
 		return Object.freeze({
 			getFirsName: () => firstName,
 			getLastName: () => lastName,

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { v2 as cloudinary } from 'cloudinary';
 import { cloudinaryConfig } from '@ostrich-app/config';
 

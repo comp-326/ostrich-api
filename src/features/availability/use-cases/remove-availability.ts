@@ -34,6 +34,7 @@ export default function makeRemoveAvailabilityUseCase({
 			});
 		}
 		await availabilityDB.deleteById(id);
+
 		return { deleted: true, id, error: 'User deleted succesfully' };
 	};
 }

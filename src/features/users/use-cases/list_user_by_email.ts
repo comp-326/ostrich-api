@@ -26,6 +26,7 @@ export default function makeListUserByEmail({
 		}
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { password, ...user } = existing;
+
 		return user;
 	};
 }

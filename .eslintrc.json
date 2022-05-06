@@ -152,8 +152,8 @@
             "error",
             {
                 "blankLine": "always",
-                "prev": "var",
-                "next": "return"
+                "prev": "*",
+                "next": ["return","interface","type","function","class","try"]
             }
         ]
     }

@@ -21,5 +21,6 @@ const template = `<!DOCTYPE html>
 
 export default function accountActivationEmailTemplate (props:{firstName:string,lastName:string,link:string}){
 	const compiled  = ejs.render(template,{data:props},{beautify:true});
+
 	return compiled;
 }

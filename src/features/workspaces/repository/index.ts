@@ -6,16 +6,19 @@ import WorkspaceModel from '@ostrich-app/features/workspaces/models';
 class WorkspaceRepository implements IWorkspaceRepository{
 	findByName = async (name: string) => {
 		const folder = await WorkspaceModel.findOne({ name });
+
 		return folder;
 	};
 
 	findById = async (id: string) => {
 		const folder = await WorkspaceModel.findById(id);
+
 		return folder;
 	};
 
 	findWorkspaceById = async (id: string) => {
 		const workspace = await WorkspaceModel.findById(id);
+
 		return workspace;
 	};
 
@@ -23,6 +26,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		const folders = await WorkspaceModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return folders;
 	};
 
@@ -36,6 +40,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return workspaceWorkspaces;
 	};
 
@@ -45,11 +50,13 @@ class WorkspaceRepository implements IWorkspaceRepository{
 			{ ...data },
 			{ new: true },
 		);
+
 		return editedWorkspace;
 	};
 
 	deleteById = async (id: string) => {
 		await WorkspaceModel.findByIdAndDelete(id);
+
 		return true;
 	};
 
@@ -61,6 +68,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 		const movedWorkspace = await WorkspaceModel.findByIdAndUpdate(folderId, {
 			workspace: destinationWorkspace,
 		});
+
 		return movedWorkspace;
 	};
 
@@ -69,6 +77,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 			...folderData,
 			workspace: destinationWorkspace,
 		});
+
 		return copiedWorkspace;
 	};
 
@@ -77,6 +86,7 @@ class WorkspaceRepository implements IWorkspaceRepository{
 			...data,
 			workspace: workspaceId,
 		});
+
 		return newWorkspace;
 	};
 }

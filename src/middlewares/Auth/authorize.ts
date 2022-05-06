@@ -1,17 +1,12 @@
-import jwt from 'jsonwebtoken';
+import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
 import { NextFunction, Response } from 'express';
 import { Model } from 'mongoose';
-import {
-	INext,
-	IRequest,
-	IResponse,
-	JWTPayloadType
-} from '@ostrich-app/common/types';
-import { environmentConfig } from '@ostrich-app/config';
-import Permissions from '@ostrich-constants/permissions';
-import UserModel from '@ostrich-app/models/Users/UserModel';
-import RoleModel from '@ostrich-app/models/Roles/RoleModel';
+import Permissions from '@ostrich-app/constants/permissions';
+import RoleModel from '@ostrich-app/features/userRoles/models';
 import TokenGEN from '@ostrich-app/helpers/tokenGEN';
+import UserModel from '@ostrich-app/features/users/models';
+import { environmentConfig } from '@ostrich-app/config';
+import jwt from 'jsonwebtoken';
 
 class AuthMiddleware{
 	constructor(private role: typeof Model, private user: typeof Model){}
@@ -66,6 +61,7 @@ class AuthMiddleware{
 				environmentConfig.SECRET_KEY
 			) as JWTPayloadType;
 			req.user = payload;
+
 			return next();
 		} catch {
 			return res.status(401).json({

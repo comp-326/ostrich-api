@@ -16,6 +16,7 @@ export default function makeListUsersUseCase({
 				status: 'warning'
 			});
 		}
+
 		return users;
 	};
 }

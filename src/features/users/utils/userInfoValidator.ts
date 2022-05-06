@@ -5,11 +5,13 @@ import emailRegex from '@ostrich-constants/emailRegex';
 class UserInfoValidator implements IUserValidator{
 	isValidEmail = (email: string) => {
 		const mailRegex = new RegExp(emailRegex);
+
 		return mailRegex.test(email);
 	};
 
 	isValidPassword = ({ fields, props }: PasswordValidatorType) => {
 		let errors = '';
+
 		try {
 			for (const key of Object.keys(props)) {
 				if (fields.some(f => f.fieldName === key)) {

@@ -31,6 +31,7 @@ export default function makeRequestPasswordReset({
 			firstName: existing.firstName,
 			lastName: existing.lastName
 		});
+
 		return existing;
 	};
 }

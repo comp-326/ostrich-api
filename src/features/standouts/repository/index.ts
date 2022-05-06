@@ -12,16 +12,19 @@ class StandoutRepository implements IStandoutRepository{
 
 	findByName = async (name: string) => {
 		const Standout = await StandoutModel.findOne({ name });
+
 		return Standout;
 	};
 
 	findById = async (id: string) => {
 		const Standout = await StandoutModel.findById(id);
+
 		return Standout;
 	};
 
 	findWorkspaceById = async (id: string) => {
 		const workspace = await StandoutModel.findById(id);
+
 		return workspace;
 	};
 
@@ -29,6 +32,7 @@ class StandoutRepository implements IStandoutRepository{
 		const Standouts = await StandoutModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return Standouts;
 	};
 
@@ -42,6 +46,7 @@ class StandoutRepository implements IStandoutRepository{
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
+
 		return workspaceStandouts;
 	};
 
@@ -51,11 +56,13 @@ class StandoutRepository implements IStandoutRepository{
 			{ ...data },
 			{ new: true },
 		);
+
 		return editedStandout;
 	};
 
 	deleteById = async (id: string) => {
 		await StandoutModel.findByIdAndDelete(id);
+
 		return true;
 	};
 
@@ -67,6 +74,7 @@ class StandoutRepository implements IStandoutRepository{
 		const movedStandout = await StandoutModel.findByIdAndUpdate(StandoutId, {
 			workspace: destinationWorkspace,
 		});
+
 		return movedStandout;
 	};
 
@@ -75,6 +83,7 @@ class StandoutRepository implements IStandoutRepository{
 			...StandoutData,
 			workspace: destinationWorkspace,
 		});
+
 		return copiedStandout;
 	};
 	

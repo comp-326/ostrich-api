@@ -44,6 +44,7 @@ export default function makeEditUserUseCase({
 			isActive: user.getIsActive(),
 			avatar: user.getAvatar()
 		});
+
 		return { ...existing._doc, ...edited, password: undefined };
 	};
 }

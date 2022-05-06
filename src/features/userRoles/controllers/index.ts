@@ -11,11 +11,13 @@ export class UserRoleController implements IUserRoleController{
 
 	createRoles = async (req: IRequest, res: IResponse, next: INext) => {
 		const response = await this.useCase.addRoles();
+
 		return res.status(201).json({ data: response });
 	};
 
 	getRoles = async (req: IRequest, res: IResponse, next: INext) => {
 		const response = await this.useCase.listRoles();
+
 		return res.status(200).json({ data: response });
 	};
 

@@ -33,6 +33,7 @@ export default function makeListUserAvailabilityUseCase({
 				statusCode: 404
 			});
 		}
+
 		return existing;
 	};
 }

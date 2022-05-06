@@ -37,6 +37,7 @@ export default function (err: any, req: IRequest, res: IResponse, next: INext){
 			data: { error }
 		});
 	}
+
 	return res.status(500).json({
 		status: 'error',
 		message: err.message ? err.message : 'Internal server error',

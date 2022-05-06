@@ -9,11 +9,13 @@ export class UserRoleUseCases implements IUserRoleUseCase{
 
 	addRoles = async () => {
 		const roles = await this.repository.createRoles();
+
 		return roles;
 	};
 
 	listRoles = async () => {
 		const roles = await this.repository.findRoles();
+
 		return roles;
 	};
 

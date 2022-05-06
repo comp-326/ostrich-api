@@ -8,6 +8,7 @@ class AvailabilityValidator implements IAvailabilityValidator{
 				return false;
 			
 		}
+
 		return false;
 	};
 }
