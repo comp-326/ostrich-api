@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import config from '@ostrich-app/node.config';
 
 const {

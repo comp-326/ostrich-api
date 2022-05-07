@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-app/db/mongodb';
+import mongoose from '@ostrich-app-db/mongodb';
 
-const NotificationSchema: mongoose.Schema<any> = new mongoose.Schema({
+const notificationSchema: mongoose.Schema<any> = new mongoose.Schema({
 	name: String
 });
 
-const NotificationModel = mongoose.model<any>('Notification', NotificationSchema);
-export default NotificationModel;
+const notificationModel = mongoose.model<any>('Notification', notificationSchema);
+export default notificationModel;

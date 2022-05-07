@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
-import { IUserRoleDocument } from '@ostrich-app/features/userRoles/models/interfaces';
+import { IUserRoleDocument } from '@ostrich-app-features/userRoles/models/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 export interface IUserRoleUseCase {
 	addRoles: () => Promise<IUserRoleDocument[] | IUserRoleDocument|null>

@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IWorkspace } from '@ostrich-app/features/workspaces/models/interfaces';
-import { IWorkspaceRepository } from '@ostrich-app/features/workspaces/interfaces';
-import WorkspaceModel from '@ostrich-app/features/workspaces/models';
-import { generateGravatarUrl } from '@ostrich-app/common/gravatar';
-import mediaModel from '@ostrich-app/features/media/models';
+import { IWorkspace } from '@ostrich-app-features/workspaces/models/interfaces';
+import { IWorkspaceRepository } from '@ostrich-app-features/workspaces/interfaces';
+import WorkspaceModel from '@ostrich-app-features/workspaces/models';
+import { generateGravatarUrl } from '@ostrich-app-common/gravatar';
+import mediaModel from '@ostrich-app-features/media/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
 	findAll = async (limit: number, page: number) => {
-		return {};
+
+		return {limit,page};
 	};
 
 	findUserWorkspaces = async (
@@ -16,7 +17,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-		return {};
+		return {userId,limit,page};
 	};
 
 	findByName = async (name: string) => {

@@ -1,5 +1,5 @@
-import { IWorkspace } from '@ostrich-app/features/workspaces/models/interfaces';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { IWorkspace } from '@ostrich-app-features/workspaces/models/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

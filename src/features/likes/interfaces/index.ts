@@ -1,4 +1,4 @@
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IFolder {

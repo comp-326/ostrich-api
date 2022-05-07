@@ -1,13 +1,13 @@
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import OstrichMailer from '@ostrich-app-services/mailService/mailer';
+import createLinks from '@ostrich-app-helpers/createLinks';
+import { mailConfig } from '@ostrich-app-config';
+import moment from 'moment';
+import tokenGenerator from '@ostrich-app-helpers/tokenGenerator';
 import {
 	accountActivationEmailTemplate,
 	passwordResetEmailTemplate
-} from '@ostrich-services/MailService';
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import { OstrichMailer } from '@ostrich/src/Services/MailService';
-import createLinks from '@ostrich-app/helpers/createLinks';
-import { mailConfig } from '@ostrich-app/config';
-import moment from 'moment';
-import tokenGenerator from '@ostrich-app/helpers/tokenGenerator';
+} from '@ostrich-app-services/mailService';
 
 class Accountmailer{
 	sendPasswordResetLink = () => {
@@ -15,6 +15,7 @@ class Accountmailer{
 			firstName,
 			lastName,
 			email,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			_id
 		}: {
 			email: string;
@@ -62,6 +63,7 @@ class Accountmailer{
 			email,
 			firstName,
 			lastName,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			_id
 		}: {
 			email: string;

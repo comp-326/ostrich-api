@@ -1,3 +1,3 @@
-import * as workspace from '@ostrich-app/features/workspaces/entities/workspace';
+import * as workspace from './workspace';
 
 export default workspace;

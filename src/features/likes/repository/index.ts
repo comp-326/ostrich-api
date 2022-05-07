@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import FolderModel from '../models';
+import WorkspaceModel from '../models';
 import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
 
 class FolderRepository implements IFolderRepository{
 	findByName = async (name: string) => {

@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import dirExistSync from '@ostrich-app/utils/fileSystem/dirExist';
+import dirExistSync from './dirExist';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';

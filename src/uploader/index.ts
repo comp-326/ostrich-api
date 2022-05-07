@@ -1,5 +1,5 @@
-import { BASE_DIR } from '@ostrich-app/config';
-import { createDirectory } from '@ostrich-app/utils/fileSystem';
+import { BASE_DIR } from '@ostrich-app-config';
+import { createDirectory } from '@ostrich-app-utils/fileSystem';
 import multer from 'multer';
 import path from 'path';
 

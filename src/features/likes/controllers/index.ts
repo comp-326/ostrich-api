@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IFolderController, IFolderUseCases } from '../interfaces';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 class FolderController implements IFolderController{
 	constructor(private useCase: IFolderUseCases){}
@@ -14,6 +15,8 @@ class FolderController implements IFolderController{
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.addFolder(req.body);
+
 		return res.status(200).json({
 			message: 'softDelete'
 		});

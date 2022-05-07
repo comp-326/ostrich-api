@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import activateAccountRoute from '@ostrich-app/features/users/routes/activateAccountRoute';
-import deleteAccountRoute from '@ostrich-app/features/users/routes/deleteUserRoute';
-import forgotPasswordRoute from '@ostrich-app/features/users/routes/forgotPasswordRoute';
-import getActivationLinkRoute from '@ostrich-app/features/users/routes/getActivationLinkRoute';
-import getUserByEmailRoute from '@ostrich-app/features/users/routes/getUserByEmailRoute';
-import getUserByIdRoute from '@ostrich-app/features/users/routes/getUserByIdRoute';
-import getUsersRoute from '@ostrich-app/features/users/routes/getUsersRoute';
-import newUserRoute from '@ostrich-app/features/users/routes/newUserRoute';
-import resetPasswordRoute from '@ostrich-app/features/users/routes/resetPasswordRoute';
-import updateProfilePic from '@ostrich-app/features/users/routes/updateProfilePic';
-import updateProfileRoute from '@ostrich-app/features/users/routes/updateProfileRoute';
+import activateAccountRoute from './routes/activateAccountRoute';
+import deleteAccountRoute from './routes/deleteUserRoute';
+import forgotPasswordRoute from './routes/forgotPasswordRoute';
+import getActivationLinkRoute from './routes/getActivationLinkRoute';
+import getUserByEmailRoute from './routes/getUserByEmailRoute';
+import getUserByIdRoute from './routes/getUserByIdRoute';
+import getUsersRoute from './routes/getUsersRoute';
+import newUserRoute from './routes/newUserRoute';
+import resetPasswordRoute from './routes/resetPasswordRoute';
+import updateProfilePic from './routes/updateProfilePic';
+import updateProfileRoute from './routes/updateProfileRoute';
 
 
 export default ({app,pathName}:{app:Router,pathName:string})=>{

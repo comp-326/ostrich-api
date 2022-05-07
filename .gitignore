@@ -3,6 +3,8 @@
 
 ### Node ###
 # Logs
+build
+dist
 .vscode
 logs
 *.log

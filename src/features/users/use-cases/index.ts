@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import { IUser } from '@ostrich-app/features/users/models/interfaces';
-import createUser from '@ostrich-app/features/users/entities';
-import { deleteFile } from '@ostrich-app/utils/fileSystem';
-import entity from '@ostrich-app/features/users/entities';
-import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import { IUser } from '@ostrich-app-features/users/models/interfaces';
+import createUser from '@ostrich-app-features/users/entities';
+import { deleteFile } from '@ostrich-app-utils/fileSystem';
+import entity from '@ostrich-app-features/users/entities';
+import validateMongodbId from '@ostrich-app-utils/mongo/ObjectId-validator';
 import { IUserRepository, IUserUseCases } from '../interfaces';
 
 

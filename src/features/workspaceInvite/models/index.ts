@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-app/db/mongodb';
-import { IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel } from '@ostrich-app/features/workspaceInvite/models/interfaces';
+import mongoose from '@ostrich-app-db/mongodb';
+import { IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel } from './interfaces';
 
 const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.Schema({
 	inviteRole: {

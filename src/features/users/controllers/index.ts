@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import responseFormatter from '@ostrich-app/common/responseFormatter';
-import verifyUserJWT from '@ostrich-app/features/users/utils/jwt/verifyUserJWT';
-import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
-import { IUserController, IUserUseCases } from '@ostrich-app/features/users/interfaces';
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import verifyUserJWT from './../utils/jwt/verifyUserJWT';
+import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app-common/types';
+import { IUserController, IUserUseCases } from './../interfaces';
 
 
 class UserController implements IUserController{
@@ -23,26 +22,20 @@ class UserController implements IUserController{
 	 * @return {IResponse} Response date returned by user usecase
 	 */
 	softDeleteUser = async (req: IRequest, res: IResponse, next: INext) => {
-		const { status, data, msg } = await this.useCase.softRemoveUser(
+		await this.useCase.softRemoveUser(
 			req.params.id
 		);
 
-		return res.status(200).json(responseFormatter.ResponseWithData({
-			data,
-			message: 'Success',
-			status: 'ok',
-			statusCode: 200,
-			params: {}
-		}));
+		return res.sendStatus(200);
 	};
 
 
 	deleteUser = async (req: IRequest, res: IResponse, next: INext) => {
-		const { status, data, msg } = await this.useCase.hardRemoveUser(
+		await this.useCase.hardRemoveUser(
 			req.params.id
 		);
 
-		return res.status(200).json(data);
+		return res.sendStatus(200);
 	};
 
 

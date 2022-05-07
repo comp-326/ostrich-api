@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import emailRegex from '@ostrich-app-constants/emailRegex';
 import { IUserValidator, PasswordValidatorType } from '../interfaces';
-import emailRegex from '@ostrich-app/constants/emailRegex';
 
 class UserInfoValidator implements IUserValidator{
 	isValidEmail = (email: string) => {
