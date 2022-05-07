@@ -8,7 +8,9 @@ const {
 	},
 	PATHS: { BASE_DIR },
 	MAIL,
-	CLOUDINARY
+	CLOUDINARY,
+	redisConfig,
+	rabbitMqConfig
 } = config;
 
 export {
@@ -16,5 +18,7 @@ export {
 	MAIL as mailConfig,
 	ENV as environmentConfig,
 	CLOUDINARY as cloudinaryConfig,
-	BASE_DIR
+	BASE_DIR,
+	redisConfig,
+	rabbitMqConfig
 };

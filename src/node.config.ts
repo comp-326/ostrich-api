@@ -30,6 +30,15 @@ const config = {
 		EMAIL_SECURE: process.env.EMAIL_SECURE === 'true' ? true : false,
 		EMAIL_PROXY: process.env.EMAIL_PROXY || ''
 	},
+	redisConfig: {
+		host: process.env.REDIS_HOST || '127.0.0.1',
+		port: parseInt(process.env.REDIS_PORT as string) || 6379,
+		username: process.env.REDIS_USER_NAME||'',
+		password: process.env.REDIS_PASSWORD||''
+	},
+	rabbitMqConfig: {
+		url: process.env.RABBIT_MQ_URL||'amqp://localhost',
+	},
 	PATHS: {
 		BASE_DIR: path.join(path.dirname(__filename), '.')
 	},
