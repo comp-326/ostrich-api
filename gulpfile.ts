@@ -1,1 +1,1 @@
-import './tasks/build-project';
+import './scripts/tasks/build-project';
