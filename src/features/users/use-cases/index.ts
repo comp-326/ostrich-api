@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import EventBus from '@ostrich-app/services/eventBus';
 import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
 import { IUser } from '@ostrich-app-features/users/models/interfaces';
 import createUser from '@ostrich-app-features/users/entities';
@@ -49,11 +50,27 @@ export class UserUseCase implements IUserUseCases{
 				data: {
 					email: newUser.getEmail()}
 
-
 			});
 		}
-		const user = await this.repository.createUser({ ...userData});
+		const queue = new EventBus('activateAccount');
+		const user = await this.repository.createUser({
+			email:newUser.getEmail(),
+			firstName:newUser.getFirstName(),
+			lastName:newUser.getLastName(),
+			password:newUser.getPassword(),
+			gender:newUser.getGender(),
+			bio:newUser.getBio(),
+			isActive:newUser.getIsActive(),
+			isDeleted:newUser.getIsDelete(),
+			profilePicture:newUser.getProfilePic(),
+			role:newUser.getRole()
+		});
+		await queue.sendToQueue(JSON.stringify({
+			name: `${newUser.getFirstName()} ${newUser.getLastName()}`,
+			email: newUser.getEmail(),
 
+		}));
+			
 		return user;
 		
 	};
@@ -155,7 +172,7 @@ export class UserUseCase implements IUserUseCases{
 		const user = await this.repository.updateById(existing._id, {
 			email: updated.getEmail(),
 			isActive: updated.getIsActive(),
-			firstName: updated.getFirsName(),
+			firstName: updated.getFirstName(),
 			lastName: updated.getLastName(),
 			gender:updated.getGender(),
 			password:updated.getPassword(),

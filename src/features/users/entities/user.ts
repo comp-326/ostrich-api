@@ -73,7 +73,7 @@ export default function makeCreateUserEntity({
 			userPassword = await hashPassword(userPassword);
 
 		return Object.freeze({
-			getFirsName: () => firstName,
+			getFirstName: () => firstName,
 			getLastName: () => lastName,
 			getBio: () => bio,
 			getIsActive: () => (isActive ? isActive : false),
