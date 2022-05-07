@@ -35,15 +35,15 @@ $ npm run dev
 ```
 # Dev-Endpoints docs
 To access the API docs head over to the `url` below
-The deault port is `4001`
+The deault port is `6200`
 Navigate to 
 
-`http://localhost:4001/api/v1/docs`
+`http://localhost:6200`
 # Pre-Production
 This is a pre-deployment script
 Run
 ```sh
-$ npm run dev:buildTs
+$ npm run build
 ```
 This will build the typescript project to js
 Then...
