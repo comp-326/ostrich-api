@@ -13,11 +13,20 @@
     "build": "rimraf ./dist && rimraf ./build &&  gulp build",
     "test": "NODE_ENV=testing jest"
   },
-  "keywords": ["appointment","users","timezones","auth","business","product management","client"],
+  "keywords": [
+    "appointment",
+    "users",
+    "timezones",
+    "auth",
+    "business",
+    "product management",
+    "client"
+  ],
   "author": "Orinda Felix Ochieng <forinda82@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "amqplib": "^0.8.0",
+    "amqplib-as-promised": "^4.1.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
     "cloudinary": "^1.29.0",
