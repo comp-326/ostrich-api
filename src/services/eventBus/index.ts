@@ -31,6 +31,7 @@ class EventBus{
 				});
 			}
 		});
+		await this.closeConnection(channel);
 	};
   
 	public closeConnection = async (channel: Channel): Promise<void> => {
