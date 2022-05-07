@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IComments, ICommentsRepository, ICommentsUseCases } from '@ostrich-app/features/comments/interfaces';
+import { IComments, ICommentsRepository, ICommentsUseCases } from '@ostrich-app-features/comments/interfaces';
 
 
 export class CommentsUseCase implements ICommentsUseCases{

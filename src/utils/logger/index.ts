@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BASE_DIR } from '@ostrich-app/config';
+import { BASE_DIR } from '@ostrich-app-config';
 import moment from 'moment';
 import path from 'path';
 import winston from 'winston';
-import { IRequest, IResponse } from '@ostrich-app/common/types';
+import { IRequest, IResponse } from '@ostrich-app-common/types';
 
 /**
  * ----------------------------  LOG HTTP ERROR REQUESTS OPTIONS -------------------------

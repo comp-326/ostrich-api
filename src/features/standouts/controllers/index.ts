@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
-import { IStandoutController, IStandoutUseCases } from '@ostrich-app/features/standouts/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
+import { IStandoutController, IStandoutUseCases } from '@ostrich-app-features/standouts/interfaces';
 
 class StandoutController implements IStandoutController{
 	constructor(private readonly useCase: IStandoutUseCases){ }

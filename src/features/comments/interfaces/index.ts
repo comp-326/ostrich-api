@@ -1,5 +1,5 @@
-import {IRequest} from '@ostrich-app/common/types';
-import { INext, IResponse } from '@ostrich-app/common/types';
+import {IRequest} from '@ostrich-app-common/types';
+import { INext, IResponse } from '@ostrich-app-common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IComments {

@@ -1,4 +1,4 @@
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function (req: IRequest, res: IResponse, next: INext){

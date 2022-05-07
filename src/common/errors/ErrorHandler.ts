@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from './ExpressError';
-import capitalize from '@ostrich-app/helpers/capitalize';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import capitalize from '@ostrich-app-helpers/capitalize';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 export default function (err: any, req: IRequest, res: IResponse, next: INext){
 	if (err instanceof ExpressError) {

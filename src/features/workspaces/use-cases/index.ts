@@ -1,7 +1,7 @@
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import {  IWorkspace} from '@ostrich-app/features/workspaces/models/interfaces';
-import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
-import {  IWorkspaceRepository, IWorkspaceUseCases } from '@ostrich-app/features/workspaces/interfaces';
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import {  IWorkspace} from '@ostrich-app-features/workspaces/models/interfaces';
+import validateMongodbId from '@ostrich-app-utils/mongo/ObjectId-validator';
+import {  IWorkspaceRepository, IWorkspaceUseCases } from '@ostrich-app-features/workspaces/interfaces';
 
 export class WorkspaceUseCase implements IWorkspaceUseCases {
 	constructor(private readonly repository: IWorkspaceRepository) { }

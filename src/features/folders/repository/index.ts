@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import FolderModel from '@ostrich-app/features/folders/models';
+import FolderModel from '@ostrich-app-features/folders/models';
 import { IFolder, IFolderRepository } from '../interfaces';
 
 class FolderRepository implements IFolderRepository{

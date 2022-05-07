@@ -1,3 +1,3 @@
-import * as standout from '@ostrich-app/features/standouts/entities/standout';
+import * as standout from './standout';
 
 export default standout;

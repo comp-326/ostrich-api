@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 import {
 	IWorkspaceController,
 	IWorkspaceUseCases
-} from '@ostrich-app/features/workspaces/interfaces';
+} from '@ostrich-app-features/workspaces/interfaces';
 
 class FolderController implements IWorkspaceController {
 

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-app/db/mongodb';
+import mongoose from '@ostrich-app-db/mongodb';
 import {
 	IWorkspaceDocument,
 	IWorkspaceDocumentModel,
-} from '@ostrich-app/features/workspaces/models/interfaces';
+} from './interfaces';
 
 const workspaceSchema: mongoose.Schema<IWorkspaceDocument> =
 	new mongoose.Schema({

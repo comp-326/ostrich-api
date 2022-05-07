@@ -12,7 +12,7 @@ import {
 	ListHeaders,
 	TextEncoding
 } from 'nodemailer/lib/mailer';
-import { mailConfig } from '@ostrich-app/config';
+import { mailConfig } from '@ostrich-app-config';
 
 
 interface IMailer {

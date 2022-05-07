@@ -3,7 +3,7 @@ import moment from 'moment';
 import mongoose from 'mongoose';
 import path from 'path';
 import winston from 'winston';
-import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-app/config';
+import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-app-config';
 
 const url =
 	environmentConfig.NODE_ENV === ('development' || 'production')

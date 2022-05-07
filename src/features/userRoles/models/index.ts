@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Permissions from '@ostrich-app/constants/permissions';
-import mongoose from '@ostrich-app/db/mongodb';
+import Permissions from '@ostrich-app-constants/permissions';
+import mongoose from '@ostrich-app-db/mongodb';
 import { IUserRoleDocument, IUserRoleDocumentModel } from './interfaces';
 
 const userRoleSchema: mongoose.Schema<IUserRoleDocument> = new mongoose.Schema({

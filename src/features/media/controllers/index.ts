@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IFolderController, IFolderUseCases } from '../interfaces';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 class FolderController implements IFolderController{
 	constructor(private readonly useCase: IFolderUseCases){}

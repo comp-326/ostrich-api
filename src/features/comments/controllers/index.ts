@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ICommentsController, ICommentsUseCases } from '../interfaces';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 class CommentsController implements ICommentsController{
 	constructor(private useCase: ICommentsUseCases){}

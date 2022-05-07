@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import commentsModel from '@ostrich-app/features/comments/models';
+import commentsModel from '@ostrich-app-features/comments/models';
 import { IComments, ICommentsRepository } from '../interfaces';
 
 class CommentsRepository implements ICommentsRepository{
