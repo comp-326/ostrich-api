@@ -4,9 +4,11 @@ import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
 import { IStandoutController, IStandoutUseCases } from '@ostrich-app/features/standouts/interfaces';
 
 class StandoutController implements IStandoutController{
-	constructor(private useCase: IStandoutUseCases){ }
+	constructor(private readonly useCase: IStandoutUseCases){ }
 
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.addStandout(req.body);
+
 		return res.status(200).json({ working: 'OK' });
 	};
 
