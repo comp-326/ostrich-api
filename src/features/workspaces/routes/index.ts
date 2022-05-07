@@ -1,23 +1,15 @@
 import { Router } from 'express';
-import copyFolderRoute from './copyFolderRoute';
-import deleteFolderRoute from './deleteFolderRoute';
-import getFolderByIdRoute from './getFolderByIdRoute';
-import getFolderByNameRoute from './getFolderByNameRoute';
-import getFoldersRoute from './getFolders';
-import getWorkspaceFoldersRoute from './getWorkspaceFolderRoute';
-import moveFolderRoute from './moveFolderRoute';
-import newFolderRoute from './newFolderRoute';
-import updateFolderRoute from './updateFolderRoute';
+import createWorkspaceRoute from '@ostrich-app/features/workspaces/routes/createWorkspaceRoute';
+import getMembertWorkspacesRoute from '@ostrich-app/features/workspaces/routes/getMembertWorkspacesRoute';
+import getWorkspaceByIdRoute from '@ostrich-app/features/workspaces/routes/getWorkspaceByIdRoute';
+import getWorkspaceByNameRoute from '@ostrich-app/features/workspaces/routes/getWorkspaceByNameRoute';
+import updateWorkspaceRoute from '@ostrich-app/features/workspaces/routes/updateWorkspaceRoute';
 
 
-export default ({app,pathName}:{app:Router,pathName:string})=>{
-	copyFolderRoute(app)(pathName);
-	deleteFolderRoute(app)(pathName);
-	getFolderByIdRoute(app)(pathName);
-	getFolderByNameRoute(app)(pathName);
-	getFoldersRoute(app)(pathName);
-	getWorkspaceFoldersRoute(app)(pathName);
-	moveFolderRoute(app)(pathName);
-	newFolderRoute(app)(pathName);
-	updateFolderRoute(app)(pathName);
+export default ({ app, pathName }: { app: Router, pathName: string }) => {
+	createWorkspaceRoute(app)(pathName);
+	getMembertWorkspacesRoute(app)(pathName);
+	getWorkspaceByIdRoute(app)(pathName);
+	getWorkspaceByNameRoute(app)(pathName);	
+	updateWorkspaceRoute(app)(pathName);			
 };

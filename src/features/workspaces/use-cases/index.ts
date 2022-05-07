@@ -1,46 +1,123 @@
-import { IWorkspace, IWorkspaceRepository, IWorkspaceUseCases } from '../interfaces';
+import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import {  IWorkspace} from '@ostrich-app/features/workspaces/models/interfaces';
+import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
+import {  IWorkspaceRepository, IWorkspaceUseCases } from '@ostrich-app/features/workspaces/interfaces';
 
-export class WorkspaceUseCase implements IWorkspaceUseCases{
-	constructor(private repository: IWorkspaceRepository){}
+export class WorkspaceUseCase implements IWorkspaceUseCases {
+	constructor(private readonly repository: IWorkspaceRepository) { }
 
-	addWorkspace: (folderData: IWorkspace) => Promise<any>;
+	addWorkspace=async (workspaceData: IWorkspace) => {
+		if(!workspaceData.ownerId){
+			throw new ExpressError({
+				message: 'OwnerId is required',
+				statusCode: 400,
+				status:'warning',
+				data:{}
+			});
+		}
+		if(!validateMongodbId(workspaceData.ownerId)){
+			throw new ExpressError({
+				message: 'OwnerId is not valid',
+				statusCode: 400,
+				status:'warning',
+				data:{}
+			});
+		}
+		if(!workspaceData.name){
+			throw new ExpressError({
+				message: 'Name is required',
+				statusCode: 400,
+				status:'warning',
+				data:{}
+			});
+		}
+		if(!workspaceData.type)
+			workspaceData.type='personal';
+		
 
-	copyWorkspace: (folderData: IWorkspace) => Promise<any>;
+		const res = await this.repository.createWorkspace(workspaceData);
 
-	editWorkspace: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	listWorkspaceById: (folderData: IWorkspace) => Promise<any>;
+	copyWorkspace=async (folderData: IWorkspace) => {
+		const res = await this.repository.createWorkspace(folderData);
 
-	listWorkspaceByName: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	listWorkspaces: (folderData: IWorkspace) => Promise<any>;
+	editWorkspace=async (workspaceId:string,folderData: IWorkspace) => {
+		if(!workspaceId){
+			throw new ExpressError({
+				message: 'WorkspaceId is required',
+				statusCode: 400,
+				status:'warning',
+				data:{}
+			});
+		}
+		if(!validateMongodbId(workspaceId)){
+			throw new ExpressError({
+				message: 'WorkspaceId is not valid',
+				statusCode: 400,
+				status:'warning',
+				data:{}
+			});
+		}
+		const res = await this.repository.updateById(workspaceId,folderData);
 
-	listWorkspaceWorkspaces: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	moveWorkspace: (folderData: IWorkspace) => Promise<any>;
+	listWorkspaceById=async (id:string) => {
+		const res = await this.repository.findWorkspaceById(id);
+		if(!res){
+			throw new ExpressError({
+				message: 'Workspace not found',
+				statusCode: 404,
+				status:'warning',
+				data:{}
+			});
 
-	softRemoveWorkspace: (folderData: IWorkspace) => Promise<any>;
+		}
 
-	hardRemoveWorkspace: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	addFolder: (folderData: IWorkspace) => Promise<any>;
+	listWorkspaceByName=async (name: string) => {
+		const res = await this.repository.findByName(name);
 
-	copyFolder: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	editFolder: (folderData: IWorkspace) => Promise<any>;
+	listWorkspaces=async (limit:number,offset:number) => {
+		const res = await this.repository.findAll(limit,offset);
 
-	listFolderById: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	listFolderByName: (folderData: IWorkspace) => Promise<any>;
+	listUserWorkspaces=async (userId:string,props:{limit:number,offset:number}) => {
+		const res = await this.repository.findUserWorkspaces(userId,props.limit,props.offset);
 
-	listFolders: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	listWorkspaceFolders: (folderData: IWorkspace) => Promise<any>;
+	moveWorkspace=async (folderData: IWorkspace) => {
+		const res = await this.repository.createWorkspace(folderData);
 
-	moveFolder: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
 
-	softRemoveFolder: (folderData: IWorkspace) => Promise<any>;
+	softRemoveWorkspace=async (folderData: IWorkspace) => {
+		const res = await this.repository.createWorkspace(folderData);
 
-	hardRemoveFolder: (folderData: IWorkspace) => Promise<any>;
+		return res;
+	};
+
+	hardRemoveWorkspace=async (folderData: IWorkspace) => {
+		const res = await this.repository.createWorkspace(folderData);
+
+		return res;
+	};
 	
+
 }
