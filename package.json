@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./build/src/server.js",
-    "prestart": "npm run build",
     "dev:start": "NODE_ENV=development nodemon ./src/server.ts",
     "env": "ts-node ./src/env.ts",
     "dev": "NODE_ENV=development nodemon",
@@ -14,7 +13,7 @@
     "build": "rimraf ./dist && rimraf ./build &&  gulp build",
     "test": "NODE_ENV=testing jest"
   },
-  "keywords": [],
+  "keywords": ["appointment","users","timezones","auth","business","product management","client"],
   "author": "Orinda Felix Ochieng <forinda82@gmail.com>",
   "license": "MIT",
   "dependencies": {
