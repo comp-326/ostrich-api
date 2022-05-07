@@ -89,14 +89,6 @@
                 }
             }
         ],
-        "space-before-blocks": [
-            "error",
-            {
-                "functions": "never",
-                "keywords": "always",
-                "classes": "never"
-            }
-        ],
         "padding-line-between-statements": [
             "error",
             {

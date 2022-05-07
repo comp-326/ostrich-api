@@ -1,13 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app/db/mongodb';
+import {
+	IWorkspaceDocument,
+	IWorkspaceDocumentModel,
+} from '@ostrich-app/features/workspaces/models/interfaces';
 
-const WorkspaceSchema: mongoose.Schema<any> = new mongoose.Schema({
-	name: String
-});
+const workspaceSchema: mongoose.Schema<IWorkspaceDocument> =
+	new mongoose.Schema({
+		name: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		logo: {
+			type: mongoose.SchemaTypes.ObjectId,
+			required: true,
+			ref: 'Media',
+		},
+		ownerId: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: 'User',
+			required: true,
+		},
+		type: {
+			type: String,
+			required: true,
+			enum: ['personal', 'business', 'education'],
+		},
+	});
 
-const WorkspaceModel: mongoose.Model<any> = mongoose.model(
+const workspaceModel= mongoose.model<IWorkspaceDocument,IWorkspaceDocumentModel>(
 	'Workspace',
-	WorkspaceSchema
+	workspaceSchema,
 );
 
-export default WorkspaceModel;
+export default workspaceModel;

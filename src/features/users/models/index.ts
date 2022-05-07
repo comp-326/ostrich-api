@@ -65,6 +65,6 @@ userSchema.statics.findByEmail = async function(email: string){
 
 	return user;
 };
-const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('Users', userSchema);
+const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('User', userSchema);
 
 export default userModel;
