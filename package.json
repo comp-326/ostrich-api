@@ -51,6 +51,7 @@
     "nodemailer-html-to-text": "^3.2.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.3.0",
+    "ts-jest-resolver": "^2.0.0",
     "winston": "^3.6.0",
     "yamljs": "^0.3.0"
   },
