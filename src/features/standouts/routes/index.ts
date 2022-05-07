@@ -1,5 +1,5 @@
-import { Router } from 'express';
+// import { Router } from 'express';
 
 
-export default ({app,pathName}:{app:Router,pathName:string})=>{
-};
+// export default ({app,pathName}:{app:Router,pathName:string})=>{
+// };

@@ -1,4 +1,4 @@
-import { environmentConfig } from '@ostrich-app/config';
+import { environmentConfig } from '@ostrich-app-config';
 
 /**
  *

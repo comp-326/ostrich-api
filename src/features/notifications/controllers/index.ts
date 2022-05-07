@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 import { INotificationController, INotificationUseCases } from '../interfaces';
 
 class NotificationController implements INotificationController{

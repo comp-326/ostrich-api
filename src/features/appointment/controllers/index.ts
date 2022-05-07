@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFolderController, IFolderUseCases } from '../interfaces';
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
+import { IAppointmentController, IAppointmentUseCases } from '../interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
-class FolderController implements IFolderController{
-	constructor(private useCase: IFolderUseCases){}
+class AppointmentController implements IAppointmentController{
+	constructor(private useCase: IAppointmentUseCases){}
 
 	/**
 	 * Brief desc
@@ -27,7 +28,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findFolders = async (req: IRequest, res: IResponse, next: INext) => {
+	findAppointments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ folders: true });
 	};
 
@@ -40,6 +41,8 @@ class FolderController implements IFolderController{
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.listAppointmentById(req.body);
+
 		return res.status(200).json({ finding: true });
 	};
 
@@ -63,7 +66,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	findWorkspaceFolders = async (req: IRequest, res: IResponse, next: INext) => {
+	findWorkspaceAppointments = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ finding: true });
 	};
 
@@ -75,7 +78,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	createFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	createAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ creating: true });
 	};
 
@@ -87,7 +90,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	copyFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	copyAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ copied: true });
 	};
 
@@ -99,7 +102,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	updateFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	updateAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ updated: true });
 	};
 
@@ -111,7 +114,7 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	moveFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	moveAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		return res.status(200).json({ moved: true });
 	};
 
@@ -123,9 +126,9 @@ class FolderController implements IFolderController{
 	 * @param {INext} next - Next middleware
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
-	hardDeleteFolder = async (req: IRequest, res: IResponse, next: INext) => {
+	hardDeleteAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		return { deleting: true };
 	};
 }
 
-export default FolderController;
+export default AppointmentController;

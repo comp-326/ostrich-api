@@ -1,4 +1,4 @@
-import { IUserRoleRepository, IUserRoleUseCase } from '@ostrich-app/features/userRoles/interfaces';
+import { IUserRoleRepository, IUserRoleUseCase } from '@ostrich-app-features/userRoles/interfaces';
 
 export class UserRoleUseCases implements IUserRoleUseCase{
 	private readonly repository: IUserRoleRepository;

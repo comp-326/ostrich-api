@@ -1,6 +1,6 @@
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import { IUser } from '@ostrich-app/features/users/models/interfaces';
-import { IPassword, IUserValidator } from '@ostrich-app/features/users/interfaces';
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import { IUser } from '@ostrich-app-features/users/models/interfaces';
+import { IPassword, IUserValidator } from '@ostrich-app-features/users/interfaces';
 
 export default function makeCreateUserEntity({
 	validator,

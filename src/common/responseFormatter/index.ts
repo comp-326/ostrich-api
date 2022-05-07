@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StatusCodeType, StatusType } from '@ostrich-app/common/errors/ExpressError';
+import { StatusCodeType, StatusType } from '@ostrich-app-common/errors/ExpressError';
 
 export interface ISuccessResponse {
     data: any,

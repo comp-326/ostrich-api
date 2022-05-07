@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
-import { IStandoutController, IStandoutUseCases } from '@ostrich-app/features/standouts/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
+import { IStandoutController, IStandoutUseCases } from '@ostrich-app-features/standouts/interfaces';
 
 class StandoutController implements IStandoutController{
-	constructor(private useCase: IStandoutUseCases){ }
+	constructor(private readonly useCase: IStandoutUseCases){ }
 
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.addStandout(req.body);
+
 		return res.status(200).json({ working: 'OK' });
 	};
 

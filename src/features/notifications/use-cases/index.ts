@@ -10,22 +10,59 @@ export class NotificationUseCase implements INotificationUseCases{
 		return await this.repository.comment('');
 	};
 
-	copyNotification: (notification: INotification) => Promise<any>;
+	copyNotification=async (notificationData: INotification) => {
 
-	editNotification: (NotificationData: INotification) => Promise<any>;
+		await this.repository.createNotification('',notificationData as any);
 
-	listNotificationById: (NotificationData: INotification) => Promise<any>;
+		return {};
+	};
 
-	listNotificationByName: (NotificationData: INotification) => Promise<any>;
+	editNotification=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
 
-	listNotifications: (NotificationData: INotification) => Promise<any>;
+		return {};
+	};
 
-	listWorkspaceNotifications: (NotificationData: INotification) => Promise<any>;
+	listNotificationById=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
 
-	moveNotification: (NotificationData: INotification) => Promise<any>;
+		return {};
+	};
 
-	softRemoveNotification: (NotificationData: INotification) => Promise<any>;
+	listNotificationByName=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
 
-	hardRemoveNotification: (NotificationData: INotification) => Promise<any>;
+		return {};
+	};
+
+	listNotifications=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
+
+		return {};
+	};
+
+	listWorkspaceNotifications=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
+
+		return {};
+	};
+
+	moveNotification=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
+
+		return {};
+	};
+
+	softRemoveNotification=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
+
+		return {};
+	};
+
+	hardRemoveNotification=async (notificationData: INotification) => {
+		await this.repository.createNotification('',notificationData as any);
+
+		return {};
+	};
 	
 }

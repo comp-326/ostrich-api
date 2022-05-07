@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import NotificationModel from '@ostrich-app-features/notifications/models';
 import { INotification, INotificationRepository } from '../interfaces';
-import NotificationModel from '@ostrich-app/features/notifications/models';
 
 class NotificationRepository implements INotificationRepository{
 	findByName = async (name: string) => {
-		const Notification = await NotificationModel.findOne({ name });
+		const notification = await NotificationModel.findOne({ name });
 
-		return Notification;
+		return notification;
 	};
 
 	findById = async (id: string) => {
-		const Notification = await NotificationModel.findById(id);
+		const notification = await NotificationModel.findById(id);
 
-		return Notification;
+		return notification;
 	};
 
 	findWorkspaceById = async (id: string) => {
@@ -23,11 +23,11 @@ class NotificationRepository implements INotificationRepository{
 	};
 
 	find = async (limit: number, page: number) => {
-		const Notifications = await NotificationModel.find()
+		const notifications = await NotificationModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return Notifications;
+		return notifications;
 	};
 
 	findWorkspaceNotifications = async (
@@ -64,17 +64,17 @@ class NotificationRepository implements INotificationRepository{
 
 	like: (userId: string, id: string) => Promise<any>;
 
-	move = async (destinationWorkspace: string, NotificationId: string) => {
-		const movedNotification = await NotificationModel.findByIdAndUpdate(NotificationId, {
+	move = async (destinationWorkspace: string, notificationId: string) => {
+		const movedNotification = await NotificationModel.findByIdAndUpdate(notificationId, {
 			workspace: destinationWorkspace,
 		});
 
 		return movedNotification;
 	};
 
-	copy = async (destinationWorkspace: string, NotificationData: INotification) => {
+	copy = async (destinationWorkspace: string, notificationData: INotification) => {
 		const copiedNotification = await NotificationModel.create({
-			...NotificationData,
+			...notificationData,
 			workspace: destinationWorkspace,
 		});
 

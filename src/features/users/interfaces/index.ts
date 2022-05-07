@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUser } from '@ostrich-app/features/users/models/interfaces';
-import { INext,IRequest,IResponse } from '@ostrich-app/common/types';
+import { IUser } from '@ostrich-app-features/users/models/interfaces';
+import { INext,IRequest,IResponse } from '@ostrich-app-common/types';
 
 
 type FilesType =

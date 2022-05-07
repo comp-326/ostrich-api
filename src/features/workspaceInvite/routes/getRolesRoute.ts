@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from 'express';
-import { UserRoleController } from '@ostrich-app/features/userRoles/controllers';
-import { UserRoleUseCases } from '@ostrich-app/features/userRoles/use-cases';
-import userRolesRepository from '@ostrich-app/features/userRoles/repository';
+import { UserRoleController } from '@ostrich-app-features/userRoles/controllers';
+import { UserRoleUseCases } from '@ostrich-app-features/userRoles/use-cases';
+import userRolesRepository from '@ostrich-app-features/userRoles/repository';
 
 
 export default function getUserRolesRoute(app: Router){

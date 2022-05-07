@@ -1,6 +1,6 @@
-import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
-import { JWTPayloadType } from '@ostrich-app/common/types';
-import { environmentConfig } from '@ostrich-app/config';
+import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
+import { JWTPayloadType } from '@ostrich-app-common/types';
+import { environmentConfig } from '@ostrich-app-config';
 import jwt from 'jsonwebtoken';
 
 class VerifyUserJWT{

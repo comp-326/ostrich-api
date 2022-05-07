@@ -1,5 +1,5 @@
-import { IUserRoleRepository } from '@ostrich-app/features/userRoles/interfaces';
-import UserRoleModel from '@ostrich-app/features/userRoles/models';
+import { IUserRoleRepository } from '@ostrich-app-features/userRoles/interfaces';
+import UserRoleModel from '@ostrich-app-features/userRoles/models';
 
 class UserRoleRepository implements IUserRoleRepository{
 	findByName = async (name: string) => {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-app/db/mongodb';
+import mongoose from '@ostrich-app-db/mongodb';
 
 
 export interface IMedia {

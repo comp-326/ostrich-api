@@ -1,27 +1,69 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
+import { IAppointment, IAppointmentRepository, IAppointmentUseCases } from '../interfaces';
 
-export class AppointmentUseCase implements IFolderUseCases{
-	constructor(private repository: IFolderRepository){}
+export class AppointmentUseCase implements IAppointmentUseCases{
+	constructor(private readonly repository: IAppointmentRepository){}
 
-	addFolder: (folderData: IFolder) => Promise<any>;
+	addAppointment=async (folderData: IAppointment) => {
+		await this.repository.comment('');
 
-	copyFolder: (folderData: IFolder) => Promise<any>;
+		await this.repository.createAppointment('',folderData);
 
-	editFolder: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	listFolderById: (folderData: IFolder) => Promise<any>;
+	copyAppointment=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
 
-	listFolderByName: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	listFolders: (folderData: IFolder) => Promise<any>;
+	editAppointment=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
 
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	moveFolder: (folderData: IFolder) => Promise<any>;
+	listAppointmentById=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
 
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+	listAppointmentByName=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
+
+	listAppointments=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
+
+	listWorkspaceAppointments=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
+
+	moveAppointment=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
+
+	softRemoveAppointment=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
+
+	hardRemoveAppointment=async (folderData: IAppointment) => {
+		await this.repository.createAppointment('',folderData);
+
+		return {};
+	};
 	
 }

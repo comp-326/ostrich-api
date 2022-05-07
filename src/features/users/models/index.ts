@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from '@ostrich-app/db/mongodb';
-import { IUserDocument, IUserDocumentModel } from '@ostrich-app/features/users/models/interfaces';
+import mongoose from '@ostrich-app-db/mongodb';
+import { IUserDocument, IUserDocumentModel } from './interfaces';
 
 const userSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 	firstName: {
@@ -65,6 +65,6 @@ userSchema.statics.findByEmail = async function(email: string){
 
 	return user;
 };
-const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('Users', userSchema);
+const userModel = mongoose.model<IUserDocument, IUserDocumentModel>('User', userSchema);
 
 export default userModel;

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IUser } from '@ostrich-app/features/users/models/interfaces';
-import { IUserRepository } from '@ostrich-app/features/users/interfaces';
-import UserModel from '@ostrich-app/features/users/models';
-import UserRoleModel from '@ostrich-app/features/userRoles/models';
-import { generateGravatarUrl } from '@ostrich-app/common/gravatar';
-import mediaModel from '@ostrich-app/features/media/models';
+import { IUser } from '@ostrich-app-features/users/models/interfaces';
+import { IUserRepository } from '@ostrich-app-features/users/interfaces';
+import UserModel from '@ostrich-app-features/users/models';
+import UserRoleModel from '@ostrich-app-features/userRoles/models';
+import { generateGravatarUrl } from '@ostrich-app-common/gravatar';
+import mediaModel from '@ostrich-app-features/media/models';
 
 class UserRepository implements IUserRepository{
 

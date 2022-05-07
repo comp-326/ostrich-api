@@ -1,15 +1,15 @@
-import ErrorHandler from '@ostrich-app/common/errors/ErrorHandler';
+import ErrorHandler from '@ostrich-app-common/errors/ErrorHandler';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import expressWinston from 'express-winston';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import pages from '@ostrich-app/setup/pages';
-import shouldCompress from '@ostrich-app/utils/compression';
-import v1 from '@ostrich-app/api/v1';
+import pages from './pages';
+import shouldCompress from '@ostrich-app-utils/compression';
+import v1 from '@ostrich-app-api/v1';
 import express, { Application } from 'express';
-import { httpErrorLogOptions, httpLogOptions } from '@ostrich-app/utils/logger';
+import { httpErrorLogOptions, httpLogOptions } from '@ostrich-app-utils/logger';
 
 export default function ({ app }: { app: Application }){
 	app.use(express.json({ limit: '30mb' }));
