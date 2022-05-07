@@ -8,7 +8,8 @@ import mediaModel from '@ostrich-app/features/media/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
 	findAll = async (limit: number, page: number) => {
-		return {};
+
+		return {limit,page};
 	};
 
 	findUserWorkspaces = async (
@@ -16,7 +17,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-		return {};
+		return {userId,limit,page};
 	};
 
 	findByName = async (name: string) => {

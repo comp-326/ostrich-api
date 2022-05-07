@@ -1,67 +1,71 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import standoutModel from '@ostrich-app/features/standouts/models';
 import { IStandout, IStandoutRepository } from '../interfaces';
-import StandoutModel from '@ostrich-app/features/standouts/models';
 
 class StandoutRepository implements IStandoutRepository{
-	createStandout: (workspaceId: string, data: IStandout) =>
-		/* eslint-disable @typescript-eslint/no-non-null-assertion */
-		Promise<any>;
+	createStandout: (workspaceId: string, data: IStandout) => Promise<any>;
 
 	findWorkspaceStandouts: (workspaceId: string, limit: number, page: number) => Promise<any>;
 
-	findByName = async (name: string) => {
-		const Standout = await StandoutModel.findOne({ name });
+	createstandout: (workspaceId: string, data: IStandout) =>
+		/* eslint-disable @typescript-eslint/no-non-null-assertion */
+		Promise<any>;
 
-		return Standout;
+	findWorkspacestandouts: (workspaceId: string, limit: number, page: number) => Promise<any>;
+
+	findByName = async (name: string) => {
+		const standout = await standoutModel.findOne({ name });
+
+		return standout;
 	};
 
 	findById = async (id: string) => {
-		const Standout = await StandoutModel.findById(id);
+		const standout = await standoutModel.findById(id);
 
-		return Standout;
+		return standout;
 	};
 
 	findWorkspaceById = async (id: string) => {
-		const workspace = await StandoutModel.findById(id);
+		const workspace = await standoutModel.findById(id);
 
 		return workspace;
 	};
 
 	find = async (limit: number, page: number) => {
-		const Standouts = await StandoutModel.find()
+		const standouts = await standoutModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return Standouts;
+		return standouts;
 	};
 
-	findStandouts = async (
+	findstandouts = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceStandouts = await StandoutModel.find({
+		const workspacestandouts = await standoutModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return workspaceStandouts;
+		return workspacestandouts;
 	};
 
 	updateById = async (id: string, data: IStandout) => {
-		const editedStandout = await StandoutModel.findByIdAndUpdate(
+		const editedstandout = await standoutModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
 
-		return editedStandout;
+		return editedstandout;
 	};
 
 	deleteById = async (id: string) => {
-		await StandoutModel.findByIdAndDelete(id);
+		await standoutModel.findByIdAndDelete(id);
 
 		return true;
 	};
@@ -70,21 +74,21 @@ class StandoutRepository implements IStandoutRepository{
 
 	like: (userId: string, id: string) => Promise<any>;
 
-	move = async (destinationWorkspace: string, StandoutId: string) => {
-		const movedStandout = await StandoutModel.findByIdAndUpdate(StandoutId, {
+	move = async (destinationWorkspace: string, standoutId: string) => {
+		const movedstandout = await standoutModel.findByIdAndUpdate(standoutId, {
 			workspace: destinationWorkspace,
 		});
 
-		return movedStandout;
+		return movedstandout;
 	};
 
-	copy = async (destinationWorkspace: string, StandoutData: IStandout) => {
-		const copiedStandout = await StandoutModel.create({
-			...StandoutData,
+	copy = async (destinationWorkspace: string, standoutData: IStandout) => {
+		const copiedstandout = await standoutModel.create({
+			...standoutData,
 			workspace: destinationWorkspace,
 		});
 
-		return copiedStandout;
+		return copiedstandout;
 	};
 	
 }

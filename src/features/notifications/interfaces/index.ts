@@ -1,5 +1,4 @@
-import { INext, IResponse } from '@ostrich-app/common/types';
-import IRequest from '@ostrich-app/common/interfaces/request';
+import { INext, IRequest,IResponse } from '@ostrich-app/common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface INotification {
@@ -76,14 +75,14 @@ export interface INotificationUseCases {
 }
 
 export interface INotificationController {
-	softDelete= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	findById= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	findNotifications= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	findByName= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	findWorkspaceNotifications= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	createNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	copyNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	updateNotification:(req:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	moveNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
-	hardDeleteNotification= async(req:IRequest:IRequest,res:IResponse,next:INext) => {return res.status(200).json({working:"OK"})
+	softDelete:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findById:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findNotifications:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findByName:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	findWorkspaceNotifications:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	createNotification:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	copyNotification:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	updateNotification:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	moveNotification:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	hardDeleteNotification:(req:IRequest,res:IResponse,next:INext) => Promise<any>
 }

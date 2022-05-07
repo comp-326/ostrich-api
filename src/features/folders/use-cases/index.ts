@@ -1,26 +1,67 @@
 import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
 
 export class FolderUseCase implements IFolderUseCases{
-	constructor(private repository: IFolderRepository){}
+	constructor(private readonly repository: IFolderRepository){}
 
-	addFolder: (folderData: IFolder) => Promise<any>;
+	addFolder=async (folderData: IFolder) => {
 
-	copyFolder: (folderData: IFolder) => Promise<any>;
+		await this.repository.createFolder('',folderData);
 
-	editFolder: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	listFolderById: (folderData: IFolder) => Promise<any>;
+	copyFolder=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
 
-	listFolderByName: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	listFolders: (folderData: IFolder) => Promise<any>;
+	editFolder=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
 
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	moveFolder: (folderData: IFolder) => Promise<any>;
+	listFolderById=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
 
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
+		return {};
+	};
 
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+	listFolderByName=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
+
+	listFolders=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
+
+	listWorkspaceFolders=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
+
+	moveFolder=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
+
+	softRemoveFolder=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
+
+	hardRemoveFolder=async (folderData: IFolder) => {
+		await this.repository.createFolder('',folderData);
+
+		return {};
+	};
 	
 }

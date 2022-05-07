@@ -1,61 +1,65 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import commentsModel from '@ostrich-app/features/comments/models';
 import { IComments, ICommentsRepository } from '../interfaces';
-import CommentsModel from '@ostrich-app/features/comments/models';
 
 class CommentsRepository implements ICommentsRepository{
-	findByName = async (name: string) => {
-		const Comments = await CommentsModel.findOne({ name });
+	createComments: (workspaceId: string, data: IComments) => Promise<any>;
 
-		return Comments;
+	findWorkspaceCommentss: (workspaceId: string, limit: number, page: number) => Promise<any>;
+
+	findByName = async (name: string) => {
+		const comments = await commentsModel.findOne({ name });
+
+		return comments;
 	};
 
 	findById = async (id: string) => {
-		const Comments = await CommentsModel.findById(id);
+		const comments = await commentsModel.findById(id);
 
-		return Comments;
+		return comments;
 	};
 
 	findWorkspaceById = async (id: string) => {
-		const workspace = await CommentsModel.findById(id);
+		const workspace = await commentsModel.findById(id);
 
 		return workspace;
 	};
 
 	find = async (limit: number, page: number) => {
-		const Commentss = await CommentsModel.find()
+		const commentss = await commentsModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return Commentss;
+		return commentss;
 	};
 
-	findWorkspaceCommentss = async (
+	findWorkspacecommentss = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceCommentss = await CommentsModel.find({
+		const workspacecommentss = await commentsModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return workspaceCommentss;
+		return workspacecommentss;
 	};
 
 	updateById = async (id: string, data: IComments) => {
-		const editedComments = await CommentsModel.findByIdAndUpdate(
+		const editedcomments = await commentsModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
 
-		return editedComments;
+		return editedcomments;
 	};
 
 	deleteById = async (id: string) => {
-		await CommentsModel.findByIdAndDelete(id);
+		await commentsModel.findByIdAndDelete(id);
 
 		return true;
 	};
@@ -64,30 +68,30 @@ class CommentsRepository implements ICommentsRepository{
 
 	like: (userId: string, id: string) => Promise<any>;
 
-	move = async (destinationWorkspace: string, CommentsId: string) => {
-		const movedComments = await CommentsModel.findByIdAndUpdate(CommentsId, {
+	move = async (destinationWorkspace: string, commentsId: string) => {
+		const movedcomments = await commentsModel.findByIdAndUpdate(commentsId, {
 			workspace: destinationWorkspace,
 		});
 
-		return movedComments;
+		return movedcomments;
 	};
 
-	copy = async (destinationWorkspace: string, CommentsData: IComments) => {
-		const copiedComments = await CommentsModel.create({
-			...CommentsData,
+	copy = async (destinationWorkspace: string, commentsData: IComments) => {
+		const copiedcomments = await commentsModel.create({
+			...commentsData,
 			workspace: destinationWorkspace,
 		});
 
-		return copiedComments;
+		return copiedcomments;
 	};
 
-	createComments = async (workspaceId: string, data: IComments) => {
-		const newComments = await CommentsModel.create({
+	createcomments = async (workspaceId: string, data: IComments) => {
+		const newcomments = await commentsModel.create({
 			...data,
 			workspace: workspaceId,
 		});
 
-		return newComments;
+		return newcomments;
 	};
 }
 

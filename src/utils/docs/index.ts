@@ -1,7 +1,7 @@
-import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import yaml from 'yamljs';
+import { BASE_DIR, environmentConfig } from '@ostrich-app/config';
 
 const swaggerDocument =
 	environmentConfig.NODE_ENV === 'development'

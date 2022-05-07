@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app/db/mongodb';
 
-const CommentSchema:mongoose.Schema<any>=new mongoose.Schema({
+const commentSchema:mongoose.Schema<any>=new mongoose.Schema({
 	name:String
 });
 
-const CommentsModel = mongoose.model<any>('Comments',CommentSchema);
+const commentsModel = mongoose.model<any>('Comments',commentSchema);
 
-export default CommentsModel;
+export default commentsModel;

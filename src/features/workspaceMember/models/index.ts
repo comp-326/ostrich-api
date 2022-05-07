@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app/db/mongodb';
-import { IWorkspaceMemberDocument,IWorkspaceMemberDocumentModel} from '@ostrich-app/features/workspaceMember/models/interfaces';
+import { IWorkspaceMemberDocument,IWorkspaceMemberDocumentModel} from './interfaces';
 
 const userRoleSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mongoose.Schema({
 	memberEmail:{

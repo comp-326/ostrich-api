@@ -1,5 +1,3 @@
-import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
-import { NextFunction, Response } from 'express';
 import { Model } from 'mongoose';
 import Permissions from '@ostrich-app/constants/permissions';
 import RoleModel from '@ostrich-app/features/userRoles/models';
@@ -7,20 +5,22 @@ import TokenGEN from '@ostrich-app/helpers/tokenGEN';
 import UserModel from '@ostrich-app/features/users/models';
 import { environmentConfig } from '@ostrich-app/config';
 import jwt from 'jsonwebtoken';
+import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app/common/types';
 
 class AuthMiddleware{
 	constructor(private role: typeof Model, private user: typeof Model){}
 
 	validateIsAccountActive = async (
 		req: IRequest,
-		res: Response,
-		next: NextFunction
+		res: IResponse,
+		next: INext
 	) => {
 		try {
 			const { email } = req.body;
 			const user = await this.user.findOne({ email });
 			if (!user.isActive) 
 				return res.status(401).json('Please activate your account');
+			
 			
 			return next();
 		} catch (error) {
@@ -73,7 +73,7 @@ class AuthMiddleware{
 		}
 	};
 
-	loginRequired = async (req: IRequest, res: Response, next: NextFunction) => {
+	loginRequired = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			this.verifyCookie(req, res, async () => {
 				const user = await this.user.findById(req.user.userId);
@@ -97,7 +97,7 @@ class AuthMiddleware{
 		}
 	};
 
-	adminRequired = async (req: IRequest, res: Response, next: NextFunction) => {
+	adminRequired = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			this.loginRequired(req, res, async () => {
 				const user = await this.user.findById(req.user.userId);

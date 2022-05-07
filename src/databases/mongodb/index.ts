@@ -1,16 +1,16 @@
-import mongoose from 'mongoose';
-import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-app/config';
-import winston from 'winston';
-import moment from 'moment';
-import path from 'path';
 import chalk from 'chalk';
+import moment from 'moment';
+import mongoose from 'mongoose';
+import path from 'path';
+import winston from 'winston';
+import { BASE_DIR, environmentConfig, mongoConfig } from '@ostrich-app/config';
 
 const url =
 	environmentConfig.NODE_ENV === ('development' || 'production')
 		? mongoConfig.DATABASE_URL
 		: mongoConfig.TEST_DB_URL;
 
-const Logger = winston.createLogger({
+const logger = winston.createLogger({
 	format: winston.format.json(),
 	defaultMeta: { service: 'user-service' },
 	transports: [
@@ -34,7 +34,7 @@ mongoose.connect(url, options);
 
 mongoose.connection.on('connected', () => {
 	const time = moment(new Date().getTime()).format('LLLL');
-	Logger.info({
+	logger.info({
 		message: 'Mongoose connected',
 		timestamp: time,
 		level: 'info',
@@ -42,7 +42,7 @@ mongoose.connection.on('connected', () => {
 	});
 });
 mongoose.connection.on('disconnected', () => {
-	Logger.info({
+	logger.info({
 		message: 'Mongoose dis-connected',
 		timestamp: `${moment(new Date().getTime()).format('LLLL')}`,
 		level: 'info',
@@ -53,7 +53,7 @@ mongoose.connection.on('disconnected', () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 mongoose.connection.on('error', (err: any) => {
 	const time = moment(new Date().getTime()).format('LLLL');
-	Logger.error({
+	logger.error({
 		message: 'Mongoose Disconnected',
 		reason: `${err.message}`,
 		timestamp: `${time}`,
@@ -62,7 +62,7 @@ mongoose.connection.on('error', (err: any) => {
 	});
 });
 mongoose.connection.on('reconnected', () => {
-	Logger.info({
+	logger.info({
 		message: 'Mongoose re-connected',
 		timestamp: `${chalk.yellow(moment(new Date().getTime()).format('LLLL'))}`,
 		level: 'info',

@@ -14,4 +14,4 @@ const buildTS = () => {
 	return compiled.js.pipe(sourcemaps.write('.')).pipe(gulp.dest('./dist/src'));
 };
 
-gulp.task('buildTS', buildTS);
+gulp.task('build', buildTS);

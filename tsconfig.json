@@ -1,22 +1,7 @@
 {
   "compileOnSave": false,
-  "ts-node": {
-    "transpileOnly": true,
-    "require": ["typescript-transform-paths/register"]
-  },
   "compilerOptions": {
      "types": ["node", "jest"],
-     "plugins": [
-       {
-         "transform": "typescript-transform-paths",
-         "exclude": ["**/node_modules/**"]
-       },
-       {
-         "transform": "typescript-transform-paths",
-         "afterDeclarations": true,
-         "exclude": ["**/node_modules/**"]
-       }
-     ],
     "target": "es2017",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
@@ -42,11 +27,11 @@
     "rootDir": ".",
     "paths": {
       "@ostrich-app/*": ["./src/*"],
+      "@ostrich-app/app": ["./src/app"],
       "@ostrich-app/config": ["./src/config"],
       "@ostrich-app/api/*": ["./src/api/*"],
       "@ostrich-app/setup": ["./src/setup"],
       "@ostrich-app/setup/*": ["./src/setup/*"],
-      "@ostrich-app/scripts/tasks/*": ["./src/scripts/tasks/*"],
       "@ostrich-app/features/*": ["src/features/*"],
       "@ostrich-app/models/*": ["./src/models/*"],
       "@ostrich-app/common/*": ["./src/common/*"],
@@ -56,7 +41,6 @@
       "@ostrich-app/constants/*": ["./src/constants/*"],
       "@ostrich-app/upload": ["./src/uploadSDK"],
       "@ostrich-app/db/*": ["./src/databases/*"],
-      "@ostrich-app/db/mongodb": ["./src/databases/mongodb"],
       "@ostrich-app/middlewares/*": ["./src/middlewares/*"],
     }
   },

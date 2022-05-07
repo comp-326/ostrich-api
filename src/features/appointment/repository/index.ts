@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IFolder, IFolderRepository } from '../interfaces';
-import FolderModel from '@ostrich-app/models/Folder/FolderModel';
-import WorkspaceModel from '@ostrich-app/models/Workspace/WorkspaceModel';
+import AppointmentModel from './../models';
+import WorkspaceModel from '../models';
+import { IAppointment, IAppointmentRepository } from '../interfaces';
 
-class FolderRepository implements IFolderRepository{
+class AppointmentRepository implements IAppointmentRepository{
 	findByName = async (name: string) => {
-		const folder = await FolderModel.findOne({ name });
+		const folder = await AppointmentModel.findOne({ name });
 
 		return folder;
 	};
 
 	findById = async (id: string) => {
-		const folder = await FolderModel.findById(id);
+		const folder = await AppointmentModel.findById(id);
 
 		return folder;
 	};
@@ -24,39 +24,39 @@ class FolderRepository implements IFolderRepository{
 	};
 
 	find = async (limit: number, page: number) => {
-		const folders = await FolderModel.find()
+		const folders = await AppointmentModel.find()
 			.limit(limit)
 			.skip(limit * (page - 1));
 
 		return folders;
 	};
 
-	findWorkspaceFolders = async (
+	findWorkspaceAppointments = async (
 		workspaceId: string,
 		limit: number,
 		page: number,
 	) => {
-		const workspaceFolders = await FolderModel.find({
+		const workspaceAppointments = await AppointmentModel.find({
 			workspace: workspaceId,
 		})
 			.limit(limit)
 			.skip(limit * (page - 1));
 
-		return workspaceFolders;
+		return workspaceAppointments;
 	};
 
-	updateById = async (id: string, data: IFolder) => {
-		const editedFolder = await FolderModel.findByIdAndUpdate(
+	updateById = async (id: string, data: IAppointment) => {
+		const editedAppointment = await AppointmentModel.findByIdAndUpdate(
 			id,
 			{ ...data },
 			{ new: true },
 		);
 
-		return editedFolder;
+		return editedAppointment;
 	};
 
 	deleteById = async (id: string) => {
-		await FolderModel.findByIdAndDelete(id);
+		await AppointmentModel.findByIdAndDelete(id);
 
 		return true;
 	};
@@ -66,30 +66,30 @@ class FolderRepository implements IFolderRepository{
 	like: (userId: string, id: string) => Promise<any>;
 
 	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedFolder = await FolderModel.findByIdAndUpdate(folderId, {
+		const movedAppointment = await AppointmentModel.findByIdAndUpdate(folderId, {
 			workspace: destinationWorkspace,
 		});
 
-		return movedFolder;
+		return movedAppointment;
 	};
 
-	copy = async (destinationWorkspace: string, folderData: IFolder) => {
-		const copiedFolder = await FolderModel.create({
+	copy = async (destinationWorkspace: string, folderData: IAppointment) => {
+		const copiedAppointment = await AppointmentModel.create({
 			...folderData,
 			workspace: destinationWorkspace,
 		});
 
-		return copiedFolder;
+		return copiedAppointment;
 	};
 
-	createFolder = async (workspaceId: string, data: IFolder) => {
-		const newFolder = await FolderModel.create({
+	createAppointment = async (workspaceId: string, data: IAppointment) => {
+		const newAppointment = await AppointmentModel.create({
 			...data,
 			workspace: workspaceId,
 		});
 
-		return newFolder;
+		return newAppointment;
 	};
 }
 
-export default new FolderRepository();
+export default new AppointmentRepository();

@@ -2,10 +2,10 @@
 import mongoose from '@ostrich-app/db/mongodb';
 
 
-const ServiceSchema:mongoose.Schema<any>=new mongoose.Schema({
+const serviceSchema:mongoose.Schema<any>=new mongoose.Schema({
 	name:String
 });
 
-const ServicesModel = mongoose.model<any>('Services',ServiceSchema);
+const servicesModel = mongoose.model<any>('Services',serviceSchema);
 
-export default ServicesModel;
+export default servicesModel;

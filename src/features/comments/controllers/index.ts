@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ICommentsController, ICommentsUseCases } from '../interfaces';
 import { INext, IRequest, IResponse } from '@ostrich-app/common/types';
@@ -14,6 +15,8 @@ class CommentsController implements ICommentsController{
 	 * @return {IResponse|INext} Brief description of the returning value here.
 	 */
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.addComments(req.body);
+
 		return res.status(200).json({
 			message: 'softDelete'
 		});

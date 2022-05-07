@@ -3,45 +3,65 @@ import { IComments, ICommentsRepository, ICommentsUseCases } from '@ostrich-app/
 
 
 export class CommentsUseCase implements ICommentsUseCases{
-	constructor(repository: ICommentsRepository){ }
+	constructor(private readonly repository: ICommentsRepository){ }
 
-	addComments = async (CommentsData: IComments) => {
+	addComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	copyComments = async (CommentsData: IComments) => {
+	copyComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	editComments = async (CommentsData: IComments) => {
+	editComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	listCommentsById = async (CommentsData: IComments) => {
+	listCommentsById = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	listCommentsByName = async (CommentsData: IComments) => {
+	listCommentsByName = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	listCommentss = async (CommentsData: IComments) => {
+	listCommentss = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	listWorkspaceCommentss = async (CommentsData: IComments) => {
+	listWorkspaceCommentss = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	moveComments = async (CommentsData: IComments) => {
+	moveComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	softRemoveComments = async (CommentsData: IComments) => {
+	softRemoveComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 
-	hardRemoveComments = async (CommentsData: IComments) => {
+	hardRemoveComments = async (commentsData: IComments) => {
+		await this.repository.createComments('',commentsData);
+
 		return { woing: 'OK' };
 	};
 

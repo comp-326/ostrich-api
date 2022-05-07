@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app/db/mongodb';
 
-const StandoutSchema: mongoose.Schema<any> = new mongoose.Schema({
+const standoutSchema: mongoose.Schema<any> = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true
 	},
 });
 
-const StandoutModel = mongoose.model('Standout', StandoutSchema);
+const standoutModel = mongoose.model('Standout', standoutSchema);
 
-export default StandoutModel;
+export default standoutModel;

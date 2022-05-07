@@ -1,5 +1,5 @@
-import { IFolder, IFolderValidator } from '@ostrich-app/features/Folders/interfaces';
 import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
+import { IFolder, IFolderValidator } from '../interfaces';
 
 export default function makeCreateFOlderEntity({
 	validator

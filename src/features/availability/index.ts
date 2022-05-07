@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import api from './api';
+import api from './routes';
 
 const availabilityRouter = Router();
 export default function availabilityDomain(app: Router){
