@@ -132,6 +132,7 @@ class UserController implements IUserController{
 	activateAccount = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			await this.useCase.activateUserAccount(
+				req.params.token,
 				req.body.email
 			);
 

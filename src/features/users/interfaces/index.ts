@@ -85,10 +85,14 @@ export interface IUserUseCases {
 			offset: number;
 			query?: any;
 		}) => Promise<any>;
-		activateUserAccount: (email: string) => Promise<any>;
+		activateUserAccount: (token:string,email: string) => Promise<any>;
 		changeUserPassword: (id:string,
 			data: IUser
 		) => Promise<any>;
+		resetPassword: (token:string,data:{
+			password:string
+			confirmPassword:string
+		}) => Promise<any>;
 		softRemoveUser: (id:string) => Promise<any>;
 		hardRemoveUser: (id:string) => Promise<any>;
 		sendAccountActivationLink: (email:string) => Promise<any>;

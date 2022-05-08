@@ -4,9 +4,10 @@ import makeCreateUserEntity from './user';
 
 const createUser = makeCreateUserEntity({
 	validator: UserInfoValidator,
-	passwordUtil: Password
+	passwordUtil: Password,
 });
 
+export { createUser };
 export default createUser;
 
 // export type UserInfoValidator = typeof Validate
