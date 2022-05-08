@@ -1,14 +1,11 @@
-/* eslint-disable no-undef */
-/*
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-module.exports = {
+export default {
 	clearMocks: true,
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
 	resolver: 'ts-jest-resolver',
+	// preset: '@shelf/jest-mongodb',
+	// globalSetup:'./test-setup/setup.ts',
+	// globalTeardown:'./test-setup/tearDown.ts',
 	moduleNameMapper: {
 		'^@ostrich-app/(.*)$': '<rootDir>/src/$1',
 		'^@ostrich-app-app': '<rootDir>/src/app',
@@ -16,7 +13,7 @@ module.exports = {
 		'^@ostrich-app-api/(.*)$': '<rootDir>/src/api/$1',
 		'^@ostrich-app-setup': '<rootDir>/src/setup',
 		'^@ostrich-app-setup/(.*)$': '<rootDir>/src/setup/$1',
-		'^@ostrich-app-features/(.*)$': 'src/features/$1',
+		'^@ostrich-app-features/(.*)$': '<rootDir>/features/$1',
 		'^@ostrich-app-models/(.*)$': '<rootDir>/src/models/$1',
 		'^@ostrich-app-common/(.*)$': '<rootDir>/src/common/$1',
 		'^@ostrich-app-services/(.*)$': '<rootDir>/src/services/$1',

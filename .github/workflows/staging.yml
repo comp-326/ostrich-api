@@ -48,7 +48,7 @@ jobs:
       
     - name: Set env
       run: npm run env
-
+      
     - name: Build
       run: npm run build
 
@@ -67,5 +67,3 @@ jobs:
         TARGET: ${{ secrets.REMOTE_TARGET_STAGING_DIGITAL_OCEAN }}
         # Arguments to pass to rsync
         ARGS: "-rltgoDzvO --exclude-from='excludesFile'"
-
-# Monogo
