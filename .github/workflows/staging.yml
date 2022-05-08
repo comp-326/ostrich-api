@@ -48,10 +48,7 @@ jobs:
       
     - name: Set env
       run: npm run env
-
-    - name: Run the tests
-      run: npm test --passWithNoTests --ci
-
+      
     - name: Build
       run: npm run build
 
