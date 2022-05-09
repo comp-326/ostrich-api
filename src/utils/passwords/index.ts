@@ -1,4 +1,4 @@
-import { IPassword } from '../interfaces';
+import { IPassword } from '../../features/users/interfaces';
 import bcryptjs from 'bcryptjs';
 
 class Password implements IPassword{

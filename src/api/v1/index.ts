@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import authDomain from '@ostrich-app/features/auth';
 import folderDomain from '@ostrich-app-features/folders/routes';
 import testRoute from './testRoute';
 import userDomain from '@ostrich-app/features/users';
 import userRolesDomain from '@ostrich-app/features/userRoles';
 import workspaceDomain from '@ostrich-app/features/workspaces';
+import workspaceInviteDomain from '@ostrich-app/features/workspaceInvite';
 import { swaggerServe, swaggerSetup } from '@ostrich-app/utils/docs';
 
 require('module-alias/register');
@@ -15,6 +17,8 @@ export default function () {
 	userDomain({ app: apiRoute, pathName: '/users' });
 	workspaceDomain({ app: apiRoute, pathName: '/workspaces' });
 	userRolesDomain({ app: apiRoute, pathName: '/u-roles' });
+	workspaceInviteDomain({ app: apiRoute, pathName: '/workspace-invite' });
+	authDomain({app:apiRoute,pathName:'/auth'});
 
 	return apiRoute;
 }

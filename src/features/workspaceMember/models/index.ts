@@ -2,7 +2,7 @@
 import mongoose from '@ostrich-app-db/mongodb';
 import { IWorkspaceMemberDocument,IWorkspaceMemberDocumentModel} from './interfaces';
 
-const userRoleSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mongoose.Schema({
+const workspaceMemberSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mongoose.Schema({
 	memberEmail:{
 		type:String,
 		required:true,
@@ -22,7 +22,7 @@ const userRoleSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mongoose.S
 	timestamps: true
 });
 
-const workspaceInviteModel = mongoose.model<IWorkspaceMemberDocument, IWorkspaceMemberDocumentModel>('WorkspaceMember', userRoleSchema);
+const workspaceMemberModel = mongoose.model<IWorkspaceMemberDocument, IWorkspaceMemberDocumentModel>('WorkspaceMember', workspaceMemberSchema);
 
 
-export default workspaceInviteModel;
+export default workspaceMemberModel;

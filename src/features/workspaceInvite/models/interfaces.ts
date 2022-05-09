@@ -2,16 +2,18 @@
 import mongoose from '@ostrich-app-db/mongodb';
 
 export interface IWorkspaceInvite {
-    inviteRole: string;
+    inviteRole: any;
     status: 'pending' | 'confirmed',
-    workspaceOwnerId: string,
+    workspaceId: any,
     workspaceOwnerEmail: string
     inviteeEmail: string
-    note: string
+    note: string,
+    inviteeId: any
 }
 
 export interface IWorkspaceInviteDocument extends IWorkspaceInvite, mongoose.Document {
     _doc: any
+    // consfirmInvite
 }
 
 export interface IWorkspaceInviteDocumentModel extends mongoose.Model<IWorkspaceInviteDocument> {

@@ -1,4 +1,4 @@
-import Password from '../utils/password';
+import Password from '@ostrich-app-utils/passwords';
 import UserInfoValidator from '../utils/userInfoValidator';
 import makeCreateUserEntity from './user';
 

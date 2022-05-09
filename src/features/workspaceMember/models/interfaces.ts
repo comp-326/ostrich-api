@@ -4,8 +4,9 @@ import mongoose from '@ostrich-app-db/mongodb';
 export interface IWorkspaceMember {
     memberRole: any;
     workspaceId: string,
-    memberEmail: string
-    memberPhone: string
+    memberEmail: string,
+    memberPhone: string,
+    memberId: string,
 }
 
 export interface IWorkspaceMemberDocument extends IWorkspaceMember, mongoose.Document {
