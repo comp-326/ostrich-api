@@ -4,8 +4,9 @@ import { IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel } from './inter
 
 const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.Schema({
 	inviteRole: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
 		required: true,
+		ref: 'WorkspaceRole'
 
 	},
 	inviteeEmail: {
@@ -25,9 +26,15 @@ const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.S
 		type: String,
 		default: ''
 	},
-	workspaceOwnerId: {
-		type: String,
-		required: true
+	workspaceId: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'Workspace'
+	},
+	inviteeId: {
+		type: mongoose.Schema.Types.ObjectId,
+		default:'',
+		ref: 'User'
 	}
 
 }, {

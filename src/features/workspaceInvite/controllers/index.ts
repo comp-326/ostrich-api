@@ -3,22 +3,43 @@ import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 import { IWorkspaceInviteController, IWorkspaceInviteUseCase } from '../interfaces';
 
 export class WorkspaceInviteController implements IWorkspaceInviteController{
-	private readonly useCase: IWorkspaceInviteUseCase;
 
-	constructor(useCase: IWorkspaceInviteUseCase){
-		this.useCase = useCase;
+	constructor(private readonly useCase: IWorkspaceInviteUseCase){
 	}
 
-	createRoles = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.addRoles();
+	createInvite=async (req: IRequest, res: IResponse, next: INext) =>{
+		try{
+			await this.useCase.inviteUserToWorkspace(req.body);
 
-		return res.status(201).json({ data: response });
+			return res.sendStatus(201);
+		}catch(err){
+			return next(err);
+		}
 	};
 
-	getRoles = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.listRoles();
-
-		return res.status(200).json({ data: response });
+	deleteInvite=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
 	};
+
+	confirmInvite=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
+	};
+
+	updateInvite=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
+	};
+
+	getPendingInvites=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
+	};
+
+	getConfirmedInvites=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
+	};
+
+	rejectInvite=async (req: IRequest, res: IResponse, next: INext) =>{
+		return {};
+	};
+
 
 }

@@ -1,26 +1,17 @@
-import { IUserRoleRepository } from '@ostrich-app-features/userRoles/interfaces';
-import UserRoleModel from '@ostrich-app-features/userRoles/models';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IUser } from '@ostrich-app/features/users/models/interfaces';
+import { IWorkspaceMemberRepository } from './../interfaces';
 
-class UserRoleRepository implements IUserRoleRepository{
-	findByName = async (name: string) => {
-		const role = await UserRoleModel.findOne({ name });
-		if (role) return role;
+class UserRoleRepository implements IWorkspaceMemberRepository {
+	findAll: (workspaceId: string) => Promise<any>;
 
-		return null;
-	};
+	findMembersByRole: (workspaceId: string, roleId: string) => Promise<any>;
 
-	createRoles = async () => {
-		const roles = await UserRoleModel.InsertRoles();
+	createNewMember: (workspaceId: string, roleId: string, memberData: IUser) => Promise<any>;
 
-		return roles;
-	};
+	updateMemberRole: (workspaceId: string, memberId: string) => Promise<any>;
 
-	findRoles = async () => {
-		const roles = await UserRoleModel.find({});
-
-		return roles;
-	};
-
+	deleteMember: (workspaceId: string, memberId: string) => Promise<any>;
 }
 
 export default new UserRoleRepository();

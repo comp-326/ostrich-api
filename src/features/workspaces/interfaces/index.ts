@@ -30,9 +30,8 @@ export interface IWorkspaceUseCases {
 	listWorkspaceByName: (name: string) => Promise<any>;
 	listWorkspaces: (limit:number,offset:number) => Promise<any>;
 	listUserWorkspaces: (userId:string,props:{limit:number,offset:number}) => Promise<any>;
-	moveWorkspace: (workspaceData: IWorkspace) => Promise<any>;
-	softRemoveWorkspace: (workspaceData: IWorkspace) => Promise<any>;
-	hardRemoveWorkspace: (workspaceData: IWorkspace) => Promise<any>;
+	softRemoveWorkspace: (id: string) => Promise<any>;
+	hardRemoveWorkspace: (id: IWorkspace) => Promise<any>;
 }
 
 export interface IWorkspaceController {
@@ -42,8 +41,6 @@ export interface IWorkspaceController {
 	findByName: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	findUserWorkspaces: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	createWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
-	copyWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	updateWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
-	moveWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	hardDeleteWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

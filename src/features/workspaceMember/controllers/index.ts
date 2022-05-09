@@ -1,24 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
-import { IUserRoleController, IUserRoleUseCase } from '@ostrich-app-features/userRoles/interfaces';
+import { IWorkspaceMemberController, IWorkspaceMemberUseCase } from './../interfaces';
 
-export class UserRoleController implements IUserRoleController{
-	private readonly useCase: IUserRoleUseCase;
+export class WorkspaceMemberController implements IWorkspaceMemberController{
 
-	constructor(useCase: IUserRoleUseCase){
-		this.useCase = useCase;
+	constructor(private readonly useCase: IWorkspaceMemberUseCase){
 	}
 
-	createRoles = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.addRoles();
+	joinWorkspace=async(req: IRequest, res: IResponse, next: INext) => {
+		await this.useCase.joinWorkspace('','','');
 
-		return res.status(201).json({ data: response });
+		return {};
 	};
 
-	getRoles = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.listRoles();
+	createMember=async (req: IRequest, res: IResponse, next: INext) => {
+		return {};
+	};
 
-		return res.status(200).json({ data: response });
+	changeMemberRole=async (req: IRequest, res: IResponse, next: INext) => {
+		return {};
+	};
+
+	getMembers=async (req: IRequest, res: IResponse, next: INext) => {
+		return {};
+	};
+
+	getMembersByRole=async (req: IRequest, res: IResponse, next: INext) => {
+		return {};
 	};
 
 }

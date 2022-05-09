@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import Permissions from '@ostrich-app-constants/permissions';
 import RoleModel from '@ostrich-app-features/userRoles/models';
-import TokenGEN from '@ostrich-app-helpers/tokenGEN';
+import TokenGEN from '@ostrich-app/utils/jwt/tokenGEN';
 import UserModel from '@ostrich-app-features/users/models';
 import { environmentConfig } from '@ostrich-app-config';
 import jwt from 'jsonwebtoken';

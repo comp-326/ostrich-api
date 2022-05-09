@@ -1,26 +1,66 @@
-import { IUserRoleRepository } from '@ostrich-app-features/userRoles/interfaces';
-import UserRoleModel from '@ostrich-app-features/userRoles/models';
+import { IWorkspaceInvite } from '../models/interfaces';
+import { IWorkspaceInviteRepository } from '../interfaces';
+import workspaceInviteModel from './../models';
+import workspaceModel from '@ostrich-app/features/workspaces/models';
 
-class UserRoleRepository implements IUserRoleRepository{
-	findByName = async (name: string) => {
-		const role = await UserRoleModel.findOne({ name });
-		if (role) return role;
+class WorkspaceInviteRepository implements IWorkspaceInviteRepository{
+	getInviteById=async (id: string) => {
+		const invite = await workspaceInviteModel.findById(id);
 
-		return null;
+		return invite;
 	};
 
-	createRoles = async () => {
-		const roles = await UserRoleModel.InsertRoles();
+	getInviteWorkspace=async (workspaceId: string) => {
+		const workspace = await workspaceModel.findById(workspaceId);
 
-		return roles;
+		return workspace;
 	};
 
-	findRoles = async () => {
-		const roles = await UserRoleModel.find({});
+	getUserInvite=async(userEmail: string, workspaceId: string) =>{
+		const invite = await workspaceInviteModel.findOne({
+			userEmail,workspaceId
+		});
 
-		return roles;
+		return invite;
 	};
+
+	createInvite=async (inviteData: IWorkspaceInvite) => {
+		const invite = await workspaceInviteModel.create({
+			...inviteData
+		});
+
+		return invite;
+	};
+
+	deleteInvite=async (workspaceId: string) => {
+		const deletedInvite = await workspaceInviteModel.deleteOne({workspaceId});
+
+		return deletedInvite;
+	};
+
+	updateInvite=async () => {
+		return {};
+	};
+
+	getConfirmed=async (workspaceId:string) => {
+		const invites =  await workspaceInviteModel.find({workspaceId,status:'confirmed'});
+
+		return invites;
+	};
+
+	getPending=async (workspaceId:string) => {
+		const invites =  await workspaceInviteModel.find({workspaceId,status:'pending'});
+
+		return invites;
+	};
+
+	confirmInvite=async (inviteId:string) => {
+		const invite =  await workspaceInviteModel.findByIdAndUpdate(inviteId,{status:'confirmed'});
+
+		return invite;
+	};
+
 
 }
 
-export default new UserRoleRepository();
+export default new WorkspaceInviteRepository();
