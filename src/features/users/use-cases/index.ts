@@ -6,7 +6,7 @@ import { JWTPayloadType } from '@ostrich-app/common/types';
 import createUser from '@ostrich-app-features/users/entities';
 import { deleteFile } from '@ostrich-app-utils/fileSystem';
 import entity from '@ostrich-app-features/users/entities';
-import tokenGEN from '@ostrich-app/helpers/tokenGEN';
+import tokenGEN from '@ostrich-app/utils/jwt/tokenGEN';
 import validateMongodbId from '@ostrich-app-utils/mongo/ObjectId-validator';
 import { IUserRepository, IUserUseCases } from '../interfaces';
 

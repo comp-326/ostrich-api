@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import getUserRolesRoute from '@ostrich-app-features/userRoles/routes/getRolesRoute';
-import postNewRolesRoute from '@ostrich-app-features/userRoles/routes/postNewRolesRoute';
+import getConfirmedInvitesRoute from './routes/getConfirmedInvitesRoute';
+import getPendingInvitesRoute from './routes/getPendingInvitesRoute';
+import inviteUserToWorkspace from './routes/inviteUserToWorkspaceRoute';
 export default ({ app, pathName }: { app: Router, pathName: string }) => {
-	getUserRolesRoute(app)(pathName);
-	postNewRolesRoute(app)(pathName);
+	inviteUserToWorkspace(app)(pathName);
+	getConfirmedInvitesRoute(app)(pathName);
+	getPendingInvitesRoute(app)(pathName);
 };

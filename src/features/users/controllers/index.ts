@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
-import verifyUserJWT from './../utils/jwt/verifyUserJWT';
+import verifyUserJWT from '../../../utils/jwt/verifyUserJWT';
 import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app-common/types';
 import { IUserController, IUserUseCases } from './../interfaces';
 

@@ -11,9 +11,14 @@ class FolderController implements IWorkspaceController {
 	constructor(private readonly useCase: IWorkspaceUseCases) { }
 
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.addWorkspace(req.body);
-
-		return response;
+		try{
+			const {id}=req.params;
+			await this.useCase.softRemoveWorkspace(id);
+			
+			return res.sendStatus(301);
+		}catch(err){
+			return next(err);
+		}
 	};
 
 	findById = async (req: IRequest, res: IResponse, next: INext) => {
@@ -63,11 +68,6 @@ class FolderController implements IWorkspaceController {
 		}
 	};
 
-	copyWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.addWorkspace(req.body);
-
-		return response;
-	};
 
 	updateWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
@@ -77,12 +77,6 @@ class FolderController implements IWorkspaceController {
 		} catch (err) {
 			return next(err);
 		}
-	};
-
-	moveWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
-		const response = await this.useCase.addWorkspace(req.body);
-
-		return response;
 	};
 
 	hardDeleteWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
