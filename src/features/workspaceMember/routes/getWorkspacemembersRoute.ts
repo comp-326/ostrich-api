@@ -5,7 +5,7 @@ import { UserRoleUseCases } from '@ostrich-app-features/userRoles/use-cases';
 import userRolesRepository from '@ostrich-app-features/userRoles/repository';
 
 
-export default function postNewRolesRoute(app: Router){
+export default function getWorkspacemembersRoute(app: Router){
 	return (pathName: string) => {
 		const userRolesUseCase = new UserRoleUseCases(userRolesRepository);
 		const controller = new UserRoleController(userRolesUseCase);

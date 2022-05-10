@@ -1,17 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUser } from '@ostrich-app/features/users/models/interfaces';
+import { IWorkspaceMember } from '../models/interfaces';
 import { IWorkspaceMemberRepository } from './../interfaces';
+import userModel from '@ostrich-app/features/users/models';
+import workspaceMemberModel from '../models';
+import workspaceModel from '@ostrich-app/features/workspaces/models';
 
-class UserRoleRepository implements IWorkspaceMemberRepository {
-	findAll: (workspaceId: string) => Promise<any>;
+class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
+	getWorkspaceMember=async(workspaceMemberId: string) => {
+		return await workspaceMemberModel.findById(workspaceMemberId);
+	};
 
-	findMembersByRole: (workspaceId: string, roleId: string) => Promise<any>;
+	getWorkspace = async (workspaceId: string) => {
+		return await workspaceModel.findById(workspaceId);
+	};
 
-	createNewMember: (workspaceId: string, roleId: string, memberData: IUser) => Promise<any>;
+	getWorkspaceOwner = async (workspaceOwnerId: string) => {
+		return await userModel.findById(workspaceOwnerId);
+	};
 
-	updateMemberRole: (workspaceId: string, memberId: string) => Promise<any>;
+	createNewWorkspaceMember = async (
+		workspaceMemberData: IWorkspaceMember,
+	) => {
+		return workspaceMemberModel.create(workspaceMemberData);
+	};
 
-	deleteMember: (workspaceId: string, memberId: string) => Promise<any>;
+	findAll = async (workspaceId: string) => {
+		return workspaceMemberModel.find({ workspaceId });
+	};
+
+	findMembersByRole = async (workspaceId: string, roleId: string) => {
+		return await workspaceMemberModel.find({ workspaceId, roleId });
+	};
+
+	updateMemberRole = async (
+		workspaceId: string,
+		memberId: string,
+		roleId: string,
+	) => {
+		return await workspaceMemberModel.findOneAndUpdate(
+			{ workspaceId, memberId },
+			{ roleId },
+		);
+	};
+
+	deleteMember = async (workspaceMemberId: string) => {
+		return await workspaceMemberModel.findByIdAndDelete(workspaceMemberId);
+	};
 }
 
-export default new UserRoleRepository();
+export default new WorkspaceMemberRepository();
