@@ -9,7 +9,6 @@ import workspaceInviteDomain from '@ostrich-app/features/workspaceInvite';
 import workspaceMemberDomain from '@ostrich-app/features/workspaceMember';
 import { swaggerServe, swaggerSetup } from '@ostrich-app/utils/docs';
 
-require('module-alias/register');
 const apiRoute = Router();
 export default function () {
 	apiRoute.get('/test', testRoute);

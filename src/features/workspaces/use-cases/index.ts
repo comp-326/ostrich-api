@@ -107,8 +107,8 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 		return res;
 	};
 
-	softRemoveWorkspace=async (folderData: IWorkspace) => {
-		const res = await this.repository.createWorkspace(folderData);
+	softRemoveWorkspace=async (id: string) => {
+		const res = await this.repository.deleteById(id);
 
 		return res;
 	};
