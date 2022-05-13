@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import { WorkspaceMemberController } from '../controllers';
 import { WorkspaceUseCases } from '../use-cases';
+import  { loginRequired } from '@ostrich-app/middlewares/Auth';
 import workspaceMemberRepository from '../repository';
 
 
@@ -11,7 +12,7 @@ export default function getWorkspaceMembersRoute(app: Router){
 		const controller = new WorkspaceMemberController(workspaceMemberUseCase);
 		const workspaceMemberRouter = Router();
 		app.use(`${pathName}`, workspaceMemberRouter);
-		workspaceMemberRouter.put('/', controller.getMembersByRole);
+		workspaceMemberRouter.put('/', loginRequired,controller.getMembersByRole);
 
 	};
 }

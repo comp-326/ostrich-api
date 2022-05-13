@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import { WorkspaceInviteController } from '../controllers';
 import { WorkspaceInviteUseCases } from '../use-cases';
+import { loginRequired } from '@ostrich-app/middlewares/Auth';
 import workspaceInviteRepository from '../repository';
 
 
@@ -11,7 +12,7 @@ export default function updateInviteRoute(app: Router){
 		const controller = new WorkspaceInviteController(workspaceInviteUseCase);
 		const workspaceInviteRouter = Router();
 		app.use(`${pathName}`, workspaceInviteRouter);
-		workspaceInviteRouter.put('/invite/update/:inviteId', controller.updateInvite);
+		workspaceInviteRouter.put('/invite/update/:inviteId', loginRequired ,controller.updateInvite);
 
 	};
 }
