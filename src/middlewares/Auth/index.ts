@@ -1,0 +1,95 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import Permissions from '@ostrich-app-constants/permissions';
+import RoleModel from '@ostrich-app-features/userRoles/models';
+import TokenGEN from '@ostrich-app/utils/jwt/tokenGEN';
+import UserModel from '@ostrich-app-features/users/models';
+import { environmentConfig } from '@ostrich-app-config';
+import jwt from 'jsonwebtoken';
+import { INext, IRequest, IResponse, JWTPayloadType } from '@ostrich-app-common/types';
+
+
+const verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
+	try {
+		if (!req.cookies) {
+			return res.status(401).json({
+				message: 'Please login to access this page',
+				status: 'warning',
+				statusCode: 401,
+				data: {}
+			});
+		}
+		const token = req.cookies['access_token'];
+		if (!token) {
+			return res.status(401).json({
+				message: 'Please login to access this page',
+				status: 'warning',
+				statusCode: 401,
+				data: {}
+			});
+		}
+		const jwtToken = TokenGEN.decodeToken(token);
+		if (!jwtToken) {
+			return res.status(401).json({
+				message: 'Please login to access this page',
+				status: 'warning',
+				statusCode: 401,
+				data: {}
+			});
+		}
+		const payload = jwt.verify(
+			jwtToken,
+			environmentConfig.SECRET_KEY
+		) as JWTPayloadType;
+		req.user = payload;
+
+		return next();
+	} catch {
+		return res.status(401).json({
+			message: 'Login session has expired',
+			status: 'warning',
+			statusCode: 401,
+			data: {}
+		});
+	}
+};
+
+export const	loginRequired = async (req: IRequest, res: IResponse, next: INext) => {
+	try {
+		verifyCookie(req, res, async () => {
+			const user = await UserModel.findById(req.user.userId);
+			if (!user!.isActive) {
+				return res.status(401).json({
+					message: 'Please activate your account',
+					status: 'warning',
+					statusCode: 401,
+					data: {}
+				});
+			}
+			const role = await RoleModel.findById(user!.role);
+			const permitted = await role!.hasPermission(Permissions.USER);
+			if (!permitted) 
+				return res.sendStatus(403);
+				
+			return next();
+		});
+	} catch (error) {
+		return next(error);
+	}
+};
+
+export const adminRequired = async (req: IRequest, res: IResponse, next: INext) => {
+	try {
+		loginRequired(req, res, async () => {
+			const user = await UserModel.findById(req.user.userId);
+			const role = await RoleModel.findById(user!.role);
+			const permitted = await role!.hasPermission(Permissions.ADMIN);
+			if (!permitted) 
+				return res.sendStatus(403);
+				
+			return next();
+		});
+	} catch (error) {
+		return next(error);
+	}
+};
+
