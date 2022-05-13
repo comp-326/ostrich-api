@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import { WorkspaceInviteController } from './../controllers';
 import { WorkspaceInviteUseCases } from './../use-cases';
+import { loginRequired } from '@ostrich-app/middlewares/Auth';
 import workspaceInviteRepository from './../repository';
 
 
@@ -11,7 +12,7 @@ export default function getConfirmedInvitesRoute(app: Router){
 		const controller = new WorkspaceInviteController(workspaceInviteUseCase);
 		const workspaceInviteRouter = Router();
 		app.use(`${pathName}`, workspaceInviteRouter);
-		workspaceInviteRouter.put('/workspace/invites/confirmed/:workspaceId', controller.getConfirmedInvites);
+		workspaceInviteRouter.put('/workspace/invites/confirmed/:workspaceId', loginRequired,controller.getConfirmedInvites);
 
 	};
 }

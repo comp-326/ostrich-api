@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import WorkspaceRepository from '@ostrich-app-features/workspaces/repository';
 import { WorkspaceUseCase } from '@ostrich-app-features/workspaces/use-cases';
+import { loginRequired  } from '@ostrich-app/middlewares/Auth';
 import workspaceController from '@ostrich-app-features/workspaces/controllers';
 
 export  function getWorkspaceByNameRoute(app: Router) {
@@ -10,6 +11,6 @@ export  function getWorkspaceByNameRoute(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-		workspaceRouter.post('/find/:name', controller.findByName);
+		workspaceRouter.post('/find/:name', loginRequired,controller.findByName);
 	};
 }
