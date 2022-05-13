@@ -8,11 +8,16 @@ const workspaceMemberSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mon
 		required:true,
 
 	},
+	workspaceId:{
+		type:mongoose.SchemaTypes.ObjectId,
+		required:true,
+		ref:'Workspace'
+	},
 	memberPhone:{
 		type:String,
 		default:''
 	},
-	memberRole:{
+	memberRoleId:{
 		type:mongoose.SchemaTypes.ObjectId,
 		required:true,
 		ref:'WorkspaceRole'

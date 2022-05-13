@@ -11,90 +11,92 @@ import validateMongodbId from '@ostrich-app-utils/mongo/ObjectId-validator';
 import { IUserRepository, IUserUseCases } from '../interfaces';
 
 
-export class UserUseCase implements IUserUseCases{
+export class UserUseCase implements IUserUseCases {
 	private readonly repository: IUserRepository;
 
-	constructor(repository: IUserRepository){
+	constructor(repository: IUserRepository) {
 		this.repository = repository;
 	}
 
-	editUserProfilePic=async (userId: string, userData: IUser & {file:Express.Multer.File}) => {
-		if(!userId && userData.file) {
+	editUserProfilePic = async (userId: string, userData: IUser & { file: Express.Multer.File }) => {
+		if (!userId && userData.file) {
 			await deleteFile(userData.file.path);
 			throw new ExpressError({
-				data:{},
-				message:'User id not provided',
-				status:'error',
-				statusCode:400
+				data: {},
+				message: 'User id not provided',
+				status: 'error',
+				statusCode: 400
 			});
 		}
-		if(!validateMongodbId(userId) && userData.file) {
+		if (!validateMongodbId(userId) && userData.file) {
 			await deleteFile(userData.file.path);
 			throw new ExpressError({
-				data:{},
-				message:'Please provide a valid user id',
-				status:'error',
-				statusCode:400
+				data: {},
+				message: 'Please provide a valid user id',
+				status: 'error',
+				statusCode: 400
 			});
 		}
 
-		return {done:userData};
+		return { done: userData };
 	};
 
 	addNewUser = async (userData: IUser) => {
-		const newUser = await entity(userData);
-		const existing = await this.repository.findByEmail(newUser.getEmail());
-		if(existing) {
+		const { getBio, getEmail, getFirstName, getGender, getIsActive, getIsDelete, getLastName, getPassword, getProfilePic, getRole } = await entity(userData);
+		const existing = await this.repository.findByEmail(getEmail());
+		if (existing) {
 			throw new ExpressError({
 				message: 'User already exists',
 				status: 'warning',
 				statusCode: 409,
 				data: {
-					email: newUser.getEmail()}
+					email: getEmail()
+				}
 
 			});
 		}
 		const queue = new EventBus('activateAccount');
 		const user = await this.repository.createUser({
-			email:newUser.getEmail(),
-			firstName:newUser.getFirstName(),
-			lastName:newUser.getLastName(),
-			password:newUser.getPassword(),
-			gender:newUser.getGender(),
-			bio:newUser.getBio(),
-			isActive:newUser.getIsActive(),
-			isDeleted:newUser.getIsDelete(),
-			profilePicture:newUser.getProfilePic(),
-			role:newUser.getRole()
+			email: getEmail(),
+			firstName: getFirstName(),
+			lastName: getLastName(),
+			password: getPassword(),
+			gender: getGender(),
+			bio: getBio(),
+			isActive: getIsActive(),
+			isDeleted: getIsDelete(),
+			profilePicture: getProfilePic(),
+			role: getRole()
 		});
-		await queue.sendToQueue(JSON.stringify({
-			name: `${newUser.getFirstName()} ${newUser.getLastName()}`,
-			email: newUser.getEmail(),
+		queue.sendToQueue(JSON.stringify({
+			name: `${getFirstName()} ${getLastName()}`,
+			email: getEmail(),
 
 		}));
-			
+
 		return user;
-		
+
 	};
 
 	editUserProfile = async (userId: string, userData: IUser) => {
-		if(!userId) {
+		if (!userId) {
 			throw new ExpressError({
 				message: 'User id not provided',
 				status: 'error',
 				statusCode: 400,
 				data: {
-					userId: userId}
+					userId: userId
+				}
 			});
 		}
-		if(!validateMongodbId(userId)) {
+		if (!validateMongodbId(userId)) {
 			throw new ExpressError({
 				message: 'Please provide a valid user id',
 				status: 'error',
 				statusCode: 400,
 				data: {}
 			});
-		
+
 		}
 
 		const newUserData = await this.repository.updateById(userId, userData);
@@ -103,16 +105,17 @@ export class UserUseCase implements IUserUseCases{
 	};
 
 	listUserById = async (id: string) => {
-		if(!id) {
+		if (!id) {
 			throw new ExpressError({
 				message: 'User id not provided',
 				status: 'error',
 				statusCode: 400,
 				data: {
-					userId: id}
+					userId: id
+				}
 			});
 		}
-		if(!validateMongodbId(id)) {
+		if (!validateMongodbId(id)) {
 			throw new ExpressError({
 				message: 'Please provide a valid user id',
 				status: 'error',
@@ -126,32 +129,34 @@ export class UserUseCase implements IUserUseCases{
 	};
 
 	listUserByEmail = async (email: string) => {
-		if(!email) {
+		if (!email) {
 			throw new ExpressError({
 				message: 'Email not provided',
 				status: 'error',
 				statusCode: 400,
 				data: {
-					email: email}
+					email: email
+				}
 			});
 		}
 
 		const user = await this.repository.findByEmail(email);
-		if(!user) {
+		if (!user) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'warning',
 				statusCode: 404,
 				data: {
 				}
-			});}
+			});
+		}
 
 		return user;
 	};
 
 	listUsers = async ({ limit, offset }: { limit: number; offset: number; }) => {
 		const users = await this.repository.find(limit, offset);
-		if(users.length === 0) {
+		if (users.length === 0) {
 			throw new ExpressError({
 				message: 'No users found',
 				status: 'warning',
@@ -166,8 +171,8 @@ export class UserUseCase implements IUserUseCases{
 		return users;
 	};
 
-	activateUserAccount = async (token:string,email: string) => {
-		if(!email) {
+	activateUserAccount = async (token: string, email: string) => {
+		if (!email) {
 			throw new ExpressError({
 				message: 'Email is required',
 				status: 'warning',
@@ -178,7 +183,7 @@ export class UserUseCase implements IUserUseCases{
 			});
 		}
 		const existing = await this.repository.findByEmail(email);
-		if(!existing) {
+		if (!existing) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'warning',
@@ -188,7 +193,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(existing.isActive) {
+		if (existing.isActive) {
 			throw new ExpressError({
 				message: 'User account already activated',
 				status: 'warning',
@@ -197,7 +202,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(existing.isDeleted) {
+		if (existing.isDeleted) {
 			throw new ExpressError({
 				message: 'User account has been deleted',
 				status: 'warning',
@@ -206,7 +211,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!token) {
+		if (!token) {
 			throw new ExpressError({
 				message: 'Token is required',
 				status: 'warning',
@@ -216,8 +221,8 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		const {userId}=tokenGEN.decodeToken(token) as unknown as JWTPayloadType;
-		if(!userId) {
+		const { userId } = tokenGEN.decodeToken(token) as unknown as JWTPayloadType;
+		if (!userId) {
 			throw new ExpressError({
 				message: 'Token is invalid',
 				status: 'warning',
@@ -227,7 +232,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(userId!==existing.id) {
+		if (userId !== existing.id) {
 			throw new ExpressError({
 				message: 'Token is invalid',
 				status: 'warning',
@@ -238,23 +243,23 @@ export class UserUseCase implements IUserUseCases{
 			});
 		}
 
-		const updated = await createUser({...existing, isActive: true});
+		const updated = await createUser({ ...existing, isActive: true });
 		const user = await this.repository.updateById(existing._id, {
 			email: updated.getEmail(),
-			isActive:true,
+			isActive: true,
 			firstName: updated.getFirstName(),
 			lastName: updated.getLastName(),
-			gender:updated.getGender(),
-			password:updated.getPassword(),
-			bio:updated.getBio(),
-			profilePicture:updated.getProfilePic()
+			gender: updated.getGender(),
+			password: updated.getPassword(),
+			bio: updated.getBio(),
+			profilePicture: updated.getProfilePic()
 		});
 
 		return user;
 	};
 
-	resetPassword=async (token: string,data:{password:string,confirmPassword:string}) => {
-		if(!token) {
+	resetPassword = async (token: string, data: { password: string, confirmPassword: string }) => {
+		if (!token) {
 			throw new ExpressError({
 				message: 'Token is required',
 				status: 'warning',
@@ -264,8 +269,8 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		const {userId}=tokenGEN.decodeToken(token) as unknown as JWTPayloadType;
-		if(!userId) {
+		const { userId } = tokenGEN.decodeToken(token) as unknown as JWTPayloadType;
+		if (!userId) {
 			throw new ExpressError({
 				message: 'Token is invalid',
 				status: 'warning',
@@ -275,8 +280,8 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		const existing  = await this.repository.findById(userId);
-		if(!existing) {
+		const existing = await this.repository.findById(userId);
+		if (!existing) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'warning',
@@ -286,7 +291,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(existing.isDeleted) {
+		if (existing.isDeleted) {
 			throw new ExpressError({
 				message: 'User account has been deleted',
 				status: 'warning',
@@ -295,7 +300,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!existing.isActive) {
+		if (!existing.isActive) {
 			throw new ExpressError({
 				message: 'User account not activated',
 				status: 'warning',
@@ -304,7 +309,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!data.password) {
+		if (!data.password) {
 			throw new ExpressError({
 				message: 'Password is required',
 				status: 'warning',
@@ -313,7 +318,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!data.confirmPassword) {
+		if (!data.confirmPassword) {
 			throw new ExpressError({
 				message: 'Confirm password is required',
 				status: 'warning',
@@ -322,7 +327,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(data.password!==data.confirmPassword) {
+		if (data.password !== data.confirmPassword) {
 			throw new ExpressError({
 				message: 'Passwords do not match',
 				status: 'warning',
@@ -331,18 +336,18 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		const updated = await createUser({...existing, password: data.password});
+		const updated = await createUser({ ...existing, password: data.password });
 		const user = await this.repository.updateById(existing._id, {
 			email: updated.getEmail(),
-			isActive:updated.getIsActive(),
+			isActive: updated.getIsActive(),
 			firstName: updated.getFirstName(),
 			lastName: updated.getLastName(),
-			gender:updated.getGender(),
-			password:updated.getPassword(),
-			bio:updated.getBio(),
-			isDeleted:updated.getIsDelete(),
-			profilePicture:updated.getProfilePic(),
-			role:updated.getRole()
+			gender: updated.getGender(),
+			password: updated.getPassword(),
+			bio: updated.getBio(),
+			isDeleted: updated.getIsDelete(),
+			profilePicture: updated.getProfilePic(),
+			role: updated.getRole()
 		}
 		);
 		const queue = new EventBus('resetPassword');
@@ -357,17 +362,18 @@ export class UserUseCase implements IUserUseCases{
 
 	};
 
-	changeUserPassword = async (id: string, data: any ) => {
-		if(!id) {
+	changeUserPassword = async (id: string, data: any) => {
+		if (!id) {
 			throw new ExpressError({
 				message: 'User id not provided',
 				status: 'error',
 				statusCode: 400,
 				data: {
-					userId: id}
+					userId: id
+				}
 			});
 		}
-		if(!validateMongodbId(id)) {
+		if (!validateMongodbId(id)) {
 			throw new ExpressError({
 				message: 'Please provide a valid user id',
 				status: 'error',
@@ -376,7 +382,7 @@ export class UserUseCase implements IUserUseCases{
 			});
 		}
 		const existing = await this.repository.findById(id);
-		if(!existing) {
+		if (!existing) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'error',
@@ -385,7 +391,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(existing.isDeleted) {
+		if (existing.isDeleted) {
 			throw new ExpressError({
 				message: 'User account has been deleted',
 				status: 'error',
@@ -394,7 +400,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!data.password) {
+		if (!data.password) {
 			throw new ExpressError({
 				message: 'Password is required',
 				status: 'warning',
@@ -404,7 +410,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(data.password!==data.confirmPassword as any) {
+		if (data.password !== data.confirmPassword as any) {
 			throw new ExpressError({
 				message: 'Passwords do not match',
 				status: 'warning',
@@ -415,18 +421,18 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		const updated = await createUser({...existing, password: data.password});
+		const updated = await createUser({ ...existing, password: data.password });
 		const user = await this.repository.updateById(existing._id, {
 			email: updated.getEmail(),
-			isActive:updated.getIsActive(),
+			isActive: updated.getIsActive(),
 			firstName: updated.getFirstName(),
 			lastName: updated.getLastName(),
-			gender:updated.getGender(),
-			password:updated.getPassword(),
-			bio:updated.getBio(),
-			isDeleted:updated.getIsDelete(),
-			profilePicture:updated.getProfilePic(),
-			role:updated.getRole()
+			gender: updated.getGender(),
+			password: updated.getPassword(),
+			bio: updated.getBio(),
+			isDeleted: updated.getIsDelete(),
+			profilePicture: updated.getProfilePic(),
+			role: updated.getRole()
 		}
 		);
 		const queue = new EventBus('resetPassword');
@@ -452,7 +458,7 @@ export class UserUseCase implements IUserUseCases{
 	};
 
 	sendAccountActivationLink = async (email: string) => {
-		if(!email) {
+		if (!email) {
 			throw new ExpressError({
 				message: 'Email is required',
 				status: 'warning',
@@ -463,7 +469,7 @@ export class UserUseCase implements IUserUseCases{
 			});
 		}
 		const existing = await this.repository.findByEmail(email);
-		if(!existing) {
+		if (!existing) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'warning',
@@ -473,7 +479,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(existing.isActive) {
+		if (existing.isActive) {
 			throw new ExpressError({
 				message: 'User account already activated',
 				status: 'warning',
@@ -484,9 +490,9 @@ export class UserUseCase implements IUserUseCases{
 		}
 		const token = await tokenGEN.generateToken({
 			email: existing.email,
-			userId:existing._id
+			userId: existing._id
 		});
-		const queue=new EventBus('sendActivationLink');
+		const queue = new EventBus('sendActivationLink');
 		queue.sendToQueue(JSON.stringify({
 			email: existing.email,
 			token
@@ -496,7 +502,7 @@ export class UserUseCase implements IUserUseCases{
 	};
 
 	sendPasswordResetLink = async (email: string) => {
-		if(!email) {
+		if (!email) {
 			throw new ExpressError({
 				message: 'Email is required',
 				status: 'warning',
@@ -507,7 +513,7 @@ export class UserUseCase implements IUserUseCases{
 			});
 		}
 		const existing = await this.repository.findByEmail(email);
-		if(!existing) {
+		if (!existing) {
 			throw new ExpressError({
 				message: 'User not found',
 				status: 'warning',
@@ -517,7 +523,7 @@ export class UserUseCase implements IUserUseCases{
 				}
 			});
 		}
-		if(!existing.isActive) {
+		if (!existing.isActive) {
 			throw new ExpressError({
 				message: 'User account not activated',
 				status: 'warning',
@@ -528,9 +534,9 @@ export class UserUseCase implements IUserUseCases{
 		}
 		const token = await tokenGEN.generateToken({
 			email: existing.email,
-			userId:existing._id
+			userId: existing._id
 		});
-		const queue=new EventBus('sendPasswordResetLink');
+		const queue = new EventBus('sendPasswordResetLink');
 		queue.sendToQueue(JSON.stringify({
 			email: existing.email,
 			token

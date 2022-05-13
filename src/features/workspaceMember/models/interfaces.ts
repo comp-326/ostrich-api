@@ -2,8 +2,11 @@
 import mongoose from '@ostrich-app-db/mongodb';
 
 export interface IWorkspaceMember {
-    memberRole: any;
-    workspaceId: string,
+    memberRoleId: any;
+    workspaceId: any,
+    workspaceOwnerId: any,
+    workspaceOwnerEmail: any,
+    workspaceOwnerPhone: any,
     memberEmail: string,
     memberPhone: string,
     memberId: string,

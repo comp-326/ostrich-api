@@ -3,7 +3,7 @@ import mongoose from '@ostrich-app-db/mongodb';
 import { IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel } from './interfaces';
 
 const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.Schema({
-	inviteRole: {
+	inviteRoleId: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
 		ref: 'WorkspaceRole'
@@ -18,9 +18,10 @@ const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.S
 		enum: ['pending', 'confirmed'],
 		default: 'pending'
 	},
-	workspaceOwnerEmail: {
-		type: String,
-		required: true
+	workspaceOwnerId: {
+		type: mongoose.SchemaTypes.ObjectId,
+		required: true,
+		ref:'User'
 	},
 	note: {
 		type: String,

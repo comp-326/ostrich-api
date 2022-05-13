@@ -7,6 +7,7 @@ import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 export interface IWorkspaceRepository {
 	createWorkspace: (data: IWorkspace) => Promise<any>;
 	findByName: (name: string) => Promise<any>;
+	findById: (id: string) => Promise<any>;
 	findWorkspaceById: (id: string) => Promise<any>;
 	findAll: (limit: number, page: number) => Promise<any>;
 	findUserWorkspaces: (
