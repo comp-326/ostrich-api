@@ -5,7 +5,7 @@ import createNewWorkspaceMember from '../entities';
 import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
 import { IWorkspaceMemberRepository, IWorkspaceMemberUseCase } from './../interfaces';
 
-export class UserRoleUseCases implements IWorkspaceMemberUseCase {
+export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 
 	constructor(private readonly repository: IWorkspaceMemberRepository) {
 	}
