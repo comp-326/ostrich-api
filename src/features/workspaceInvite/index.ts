@@ -1,9 +1,14 @@
 import { Router } from 'express';
+import createNewInvite from './routes/createInviteRoute';
+import deleteInviteRoute from './routes/deleteInviteRoute';
 import getConfirmedInvitesRoute from './routes/getConfirmedInvitesRoute';
 import getPendingInvitesRoute from './routes/getPendingInvitesRoute';
-import inviteUserToWorkspace from './routes/inviteUserToWorkspaceRoute';
+import updateInviteRoute from './routes/updateInviteRoute';
+
 export default ({ app, pathName }: { app: Router, pathName: string }) => {
-	inviteUserToWorkspace(app)(pathName);
+	createNewInvite(app)(pathName);
 	getConfirmedInvitesRoute(app)(pathName);
 	getPendingInvitesRoute(app)(pathName);
+	deleteInviteRoute(app)(pathName);
+	updateInviteRoute(app)(pathName);
 };

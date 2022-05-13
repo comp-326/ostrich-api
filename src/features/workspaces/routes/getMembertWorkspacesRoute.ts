@@ -6,10 +6,10 @@ import workspaceController from '@ostrich-app-features/workspaces/controllers';
 
 export  function getMembertWorkspacesRoute(app: Router) {
 	return (pathName: string) => {
-		const userUseCase = new WorkspaceUseCase(WorkspaceRepository);
-		const controller = new workspaceController(userUseCase);
-		const userRouter = Router();
-		app.use(`${pathName}`, userRouter);
-		userRouter.post('/find/member', controller.findUserWorkspaces);
+		const workspaceUseCase = new WorkspaceUseCase(WorkspaceRepository);
+		const controller = new workspaceController(workspaceUseCase);
+		const workspaceRouter = Router();
+		app.use(`${pathName}`, workspaceRouter);
+		workspaceRouter.post('/find/member', controller.findUserWorkspaces);
 	};
 }
