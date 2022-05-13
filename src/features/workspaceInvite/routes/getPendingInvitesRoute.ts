@@ -7,11 +7,11 @@ import workspaceInviteRepository from './../repository';
 
 export default function getPendingInvitesRoute(app: Router){
 	return (pathName: string) => {
-		const userRolesUseCase = new WorkspaceInviteUseCases(workspaceInviteRepository);
-		const controller = new WorkspaceInviteController(userRolesUseCase);
-		const folderRouter = Router();
-		app.use(`${pathName}`, folderRouter);
-		folderRouter.put('/workspace/pending', controller.getPendingInvites);
+		const workspaceInviteUseCase = new WorkspaceInviteUseCases(workspaceInviteRepository);
+		const controller = new WorkspaceInviteController(workspaceInviteUseCase);
+		const workspaceInviteRouter = Router();
+		app.use(`${pathName}`, workspaceInviteRouter);
+		workspaceInviteRouter.put('/workspace/invites/pending/:workspaceId', controller.getPendingInvites);
 
 	};
 }

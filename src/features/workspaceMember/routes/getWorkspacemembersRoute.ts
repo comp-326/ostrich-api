@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from 'express';
-import { UserRoleController } from '@ostrich-app-features/userRoles/controllers';
-import { UserRoleUseCases } from '@ostrich-app-features/userRoles/use-cases';
-import userRolesRepository from '@ostrich-app-features/userRoles/repository';
+import { WorkspaceMemberController } from '../controllers';
+import { UserRoleUseCases } from '../use-cases';
+import workspaceMemberRepository from '../repository';
 
 
-export default function getWorkspacemembersRoute(app: Router){
+export default function getWorkspaceMembersRoute(app: Router){
 	return (pathName: string) => {
-		const userRolesUseCase = new UserRoleUseCases(userRolesRepository);
-		const controller = new UserRoleController(userRolesUseCase);
-		const folderRouter = Router();
-		app.use(`${pathName}`, folderRouter);
-		folderRouter.put('/insert', controller.createRoles);
+		const workspaceMemberUseCase = new UserRoleUseCases(workspaceMemberRepository);
+		const controller = new UserRoleController(workspaceMemberUseCase);
+		const workspaceMemberRouter = Router();
+		app.use(`${pathName}`, workspaceMemberRouter);
+		workspaceMemberRouter.put('/insert', controller.createRoles);
 
 	};
 }

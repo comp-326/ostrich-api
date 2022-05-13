@@ -4,6 +4,13 @@ import workspaceInviteModel from './../models';
 import workspaceModel from '@ostrich-app/features/workspaces/models';
 
 class WorkspaceInviteRepository implements IWorkspaceInviteRepository{
+	updateInviteById=async (inviteId: string, inviteData: IWorkspaceInvite) => {
+		const invite = await workspaceInviteModel.findByIdAndUpdate(inviteId, inviteData, { new: true });
+	
+
+		return invite;
+	};
+
 	getInviteById=async (id: string) => {
 		const invite = await workspaceInviteModel.findById(id);
 

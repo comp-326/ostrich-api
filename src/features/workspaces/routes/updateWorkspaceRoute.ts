@@ -6,10 +6,10 @@ import workspaceController from '@ostrich-app-features/workspaces/controllers';
 
 export  function updateWorkspaceRoute(app: Router) {
 	return (pathName: string) => {
-		const userUseCase = new WorkspaceUseCase(WorkspaceRepository);
-		const controller = new workspaceController(userUseCase);
-		const userRouter = Router();
-		app.use(`${pathName}`, userRouter);
-		userRouter.post('/workspace/update/:id', controller.updateWorkspace);
+		const workspaceUseCase = new WorkspaceUseCase(WorkspaceRepository);
+		const controller = new workspaceController(workspaceUseCase);
+		const workspaceRouter = Router();
+		app.use(`${pathName}`, workspaceRouter);
+		workspaceRouter.post('/workspace/update/:id', controller.updateWorkspace);
 	};
 }

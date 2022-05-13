@@ -2,10 +2,10 @@
 import mongoose from '@ostrich-app-db/mongodb';
 
 export interface IWorkspaceInvite {
-    inviteRole: any;
+    inviteRoleId: any;
     status: 'pending' | 'confirmed',
     workspaceId: any,
-    workspaceOwnerEmail: string
+    workspaceOwnerId: any
     inviteeEmail: string
     note: string,
     inviteeId: any

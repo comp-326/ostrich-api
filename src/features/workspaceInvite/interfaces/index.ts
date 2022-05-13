@@ -7,14 +7,13 @@ export interface IWorkspaceInviteUseCase {
 	revokeWorkspaceInvite: (inviteId:string) =>Promise<any>
 	getPendingInvites: (workspaceId:string) =>Promise<any>
 	getConfirmedInvites: (workspaceId:string) =>Promise<any>
-	updateExistingInvite?: () =>Promise<any>
-	joinWorkspaceViaInvite?: () =>Promise<any>
+	updateExistingInviteById: (inviteId:string,inviteData:Partial<IWorkspaceInvite>) =>Promise<any>
 }
 
 export interface IWorkspaceInviteRepository {
 	createInvite: (inviteData: IWorkspaceInvite) => Promise<any>
 	deleteInvite: (inviteId:string) => Promise<any>
-	updateInvite?: () => Promise<any>
+	updateInviteById: (inviteId:string,inviteData:IWorkspaceInvite) => Promise<any>
 	getConfirmed: (workspaceId:string) => Promise<any>
 	getPending: (workspaceId:string) => Promise<any>
 	getInviteById: (id:string) => Promise<any>
@@ -27,7 +26,7 @@ export interface IWorkspaceInviteController {
 	createInvite: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	deleteInvite: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	confirmInvite?: (req: IRequest, res: IResponse, next: INext) => Promise<any>
-	updateInvite?: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	updateInvite: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	getPendingInvites: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	getConfirmedInvites: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	rejectInvite: (req: IRequest, res: IResponse, next: INext) => Promise<any>

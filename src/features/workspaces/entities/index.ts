@@ -1,3 +1,5 @@
-import * as workspace from './workspace';
+import makeCreateWorkspace from './workspace';
 
-export default workspace;
+const createWorkspace = makeCreateWorkspace();
+
+export default createWorkspace;

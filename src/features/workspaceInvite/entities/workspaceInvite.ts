@@ -2,16 +2,16 @@ import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IWorkspaceInvite } from '../models/interfaces';
 
 export default function makeCreateNewWorkspaceInvite() {
-	return ({
-		inviteRole,
+	return function ({
+		inviteRoleId,
 		inviteeEmail,
 		inviteeId,
 		note,
 		status,
 		workspaceId,
-		workspaceOwnerEmail,
-	}: IWorkspaceInvite) => {
-		if (!inviteRole) {
+		workspaceOwnerId,
+	}: IWorkspaceInvite) {
+		if (!inviteRoleId) {
 			throw new ExpressError({
 				message: 'Invite role is required',
 				status: 'error',
@@ -35,7 +35,7 @@ export default function makeCreateNewWorkspaceInvite() {
 				statusCode: 400,
 			});
 		}
-		if (!workspaceOwnerEmail) {
+		if (!workspaceOwnerId) {
 			throw new ExpressError({
 				message: 'Workspace owner email is required',
 				status: 'error',
@@ -45,10 +45,10 @@ export default function makeCreateNewWorkspaceInvite() {
 		}
 
 		return Object.freeze({
-			getInviteRole: () => inviteRole,
+			getInviteRole: () => inviteRoleId,
 			getInviteeEmail: () => inviteeEmail,
 			getInviteStatus: () => (status ? status : 'pending'),
-			getWorkspaceOwnerEmail: () => workspaceOwnerEmail,
+			getWorkspaceOwnerId: () => workspaceOwnerId,
 			getInviteNote: () => note,
 			getWorkspaceId: () => workspaceId,
 			getInviteeId: () => inviteeId,

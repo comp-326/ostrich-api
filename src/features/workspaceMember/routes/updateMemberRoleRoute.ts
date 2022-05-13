@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Router } from 'express';
-import { UserRoleUseCases } from '@ostrich-app-features/workspaceMember/use-cases';
-import { WorkspaceMemberController } from '@ostrich-app-features/workspaceMember/controllers';
-import workspaceMemberRepository from '@ostrich-app-features/workspaceMember/repository';
+import { UserRoleUseCases } from './../use-cases';
+import { WorkspaceMemberController } from './../controllers';
+import workspaceMemberRepository from './../repository';
 
 
 export default function updateMemberRoleRoute(app: Router){
