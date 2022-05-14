@@ -6,20 +6,28 @@ import jwt from 'jsonwebtoken';
 class TokenGEN{
 	// constructor() {}
 
-	public generateToken(payload: JWTPayloadType): string{
+	public generateEncodedToken(payload: JWTPayloadType): string{
 		const token = jwt.sign(payload, environmentConfig.SECRET_KEY, { expiresIn: '270h' });
 		const encryptedToken = CryptoJS.AES.encrypt(token, environmentConfig.ENC_KEY).toString();
 
 		return encryptedToken;
 	}
 
-	public decodeToken(token: string): string{
+	public decodeEncodedToken(token: string): string{
 		const decryptedToken = CryptoJS.AES.decrypt(token, environmentConfig.ENC_KEY).toString(
 			CryptoJS.enc.Utf8
 		);
 
 		return decryptedToken;
 	}
+
+	public generateSimpleToken = async(payload:JWTPayloadType)=>{
+		return jwt.sign(payload, environmentConfig.SECRET_KEY, { expiresIn: '24h' });
+	};
+	
+	public decodeSimpleToken = async(token:string)=>{
+		return jwt.verify(token, environmentConfig.SECRET_KEY);
+	};
 }
 
 export default new TokenGEN();
