@@ -55,6 +55,7 @@ class UserRepository implements IUserRepository{
 	};
 
 	findById = async (id: string) => {
+		
 		const user = await UserModel.findById(id).select('+password');
 
 		return user;

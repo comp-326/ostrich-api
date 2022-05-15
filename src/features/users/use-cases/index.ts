@@ -144,10 +144,29 @@ export class UserUseCase implements IUserUseCases {
 			});
 
 		}
+		const existing = await this.repository.findById(userId);
+		if(!existing){
+			throw new ExpressError({
+				message: 'User not found',
+				status: 'error',
+				statusCode: 404,
+				data: {}
+			});
+		}
+		const { getBio, getEmail, getFirstName, getIsActive,getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc,...userData });
+		const user = await this.repository.updateById(existing._id, {
+			email: getEmail(),
+			isActive: getIsActive(),
+			firstName: getFirstName(),
+			lastName: getLastName(),
+			gender: getGender(),
+			password: getPassword(),
+			bio: getBio(),
+			profilePicture: getProfilePic()
+		});
 
-		const newUserData = await this.repository.updateById(userId, userData);
 
-		return newUserData;
+		return user;
 	};
 
 	listUserById = async (id: string) => {
@@ -169,9 +188,11 @@ export class UserUseCase implements IUserUseCases {
 				data: {}
 			});
 		}
-		const user = await this.repository.findById(id);
+		const user= await this.repository.findById(id);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const {password:_docs,...props}=user._doc;
 
-		return user;
+		return props;
 	};
 
 	listUserByEmail = async (email: string) => {
@@ -196,8 +217,10 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const {password:_do,...props}=user._doc;
 
-		return user;
+		return props;
 	};
 
 	listUsers = async ({ limit, offset }: { limit: number; offset: number; }) => {
@@ -315,7 +338,8 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		const { userId } = tokenGEN.decodeEncodedToken(token) as unknown as JWTPayloadType;
+		const {userId} =await tokenGEN.decodeSimpleToken(token) as unknown as JWTPayloadType;
+		
 		if (!userId) {
 			throw new ExpressError({
 				message: 'Token is invalid',
@@ -382,114 +406,25 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		const { getBio, getEmail, getFirstName, getGender, getIsActive, getIsDelete, getLastName, getPassword, getProfilePic, getRole } = await createUser({ ...existing, password: data.password });
+		console.log(existing);
+		
+		const { getBio, getEmail, getFirstName, getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc, password: data.password });
 		const user = await this.repository.updateById(existing._id, {
 			email: getEmail(),
-			isActive: getIsActive(),
+			isActive: true,
 			firstName: getFirstName(),
 			lastName: getLastName(),
 			gender: getGender(),
 			password: getPassword(),
 			bio: getBio(),
-			isDeleted: getIsDelete(),
-			profilePicture: getProfilePic(),
-			role: getRole()
-		}
-		);
-		const queue = new EventBus('resetPassword');
-		queue.sendToQueue(JSON.stringify({
-			email: user.email,
-			firstName: user.firstName,
-			lastName: user.lastName,
-		}));
-
+			profilePicture: getProfilePic()
+		});
+	
 		return user;
 
 
 	};
 
-	changeUserPassword = async (id: string, data: any) => {
-		if (!id) {
-			throw new ExpressError({
-				message: 'User id not provided',
-				status: 'error',
-				statusCode: 400,
-				data: {
-					userId: id
-				}
-			});
-		}
-		if (!validateMongodbId(id)) {
-			throw new ExpressError({
-				message: 'Please provide a valid user id',
-				status: 'error',
-				statusCode: 400,
-				data: {}
-			});
-		}
-		const existing = await this.repository.findById(id);
-		if (!existing) {
-			throw new ExpressError({
-				message: 'User not found',
-				status: 'error',
-				statusCode: 404,
-				data: {
-				}
-			});
-		}
-		if (existing.isDeleted) {
-			throw new ExpressError({
-				message: 'User account has been deleted',
-				status: 'error',
-				statusCode: 409,
-				data: {
-				}
-			});
-		}
-		if (!data.password) {
-			throw new ExpressError({
-				message: 'Password is required',
-				status: 'warning',
-				statusCode: 400,
-				data: {
-					password: data.password
-				}
-			});
-		}
-		if (data.password !== data.confirmPassword as any) {
-			throw new ExpressError({
-				message: 'Passwords do not match',
-				status: 'warning',
-				statusCode: 400,
-				data: {
-					password: data.password,
-					confirmPassword: data.confirmPassword
-				}
-			});
-		}
-		const { getBio, getEmail, getFirstName, getGender, getIsActive, getIsDelete, getLastName, getPassword, getProfilePic, getRole } = await createUser({ ...existing, password: data.password });
-		const user = await this.repository.updateById(existing._id, {
-			email: getEmail(),
-			isActive: getIsActive(),
-			firstName: getFirstName(),
-			lastName: getLastName(),
-			gender: getGender(),
-			password: getPassword(),
-			bio: getBio(),
-			isDeleted: getIsDelete(),
-			profilePicture: getProfilePic(),
-			role: getRole()
-		}
-		);
-		const queue = new EventBus('resetPassword');
-		queue.sendToQueue(JSON.stringify({
-			email: user.email,
-			firstName: user.firstName,
-			lastName: user.lastName,
-		}));
-
-		return user;
-	};
 
 	softRemoveUser = async (id: string) => {
 		const user = await this.repository.softDeleteUser(id);
@@ -535,14 +470,14 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		const token = await tokenGEN.generateEncodedToken({
-			email: existing.email,
-			userId: existing._id
-		});
-		const queue = new EventBus('sendPasswordResetLink');
+	
+		const queue = new EventBus('resetPassword');
+		const token = await tokenGEN.generateSimpleToken({ userId: existing._id, email: existing.email });
 		queue.sendToQueue(JSON.stringify({
+			name: `${existing.firstName} ${existing.lastName}`,
 			email: existing.email,
 			token
+
 		}));
 
 

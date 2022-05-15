@@ -22,10 +22,12 @@ class TokenGEN{
 	}
 
 	public generateSimpleToken = async(payload:JWTPayloadType)=>{
-		return jwt.sign(payload, environmentConfig.SECRET_KEY, { expiresIn: '24h' });
+		return jwt.sign(payload, environmentConfig.SECRET_KEY, { expiresIn: '24hr' });
 	};
 	
 	public decodeSimpleToken = async(token:string)=>{
+		console.log('\n Decoding \n',token);
+		
 		return jwt.verify(token, environmentConfig.SECRET_KEY);
 	};
 }

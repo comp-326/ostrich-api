@@ -56,7 +56,6 @@ export  interface IUserController {
 	findUserById:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	getAccountActivationLink:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	getPasswordResetLink:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
-	resetAccountPassword:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	activateAccount:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	findUsers:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
 	updateAccount:(req: IRequest, res: IResponse,next:INext) => Promise<any>;
@@ -86,9 +85,6 @@ export interface IUserUseCases {
 			query?: any;
 		}) => Promise<any>;
 		activateUserAccount: (token:string,email: string) => Promise<any>;
-		changeUserPassword: (id:string,
-			data: IUser
-		) => Promise<any>;
 		resetPassword: (token:string,data:{
 			password:string
 			confirmPassword:string
