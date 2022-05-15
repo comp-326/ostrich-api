@@ -27,7 +27,7 @@ const verifyCookie = (req: IRequest, res: IResponse, next: INext) => {
 				data: {}
 			});
 		}
-		const jwtToken = TokenGEN.decodeToken(token);
+		const jwtToken = TokenGEN.decodeEncodedToken(token);
 		if (!jwtToken) {
 			return res.status(401).json({
 				message: 'Please login to access this page',
@@ -66,7 +66,7 @@ export const	loginRequired = async (req: IRequest, res: IResponse, next: INext) 
 				});
 			}
 			const role = await RoleModel.findById(user!.role);
-			const permitted = await role!.hasPermission(Permissions.USER);
+			const permitted =  role!.hasPermission(Permissions.USER);
 			if (!permitted) 
 				return res.sendStatus(403);
 				
@@ -82,7 +82,7 @@ export const adminRequired = async (req: IRequest, res: IResponse, next: INext) 
 		loginRequired(req, res, async () => {
 			const user = await UserModel.findById(req.user.userId);
 			const role = await RoleModel.findById(user!.role);
-			const permitted = await role!.hasPermission(Permissions.ADMIN);
+			const permitted =  role!.hasPermission(Permissions.ADMIN);
 			if (!permitted) 
 				return res.sendStatus(403);
 				

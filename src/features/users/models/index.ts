@@ -61,7 +61,7 @@ const userSchema: mongoose.Schema<IUserDocument> = new mongoose.Schema({
 });
 
 userSchema.statics.findByEmail = async function(email: string){
-	const user = await userModel.findOne({ email });
+	const user = await userModel.findOne({ email }).select('+password');
 
 	return user;
 };
