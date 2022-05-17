@@ -28,7 +28,7 @@ function setEnvironmentVariables(envFilePath: string) {
 	data['REFRESH_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['ENC_KEY'] = crypto.randomBytes(64).toString('hex');
 	data['APP_NAME'] = 'ostrich';
-	data['API_VERSION'] = '/api/v1';
+	data['API_PREFIX'] = '/api/v1';
 	data['HOST'] = 'localhost';
 	data[
 		'DATABASE_URL'

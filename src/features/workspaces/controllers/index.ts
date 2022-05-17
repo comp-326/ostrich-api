@@ -84,6 +84,8 @@ class FolderController implements IWorkspaceController {
 
 		return response;
 	};
+
+	
 }
 
 export default FolderController;
