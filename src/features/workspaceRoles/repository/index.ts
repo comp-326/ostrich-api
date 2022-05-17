@@ -1,22 +1,22 @@
 import { IUserRoleRepository } from './../interfaces';
-import UserRoleModel from './../models';
+import workspaceRoleModel from './../models';
 
 class UserRoleRepository implements IUserRoleRepository{
 	findByName = async (name: string) => {
-		const role = await UserRoleModel.findOne({ name });
+		const role = await workspaceRoleModel.findOne({ name });
 		if (role) return role;
 
 		return null;
 	};
 
 	createRoles = async () => {
-		const roles = await UserRoleModel.InsertRoles();
+		const roles = await workspaceRoleModel.InsertRoles();
 
 		return roles;
 	};
 
 	findRoles = async () => {
-		const roles = await UserRoleModel.find({});
+		const roles = await workspaceRoleModel.find({});
 
 		return roles;
 	};

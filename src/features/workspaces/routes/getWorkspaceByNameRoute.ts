@@ -11,6 +11,6 @@ export  function getWorkspaceByNameRoute(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-		workspaceRouter.post('/find/:name', loginRequired,controller.findByName);
+		workspaceRouter.get('/find/:name', loginRequired,controller.findByName);
 	};
 }

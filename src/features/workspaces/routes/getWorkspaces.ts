@@ -11,6 +11,6 @@ export  function getWorkspaces(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-		workspaceRouter.post('/find/all', adminRequired,controller.findWorkspaces);
+		workspaceRouter.get('/find/all', adminRequired,controller.findWorkspaces);
 	};
 }
