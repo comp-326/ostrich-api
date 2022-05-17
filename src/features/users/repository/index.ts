@@ -17,34 +17,18 @@ class UserRepository implements IUserRepository{
 
 	createUser = async (userData: IUser) => {
 		const role = await UserRoleModel.getDefaultRole();
-		if (role) {
-			const profilePicture = await mediaModel.create({
-				type: 'profile',
-				url: generateGravatarUrl(userData.email),
-				uploadId: userData.email,
-				size: 200,
-				mediaType: 'image'
-			});
+		const profilePicture = await mediaModel.create({
+			type: 'profile',
+			url: generateGravatarUrl(userData.email),
+			uploadId: userData.email,
+			size: 200,
+			mediaType: 'image'
+		});
 
 
-			const newUser = await UserModel.create({ ...userData, role, profilePicture });
+		const newUser = await UserModel.create({ ...userData, role, profilePicture });
 
-			return newUser;
-		} else {
-
-			await UserRoleModel.InsertRoles();
-			const defaultRole = await UserRoleModel.getDefaultRole();
-			const profilePicture = await mediaModel.create({
-				type: 'profile',
-				url: generateGravatarUrl(userData.email),
-				uploadId: userData.email,
-				size: 200,
-				mediaType: 'image'
-			});
-			const newUser = await UserModel.create({ ...userData, role: defaultRole, profilePicture });
-
-			return newUser;
-		}
+		return newUser;
 	};
 
 	findByEmail = async (email: string) => {

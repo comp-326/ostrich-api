@@ -1,26 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app-db/mongodb';
-import { IWorkspaceMemberDocument,IWorkspaceMemberDocumentModel} from './interfaces';
+import { IWorkspaceMemberDocument, IWorkspaceMemberDocumentModel } from './interfaces';
 
 const workspaceMemberSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mongoose.Schema({
-	memberEmail:{
-		type:String,
-		required:true,
+	member: {
+		type: mongoose.SchemaTypes.ObjectId,
+		required: true,
+		ref: 'Users'
 
 	},
-	workspaceId:{
-		type:mongoose.SchemaTypes.ObjectId,
-		required:true,
-		ref:'Workspace'
+	workspaceId: {
+		type: mongoose.SchemaTypes.ObjectId,
+		required: true,
+		ref: 'Workspaces'
 	},
-	memberPhone:{
-		type:String,
-		default:''
+	memberEmail: {
+		type: String,
+		required: true
 	},
-	memberRoleId:{
-		type:mongoose.SchemaTypes.ObjectId,
-		required:true,
-		ref:'WorkspaceRole'
+	memberRole: {
+		type: mongoose.SchemaTypes.ObjectId,
+		required: true,
+		ref: 'WorkspaceRoles'
 	}
 
 }, {

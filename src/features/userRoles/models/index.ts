@@ -68,7 +68,6 @@ userRoleSchema.statics.InsertRoles = async function () {
 			Permissions.ADMIN
 		]
 	};
-	console.log('Creating user roles------------------------');
 	const defaultRole = 'User';
 	Object.keys(roles).forEach(async (r) => {
 		let role = await userRoleModel.findOne({ name: r });
