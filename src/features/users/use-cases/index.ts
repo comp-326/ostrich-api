@@ -145,6 +145,7 @@ export class UserUseCase implements IUserUseCases {
 
 		}
 		const existing = await this.repository.findById(userId);
+		
 		if(!existing){
 			throw new ExpressError({
 				message: 'User not found',
@@ -311,6 +312,7 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
+console.log(existing);
 
 		const { getBio, getEmail, getFirstName, getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc, isActive: true });
 		const user = await this.repository.updateById(existing._id, {

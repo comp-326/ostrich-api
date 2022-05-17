@@ -11,6 +11,6 @@ export  function getWorkspaceByIdRoute(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-		workspaceRouter.post('/info/:id',loginRequired, controller.findById);
+		workspaceRouter.get('/info/:id',loginRequired, controller.findById);
 	};
 }
