@@ -102,7 +102,6 @@ workspaceRoleRoleSchema.statics.InsertRoles = async function () {
 			Permissions.ADMIN
 		]
 	};
-	console.log('Creating workspace roles-----');
 
 	const defaultRole = 'member';
 	Object.keys(roles).forEach(async (r) => {
