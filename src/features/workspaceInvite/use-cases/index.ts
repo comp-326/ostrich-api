@@ -44,8 +44,8 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 		return invites;
 	};
 
-	updateExistingInviteById = async (inviteId:string,inviteData:Partial<IWorkspaceInvite>) => {
-		if(!inviteId) {
+	updateExistingInviteById = async (inviteId: string, inviteData: Partial<IWorkspaceInvite>) => {
+		if (!inviteId) {
 			throw new ExpressError(
 				{
 					message: 'Invite id is required',
@@ -54,7 +54,7 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 					statusCode: 400,
 				});
 		}
-		if(!validateMongodbId(inviteId)) {
+		if (!validateMongodbId(inviteId)) {
 			throw new ExpressError(
 				{
 					message: 'Invalid invite id',
@@ -64,7 +64,7 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 				});
 		}
 		const existingInvite = await this.repository.getInviteById(inviteId);
-		if(!existingInvite) {
+		if (!existingInvite) {
 			throw new ExpressError(
 				{
 					message: 'Invite not found',
@@ -73,16 +73,16 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 					statusCode: 404,
 				});
 		}
-		const {getInviteNote,getInviteRole,getInviteStatus,getInviteeEmail,getInviteeId,getWorkspaceId,getWorkspaceOwnerId}=createWorkspaceInvite({...existingInvite._doc, ...inviteData});
+		const { getInviteNote, getInviteRole, getInviteStatus, getInviteeEmail, getInviteeId, getWorkspaceId, getWorkspaceOwnerId } = createWorkspaceInvite({ ...existingInvite._doc, ...inviteData });
 
-		await this.repository.updateInviteById(inviteId,{
-			inviteeEmail:getInviteeEmail(),
-			inviteeId:getInviteeId(),
-			inviteRoleId:getInviteRole(),
-			note:getInviteNote(),
-			status:getInviteStatus(),
-			workspaceId:getWorkspaceId(),
-			workspaceOwnerId:getWorkspaceOwnerId(),
+		await this.repository.updateInviteById(inviteId, {
+			inviteeEmail: getInviteeEmail(),
+			inviteeId: getInviteeId(),
+			inviteRoleId: getInviteRole(),
+			note: getInviteNote(),
+			status: getInviteStatus(),
+			workspaceId: getWorkspaceId(),
+			workspaceOwnerId: getWorkspaceOwnerId(),
 		});
 	};
 
@@ -156,11 +156,31 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 				statusCode: 400
 			});
 		}
-		const { getInviteNote, getInviteRole, getInviteStatus, getInviteeEmail, getInviteeId, getWorkspaceId, getWorkspaceOwnerId } = createInvite({ ...inviteData });
+		const workspaceInviteRole = await this.repository.getWorkspaceRole(inviteData.inviteRoleId);
+		if (!workspaceInviteRole) {
+			throw new ExpressError({
+				message: 'Invalid role',
+				status: 'warning',
+				data: {},
+				statusCode: 400
+			});
+		}
+		const {
+			getInviteNote,
+			getInviteRole,
+			getInviteStatus,
+			getInviteeEmail,
+			getInviteeId,
+			getWorkspaceId,
+			getWorkspaceOwnerId
+		} = createInvite({
+			...inviteData,
+			inviteRoleId: workspaceInviteRole._id
+		});
 		const inviteWorkspace = await this.repository.getInviteWorkspace(getWorkspaceId());
 
 		// Send email to the new invitee
-		const inviteeQueue = new EventBus('workspaceInviteeQueue');
+		const inviteeQueue = new EventBus('inviteUserToWorkspace');
 		inviteeQueue.sendToQueue(JSON.stringify({
 			inviteeEmail: getInviteeEmail(),
 			note: getInviteNote(),
@@ -168,7 +188,7 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 			workspaceLogo: inviteWorkspace.logo,
 		}));
 		// aSend email to the workspace owner
-		const workspaceOwnerQueue = new EventBus('workspaceOwnerInviteQueue');
+		const workspaceOwnerQueue = new EventBus('ownerInviteUserToWorkspace');
 		workspaceOwnerQueue.sendToQueue(JSON.stringify({
 			workspaceOwnerEmail: getWorkspaceOwnerId(),
 			workspaceName: inviteWorkspace.name,

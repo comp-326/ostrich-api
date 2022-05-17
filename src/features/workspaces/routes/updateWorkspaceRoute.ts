@@ -11,6 +11,6 @@ export  function updateWorkspaceRoute(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-		workspaceRouter.post('/workspace/update/:id', loginRequired,controller.updateWorkspace);
+		workspaceRouter.put('/workspace/update/:id', loginRequired,controller.updateWorkspace);
 	};
 }

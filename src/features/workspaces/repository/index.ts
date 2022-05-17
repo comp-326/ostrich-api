@@ -5,11 +5,12 @@ import { IWorkspaceRepository } from '@ostrich-app-features/workspaces/interface
 import WorkspaceModel from '@ostrich-app-features/workspaces/models';
 import { generateGravatarUrl } from '@ostrich-app-common/gravatar';
 import mediaModel from '@ostrich-app-features/media/models';
+import workspaceRoleModel from '@ostrich-app-features/workspaceRoles/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
 	findAll = async (limit: number, page: number) => {
 
-		return {limit,page};
+		return { limit, page };
 	};
 
 	findUserWorkspaces = async (
@@ -17,7 +18,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-		return {userId,limit,page};
+		return { userId, limit, page };
 	};
 
 	findByName = async (name: string) => {
@@ -103,14 +104,25 @@ class WorkspaceRepository implements IWorkspaceRepository {
 	createWorkspace = async (data: IWorkspace) => {
 		const logo = await mediaModel.create({
 			type: 'logo',
-			mediaType:'image',
-			size:200,
-			uploadId:data.name,
-			url:generateGravatarUrl(data.name),
+			mediaType: 'image',
+			size: 200,
+			uploadId: data.name,
+			url: generateGravatarUrl(data.name),
 		});
-		const newWorkspace = await WorkspaceModel.create({ ...data,logo });
+		const newWorkspace = await WorkspaceModel.create({ ...data, logo });
 
 		return newWorkspace;
+	};
+
+
+	getWorkspace = async (workspaceId: string) => {
+		return await WorkspaceModel.findById(workspaceId);
+	};
+
+	getWorkspaceAdminRole=async () => {
+		if(!(await workspaceRoleModel.getDefaultRole()))
+			return;
+		
 	};
 }
 

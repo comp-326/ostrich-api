@@ -9,6 +9,7 @@ export interface IWorkspaceMemberUseCase {
 	listMembers: (workspaceId:string,limit:number,page:number) => Promise<any>
 	listIndividualMember: (memberId:string) => Promise<any>
 	listMemberByRole: (workspaceId:string,roleId:string) => Promise<any>
+	joinWorkspace: (inviteId:string) => Promise<any>
 }
 
 export interface IWorkspaceMemberRepository {
@@ -20,6 +21,9 @@ export interface IWorkspaceMemberRepository {
 	deleteMember: (workspaceMemberId:string) => Promise<any>
 	getWorkspaceOwner: (workspaceOwnerId:string) => Promise<any>
 	getWorkspaceMember: (workspaceMemberId:string) => Promise<any>
+	getWorkspaceMemberInvitation: (inviteId:string) => Promise<any>
+	getWorkspaceRoleById: (roleId:string) => Promise<any>
+	getWorkspaceMemberByEmail: (email:string) => Promise<any>
 }
 
 export interface IWorkspaceMemberController {
@@ -29,4 +33,5 @@ export interface IWorkspaceMemberController {
 	getMember: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	getMembersByRole: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	removeMember: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	joinWorkspace: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }
