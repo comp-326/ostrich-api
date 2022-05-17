@@ -18,6 +18,8 @@ export interface IWorkspaceRepository {
 	updateById: (id: string, data: IWorkspace) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
 	comment: (id: string) => Promise<any>;
+	getWorkspace: (workspaceId:string) => Promise<any>;
+	getWorkspaceAdminRole: () => Promise<any>;
 }
 
 export interface IWorkspaceValidator {

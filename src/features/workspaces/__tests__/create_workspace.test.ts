@@ -1,6 +1,6 @@
+import { DB_URL } from '@ostrich-app-config';
 import { generateGravatarUrl } from '@ostrich-app/common/gravatar';
 import mediaModel from '../../media/models';
-import { mongoConfig } from '@ostrich-app-config';
 import mongoose from '@ostrich-app-db/mongodb';
 import userModel from '../../users/models';
 import userRoleModel from '../../userRoles/models';
@@ -8,7 +8,7 @@ import workspaceModel from '../models';
 
 describe('create workspace', () => {
 	beforeAll(async () => {
-		await mongoose.connect(mongoConfig.TEST_DB_URL, {});
+		await mongoose.connect(DB_URL, {});
 	});
 	afterAll(async () => {
 		await mongoose.connection.dropDatabase();

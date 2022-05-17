@@ -19,7 +19,7 @@ export default function makeCreateNewWorkspaceMember() {
 				statusCode: 400,
 			});
 		}
-		if (!data.memberRoleId) {
+		if (!data.memberRole) {
 			throw new ExpressError({
 				message: 'Role id is required',
 				status: 'warning',
@@ -27,7 +27,7 @@ export default function makeCreateNewWorkspaceMember() {
 				statusCode: 400,
 			});
 		}
-		if (!data.memberId) {
+		if (!data.member) {
 			throw new ExpressError({
 				message: 'Member id is required',
 				data: {},
@@ -37,14 +37,10 @@ export default function makeCreateNewWorkspaceMember() {
 		}
 
 		return Object.freeze({
-			getMemberId: () => data.memberId,
+			getMember: () => data.member,
 			getMemberEmail: () => data.memberEmail,
-			getMemberPhone: () => data.memberPhone,
-			getMemberRoleId: () => data.memberRoleId,
+			getMemberRole: () => data.memberRole,
 			getWorkspaceId: () => data.workspaceId,
-			getWorkspaceOwnerId: () => data.workspaceOwnerId,
-			getWorkspaceOwnerEmail: () => data.workspaceOwnerEmail,
-			getWorkspaceOwnerPhone: () => data.workspaceOwnerPhone,
 		});
 	};
 }

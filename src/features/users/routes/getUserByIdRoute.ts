@@ -12,7 +12,7 @@ export default function getUserByIdRoute(app:Router){
 		const controller = new UserController(userUseCase);
 		const userRouter = Router();
 		app.use(`${pathName}`,userRouter);
-		userRouter.get('/user/:id',loginRequired,controller.findUserById);
+		userRouter.get('/account/profile/:id',loginRequired,controller.findUserById);
 
 	};
 }

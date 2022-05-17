@@ -18,6 +18,7 @@ export interface IWorkspaceInviteRepository {
 	getPending: (workspaceId:string) => Promise<any>
 	getInviteById: (id:string) => Promise<any>
 	confirmInvite: (inviteId:string) => Promise<any>
+	getWorkspaceRole: (roleId:string) => Promise<any>
 	getInviteWorkspace: (workspaceId:string) => Promise<any>
 	getUserInvite: (userEmail:string,workspaceId:string) => Promise<any>
 }

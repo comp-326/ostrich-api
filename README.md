@@ -28,7 +28,13 @@ The above script command should populate the `.env` from the `.env.example` snap
 Check the `.env` file and fill the empty fields
 This will setup the project in the most convenient way for all devs workflow
 
-Once done run:
+After configuring the environment variables run the following to migrate all the app permission schemes
+i.e User roles and Workspace roles
+```sh
+$ migrate:dev:roles
+# OR
+$ migrate:dev:roles
+```
 This is to run the development server
 ```sh
 $ npm run dev
@@ -46,6 +52,13 @@ Run
 $ npm run build
 ```
 This will build the typescript project to js
+After building run the following to migrate all the app permission schemes
+i.e User roles and Workspace roles
+```sh
+$ migrate:prod:roles
+# OR
+$ migrate:prod:roles
+```
 Then...
 ```sh
 $ npm start

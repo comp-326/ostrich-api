@@ -10,7 +10,39 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 	constructor(private readonly repository: IWorkspaceMemberRepository) {
 	}
 
-	listMemberByRole=async (workspaceId: string, roleId: string) => {
+
+	joinWorkspace = async (inviteId: string) => {
+		const existingInvite = await this.repository.getWorkspaceMemberInvitation(inviteId);
+		if (!existingInvite) {
+			throw new ExpressError({
+				message: 'Invite not found',
+				status: 'warning',
+				statusCode: 404,
+				data: {}
+
+			});
+		}
+		const user = await this.repository.getWorkspaceMemberByEmail(existingInvite.inviteeEmail);
+		const workspace = await this.repository.getWorkspace(existingInvite.workspaceId);
+		const role = await this.repository.getWorkspaceRoleById(existingInvite.inviteRoleId);
+		const {
+			getMember,getMemberEmail,getMemberRole,getWorkspaceId
+		} = createNewWorkspaceMember({
+			member: user._id,
+			memberEmail: user.email,
+			memberRole: role._id,
+			workspaceId: workspace._id
+		});
+		const joined = await this.repository.createNewWorkspaceMember({
+			member:getMember(),
+			memberEmail:getMemberEmail(),memberRole:getMemberRole(),
+			workspaceId:getWorkspaceId()
+		});
+
+		return joined;
+	};
+
+	listMemberByRole = async (workspaceId: string, roleId: string) => {
 		return await this.repository.findMembersByRole(workspaceId, roleId);
 	};
 
@@ -18,13 +50,9 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 
 		const {
 			getMemberEmail,
-			getMemberId,
-			getMemberPhone,
-			getMemberRoleId,
+			getMember,
+			getMemberRole,
 			getWorkspaceId,
-			getWorkspaceOwnerEmail,
-			getWorkspaceOwnerId,
-			getWorkspaceOwnerPhone
 		} = createNewWorkspaceMember(memberDetails);
 		if (!validateMongodbId(getWorkspaceId())) {
 			throw new ExpressError({
@@ -34,7 +62,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 				statusCode: 400
 			});
 		}
-		if (!validateMongodbId(getMemberId())) {
+		if (!validateMongodbId(getMember())) {
 			throw new ExpressError({
 				message: 'Invalid member id',
 				data: {},
@@ -42,7 +70,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 				statusCode: 400
 			});
 		}
-		if (!validateMongodbId(getMemberRoleId())) {
+		if (!validateMongodbId(getMemberRole())) {
 			throw new ExpressError({
 				message: 'Invalid member role id',
 				data: {},
@@ -50,7 +78,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 				statusCode: 400
 			});
 		}
-		if (!validateMongodbId(getWorkspaceOwnerId())) {
+		if (!validateMongodbId(getWorkspaceId())) {
 			throw new ExpressError({
 				message: 'Invalid workspace owner id',
 				data: {},
@@ -69,25 +97,13 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 				statusCode: 400
 			});
 		}
-		const existingOwner = await this.repository.getWorkspaceOwner(getWorkspaceOwnerId());
-		if (!existingOwner) {
-			throw new ExpressError({
-				message: 'Workspace owner does not exist',
-				data: {},
-				status: 'warning',
-				statusCode: 400
-			});
-		}
+
 
 		const newMember = await this.repository.createNewWorkspaceMember({
 			workspaceId: getWorkspaceId(),
-			memberId: getMemberId(),
-			memberRoleId: getMemberRoleId(),
+			member: getMember(),
+			memberRole: getMemberRole(),
 			memberEmail: getMemberEmail(),
-			memberPhone: getMemberPhone(),
-			workspaceOwnerId: getWorkspaceOwnerId(),
-			workspaceOwnerEmail: getWorkspaceOwnerEmail(),
-			workspaceOwnerPhone: getWorkspaceOwnerPhone()
 		});
 		// Send email to the member
 		const newMemberQueue = new EventBus('newWorkspaceMemberQueue');
