@@ -17,23 +17,3 @@ export interface IWorkspaceDocumentModel extends mongoose.Model<IWorkspaceDocume
     findWorkspaceById: (id: string) => Promise<any>
 }
 
-const workspaceSchema: mongoose.Schema<IWorkspaceDocument> = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true
-	},
-	ownerId: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-		ref: 'User'
-	},
-	logo: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-		ref: 'Media'
-	}
-}, { timestamps: true });
-
-const workspaceModel: IWorkspaceDocumentModel = mongoose.model<IWorkspaceDocument, IWorkspaceDocumentModel>('Workspace', workspaceSchema);
-
-export default workspaceModel;

@@ -5,6 +5,6 @@ const notificationSchema: mongoose.Schema<any> = new mongoose.Schema({
 	name: String
 });
 
-const notificationModel = mongoose.model<any>('Notification', notificationSchema);
+const notificationModel = mongoose.model<any>('Notifications', notificationSchema);
 
 export default notificationModel;
