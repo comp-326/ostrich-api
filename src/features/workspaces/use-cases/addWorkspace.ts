@@ -11,7 +11,7 @@ export function makeAddWorkspace({
 	repository: IWorkspaceRepository,
 }) {
 	return async (workspaceData: IWorkspace) => {
-		if (!workspaceData.ownerId) {
+		if (!workspaceData.owner) {
 			throw new ExpressError({
 				message: 'OwnerId is required',
 				statusCode: 400,
@@ -19,7 +19,7 @@ export function makeAddWorkspace({
 				data: {},
 			});
 		}
-		if (!validateMongodbId(workspaceData.ownerId)) {
+		if (!validateMongodbId(workspaceData.owner)) {
 			throw new ExpressError({
 				message: 'OwnerId is not valid',
 				statusCode: 400,
@@ -46,24 +46,24 @@ export function makeAddWorkspace({
 				data: {},
 			});
 		}
-		const { getLogo, getName, getOwnerId, getType } = createWorkspace({
+		const { getLogo, getName, getOwner, getType } = createWorkspace({
 			logo: workspaceData.logo,
 			name: workspaceData.name,
-			ownerId: workspaceData.ownerId,
+			owner: workspaceData.owner,
 			type: workspaceData.type,
 		});
 		const res = await repository.createWorkspace({
 			logo: getLogo(),
 			name: getName(),
-			ownerId: getOwnerId(),
+			owner: getOwner(),
 			type: getType(),
 		});
 		const role = await repository.getWorkspaceAdminRole();
-		const workspaceMember = await workspaceMemberFactory()(
-			role._id,
-			workspaceData.ownerId,
-			res._id,
-		);
+		const workspaceMember = await workspaceMemberFactory()({
+			memberEmail: res.owner.email,
+			roleId: role,
+			workspaceId: res._id,
+		});
 		await repository.createWorkspaceAdminMember(workspaceMember);
 
 		return res;

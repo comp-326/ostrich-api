@@ -17,9 +17,9 @@ const workspaceSchema: mongoose.Schema<IWorkspaceDocument> =
 			required: true,
 			ref: 'Media',
 		},
-		ownerId: {
+		owner: {
 			type: mongoose.SchemaTypes.ObjectId,
-			ref: 'User',
+			ref: 'Users',
 			required: true,
 		},
 		type: {
