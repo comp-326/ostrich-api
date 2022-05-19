@@ -42,7 +42,7 @@ const userRoleSchema: mongoose.Schema<IWorkspaceInviteDocument> = new mongoose.S
 	timestamps: true
 });
 
-const workspaceInviteModel = mongoose.model<IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel>('WorkspaceInvite', userRoleSchema);
+const workspaceInviteModel = mongoose.model<IWorkspaceInviteDocument, IWorkspaceInviteDocumentModel>('WorkspaceInvites', userRoleSchema);
 
 
 export default workspaceInviteModel;

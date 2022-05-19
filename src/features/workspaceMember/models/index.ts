@@ -28,7 +28,7 @@ const workspaceMemberSchema: mongoose.Schema<IWorkspaceMemberDocument> = new mon
 	timestamps: true
 });
 
-const workspaceMemberModel = mongoose.model<IWorkspaceMemberDocument, IWorkspaceMemberDocumentModel>('WorkspaceMember', workspaceMemberSchema);
+const workspaceMemberModel = mongoose.model<IWorkspaceMemberDocument, IWorkspaceMemberDocumentModel>('WorkspaceMembers', workspaceMemberSchema);
 
 
 export default workspaceMemberModel;

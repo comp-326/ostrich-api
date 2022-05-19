@@ -8,6 +8,6 @@ const standoutSchema: mongoose.Schema<any> = new mongoose.Schema({
 	},
 });
 
-const standoutModel = mongoose.model('Standout', standoutSchema);
+const standoutModel = mongoose.model('Standouts', standoutSchema);
 
 export default standoutModel;
