@@ -17,10 +17,17 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		workspaceMemberData: IWorkspaceMember,
 	) => {
 		return await workspaceRoleModel.findOne({ name: 'admin' });
+<<<<<<< HEAD
 
 		return await workspaceMemberModel.create({ ...workspaceMemberData });
 	};
 
+=======
+
+		return await workspaceMemberModel.create({ ...workspaceMemberData });
+	};
+
+>>>>>>> 7f899da1c1dff6f94e1c6d9b0fbdd66c0e76b982
 	findAll = async (limit: number, page: number) => {
 		return { limit, page };
 	};
@@ -93,6 +100,34 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		return true;
 	};
 
+<<<<<<< HEAD
+	comment = async (id: string) => {
+		return { id };
+	};
+
+
+	move = async (destinationWorkspace: string, folderId: string) => {
+		const movedWorkspace = await WorkspaceModel.findByIdAndUpdate(
+			folderId,
+			{
+				workspace: destinationWorkspace,
+			},
+		);
+
+		return movedWorkspace;
+	};
+
+	copy = async (destinationWorkspace: string, folderData: IWorkspace) => {
+		const copiedWorkspace = await WorkspaceModel.create({
+			...folderData,
+			workspace: destinationWorkspace,
+		});
+
+		return copiedWorkspace;
+	};
+
+=======
+>>>>>>> 7f899da1c1dff6f94e1c6d9b0fbdd66c0e76b982
 	createWorkspace = async (data: IWorkspace) => {
 		const logo = await mediaModel.create({
 			type: 'logo',

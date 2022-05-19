@@ -1,3 +1,4 @@
+import { environmentConfig } from '@ostrich-app-config';
 import userRoleModel from '@ostrich-app/features/userRoles/models';
 import workspaceRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
@@ -17,6 +18,9 @@ class RoleMigrator {
 	migrate = async () => {
 		await this.migrateUserPermissions();
 		await this.migrateWorkspacePermissions();
+
+		console.log(`Role migration successful----${environmentConfig.NODE_ENV}`);
+
 	};
 
 
