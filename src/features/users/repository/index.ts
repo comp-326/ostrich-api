@@ -12,7 +12,8 @@ import workspaceInviteModel from '@ostrich-app-features/workspaceInvite/models';
 import { workspaceMemberFactory } from '@ostrich-app-factories/workspaceMember';
 import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 import workspaceModel from '@ostrich-app/features/workspaces/models';
-class UserRepository implements IUserRepository{
+
+class UserRepository implements IUserRepository {
 
 	softDeleteUser = async (id: string) => {
 		const user = await UserModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
@@ -40,9 +41,11 @@ class UserRepository implements IUserRepository{
 		});
 		if (invite) {
 			const member = await workspaceMemberFactory()(
-				invite.inviteRoleId,
-				userData.email,
-				invite.workspaceId,
+				{
+					memberEmail: newUser._doc.email,
+					roleId: invite.inviteRoleId,
+					workspaceId: invite.workspaceId
+				}
 			);
 			await workspaceMemberModel.create({
 				...member,
@@ -50,36 +53,35 @@ class UserRepository implements IUserRepository{
 			const workspace = await workspaceModel.findById(invite.workspaceId)
 				.populate('logo', 'url -_id')
 				.populate('owner', 'email -_id') as unknown as any;
-			const queue=new EventBus(appEvents.memberJoinWorkspace);
+			const queue = new EventBus(appEvents.memberJoinWorkspace);
 			queue.sendToQueue(JSON.stringify({
 				email: userData.email,
 				workspaceId: invite.workspaceId,
 				workspaceName: workspace!.name,
 			}));
-			const queue2=new EventBus(appEvents.ownerMemberJoinWorkspace);
+			const queue2 = new EventBus(appEvents.ownerMemberJoinWorkspace);
 			queue2.sendToQueue(JSON.stringify({
-				email:workspace?.owner!.email,
-				memberName:`${userData.firstName} ${userData.lastName}`,
-				time:new Date().getTime(),
+				email: workspace?.owner!.email,
+				memberName: `${userData.firstName} ${userData.lastName}`,
+				time: new Date().getTime(),
 			}));
 
 
 		}
 
-		const newUser = await UserModel.create({ ...userData, role, profilePicture });
 
 		return newUser;
 	};
 
 	findByEmail = async (email: string) => {
 
-		const user = await UserModel.findByEmail(email );
+		const user = await UserModel.findByEmail(email);
 
 		return user;
 	};
 
 	findById = async (id: string) => {
-		
+
 		const user = await UserModel.findById(id).select('+password');
 
 		return user;
