@@ -2,6 +2,7 @@ import EventBus from '@ostrich-app/services/eventBus';
 import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IUser } from '../models/interfaces';
 import { IUserRepository } from '../interfaces';
+import { appEvents } from '@ostrich-app/constants/events';
 import entity from './../entities';
 import tokenGEN from '@ostrich-app/utils/jwt/tokenGEN';
 
@@ -20,7 +21,7 @@ export  function makeAddNewUser({ repository }: { repository: IUserRepository })
 
 			});
 		}
-		const queue = new EventBus('activateAccount');
+		const queue = new EventBus(appEvents.activateAccount);
 		const user = await repository.createUser({
 			email: getEmail(),
 			firstName: getFirstName(),
