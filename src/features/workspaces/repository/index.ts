@@ -9,19 +9,19 @@ import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 import workspaceRoleModel from '@ostrich-app-features/workspaceRoles/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
-
 	getWorspaceAdminRole = async () => {
-		const role = await workspaceRoleModel.findOne({ name: 'admin' });
+		return await workspaceRoleModel.findOne({ name: 'admin' });
 	};
 
-	createWorkspaceAdminMember = async (workspaceMemberData: IWorkspaceMember) => {
-		const adminRole = await workspaceRoleModel.findOne({ name: 'admin' });
+	createWorkspaceAdminMember = async (
+		workspaceMemberData: IWorkspaceMember,
+	) => {
+		return await workspaceRoleModel.findOne({ name: 'admin' });
 
-		return await workspaceMemberModel.create({ ...workspaceMemberData, });
+		return await workspaceMemberModel.create({ ...workspaceMemberData });
 	};
 
 	findAll = async (limit: number, page: number) => {
-
 		return { limit, page };
 	};
 
@@ -30,10 +30,11 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-
 		return await WorkspaceModel.find({
-
-		});
+			_id: userId,
+		})
+			.limit(limit)
+			.skip((page - 1) * limit);
 	};
 
 	findByName = async (name: string) => {
@@ -92,34 +93,6 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		return true;
 	};
 
-	comment = async (id: string) => {
-		return { id };
-	};
-
-	like = async (userId: string, id: string) => {
-		return {};
-	};
-
-	move = async (destinationWorkspace: string, folderId: string) => {
-		const movedWorkspace = await WorkspaceModel.findByIdAndUpdate(
-			folderId,
-			{
-				workspace: destinationWorkspace,
-			},
-		);
-
-		return movedWorkspace;
-	};
-
-	copy = async (destinationWorkspace: string, folderData: IWorkspace) => {
-		const copiedWorkspace = await WorkspaceModel.create({
-			...folderData,
-			workspace: destinationWorkspace,
-		});
-
-		return copiedWorkspace;
-	};
-
 	createWorkspace = async (data: IWorkspace) => {
 		const logo = await mediaModel.create({
 			type: 'logo',
@@ -133,15 +106,12 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		return newWorkspace;
 	};
 
-
 	getWorkspace = async (workspaceId: string) => {
 		return await WorkspaceModel.findById(workspaceId);
 	};
 
 	getWorkspaceAdminRole = async () => {
-		if (!(await workspaceRoleModel.getDefaultRole()))
-			return;
-
+		if (!(await workspaceRoleModel.getDefaultRole())) return;
 	};
 }
 
