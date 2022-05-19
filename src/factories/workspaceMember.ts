@@ -8,8 +8,9 @@ import workspaceModel from '@ostrich-app/features/workspaces/models';
 import workspaceRoleRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
 export function workspaceMemberFactory() {
-	return async (roleId: string, memberEmail: string, workspaceId: string) => {
-      
+	return async (props:{roleId: string, memberEmail: string, workspaceId: string}) => {
+		const {memberEmail,roleId,workspaceId}=props;
+		
 		if (!roleId) {
 			throw new ExpressError({
 				message: 'Role is required',
@@ -68,6 +69,7 @@ export function workspaceMemberFactory() {
 		const member = await userModel.findOne({
 			email: memberEmail,
 		});
+		
 		const workspace = await workspaceModel.findById(workspaceId);
 		const role = await workspaceRoleRoleModel.findById(roleId)!;
 		const { getMember, getMemberEmail, getMemberRole, getWorkspaceId } = createNewWorkspaceMember({

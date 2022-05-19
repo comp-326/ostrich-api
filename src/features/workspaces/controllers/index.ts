@@ -58,7 +58,7 @@ class FolderController implements IWorkspaceController {
 
 	createWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			req.body.ownerId = req.user.userId;
+			req.body.owner = req.user.userId;
 			
 			await this.useCase.addWorkspace(req.body);
 

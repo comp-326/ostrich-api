@@ -12,7 +12,7 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 	constructor(private readonly repository: IWorkspaceRepository) { }
 
 	addWorkspace = async (workspaceData: IWorkspace) => {
-		if (!workspaceData.ownerId) {
+		if (!workspaceData.owner) {
 			throw new ExpressError({
 				message: 'OwnerId is required',
 				statusCode: 400,
@@ -20,7 +20,7 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 				data: {},
 			});
 		}
-		if (!validateMongodbId(workspaceData.ownerId)) {
+		if (!validateMongodbId(workspaceData.owner)) {
 			throw new ExpressError({
 				message: 'OwnerId is not valid',
 				statusCode: 400,
@@ -47,23 +47,24 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 				data: {},
 			});
 		}
-		const { getLogo, getName, getOwnerId, getType } = createWorkspace({
+		const { getLogo, getName, getOwner, getType } = createWorkspace({
 			logo: workspaceData.logo,
 			name: workspaceData.name,
-			ownerId: workspaceData.ownerId,
+			owner: workspaceData.owner,
 			type: workspaceData.type,
 		});
 		const res = await this.repository.createWorkspace({
 			logo: getLogo(),
 			name: getName(),
-			ownerId: getOwnerId(),
+			owner: getOwner(),
 			type: getType(),
 		});
 		const role = await this.repository.getWorkspaceAdminRole();
+		
 		const workspaceMember = await workspaceMemberFactory()(
-			role._id,
-			workspaceData.ownerId,
-			res._id,
+			{
+				memberEmail:res.owner.email,roleId:role,workspaceId:res.id,
+			}
 		);
 		await this.repository.createWorkspaceAdminMember(workspaceMember);
 
@@ -102,13 +103,13 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 				data: {},
 			});
 		}
-		const { getLogo, getName, getOwnerId, getType } = createWorkspace({
+		const { getLogo, getName, getOwner, getType } = createWorkspace({
 			...existing._doc, ...workspaceData
 		});
 		const res = await this.repository.updateById(workspaceId, {
 			logo: getLogo(),
 			name: getName(),
-			ownerId: getOwnerId(),
+			owner: getOwner(),
 			type: getType(),
 		});
 

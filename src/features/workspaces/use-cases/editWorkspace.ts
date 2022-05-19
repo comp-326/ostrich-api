@@ -31,13 +31,13 @@ export function makeEditWorkspace({ repository }: { repository: IWorkspaceReposi
 				data: {},
 			});
 		}
-		const { getLogo, getName, getOwnerId, getType } = createWorkspace({
+		const { getLogo, getName, getOwner, getType } = createWorkspace({
 			...existing._doc, ...workspaceData
 		});
 		const res = await repository.updateById(workspaceId, {
 			logo: getLogo(),
 			name: getName(),
-			ownerId: getOwnerId(),
+			owner: getOwner(),
 			type: getType(),
 		});
 

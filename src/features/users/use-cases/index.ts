@@ -313,7 +313,6 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		console.log(existing);
 
 		const { getBio, getEmail, getFirstName, getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc, isActive: true });
 		const user = await this.repository.updateById(existing._id, {
@@ -409,7 +408,6 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		console.log(existing);
 		
 		const { getBio, getEmail, getFirstName, getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc, password: data.password });
 		const user = await this.repository.updateById(existing._id, {
