@@ -4,7 +4,7 @@ import createNewWorkspaceMember from '@ostrich-app/features/workspaceMember/enti
 import userModel from '@ostrich-app/features/users/models';
 import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
 import  workspaceMemberModel  from '@ostrich-app-features/workspaceMember/models';
-import workspaceModel from '@ostrich-app/features/workspaces/models/interfaces';
+import workspaceModel from '@ostrich-app/features/workspaces/models';
 import workspaceRoleRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
 export function workspaceMemberFactory() {
