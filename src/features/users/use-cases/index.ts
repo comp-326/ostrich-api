@@ -3,6 +3,7 @@ import EventBus from '@ostrich-app/services/eventBus';
 import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
 import { IUser } from '@ostrich-app-features/users/models/interfaces';
 import { JWTPayloadType } from '@ostrich-app/common/types';
+import { appEvents } from '@ostrich-app/constants/events';
 import createUser from '@ostrich-app-features/users/entities';
 import { deleteFile } from '@ostrich-app-utils/fileSystem';
 import entity from '@ostrich-app-features/users/entities';
@@ -55,7 +56,7 @@ export class UserUseCase implements IUserUseCases {
 
 			});
 		}
-		const queue = new EventBus('activateAccount');
+		const queue = new EventBus(appEvents.activateAccount);
 		const user = await this.repository.createUser({
 			email: getEmail(),
 			firstName: getFirstName(),

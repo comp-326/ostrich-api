@@ -1,6 +1,7 @@
 import EventBus from '@ostrich-app/services/eventBus';
 import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IUserRepository } from '@ostrich-app-features/users/interfaces';
+import { appEvents } from '@ostrich-app/constants/events';
 import tokenGEN from '@ostrich-app/utils/jwt/tokenGEN';
 
 export function makeSendAccountActivationLink({ repository }: { repository: IUserRepository }) {
@@ -35,7 +36,7 @@ export function makeSendAccountActivationLink({ repository }: { repository: IUse
 				}
 			});
 		}
-		const queue = new EventBus('activateAccount');
+		const queue = new EventBus(appEvents.activateAccount);
 		const token = await tokenGEN.generateSimpleToken({ userId: existing._id, email: existing.email });
 		queue.sendToQueue(JSON.stringify({
 			name: `${existing.firstName} ${existing.lastName}`,
