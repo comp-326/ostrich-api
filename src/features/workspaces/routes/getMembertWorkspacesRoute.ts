@@ -11,10 +11,6 @@ export  function getMembertWorkspacesRoute(app: Router) {
 		const controller = new workspaceController(workspaceUseCase);
 		const workspaceRouter = Router();
 		app.use(`${pathName}`, workspaceRouter);
-<<<<<<< HEAD
-		workspaceRouter.post('/find/member/:userId', loginRequired,controller.findUserWorkspaces);
-=======
 		workspaceRouter.get('/find/member', loginRequired,controller.findUserWorkspaces);
->>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 	};
 }

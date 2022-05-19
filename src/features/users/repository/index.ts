@@ -6,17 +6,11 @@ import UserModel from '@ostrich-app-features/users/models';
 import UserRoleModel from '@ostrich-app-features/userRoles/models';
 import { generateGravatarUrl } from '@ostrich-app-common/gravatar';
 import mediaModel from '@ostrich-app-features/media/models';
-import workspaceInviteModel from '@ostrich-app-features/workspaceInvite/models';
-import { workspaceMemberFactory } from '@ostrich-app-factories/workspaceMember';
-import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 
-class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository{
+
 	softDeleteUser = async (id: string) => {
-		const user = await UserModel.findByIdAndUpdate(
-			id,
-			{ isDeleted: true },
-			{ new: true },
-		);
+		const user = await UserModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
 
 		return user;
 	};
@@ -28,47 +22,24 @@ class UserRepository implements IUserRepository {
 			url: generateGravatarUrl(userData.email),
 			uploadId: userData.email,
 			size: 200,
-<<<<<<< HEAD
 			mediaType: 'image'
 		});
 
 
 		const newUser = await UserModel.create({ ...userData, role, profilePicture });
-=======
-			mediaType: 'image',
-		});
-
-		const newUser = await UserModel.create({
-			...userData,
-			role,
-			profilePicture,
-		});
-		const invite = await workspaceInviteModel.findOne({
-			email: userData.email,
-			status: 'pending',
-		});
-		if (invite) {
-			const member = await workspaceMemberFactory()(
-				invite.inviteRoleId,
-				userData.email,
-				invite.workspaceId,
-			);
-			await workspaceMemberModel.create({
-				...member,
-			});
-		}
->>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 
 		return newUser;
 	};
 
 	findByEmail = async (email: string) => {
-		const user = await UserModel.findByEmail(email);
+
+		const user = await UserModel.findByEmail(email );
 
 		return user;
 	};
 
 	findById = async (id: string) => {
+		
 		const user = await UserModel.findById(id).select('+password');
 
 		return user;
@@ -87,7 +58,7 @@ class UserRepository implements IUserRepository {
 		const updated = await UserModel.findByIdAndUpdate(
 			id,
 			{ ...data },
-			{ new: true },
+			{ new: true }
 		).select('+password');
 
 		return updated;
