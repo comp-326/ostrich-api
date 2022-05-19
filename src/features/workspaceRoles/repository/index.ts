@@ -10,15 +10,13 @@ class UserRoleRepository implements IUserRoleRepository{
 	};
 
 	createRoles = async () => {
-		const roles = await workspaceRoleModel.InsertRoles();
-
-		return roles;
+		return await workspaceRoleModel.InsertRoles();
+		
 	};
 
 	findRoles = async () => {
-		const roles = await workspaceRoleModel.find({});
+		return await workspaceRoleModel.find({});
 
-		return roles;
 	};
 
 }
