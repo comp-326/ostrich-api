@@ -13,20 +13,12 @@ class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 		return await workspaceInviteModel.findById(inviteId);
 	};
 
-	getWorkspaceRoleById=async (roleId: string) =>{
-		return await 	workspaceRoleModel.findById(roleId);
-	};
 
 	getWorkspaceMemberByEmail=async (email: string) => {
 		return userModel.findByEmail(email);
 	};
 
-	getWorkspaceMember=async(workspaceMemberId: string) => {
-
-	getWorkspaceMemberInvitation = async (inviteId: string) => {
-		return await workspaceInviteModel.findById(inviteId);
-	};
-
+	
 	confirmInvite = async (inviteId: string) => {
 		return await workspaceInviteModel.findByIdAndUpdate(
 			inviteId,
@@ -45,9 +37,6 @@ class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 		return await workspaceInviteModel.findById(inviteId);
 	};
 
-	getWorkspaceMemberByEmail = async (email: string) => {
-		return userModel.findByEmail(email);
-	};
 
 	getWorkspaceMember = async (workspaceMemberId: string) => {
 		return await workspaceMemberModel.findById(workspaceMemberId);
