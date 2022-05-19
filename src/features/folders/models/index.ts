@@ -5,6 +5,6 @@ const folderSchema:mongoose.Schema<any>=new mongoose.Schema({
 	name:String
 });
 
-const folderModel = mongoose.model<any>('Folder',folderSchema);
+const folderModel = mongoose.model<any>('Folders',folderSchema);
 
 export default folderModel;

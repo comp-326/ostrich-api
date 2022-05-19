@@ -30,7 +30,7 @@ const workspaceSchema: mongoose.Schema<IWorkspaceDocument> =
 	});
 
 const workspaceModel= mongoose.model<IWorkspaceDocument,IWorkspaceDocumentModel>(
-	'Workspace',
+	'Workspaces',
 	workspaceSchema,
 );
 

@@ -44,25 +44,6 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 		const user = await this.repository.getWorkspaceMemberByEmail(existingInvite.inviteeEmail);
 		const workspace = await this.repository.getWorkspace(existingInvite.workspaceId);
 		const role = await this.repository.getWorkspaceRoleById(existingInvite.inviteRoleId);
-
-
-		const {
-			getMember,getMemberEmail,getMemberRole,getWorkspaceId
-		} = createNewWorkspaceMember({
-			member: user._id,
-			memberEmail: user.email,
-			memberRole: role._id,
-			workspaceId: workspace._id
-		});
-		const joined = await this.repository.createNewWorkspaceMember({
-			member:getMember(),
-			memberEmail:getMemberEmail(),memberRole:getMemberRole(),
-			workspaceId:getWorkspaceId()
-		});
-		const newMember = await workspaceMemberFactory()(role._id,user.email, workspace._id);
-		const joined = await this.repository.createNewWorkspaceMember(newMember);
-		await this.repository.confirmInvite(inviteId);
-
 		const newMember = await workspaceMemberFactory()(role._id,user.email, workspace._id);
 		const joined = await this.repository.createNewWorkspaceMember(newMember);
 		await this.repository.confirmInvite(inviteId);
