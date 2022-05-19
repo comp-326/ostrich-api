@@ -12,14 +12,10 @@ import workspaceInviteModel from '@ostrich-app-features/workspaceInvite/models';
 import { workspaceMemberFactory } from '@ostrich-app-factories/workspaceMember';
 import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 import workspaceModel from '@ostrich-app/features/workspaces/models';
+class UserRepository implements IUserRepository{
 
-class UserRepository implements IUserRepository {
 	softDeleteUser = async (id: string) => {
-		const user = await UserModel.findByIdAndUpdate(
-			id,
-			{ isDeleted: true },
-			{ new: true },
-		);
+		const user = await UserModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
 
 		return user;
 	};
@@ -31,9 +27,8 @@ class UserRepository implements IUserRepository {
 			url: generateGravatarUrl(userData.email),
 			uploadId: userData.email,
 			size: 200,
-			mediaType: 'image',
+			mediaType: 'image'
 		});
-
 		const newUser = await UserModel.create({
 			...userData,
 			role,
@@ -71,16 +66,20 @@ class UserRepository implements IUserRepository {
 
 		}
 
+		const newUser = await UserModel.create({ ...userData, role, profilePicture });
+
 		return newUser;
 	};
 
 	findByEmail = async (email: string) => {
-		const user = await UserModel.findByEmail(email);
+
+		const user = await UserModel.findByEmail(email );
 
 		return user;
 	};
 
 	findById = async (id: string) => {
+		
 		const user = await UserModel.findById(id).select('+password');
 
 		return user;
@@ -99,7 +98,7 @@ class UserRepository implements IUserRepository {
 		const updated = await UserModel.findByIdAndUpdate(
 			id,
 			{ ...data },
-			{ new: true },
+			{ new: true }
 		).select('+password');
 
 		return updated;

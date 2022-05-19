@@ -16,8 +16,6 @@ class WorkspaceRepository implements IWorkspaceRepository {
 	createWorkspaceAdminMember = async (
 		workspaceMemberData: IWorkspaceMember,
 	) => {
-		return await workspaceRoleModel.findOne({ name: 'admin' });
-
 		return await workspaceMemberModel.create({ ...workspaceMemberData });
 	};
 

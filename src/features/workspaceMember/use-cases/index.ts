@@ -13,6 +13,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 
 
 	joinWorkspace = async (inviteId: string) => {
+
 		if(!inviteId) {
 			throw new ExpressError({
 				message: 'InviteId is required',
@@ -29,6 +30,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 				data: {},
 			});
 		}
+
 		const existingInvite = await this.repository.getWorkspaceMemberInvitation(inviteId);
 		if (!existingInvite) {
 			throw new ExpressError({
