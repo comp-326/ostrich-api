@@ -114,7 +114,6 @@ class UserController implements IUserController{
 
 	activateAccount = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			console.log('Activating account');
 			
 			await this.useCase.activateUserAccount(
 				req.params.token
@@ -149,7 +148,6 @@ class UserController implements IUserController{
 		try{
 
 			const { id } = req.params;
-			console.log(id);
 			
 			await this.useCase.editUserProfile(
 				id,

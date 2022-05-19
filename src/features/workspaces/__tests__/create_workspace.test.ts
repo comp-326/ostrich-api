@@ -22,7 +22,7 @@ describe('create workspace', () => {
 			expect(workspace).toThrow();
 		} catch (error) {
 			expect(error.message).toBe(
-				'Workspace validation failed: type: Path `type` is required., ownerId: Path `ownerId` is required., logo: Path `logo` is required.',
+				'Workspace validation failed: type: Path `type` is required., owner: Path `owner` is required., logo: Path `logo` is required.',
 			);
 		}
 	});
@@ -48,13 +48,13 @@ describe('create workspace', () => {
 		const workspace = await workspaceModel.create({
 			name: 'test',
 			type: 'personal',
-			ownerId: user._id,
+			owner: user._id,
 			logo: media._id,
 		});
 		expect(workspace).toBeDefined();
 		expect(workspace.name).toBe('test');
 		expect(workspace.type).toBe('personal');
-		expect(workspace.ownerId).toBe(user._id);
+		expect(workspace.owner).toBe(user._id);
 		expect(workspace.logo).toBe(media._id);
 	});
 });

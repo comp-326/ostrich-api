@@ -3,7 +3,7 @@ import mongoose from '@ostrich-app-db/mongodb';
 
 export interface IWorkspace {
     name: string
-    ownerId: any
+    owner: any
     logo: any,
 	type:'personal'|'business'|'education'
 }

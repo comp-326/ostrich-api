@@ -9,14 +9,16 @@ import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 import workspaceRoleModel from '@ostrich-app-features/workspaceRoles/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
-	getWorspaceAdminRole = async () => {
-		return await workspaceRoleModel.findOne({ name: 'admin' });
+	getWorkspaceAdminRole = async () => {
+		const role = await workspaceRoleModel.findOne({ name: 'admin' });
+
+		return role!._id.toString();
 	};
 
 	createWorkspaceAdminMember = async (
 		workspaceMemberData: IWorkspaceMember,
 	) => {
-		return await workspaceMemberModel.create({ ...workspaceMemberData });
+		return await workspaceMemberModel.create(workspaceMemberData);
 	};
 
 	findAll = async (limit: number, page: number) => {
@@ -99,17 +101,15 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			uploadId: data.name,
 			url: 'https://www.gravatar.com/avatar/f=y?d=identicon&s=200&r=g&f=y',
 		});
-		const newWorkspace = await WorkspaceModel.create({ ...data, logo });
+		const newWorkspace = await (await WorkspaceModel.create({ ...data, logo }))
+			.populate('owner','-_id email') as any;
+		const id = newWorkspace._id.toString();
 
-		return newWorkspace;
+		return {...newWorkspace._doc,id};
 	};
 
 	getWorkspace = async (workspaceId: string) => {
 		return await WorkspaceModel.findById(workspaceId);
-	};
-
-	getWorkspaceAdminRole = async () => {
-		if (!(await workspaceRoleModel.getDefaultRole())) return;
 	};
 }
 

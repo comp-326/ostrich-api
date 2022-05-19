@@ -21,7 +21,6 @@ export interface IWorkspaceRepository {
 	getWorkspace: (workspaceId:string) => Promise<any>;
 	getWorkspaceAdminRole: () => Promise<any>;
 	createWorkspaceAdminMember: (workspaceMember:IWorkspaceMember) => Promise<any>;
-	getWorspaceAdminRole: () => Promise<any>;
 }
 
 export interface IWorkspaceValidator {
