@@ -11,6 +11,7 @@ import workspaceRoleDomain from '@ostrich-app/features/workspaceRoles';
 import { swaggerServe, swaggerSetup } from '@ostrich-app/utils/docs';
 
 const apiRoute = Router();
+
 export default function () {
 	apiRoute.get('/test', testRoute);
 	apiRoute.use('/docs', swaggerServe, swaggerSetup);

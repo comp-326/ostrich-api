@@ -1,13 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { IWorkspace } from '@ostrich-app-features/workspaces/models/interfaces';
+import { IWorkspaceMember } from '@ostrich-app/features/workspaceMember/models/interfaces';
 import { IWorkspaceRepository } from '@ostrich-app-features/workspaces/interfaces';
 import WorkspaceModel from '@ostrich-app-features/workspaces/models';
-import { generateGravatarUrl } from '@ostrich-app-common/gravatar';
 import mediaModel from '@ostrich-app-features/media/models';
+import workspaceMemberModel from '@ostrich-app-features/workspaceMember/models';
 import workspaceRoleModel from '@ostrich-app-features/workspaceRoles/models';
 
 class WorkspaceRepository implements IWorkspaceRepository {
+
+	getWorspaceAdminRole = async () => {
+		const role = await workspaceRoleModel.findOne({ name: 'admin' });
+	};
+
+	createWorkspaceAdminMember = async (workspaceMemberData: IWorkspaceMember) => {
+		const adminRole = await workspaceRoleModel.findOne({ name: 'admin' });
+
+		return await workspaceMemberModel.create({ ...workspaceMemberData, });
+	};
+
 	findAll = async (limit: number, page: number) => {
 
 		return { limit, page };
@@ -18,7 +30,10 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-		return { userId, limit, page };
+
+		return await WorkspaceModel.find({
+
+		});
 	};
 
 	findByName = async (name: string) => {
@@ -77,9 +92,13 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		return true;
 	};
 
-	comment: (id: string) => Promise<any>;
+	comment = async (id: string) => {
+		return { id };
+	};
 
-	like: (userId: string, id: string) => Promise<any>;
+	like = async (userId: string, id: string) => {
+		return {};
+	};
 
 	move = async (destinationWorkspace: string, folderId: string) => {
 		const movedWorkspace = await WorkspaceModel.findByIdAndUpdate(
@@ -107,7 +126,7 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			mediaType: 'image',
 			size: 200,
 			uploadId: data.name,
-			url: generateGravatarUrl(data.name),
+			url: 'https://www.gravatar.com/avatar/f=y?d=identicon&s=200&r=g&f=y',
 		});
 		const newWorkspace = await WorkspaceModel.create({ ...data, logo });
 
@@ -119,10 +138,10 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		return await WorkspaceModel.findById(workspaceId);
 	};
 
-	getWorkspaceAdminRole=async () => {
-		if(!(await workspaceRoleModel.getDefaultRole()))
+	getWorkspaceAdminRole = async () => {
+		if (!(await workspaceRoleModel.getDefaultRole()))
 			return;
-		
+
 	};
 }
 

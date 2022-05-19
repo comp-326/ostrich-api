@@ -8,19 +8,33 @@ import workspaceModel from '@ostrich-app/features/workspaces/models';
 import workspaceRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
 class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
-	getWorkspaceMemberInvitation=async (inviteId: string) => {
+	getWorkspaceMemberInvitation = async (inviteId: string) => {
 		return await workspaceInviteModel.findById(inviteId);
 	};
 
-	getWorkspaceRoleById=async (roleId: string) =>{
-		return await 	workspaceRoleModel.findById(roleId);
+	confirmInvite = async (inviteId: string) => {
+		return await workspaceInviteModel.findByIdAndUpdate(
+			inviteId,
+			{
+				status: 'confirmed',
+			},
+			{ new: true },
+		);
 	};
 
-	getWorkspaceMemberByEmail=async (email: string) => {
+	getWorkspaceRoleById = async (roleId: string) => {
+		return await workspaceRoleModel.findById(roleId);
+	};
+
+	getInviteById = async (inviteId: string) => {
+		return await workspaceInviteModel.findById(inviteId);
+	};
+
+	getWorkspaceMemberByEmail = async (email: string) => {
 		return userModel.findByEmail(email);
 	};
 
-	getWorkspaceMember=async(workspaceMemberId: string) => {
+	getWorkspaceMember = async (workspaceMemberId: string) => {
 		return await workspaceMemberModel.findById(workspaceMemberId);
 	};
 

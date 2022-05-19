@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from '@ostrich-app-db/mongodb';
+
 export interface IWorkspace {
     name: string
     ownerId: any
@@ -34,4 +35,5 @@ const workspaceSchema: mongoose.Schema<IWorkspaceDocument> = new mongoose.Schema
 }, { timestamps: true });
 
 const workspaceModel: IWorkspaceDocumentModel = mongoose.model<IWorkspaceDocument, IWorkspaceDocumentModel>('Workspace', workspaceSchema);
+
 export default workspaceModel;

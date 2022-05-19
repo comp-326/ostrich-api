@@ -59,6 +59,7 @@
       "@ostrich-app-uploadSDK": ["./src/uploadSDK"],
       "@ostrich-app-uploader": ["./src/uploader"],
       "@ostrich-app-db/*": ["./src/databases/*"],
+      "@ostrich-app-factories/*": ["./src/factories/*"],
       "@ostrich-app-middlewares/*": ["./src/middlewares/*"],
     }
   },

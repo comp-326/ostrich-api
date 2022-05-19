@@ -13,6 +13,7 @@ export type daysType = {
 	initial: any
 	position: number
 }
+
 export interface IAvailabilityRequest {
 	[x: string]: Record<string,any>
 	body: any

@@ -83,4 +83,5 @@ userRoleSchema.statics.InsertRoles = async function () {
 	});
 };
 const userRoleModel = mongoose.model<IUserRoleDocument, IUserRoleDocumentModel>('UserRoles', userRoleSchema);
+
 export default userRoleModel;

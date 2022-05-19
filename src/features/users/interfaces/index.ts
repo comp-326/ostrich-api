@@ -34,6 +34,7 @@ export type PasswordValidatorType = {
 	props: { [x: string]: string };
 	fields: { fieldName: string; name: string }[];
 };
+
 export interface IUserValidator {
 	isValidEmail: (email: string) => boolean;
 	isValidPassword: (body: PasswordValidatorType) => {
@@ -84,7 +85,7 @@ export interface IUserUseCases {
 			offset: number;
 			query?: any;
 		}) => Promise<any>;
-		activateUserAccount: (token:string,email: string) => Promise<any>;
+		activateUserAccount: (token:string) => Promise<any>;
 		resetPassword: (token:string,data:{
 			password:string
 			confirmPassword:string

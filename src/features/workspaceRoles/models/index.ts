@@ -118,4 +118,5 @@ workspaceRoleRoleSchema.statics.InsertRoles = async function () {
 	});
 };
 const workspaceRoleRoleModel = mongoose.model<IWorkspaceRoleDocument, IWorkspaceRoleDocumentModel>('WorkspaceRoles', workspaceRoleRoleSchema);
+
 export default workspaceRoleRoleModel;
