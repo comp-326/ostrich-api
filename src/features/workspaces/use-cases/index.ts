@@ -2,6 +2,7 @@ import { ExpressError } from '@ostrich-app-common/errors/ExpressError';
 import { IWorkspace } from '@ostrich-app-features/workspaces/models/interfaces';
 import createWorkspace from '../entities';
 import validateMongodbId from '@ostrich-app-utils/mongo/ObjectId-validator';
+import { workspaceMemberFactory } from '@ostrich-app/factories/workspaceMember';
 import {
 	IWorkspaceRepository,
 	IWorkspaceUseCases,
@@ -58,6 +59,13 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 			ownerId: getOwnerId(),
 			type: getType(),
 		});
+		const role = await this.repository.getWorkspaceAdminRole();
+		const workspaceMember = await workspaceMemberFactory()(
+			role._id,
+			workspaceData.ownerId,
+			res._id,
+		);
+		await this.repository.createWorkspaceAdminMember(workspaceMember);
 
 		return res;
 	};

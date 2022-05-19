@@ -18,6 +18,7 @@ const DB_URL =
 		ENV.NODE_ENV === 'production'
 			? MONGOOSE.DATABASE_URL
 			: MONGOOSE.TEST_DB_URL;
+
 export {
 	DB_URL,
 	MAIL as mailConfig,
