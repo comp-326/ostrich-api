@@ -1,4 +1,5 @@
 import Alphabet from './alphabet';
+
 /**
  *@param {number} length
  * @returns

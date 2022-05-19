@@ -1,4 +1,5 @@
 import { IWorkspace } from '@ostrich-app-features/workspaces/models/interfaces';
+import { IWorkspaceMember } from '@ostrich-app/features/workspaceMember/models/interfaces';
 import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -17,9 +18,16 @@ export interface IWorkspaceRepository {
 	) => Promise<any>;
 	updateById: (id: string, data: IWorkspace) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
+<<<<<<< HEAD
 	comment: (id: string) => Promise<any>;
 	getWorkspace: (workspaceId:string) => Promise<any>;
 	getWorkspaceAdminRole: () => Promise<any>;
+=======
+	getWorkspace: (workspaceId:string) => Promise<any>;
+	getWorkspaceAdminRole: () => Promise<any>;
+	createWorkspaceAdminMember: (workspaceMember:IWorkspaceMember) => Promise<any>;
+	getWorspaceAdminRole: () => Promise<any>;
+>>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 }
 
 export interface IWorkspaceValidator {

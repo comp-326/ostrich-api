@@ -24,6 +24,11 @@ export interface IWorkspaceMemberRepository {
 	getWorkspaceMemberInvitation: (inviteId:string) => Promise<any>
 	getWorkspaceRoleById: (roleId:string) => Promise<any>
 	getWorkspaceMemberByEmail: (email:string) => Promise<any>
+<<<<<<< HEAD
+=======
+	getInviteById: (inviteId:string) => Promise<any>
+	confirmInvite: (inviteId:string) => Promise<any>
+>>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 }
 
 export interface IWorkspaceMemberController {

@@ -12,7 +12,11 @@ export default function getUserRolesRoute(app: Router){
 		const controller = new UserRoleController(userRolesUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`, folderRouter);
+<<<<<<< HEAD
 		folderRouter.put('/all', adminRequired,controller.getRoles);
+=======
+		folderRouter.get('/all', adminRequired,controller.getRoles);
+>>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 
 	};
 }

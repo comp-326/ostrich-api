@@ -3,6 +3,7 @@ import { ExpressError } from '@ostrich-app/common/errors/ExpressError';
 import { IWorkspaceMember } from '../models/interfaces';
 import createNewWorkspaceMember from '../entities';
 import validateMongodbId from '@ostrich-app/utils/mongo/ObjectId-validator';
+import { workspaceMemberFactory } from '@ostrich-app/factories/workspaceMember';
 import { IWorkspaceMemberRepository, IWorkspaceMemberUseCase } from './../interfaces';
 
 export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
@@ -12,6 +13,25 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 
 
 	joinWorkspace = async (inviteId: string) => {
+<<<<<<< HEAD
+=======
+		if(!inviteId) {
+			throw new ExpressError({
+				message: 'InviteId is required',
+				statusCode: 400,
+				status: 'warning',
+				data: {},
+			});
+		}
+		if(!validateMongodbId(inviteId)) {
+			throw new ExpressError({
+				message: 'Invalid InviteId',
+				statusCode: 400,
+				status: 'warning',
+				data: {},
+			});
+		}
+>>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 		const existingInvite = await this.repository.getWorkspaceMemberInvitation(inviteId);
 		if (!existingInvite) {
 			throw new ExpressError({
@@ -25,6 +45,7 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 		const user = await this.repository.getWorkspaceMemberByEmail(existingInvite.inviteeEmail);
 		const workspace = await this.repository.getWorkspace(existingInvite.workspaceId);
 		const role = await this.repository.getWorkspaceRoleById(existingInvite.inviteRoleId);
+<<<<<<< HEAD
 		const {
 			getMember,getMemberEmail,getMemberRole,getWorkspaceId
 		} = createNewWorkspaceMember({
@@ -38,6 +59,11 @@ export class WorkspaceUseCases implements IWorkspaceMemberUseCase {
 			memberEmail:getMemberEmail(),memberRole:getMemberRole(),
 			workspaceId:getWorkspaceId()
 		});
+=======
+		const newMember = await workspaceMemberFactory()(role._id,user.email, workspace._id);
+		const joined = await this.repository.createNewWorkspaceMember(newMember);
+		await this.repository.confirmInvite(inviteId);
+>>>>>>> 19227add749a048126a79c4f5addd72379b1e746
 
 		return joined;
 	};

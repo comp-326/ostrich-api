@@ -145,6 +145,7 @@ export class UserUseCase implements IUserUseCases {
 
 		}
 		const existing = await this.repository.findById(userId);
+		
 		if(!existing){
 			throw new ExpressError({
 				message: 'User not found',
@@ -240,7 +241,8 @@ export class UserUseCase implements IUserUseCases {
 		return users;
 	};
 
-	activateUserAccount = async (token: string, email: string) => {
+	activateUserAccount = async (token: string) => {
+		const { userId ,email} =await tokenGEN.decodeSimpleToken(token) as unknown as JWTPayloadType;
 		if (!email) {
 			throw new ExpressError({
 				message: 'Email is required',
@@ -290,7 +292,6 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
-		const { userId } =await tokenGEN.decodeSimpleToken(token) as unknown as JWTPayloadType;
 		if (!userId) {
 			throw new ExpressError({
 				message: 'Token is invalid',
@@ -311,6 +312,7 @@ export class UserUseCase implements IUserUseCases {
 				}
 			});
 		}
+		console.log(existing);
 
 		const { getBio, getEmail, getFirstName, getGender, getLastName, getPassword, getProfilePic } = await createUser({ ...existing._doc, isActive: true });
 		const user = await this.repository.updateById(existing._id, {

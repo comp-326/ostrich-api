@@ -17,4 +17,5 @@ const swaggerSetup = swaggerUI.setup(swaggerDocument, options);
 const swaggerServe = swaggerUI.serve;
 
 export default Object.freeze({ swaggerServe, swaggerSetup });
+
 export { swaggerServe, swaggerSetup };

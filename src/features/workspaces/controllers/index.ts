@@ -48,10 +48,9 @@ class FolderController implements IWorkspaceController {
 	findUserWorkspaces = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			const { limit, offset } = req.query as unknown as { limit: string, offset: string };
-			const { userId } = req.params;
-			const response = await this.useCase.listUserWorkspaces(userId, { limit: limit ? parseInt(limit) : 10, offset: offset ? parseInt(offset) : 1 });
+			const response = await this.useCase.listUserWorkspaces(req.user.userId, { limit: limit ? parseInt(limit) : 10, offset: offset ? parseInt(offset) : 1 });
 
-			return response;
+			return res.status(200).json({ data: response });
 		} catch (error) {
 			return next(error);
 		}
@@ -59,7 +58,8 @@ class FolderController implements IWorkspaceController {
 
 	createWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-
+			req.body.ownerId = req.user.userId;
+			
 			await this.useCase.addWorkspace(req.body);
 
 			return res.sendStatus(201);

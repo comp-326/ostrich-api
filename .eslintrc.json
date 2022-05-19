@@ -145,7 +145,7 @@
             {
                 "blankLine": "always",
                 "prev": "*",
-                "next": ["return","interface","type","function","class","try"]
+                "next": ["return","interface","type","function","class","try","export"]
             }
         ]
     }
