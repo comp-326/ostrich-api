@@ -65,7 +65,7 @@ class UserRepository implements IUserRepository {
 				memberName: `${userData.firstName} ${userData.lastName}`,
 				time: new Date().getTime(),
 			}));
-
+			await invite.updateOne({status: 'confirmed'});
 
 		}
 
