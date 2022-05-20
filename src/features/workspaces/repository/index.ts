@@ -49,9 +49,15 @@ class WorkspaceRepository implements IWorkspaceRepository {
 	};
 
 	findById = async (id: string) => {
-		const folder = await WorkspaceModel.findById(id);
+		const workspace = await WorkspaceModel.findById(id);
 
-		return folder;
+		return workspace;
+	};
+
+	getWorkspaceWithId = async (workspaceId: string) => {
+		const workspace = await WorkspaceModel.findById(workspaceId).populate('owner');
+
+		return { ...workspace!._doc, owner: workspace!.owner._id.toString() };
 	};
 
 	findWorkspaceById = async (id: string) => {

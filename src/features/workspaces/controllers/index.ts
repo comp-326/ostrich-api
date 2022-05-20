@@ -71,6 +71,7 @@ class FolderController implements IWorkspaceController {
 
 	updateWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
+			
 			await this.useCase.editWorkspace(req.params.id, req.body);
 
 			return res.sendStatus(200);
