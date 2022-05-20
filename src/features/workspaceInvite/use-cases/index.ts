@@ -186,7 +186,7 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 		// aSend email to the workspace owner
 		const workspaceOwnerQueue = new EventBus('ownerInviteUserToWorkspace');
 		workspaceOwnerQueue.sendToQueue(JSON.stringify({
-			workspaceOwnerEmail: getWorkspaceOwnerId(),
+			workspaceOwnerEmail:workspace.owner.email,
 			workspaceName: inviteWorkspace.name,
 			inviteeEmail: getInviteeEmail(),
 			inviteRole: getInviteRole(),

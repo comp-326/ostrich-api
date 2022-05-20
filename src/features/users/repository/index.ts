@@ -43,8 +43,8 @@ class UserRepository implements IUserRepository {
 			const member = await workspaceMemberFactory()(
 				{
 					memberEmail: newUser._doc.email,
-					roleId: invite.inviteRoleId,
-					workspaceId: invite.workspaceId
+					roleId: invite.inviteRoleId.toString(),
+					workspaceId: invite.workspaceId.toString(),
 				}
 			);
 			await workspaceMemberModel.create({
@@ -65,7 +65,7 @@ class UserRepository implements IUserRepository {
 				memberName: `${userData.firstName} ${userData.lastName}`,
 				time: new Date().getTime(),
 			}));
-
+			await invite.updateOne({status: 'confirmed'});
 
 		}
 
