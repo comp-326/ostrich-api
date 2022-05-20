@@ -9,7 +9,7 @@ export interface IWorkspace {
 }
 
 export interface IWorkspaceDocument extends IWorkspace, mongoose.Document {
-    _id: any
+    _doc:any
 }
 
 export interface IWorkspaceDocumentModel extends mongoose.Model<IWorkspaceDocument> {
