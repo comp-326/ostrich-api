@@ -45,11 +45,11 @@ export function makeJoinWorkspace({
 		const role = await repository.getWorkspaceRoleById(
 			existingInvite.inviteRoleId,
 		);
-		const newMember = await workspaceMemberFactory()(
-			role._id,
-			user.email,
-			workspace._id,
-		);
+		const newMember = await workspaceMemberFactory()({
+			memberEmail: user.email,
+			roleId: role._id,
+			workspaceId: workspace._id,
+		});
 		const joined = await repository.createNewWorkspaceMember(newMember);
 		await repository.confirmInvite(inviteId);
 

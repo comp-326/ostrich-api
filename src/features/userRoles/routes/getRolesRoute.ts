@@ -12,7 +12,7 @@ export default function getUserRolesRoute(app: Router){
 		const controller = new UserRoleController(userRolesUseCase);
 		const folderRouter = Router();
 		app.use(`${pathName}`, folderRouter);
-		folderRouter.put('/all', adminRequired,controller.getRoles);
+		folderRouter.get('/all', adminRequired,controller.getRoles);
 
 	};
 }

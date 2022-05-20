@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUserRoleDocument } from '@ostrich-app-features/userRoles/models/interfaces';
+import { IWorkspaceRoleDocument } from '../models/interfaces';
 import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
-export interface IUserRoleUseCase {
-	addRoles: () => Promise<IUserRoleDocument[] | IUserRoleDocument|null>
-	listRoles: () => Promise<IUserRoleDocument[] | IUserRoleDocument|null>
+export interface IWorkspaceRoleUseCase {
+	addRoles: () => Promise<IWorkspaceRoleDocument[] | IWorkspaceRoleDocument|null>
+	listRoles: () => Promise<IWorkspaceRoleDocument[] | IWorkspaceRoleDocument|null>
 }
 
-export interface IUserRoleRepository {
-	findByName: (name: string) => Promise<IUserRoleDocument|null>
-	createRoles: () => Promise<IUserRoleDocument | IUserRoleDocument[]>
-	findRoles: () => Promise<IUserRoleDocument | IUserRoleDocument[]|null>
+export interface IWorkspaceRoleRepository {
+	findByName: (name: string) => Promise<IWorkspaceRoleDocument|null>
+	createRoles: () => Promise<IWorkspaceRoleDocument | IWorkspaceRoleDocument[]>
+	findRoles: () => Promise<IWorkspaceRoleDocument | IWorkspaceRoleDocument[]|null>
 }
 
-export interface IUserRoleController {
+export interface IWorkspaceRoleController {
 	createRoles: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 	getRoles: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

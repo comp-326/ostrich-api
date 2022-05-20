@@ -1,9 +1,9 @@
-import { IUserRoleRepository, IUserRoleUseCase } from '@ostrich-app-features/userRoles/interfaces';
+import { IWorkspaceRoleRepository, IWorkspaceRoleUseCase } from '../interfaces';
 
-export class UserRoleUseCases implements IUserRoleUseCase{
-	private readonly repository: IUserRoleRepository;
+export class WorkspaceRoleUseCases implements IWorkspaceRoleUseCase{
+	private readonly repository: IWorkspaceRoleRepository;
 
-	constructor(repository: IUserRoleRepository){
+	constructor(repository: IWorkspaceRoleRepository){
 		this.repository = repository;
 	}
 

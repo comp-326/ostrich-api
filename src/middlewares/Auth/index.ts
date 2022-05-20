@@ -57,6 +57,14 @@ export const	loginRequired = async (req: IRequest, res: IResponse, next: INext) 
 	try {
 		verifyCookie(req, res, async () => {
 			const user = await UserModel.findById(req.user.userId);
+			if(!user){
+				return res.status(401).json({
+					message: 'Please login to access this page',
+					status: 'warning',
+					statusCode: 401,
+					data: {}
+				});
+			}
 			if (!user!.isActive) {
 				return res.status(401).json({
 					message: 'Please activate your account',

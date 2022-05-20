@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
-import { IUserRoleController, IUserRoleUseCase } from './../interfaces';
+import { IWorkspaceRoleController, IWorkspaceRoleUseCase } from './../interfaces';
 
-export class UserRoleController implements IUserRoleController{
-	private readonly useCase: IUserRoleUseCase;
+export class WorkspaceRoleController implements IWorkspaceRoleController{
+	private readonly useCase: IWorkspaceRoleUseCase;
 
-	constructor(useCase: IUserRoleUseCase){
+	constructor(useCase: IWorkspaceRoleUseCase){
 		this.useCase = useCase;
 	}
 
