@@ -1,7 +1,7 @@
-import { IUserRoleRepository } from './../interfaces';
+import { IWorkspaceRoleRepository } from './../interfaces';
 import workspaceRoleModel from './../models';
 
-class UserRoleRepository implements IUserRoleRepository{
+class WorkspaceRoleRepository implements IWorkspaceRoleRepository{
 	findByName = async (name: string) => {
 		const role = await workspaceRoleModel.findOne({ name });
 		if (role) return role;
@@ -21,4 +21,4 @@ class UserRoleRepository implements IUserRoleRepository{
 
 }
 
-export default new UserRoleRepository();
+export default new WorkspaceRoleRepository();

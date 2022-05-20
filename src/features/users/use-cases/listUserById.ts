@@ -23,6 +23,16 @@ export function makeListUserById({repository}:{repository:IUserRepository}){
 			});
 		}
 		const user= await repository.findById(id);
+		if (!user) {
+			throw new ExpressError({
+				message: 'User not found',
+				status: 'error',
+				statusCode: 404,
+				data: {
+					userId: id
+				}
+			});
+		}
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {password:_docs,...props}=user._doc;
 
