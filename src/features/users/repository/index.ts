@@ -43,8 +43,8 @@ class UserRepository implements IUserRepository {
 			const member = await workspaceMemberFactory()(
 				{
 					memberEmail: newUser._doc.email,
-					roleId: invite.inviteRoleId,
-					workspaceId: invite.workspaceId
+					roleId: invite.inviteRoleId.toString(),
+					workspaceId: invite.workspaceId.toString(),
 				}
 			);
 			await workspaceMemberModel.create({

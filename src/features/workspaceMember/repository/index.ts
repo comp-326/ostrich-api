@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IWorkspaceMember } from '../models/interfaces';
 import { IWorkspaceMemberRepository } from './../interfaces';
@@ -10,7 +11,10 @@ import workspaceRoleModel from '@ostrich-app/features/workspaceRoles/models';
 class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 
 	getWorkspaceMemberInvitation=async (inviteId: string) => {
-		return await workspaceInviteModel.findById(inviteId);
+		const invite= await workspaceInviteModel.findById(inviteId)!;
+console.log({...invite!._doc,_id:invite!._id.toString()});
+
+		return {...invite!._doc,inviteRoleId:inviteRoleId.toString()};
 	};
 
 
