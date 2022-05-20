@@ -191,6 +191,14 @@ export class UserUseCase implements IUserUseCases {
 			});
 		}
 		const user= await this.repository.findById(id);
+		if(!user){
+			throw new ExpressError({
+				message: 'User profile not found',
+				status: 'error',
+				statusCode: 404,
+				data: {}
+			});
+		}
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {password:_docs,...props}=user._doc;
 
