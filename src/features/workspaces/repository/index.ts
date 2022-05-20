@@ -22,7 +22,10 @@ class WorkspaceRepository implements IWorkspaceRepository {
 	};
 
 	findAll = async (limit: number, page: number) => {
-		return { limit, page };
+		return await WorkspaceModel.find({})
+			.populate('logo', '-_id -type -size')
+			.limit(limit)
+			.skip(limit * (page - 1));
 	};
 
 	findUserWorkspaces = async (
@@ -30,9 +33,11 @@ class WorkspaceRepository implements IWorkspaceRepository {
 		limit: number,
 		page: number,
 	) => {
-		return await WorkspaceModel.find({
-			_id: userId,
-		})
+		return await workspaceMemberModel.find({
+			member: userId,
+		}).populate('workspaceId', '-createdAt -updatedAt -__v')
+			.populate('memberRole', '-_id -createdAt -updatedAt -__v')
+			.select('-_id -createdAt -updatedAt -__v')
 			.limit(limit)
 			.skip((page - 1) * limit);
 	};
@@ -102,10 +107,10 @@ class WorkspaceRepository implements IWorkspaceRepository {
 			url: 'https://www.gravatar.com/avatar/f=y?d=identicon&s=200&r=g&f=y',
 		});
 		const newWorkspace = await (await WorkspaceModel.create({ ...data, logo }))
-			.populate('owner','-_id email') as any;
+			.populate('owner', '-_id email') as any;
 		const id = newWorkspace._id.toString();
 
-		return {...newWorkspace._doc,id};
+		return { ...newWorkspace._doc, id };
 	};
 
 	getWorkspace = async (workspaceId: string) => {

@@ -11,12 +11,12 @@ class FolderController implements IWorkspaceController {
 	constructor(private readonly useCase: IWorkspaceUseCases) { }
 
 	softDelete = async (req: IRequest, res: IResponse, next: INext) => {
-		try{
-			const {id}=req.params;
+		try {
+			const { id } = req.params;
 			await this.useCase.softRemoveWorkspace(id);
-			
+
 			return res.sendStatus(301);
-		}catch(err){
+		} catch (err) {
 			return next(err);
 		}
 	};
@@ -33,7 +33,7 @@ class FolderController implements IWorkspaceController {
 			const { limit, offset } = req.query as unknown as { limit: number; offset: number };
 			const response = await this.useCase.listWorkspaces(limit, offset);
 
-			return response;
+			return response.lenght < 1 ? res.sendStatus(404) : res.status(200).json({ data: response });
 		} catch (error) {
 			return next(error);
 		}
@@ -59,7 +59,7 @@ class FolderController implements IWorkspaceController {
 	createWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
 			req.body.owner = req.user.userId;
-			
+
 			await this.useCase.addWorkspace(req.body);
 
 			return res.sendStatus(201);
@@ -85,7 +85,7 @@ class FolderController implements IWorkspaceController {
 		return response;
 	};
 
-	
+
 }
 
 export default FolderController;
