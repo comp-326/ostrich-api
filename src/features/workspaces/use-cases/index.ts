@@ -12,6 +12,8 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 	constructor(private readonly repository: IWorkspaceRepository) { }
 
 	addWorkspace = async (workspaceData: IWorkspace) => {
+		console.log('\nCreating workspace------------------\n');
+		
 		if (!workspaceData.owner) {
 			throw new ExpressError({
 				message: 'OwnerId is required',
@@ -94,7 +96,7 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 				data: {},
 			});
 		}
-		const existing = await this.repository.findById(workspaceId);
+		const existing = await this.repository.getWorkspaceWithId(workspaceId);
 		if (!existing) {
 			throw new ExpressError({
 				message: 'Workspace with this id does not exist',
@@ -103,8 +105,9 @@ export class WorkspaceUseCase implements IWorkspaceUseCases {
 				data: {},
 			});
 		}
+		console.log('\nUpdating workspace------------------\n',existing,existing._doc);
 		const { getLogo, getName, getOwner, getType } = createWorkspace({
-			...existing._doc, ...workspaceData
+			...existing, ...workspaceData
 		});
 		const res = await this.repository.updateById(workspaceId, {
 			logo: getLogo(),

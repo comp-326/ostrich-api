@@ -22,7 +22,7 @@ export function makeEditWorkspace({ repository }: { repository: IWorkspaceReposi
 				data: {},
 			});
 		}
-		const existing = await repository.findById(workspaceId);
+		const existing = await repository.getWorkspaceWithId(workspaceId);
 		if (!existing) {
 			throw new ExpressError({
 				message: 'Workspace with this id does not exist',

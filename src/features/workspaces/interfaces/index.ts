@@ -19,6 +19,7 @@ export interface IWorkspaceRepository {
 	updateById: (id: string, data: IWorkspace) => Promise<any>;
 	deleteById: (id: string) => Promise<any>;
 	getWorkspace: (workspaceId:string) => Promise<any>;
+	getWorkspaceWithId: (workspaceId:string) => Promise<any>;
 	getWorkspaceAdminRole: () => Promise<any>;
 	createWorkspaceAdminMember: (workspaceMember:IWorkspaceMember) => Promise<any>;
 }
