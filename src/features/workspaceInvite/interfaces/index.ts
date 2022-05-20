@@ -21,6 +21,7 @@ export interface IWorkspaceInviteRepository {
 	getWorkspaceRole: (roleId:string) => Promise<any>
 	getInviteWorkspace: (workspaceId:string) => Promise<any>
 	getUserInvite: (userEmail:string,workspaceId:string) => Promise<any>
+	getWorkspaceAndOwner: (workspaceId:string) => Promise<any>
 }
 
 export interface IWorkspaceInviteController {

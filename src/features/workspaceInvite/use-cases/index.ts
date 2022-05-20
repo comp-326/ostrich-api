@@ -140,22 +140,18 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 				statusCode: 400
 			});
 		}
-		if (!inviteData.workspaceOwnerId) {
+		const workspace = await this.repository.getWorkspaceAndOwner(inviteData.workspaceId);
+		if(!workspace){
 			throw new ExpressError({
-				message: 'Workspace owner email is required',
-				status: 'warning',
+				message: 'Workspace not found',
+				status: 'error',
 				data: {},
-				statusCode: 400
+				statusCode: 404
 			});
 		}
-		if (!validateMongodbId(inviteData.workspaceOwnerId)) {
-			throw new ExpressError({
-				message: 'Workspace owner id is not valid',
-				status: 'warning',
-				data: {},
-				statusCode: 400
-			});
-		}
+		inviteData.workspaceOwnerId=workspace.owner._id;
+		console.log(inviteData);
+		
 		const workspaceInviteRole = await this.repository.getWorkspaceRole(inviteData.inviteRoleId);
 		if (!workspaceInviteRole) {
 			throw new ExpressError({

@@ -6,6 +6,13 @@ import workspaceRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
 class WorkspaceInviteRepository implements IWorkspaceInviteRepository {
 
+	getWorkspaceAndOwner=async (workspaceId: string) => {
+		const workspace =await workspaceModel.findById(workspaceId).populate('owner', 'email');
+
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		return workspace!._doc;
+	};
+
 	updateInviteById = async (inviteId: string, inviteData: IWorkspaceInvite) => {
 		const invite = await workspaceInviteModel.findByIdAndUpdate(inviteId, inviteData, { new: true });
 

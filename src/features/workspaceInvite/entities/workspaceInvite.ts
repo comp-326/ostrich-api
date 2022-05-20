@@ -37,7 +37,7 @@ export default function makeCreateNewWorkspaceInvite() {
 		}
 		if (!workspaceOwnerId) {
 			throw new ExpressError({
-				message: 'Workspace owner email is required',
+				message: 'Workspace owner id is required',
 				status: 'error',
 				data: {},
 				statusCode: 400,
