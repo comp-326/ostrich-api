@@ -12,7 +12,7 @@ export default function createInviteRoute(app: Router){
 		const controller = new WorkspaceInviteController(workspaceInviteUseCase);
 		const workspaceInviteRouter = Router();
 		app.use(`${pathName}`, workspaceInviteRouter);
-		workspaceInviteRouter.put('/invite/new',loginRequired ,controller.createInvite);
+		workspaceInviteRouter.post('/invite/new',loginRequired ,controller.createInvite);
 
 	};
 }
