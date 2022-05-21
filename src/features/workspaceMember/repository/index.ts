@@ -10,18 +10,18 @@ import workspaceRoleModel from '@ostrich-app/features/workspaceRoles/models';
 
 class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 
-	getWorkspaceMemberInvitation=async (inviteId: string) => {
-		const invite= await workspaceInviteModel.findById(inviteId)!;
+	getWorkspaceMemberInvitation = async (inviteId: string) => {
+		const invite = await workspaceInviteModel.findById(inviteId)!;
 
-		return {...invite!._doc,inviteRoleId:invite!.inviteRoleId.toString()};
+		return { ...invite!._doc, inviteRoleId: invite!._doc.inviteRoleId.toString(), workspaceId: invite!._doc.workspaceId.toString() };
 	};
 
 
-	getWorkspaceMemberByEmail=async (email: string) => {
+	getWorkspaceMemberByEmail = async (email: string) => {
 		return userModel.findByEmail(email);
 	};
 
-	
+
 	confirmInvite = async (inviteId: string) => {
 		return await workspaceInviteModel.findByIdAndUpdate(
 			inviteId,
@@ -33,7 +33,9 @@ class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 	};
 
 	getWorkspaceRoleById = async (roleId: string) => {
-		return await workspaceRoleModel.findById(roleId);
+		const role = await workspaceRoleModel.findById(roleId)!;
+
+		return { ...role!._doc, _id: role!._id.toString() };
 	};
 
 	getInviteById = async (inviteId: string) => {
@@ -46,7 +48,9 @@ class WorkspaceMemberRepository implements IWorkspaceMemberRepository {
 	};
 
 	getWorkspace = async (workspaceId: string) => {
-		return await workspaceModel.findById(workspaceId);
+		const workspace = await workspaceModel.findById(workspaceId);
+
+		return { ...workspace!._doc, _id: workspace!._id.toString() };
 	};
 
 	getWorkspaceOwner = async (workspaceOwnerId: string) => {
