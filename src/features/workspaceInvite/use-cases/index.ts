@@ -175,25 +175,8 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 		});
 		const inviteWorkspace = await this.repository.getInviteWorkspace(getWorkspaceId());
 
-		// Send email to the new invitee
-		const inviteeQueue = new EventBus('inviteUserToWorkspace');
-		inviteeQueue.sendToQueue(JSON.stringify({
-			inviteeEmail: getInviteeEmail(),
-			note: getInviteNote(),
-			workspaceName: inviteWorkspace.name,
-			workspaceLogo: inviteWorkspace.logo,
-		}));
-		// aSend email to the workspace owner
-		const workspaceOwnerQueue = new EventBus('ownerInviteUserToWorkspace');
-		workspaceOwnerQueue.sendToQueue(JSON.stringify({
-			workspaceOwnerEmail:workspace.owner.email,
-			workspaceName: inviteWorkspace.name,
-			inviteeEmail: getInviteeEmail(),
-			inviteRole: getInviteRole(),
-		}));
-		// return {};
 
-		return await this.repository.createInvite({
+		const invite= await this.repository.createInvite({
 			inviteRoleId: getInviteRole(),
 			inviteeEmail: getInviteeEmail(),
 			inviteeId: getInviteeId(),
@@ -203,6 +186,27 @@ export class WorkspaceInviteUseCases implements IWorkspaceInviteUseCase {
 			workspaceOwnerId: getWorkspaceOwnerId()
 
 		});
+
+		// Send email to the new invitee
+		const inviteeQueue = new EventBus('inviteUserToWorkspace');
+		inviteeQueue.sendToQueue(JSON.stringify({
+			inviteeEmail: getInviteeEmail(),
+			note: getInviteNote(),
+			workspaceName: inviteWorkspace.name,
+			workspaceLogo: inviteWorkspace.logo,
+			inviteId:invite._id,
+		}));
+		// aSend email to the workspace owner
+		const workspaceOwnerQueue = new EventBus('ownerInviteUserToWorkspace');
+		workspaceOwnerQueue.sendToQueue(JSON.stringify({
+			workspaceOwnerEmail:workspace.owner.email,
+			workspaceName: inviteWorkspace.name,
+			inviteeEmail: getInviteeEmail(),
+			inviteRole: getInviteRole(),
+		}));
+
+		// return {}
+		return invite;
 	};
 
 	revokeWorkspaceInvite = async (inviteId: string) => {

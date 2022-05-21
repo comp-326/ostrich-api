@@ -28,7 +28,7 @@ export class WorkspaceMemberController implements IWorkspaceMemberController {
 
 	joinWorkspace = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			await this.useCase.joinWorkspace(req.query.inviteId as string);
+			await this.useCase.joinWorkspace(req.params.id as string);
 
 			return res.sendStatus(201);
 		} catch (err) {
