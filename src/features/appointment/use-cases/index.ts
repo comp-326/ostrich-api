@@ -1,69 +1,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAppointment, IAppointmentRepository, IAppointmentUseCases } from '../interfaces';
+import {IAppointment} from '../models/interfaces';
+import {  IAppointmentRepository, IAppointmentUseCases } from '../interfaces';
 
 export class AppointmentUseCase implements IAppointmentUseCases{
 	constructor(private readonly repository: IAppointmentRepository){}
 
-	addAppointment=async (folderData: IAppointment) => {
-		await this.repository.comment('');
-
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	createAppointment=async (appointmentData: IAppointment) =>{
+		return await this.repository.create(appointmentData);
 	};
 
-	copyAppointment=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	cancelAppointment=async (appointmentId: string) =>{
+		return await this.repository.cancel(appointmentId);
 	};
 
-	editAppointment=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	updateAppointment=async (appointmentId: string, appointmentData: IAppointment) =>{
+		return await this.repository.update(appointmentId, appointmentData);
 	};
 
-	listAppointmentById=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentById=async (appointmentId: string) =>{
+		return await this.repository.getById(appointmentId);
 	};
 
-	listAppointmentByName=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointments=async (userId:string,limit: number, page: number) =>{
+		return await this.repository.getAll(userId,limit, page);
 	};
 
-	listAppointments=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentsByWorkspaceId=async (workspaceId: string, limit: number, page: number) =>{
+		return await this.repository.getAllByWorkspaceId(workspaceId, limit, page);
 	};
 
-	listWorkspaceAppointments=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentsByUserId=async (userId: string, limit: number, page: number) =>{
+		return await this.repository.getAllByUserId(userId, limit, page);
 	};
 
-	moveAppointment=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentsByUserIdAndWorkspaceId=async (userId: string, workspaceId: string, limit: number, page: number) =>{
+		return await this.repository.getAllByUserIdAndWorkspaceId(userId, workspaceId, limit, page);
 	};
 
-	softRemoveAppointment=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentsByUserIdAndWorkspaceIdAndStatus=async (userId: string, workspaceId: string, status: string, limit: number, page: number) =>{
+		return await this.repository.getAllByUserIdAndWorkspaceIdAndStatus(userId, workspaceId, status, limit, page);
 	};
 
-	hardRemoveAppointment=async (folderData: IAppointment) => {
-		await this.repository.createAppointment('',folderData);
-
-		return {};
+	getAppointmentsByUserIdAndStatus=async (userId: string, status: string, limit: number, page: number) =>{
+		return await this.repository.getAllByUserIdAndStatus(userId, status, limit, page);
 	};
+
+	getUpcomingAppointments=async (userId: string, limit: number, page: number) =>{
+		return await this.repository.getUpcomingAppointments(userId, limit, page);
+	};
+
+	getPastAppointments=async (userId: string, limit: number, page: number) =>{
+		return await this.repository.getPastAppointments(userId, limit, page);
+	};
+
+	getCancelledAppointments=async (userId: string, limit: number, page: number) =>{
+		return await this.repository.getCancelledAppointments(userId, limit, page);
+	};
+	
 	
 }

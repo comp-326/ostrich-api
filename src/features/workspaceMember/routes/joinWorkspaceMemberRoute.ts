@@ -11,7 +11,7 @@ export default function joinWorkspaceMemberRoute(app: Router){
 		const controller = new WorkspaceMemberController(workspaceMemberUseCase);
 		const workspaceMemberRouter = Router();
 		app.use(`${pathName}`, workspaceMemberRouter);
-		workspaceMemberRouter.put('/member/join', loginRequired,controller.joinWorkspace);
+		workspaceMemberRouter.post('/member/join/:id', loginRequired,controller.joinWorkspace);
 
 	};
 }
