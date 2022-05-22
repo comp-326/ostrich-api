@@ -15,7 +15,7 @@ const appointmentSchema: mongoose.Schema<IAppointmentDocument> = new mongoose.Sc
 	},
 	startTime: {
 		type: String,
-		required: true
+		required: true,
 	},
 	endTime: {
 		type: String,
@@ -24,7 +24,8 @@ const appointmentSchema: mongoose.Schema<IAppointmentDocument> = new mongoose.Sc
 	},
 	title: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 
 	},
 	description: {

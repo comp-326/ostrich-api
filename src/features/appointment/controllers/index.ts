@@ -8,6 +8,7 @@ class AppointmentController implements IAppointmentController {
 
 	createAppointment = async (req: IRequest, res: IResponse, next /* eslint-disable @typescript-eslint/no-explicit-any */: INext) => {
 		try {
+			req.body.owner=req.user.userId;
 			await this.useCase.createAppointment(req.body);
 
 			return res.sendStatus(201);

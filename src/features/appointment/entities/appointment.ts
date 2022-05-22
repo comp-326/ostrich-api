@@ -115,9 +115,12 @@ export default function makeCreateAppointmentEntity() {
 			});
 		}
 		if (!meetingLength)
-			meetingLength = moment(startTime).diff(moment(endTime), 'minutes');
+			meetingLength = moment(endTime).diff(moment(startTime), 'minutes');
+
 		if (!status)
 			status = 'upcoming';
+
+		console.log(meetingLength);
 
 		return {
 			getAttendees: () => attendees,
