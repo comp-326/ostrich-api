@@ -47,13 +47,8 @@ const appointmentSchema: mongoose.Schema<IAppointmentDocument> = new mongoose.Sc
 		required: true,
 		default: []
 	},
-	createdBy: {
-		type: String,
-		required: true
-
-	},
 	status: { enum: ['confirmed', 'cancelled', 'upcoming'], type: String, required: true, default: 'upcoming' },
 	expectedAttendees: { type: Number, required: true }
 });
 
-export default mongoose.model<IAppointmentDocument, IAppointmentDocumentModel>('Appointment', appointmentSchema);
+export default mongoose.model<IAppointmentDocument, IAppointmentDocumentModel>('Appointments', appointmentSchema);
