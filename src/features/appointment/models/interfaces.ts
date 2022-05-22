@@ -10,7 +10,6 @@ export interface IAppointment{
     description:string
     location:string
     attendees:string[]
-    createdBy:string
     owner:any
     status:'confirmed'|'cancelled'|'upcoming'
     expectedAttendees:number
