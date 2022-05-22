@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import appointmentDomain from '@ostrich-app/features/appointment';
 import authDomain from '@ostrich-app/features/auth';
 import folderDomain from '@ostrich-app-features/folders/routes';
 import testRoute from './testRoute';
@@ -21,8 +22,9 @@ export default function () {
 	userRolesDomain({ app: apiRoute, pathName: '/u-roles' });
 	workspaceRoleDomain({ app: apiRoute, pathName: '/w-roles' });
 	workspaceInviteDomain({ app: apiRoute, pathName: '/workspace-invite' });
-	authDomain({app:apiRoute,pathName:'/auth'});
-	workspaceMemberDomain({app:apiRoute,pathName:'/workspace-member'});
+	authDomain({ app: apiRoute, pathName: '/auth' });
+	workspaceMemberDomain({ app: apiRoute, pathName: '/workspace-member' });
+	appointmentDomain({ app: apiRoute, pathName: '/appointments' });
 
 	return apiRoute;
 }
