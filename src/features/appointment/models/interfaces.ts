@@ -11,7 +11,7 @@ export interface IAppointment{
     location:string
     attendees:string[]
     owner:any
-    status:'confirmed'|'cancelled'|'upcoming'
+    status:'confirmed'|'cancelled'|'upcoming'|'past'
     expectedAttendees:number
 }
 

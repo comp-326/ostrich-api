@@ -6,9 +6,9 @@ import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 class AppointmentController implements IAppointmentController {
 	constructor(private useCase: IAppointmentUseCases) { }
 
-	createAppointment = async (req: IRequest, res: IResponse, next /* eslint-disable @typescript-eslint/no-explicit-any */: INext) => {
+	createAppointment = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			req.body.owner=req.user.userId;
+			req.body.owner = req.user.userId;
 			await this.useCase.createAppointment(req.body);
 
 			return res.sendStatus(201);
@@ -23,7 +23,7 @@ class AppointmentController implements IAppointmentController {
 
 			return res.sendStatus(200);
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
@@ -33,7 +33,7 @@ class AppointmentController implements IAppointmentController {
 
 			return res.sendStatus(200);
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
@@ -43,7 +43,7 @@ class AppointmentController implements IAppointmentController {
 
 			return res.status(200).json({ data: appointment });
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
@@ -55,31 +55,37 @@ class AppointmentController implements IAppointmentController {
 
 			return res.status(200).json({ data: appointments });
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
 	getCancelledAppointments = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			return res.sendStatus(200);
+			const appintments = await this.useCase.getCancelledAppointments(req.user.userId, 20, 1);
+
+			return res.status(200).json({ data: appintments });
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
 	getUpcomingAppointments = async (req: IRequest, res: IResponse /* eslint-disable @typescript-eslint/no-explicit-any */, next: INext) => {
 		try {
-			return res.sendStatus(200);
+			const appointments = await this.useCase.getUpcomingAppointments(req.user.userId, 20, 1);
+
+			return res.status(200).json({ data: appointments });
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
 	getPastAppointments = async (req: IRequest, res: IResponse, next: INext) => {
 		try {
-			return res.sendStatus(200);
+			const appointments = await this.useCase.getPastAppointments(req.user.userId, 20, 1);
+
+			return res.status(200).json({ data: appointments });
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 
@@ -87,7 +93,7 @@ class AppointmentController implements IAppointmentController {
 		try {
 			return res.sendStatus(200);
 		} catch (error) {
-			return;
+			return next(error);
 		}
 	};
 

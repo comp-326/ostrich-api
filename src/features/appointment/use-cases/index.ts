@@ -11,6 +11,16 @@ export class AppointmentUseCase implements IAppointmentUseCases {
 	createAppointment = async (appointmentData: IAppointment) => {
 		const { getAttendees, getDescription, getEndTime, getExpectedAttendees, getLocation, getMeetingLength, getMeetingLink, getOwner, getStartTime, getStatus, getTitle } = createAppointmentEntity(appointmentData);
 
+		const existing = await this.repository.getByTitle(getTitle());
+		if (existing) {
+			throw new ExpressError({
+				message: 'Appointment with this title already exists',
+				status: 'warning',
+				data: {},
+				statusCode: 400
+			});
+		}
+
 		return await this.repository.create({
 			attendees: getAttendees(),
 			description: getDescription(),
@@ -35,7 +45,7 @@ export class AppointmentUseCase implements IAppointmentUseCases {
 				statusCode: 400
 			});
 		}
-		const existingAppointment = await this.repository.findById(appointmentId);
+		const existingAppointment = await this.repository.getById(appointmentId);
 		if (!existingAppointment) {
 			throw new ExpressError({
 				message: 'appointment not found',
@@ -66,7 +76,42 @@ export class AppointmentUseCase implements IAppointmentUseCases {
 	};
 
 	updateAppointment = async (appointmentId: string, appointmentData: IAppointment) => {
-		return await this.repository.update(appointmentId, appointmentData);
+		if (!validateMongodbId(appointmentId)) {
+			throw new ExpressError({
+				message: 'appointmentId is not valid',
+				status: 'warning',
+				data: {},
+				statusCode: 400
+			});
+		}
+		const existingAppointment = await this.repository.getById(appointmentId);
+		if (!existingAppointment) {
+			throw new ExpressError({
+				message: 'appointment not found',
+				status: 'warning',
+				data: {},
+				statusCode: 404
+			});
+		}
+
+		const {
+			getAttendees, getDescription, getEndTime, getExpectedAttendees, getLocation, getMeetingLength, getMeetingLink, getOwner, getStartTime, getStatus, getTitle
+		} = createAppointmentEntity({ ...existingAppointment._doc, ...appointmentData });
+		const updatedAppointment = await this.repository.update(appointmentId, {
+			attendees: getAttendees(),
+			description: getDescription(),
+			endTime: getEndTime(),
+			expectedAttendees: getExpectedAttendees(),
+			location: getLocation(),
+			meetingLength: getMeetingLength(),
+			meetingLink: getMeetingLink(),
+			owner: getOwner(),
+			startTime: getStartTime(),
+			status: getStatus(),
+			title: getTitle()
+		});
+
+		return updatedAppointment;
 	};
 
 	getAppointmentById = async (appointmentId: string) => {
@@ -74,39 +119,65 @@ export class AppointmentUseCase implements IAppointmentUseCases {
 	};
 
 	getAppointments = async (userId: string, limit: number, page: number) => {
-		return await this.repository.getAll(userId, limit, page);
+		const appointments = await this.repository.getAll(userId, limit, page);
+
+		if (appointments.length < 1) {
+			throw new ExpressError({
+				message: 'appointments not found',
+				status: 'warning',
+				data: {},
+				statusCode: 404
+			});
+		}
+
+		return appointments;
 	};
 
-	getAppointmentsByWorkspaceId = async (workspaceId: string, limit: number, page: number) => {
-		return await this.repository.getAllByWorkspaceId(workspaceId, limit, page);
-	};
-
-	getAppointmentsByUserId = async (userId: string, limit: number, page: number) => {
-		return await this.repository.getAllByUserId(userId, limit, page);
-	};
-
-	getAppointmentsByUserIdAndWorkspaceId = async (userId: string, workspaceId: string, limit: number, page: number) => {
-		return await this.repository.getAllByUserIdAndWorkspaceId(userId, workspaceId, limit, page);
-	};
-
-	getAppointmentsByUserIdAndWorkspaceIdAndStatus = async (userId: string, workspaceId: string, status: string, limit: number, page: number) => {
-		return await this.repository.getAllByUserIdAndWorkspaceIdAndStatus(userId, workspaceId, status, limit, page);
-	};
-
-	getAppointmentsByUserIdAndStatus = async (userId: string, status: string, limit: number, page: number) => {
-		return await this.repository.getAllByUserIdAndStatus(userId, status, limit, page);
-	};
 
 	getUpcomingAppointments = async (userId: string, limit: number, page: number) => {
-		return await this.repository.getUpcomingAppointments(userId, limit, page);
+		const appointments = await this.repository.getWithStatus(userId, 'upcoming', limit, page);
+
+		if (appointments.length < 1) {
+			throw new ExpressError({
+				message: 'appointments not found',
+				status: 'warning',
+				data: {},
+				statusCode: 404
+			});
+		}
+
+		return appointments;
 	};
 
+
 	getPastAppointments = async (userId: string, limit: number, page: number) => {
-		return await this.repository.getPastAppointments(userId, limit, page);
+		const appointments = await this.repository.getWithStatus(userId, 'past', limit, page);
+
+		if (appointments.length < 1) {
+			throw new ExpressError({
+				message: 'appointments not found',
+				status: 'warning',
+				data: {},
+				statusCode: 404
+			});
+		}
+
+		return appointments;
 	};
 
 	getCancelledAppointments = async (userId: string, limit: number, page: number) => {
-		return await this.repository.getCancelledAppointments(userId, limit, page);
+		const appointments = await this.repository.getWithStatus(userId, 'cancelled', limit, page);
+
+		if (appointments.length < 1) {
+			throw new ExpressError({
+				message: 'appointments not found',
+				status: 'warning',
+				data: {},
+				statusCode: 404
+			});
+		}
+
+		return appointments;
 	};
 
 
