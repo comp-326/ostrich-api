@@ -12,7 +12,7 @@ export default function getAllRoute(app: Router) {
 		const controller = new AppointmenttController(appointmentUseCase);
 		const appointmentRouter = Router();
 		app.use(`${pathName}`, appointmentRouter);
-		appointmentRouter.put('/appointment/all', loginRequired, controller.getAppointments);
+		appointmentRouter.get('/personal/all', loginRequired, controller.getAppointments);
 
 	};
 }

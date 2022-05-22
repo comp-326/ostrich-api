@@ -6,13 +6,13 @@ import { Router } from 'express';
 import { loginRequired } from '@ostrich-app/middlewares/Auth';
 
 
-export default function getPastRoute(app: Router) {
+export default function getCancelledRoute(app: Router) {
 	return (pathName: string) => {
 		const appointmentUseCase = new AppointmentUseCase(AppointmentRepository);
 		const controller = new AppointmenttController(appointmentUseCase);
 		const appointmentRouter = Router();
 		app.use(`${pathName}`, appointmentRouter);
-		appointmentRouter.get('/personal/past', loginRequired, controller.getPastAppointments);
+		appointmentRouter.get('/personal/cancelled', loginRequired, controller.getCancelledAppointments);
 
 	};
 }

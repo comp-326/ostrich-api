@@ -12,7 +12,7 @@ export default function createRoute(app: Router) {
 		const controller = new AppointmenttController(appointmentUseCase);
 		const appointmentRouter = Router();
 		app.use(`${pathName}`, appointmentRouter);
-		appointmentRouter.put('/new/:id', loginRequired, controller.createAppointment);
+		appointmentRouter.post('/new', loginRequired, controller.createAppointment);
 
 	};
 }

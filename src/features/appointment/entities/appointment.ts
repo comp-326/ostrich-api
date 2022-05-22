@@ -26,14 +26,6 @@ export default function makeCreateAppointmentEntity() {
 				statusCode: 400
 			});
 		}
-		if (!expectedAttendees) {
-			throw new ExpressError({
-				message: 'expectedAttendees is required',
-				status: 'warning',
-				data: {},
-				statusCode: 400
-			});
-		}
 		if (!location) {
 			throw new ExpressError({
 				message: 'location is required',
@@ -115,9 +107,12 @@ export default function makeCreateAppointmentEntity() {
 			});
 		}
 		if (!meetingLength)
-			meetingLength = moment(startTime).diff(moment(endTime), 'minutes');
+			meetingLength = moment(endTime).diff(moment(startTime), 'minutes');
+
 		if (!status)
 			status = 'upcoming';
+
+		expectedAttendees = attendees.length;
 
 		return {
 			getAttendees: () => attendees,
