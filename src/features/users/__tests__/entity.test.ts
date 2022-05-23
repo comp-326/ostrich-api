@@ -1,18 +1,16 @@
+import { DB_URL } from '@ostrich-app-config';
 import createUser from '../entities/index';
-// import { mongoConfig } from '@ostrich-app-config';
-// import mongoose from '@ostrich-app-db/mongodb';
+import mongoose from '@ostrich-app-db/mongodb';
 // import userRoleModel from '@ostrich-app-features/userRoles/models';
 
 describe('createUser', () => {
-	// beforeAll(async () => {
-	// 	await mongoose.connect(mongoConfig.TEST_DB_URL, {});
-	// 	await mongoose.connection.dropDatabase();
-	// 	await userRoleModel.InsertRoles();
-	// });
-	// afterAll(async () => {
-	// 	await mongoose.connection.dropDatabase();
-	// 	await mongoose.disconnect();
-	// });
+	beforeAll(async () => {
+		await mongoose.connect(DB_URL, {});
+		await mongoose.connection.dropDatabase();
+	});
+	afterAll(async () => {
+		await mongoose.disconnect();
+	});
 	it('Should create a new user', async () => {
 		// try{
 		const user = await createUser({

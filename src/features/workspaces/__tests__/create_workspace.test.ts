@@ -9,9 +9,9 @@ import workspaceModel from '../models';
 describe('create workspace', () => {
 	beforeAll(async () => {
 		await mongoose.connect(DB_URL, {});
+		// await mongoose.connection.dropCollection('workspaces');
 	});
 	afterAll(async () => {
-		await mongoose.connection.dropDatabase();
 		await mongoose.disconnect();
 	});
 	it('Should not create a workspace', async () => {
@@ -22,12 +22,11 @@ describe('create workspace', () => {
 			expect(workspace).toThrow();
 		} catch (error) {
 			expect(error.message).toBe(
-				'Workspace validation failed: type: Path `type` is required., owner: Path `owner` is required., logo: Path `logo` is required.',
+				'Workspaces validation failed: type: Path `type` is required., owner: Path `owner` is required., logo: Path `logo` is required.',
 			);
 		}
 	});
 	it('Should create a workspace', async () => {
-		await userRoleModel.InsertRoles();
 		const role = await userRoleModel.getDefaultRole();
 		const media = await mediaModel.create({
 			type: 'profile',

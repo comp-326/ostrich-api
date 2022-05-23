@@ -96,7 +96,7 @@ export class AppointmentUseCase implements IAppointmentUseCases {
 
 		const {
 			getAttendees, getDescription, getEndTime, getExpectedAttendees, getLocation, getMeetingLength, getMeetingLink, getOwner, getStartTime, getStatus, getTitle
-		} = createAppointmentEntity({ ...existingAppointment._doc, ...appointmentData });
+		} = createAppointmentEntity({ ...existingAppointment, ...appointmentData });
 		const updatedAppointment = await this.repository.update(appointmentId, {
 			attendees: getAttendees(),
 			description: getDescription(),
