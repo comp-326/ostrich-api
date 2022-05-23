@@ -15,7 +15,9 @@ class AppointmentRepository implements IAppointmentRepository {
 	};
 
 	getById = async (appointmentId: string) => {
-		return await AppointmentModel.findById(appointmentId);
+		const appointment= await AppointmentModel.findById(appointmentId);
+
+		return {...appointment!._doc,_id:appointment!._id.toString(),owner:appointment!.owner.toString()};
 	};
 
 	getWithStatus = async (
