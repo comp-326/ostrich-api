@@ -1,67 +1,50 @@
-import { IFolder, IFolderRepository, IFolderUseCases } from '../interfaces';
+import { IFolder } from '../models/interfaces';
+import { IFolderRepository, IFolderUseCases } from '../interfaces';
 
-export class FolderUseCase implements IFolderUseCases{
-	constructor(private readonly repository: IFolderRepository){}
+export class FolderUseCase implements IFolderUseCases {
+	constructor(private readonly repository: IFolderRepository) { }
 
-	addFolder=async (folderData: IFolder) => {
+	addFolder = async (workspaceId: string, folderData: IFolder) => {
+		await this.repository.createFolder(workspaceId,folderData);
 
-		await this.repository.createFolder('',folderData);
-
-		return {};
+		return;
 	};
 
-	copyFolder=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	copyFolder = async (destinationId: string, folderId: string) => {
+		return;
 	};
 
-	editFolder=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	editFolder = async (folderId: string, folderData: IFolder) => {
+		return;
 	};
 
-	listFolderById=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	listFolderById = async (folderId: string) => {
+		return;
 	};
 
-	listFolderByName=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	listFolderByName = async (name: string) => {
+		return;
 	};
 
-	listFolders=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	listFolders = async (limit: number, page: number) => {
+		return;
 	};
 
-	listWorkspaceFolders=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	listWorkspaceFolders = async (workspaceId: string, limit: number, page: number) => {
+		return;
 	};
 
-	moveFolder=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	moveFolder = async (destinationId: string, workspaceId: string) => {
+		return;
 	};
 
-	softRemoveFolder=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	softRemoveFolder = async (folderId: string) => {
+		return;
 	};
 
-	hardRemoveFolder=async (folderData: IFolder) => {
-		await this.repository.createFolder('',folderData);
-
-		return {};
+	hardRemoveFolder = async (folderId: string) => {
+		return;
 	};
-	
+
+
 }
