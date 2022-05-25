@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import FolderModel from '@ostrich-app-features/folders/models';
-import { IFolder, IFolderRepository } from '../interfaces';
+import { IFolder } from './../models/interfaces';
+import { IFolderRepository } from '../interfaces';
 
-class FolderRepository implements IFolderRepository{
+class FolderRepository implements IFolderRepository {
 	findByName = async (name: string) => {
 		const folder = await FolderModel.findOne({ name });
 
