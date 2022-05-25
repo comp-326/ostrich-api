@@ -1,42 +1,6 @@
-import { INext, IRequest ,IResponse} from '@ostrich-app-common/types';
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface IFolder {
-	name: string;
-	isStandout: boolean;
-	type: string;
-	size: string;
-	views: number;
-	likes: number;
-	address: {
-		location: string;
-		country: string;
-		loactionType: string;
-	};
-	images: { public_id: string; url: string }[];
-
-	finance: {
-		tuitionFeeUnderGraduate: number;
-		tuitionFeePostGraduate: number;
-		tuitionFeePostDeposit: number;
-		tuitionPricingCategory: string;
-		currency: string;
-		scholarshipAverage: string;
-		scholarshipChances: string;
-		internationalFeeDiferential: number;
-	};
-	prompts: string[];
-	comments: string[];
-}
-
-export interface IFolderRequest {
-	params: any;
-	body: any;
-	query: any;
-	headers: any;
-	files?: any;
-	file?: any;
-}
+import { IFolder } from '../models/interfaces';
+import { INext, IRequest, IResponse } from '@ostrich-app-common/types';
 
 export interface IFolderRepository {
 	createFolder: (workspaceId: string, data: IFolder) => Promise<any>;
@@ -57,32 +21,28 @@ export interface IFolderRepository {
 	copy: (destinationWorkspace: string, folderData: IFolder) => Promise<any>;
 }
 
-export interface IFolderValidator {
-	isValidFolder: (email: string) => boolean;
-}
-
 export interface IFolderUseCases {
-	addFolder: (folderData: IFolder) => Promise<any>;
-	copyFolder: (folderData: IFolder) => Promise<any>;
-	editFolder: (folderData: IFolder) => Promise<any>;
-	listFolderById: (folderData: IFolder) => Promise<any>;
-	listFolderByName: (folderData: IFolder) => Promise<any>;
-	listFolders: (folderData: IFolder) => Promise<any>;
-	listWorkspaceFolders: (folderData: IFolder) => Promise<any>;
-	moveFolder: (folderData: IFolder) => Promise<any>;
-	softRemoveFolder: (folderData: IFolder) => Promise<any>;
-	hardRemoveFolder: (folderData: IFolder) => Promise<any>;
+	addFolder: (workspaceId: string, folderData: IFolder) => Promise<any>;
+	copyFolder: (destinationId: string, folderId: string) => Promise<any>;
+	editFolder: (folderId: string, folderData: IFolder) => Promise<any>;
+	listFolderById: (folderId: string) => Promise<any>;
+	listFolderByName: (name: string) => Promise<any>;
+	listFolders: (limit: number, page: number) => Promise<any>;
+	listWorkspaceFolders: (workspaceId: string, limit: number, page: number) => Promise<any>;
+	moveFolder: (destinationId: string, workspaceId: string) => Promise<any>;
+	softRemoveFolder: (folderId: string) => Promise<any>;
+	hardRemoveFolder: (folderId: string) => Promise<any>;
 }
 
 export interface IFolderController {
-	softDelete:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	findById:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	findFolders:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	findByName:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	findWorkspaceFolders:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	createFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	copyFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	updateFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	moveFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
-	hardDeleteFolder:(req:IRequest,res:IResponse,next:INext) => Promise<any>
+	softDelete: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findById: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findFolders: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findByName: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	findWorkspaceFolders: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	createFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	copyFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	updateFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	moveFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
+	hardDeleteFolder: (req: IRequest, res: IResponse, next: INext) => Promise<any>
 }

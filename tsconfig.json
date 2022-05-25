@@ -43,6 +43,7 @@
     "baseUrl": "./",
     "rootDir": "./",
     "paths": {
+      "@base/*":["./*"],
       "@ostrich-app/*": ["./src/*"],
       "@ostrich-app-app": ["./src/app"],
       "@ostrich-app-config": ["./src/config"],
@@ -50,7 +51,6 @@
       "@ostrich-app-setup": ["./src/setup"],
       "@ostrich-app-setup/*": ["./src/setup/*"],
       "@ostrich-app-features/*": ["./src/features/*"],
-      "@ostrich-app-models/*": ["./src/models/*"],
       "@ostrich-app-common/*": ["./src/common/*"],
       "@ostrich-app-services/*": ["./src/services/*"],
       "@ostrich-app-helpers/*": ["./src/helpers/*"],

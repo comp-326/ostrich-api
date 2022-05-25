@@ -5,20 +5,17 @@ import dirExistAsync from './dirExistAsync';
 import dirExistSync from './dirExist';
 
 // import { NODE_ENV } from "@ostrich-app-config"
-import setEnvironmentVariables from './envSetup';
 
 export default Object.freeze({
 	dirExistAsync,
 	dirExistSync,
 	createDirectory,
 	deleteFile,
-	setEnvironmentVariables
 });
 
 export {
 	dirExistAsync,
 	dirExistSync,
-	setEnvironmentVariables,
 	createDirectory,
 	deleteFile
 };
